@@ -1,6 +1,8 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { AdminService } from '../../services/admin.service';
 import { AfttClubTeamModel, AfttTeamsApiGetResponse, AfttTeamModel } from '../model/aftt-team.model';
+import { AfttTeamEntity } from '../model/aftt/aftt-team.entity';
+import { AfttDivisionCategoryEntity } from '../model/aftt/aftt-division-category.entity';
 
 @Component({
   selector: 'app-admin-equipes',
@@ -9,6 +11,12 @@ import { AfttClubTeamModel, AfttTeamsApiGetResponse, AfttTeamModel } from '../mo
 })
 export class EquipesComponent implements OnInit {
 
+  @Input()
+  afttDivisionCategories: Array<AfttDivisionCategoryEntity>;
+
+  @Input()
+  afttTeams: Array<AfttTeamEntity>;
+  /*
   afttClubTeamModel: AfttClubTeamModel=null;
   afttTeamsApiGetResponse: AfttTeamsApiGetResponse=null;
 
@@ -24,15 +32,21 @@ export class EquipesComponent implements OnInit {
   veteransTeams=new EventEmitter<Array<AfttTeamModel>>();
   @Output()
   jeunesTeams=new EventEmitter<Array<AfttTeamModel>>();
-
+  */
   constructor(
     private adminService: AdminService
   ) { }
 
   ngOnInit(): void 
   {
+    console.log('categories:', this.afttDivisionCategories);
   }
 
+  getFilteredTeamsByCategory(category: AfttDivisionCategoryEntity)
+  {
+    return this.afttTeams.filter( t => t.DivisionCategory===category.playercategory );
+  }
+  /*
   onLoadEquipesFromAftt(): void
   {
     this.adminService.getAfttTeams()
@@ -48,12 +62,12 @@ export class EquipesComponent implements OnInit {
           }
           else
           {
-            /*
+            / *
             const data=new AfttClubTeamModel();
             data.ClubName=res.data.ClubName;
             this.afttClubTeamModel=data;
             console.log('onLoadEquipesFromAftt', data);
-            */
+            * /
            const resp: AfttTeamsApiGetResponse=res;
            console.log('club', resp.data.ClubName);
            this.afttClubTeamModel=resp.data;
@@ -64,7 +78,9 @@ export class EquipesComponent implements OnInit {
       )
     ;
   }
+  */
 
+  /*
   emitTeamsByType()
   {
     // for(cont t of afttClubTeamModel.TeamEntries)
@@ -84,4 +100,5 @@ export class EquipesComponent implements OnInit {
     teams=this.afttClubTeamModel.TeamEntries.filter( t => t.DivisionCategory===13 && t.MatchType===4 );
     this.jeunesTeams.emit(teams);
   }
+  */
 }

@@ -1,0 +1,22 @@
+<div *ngIf="afttDivisions">
+    <table mdbTable small="true" hover="true">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>DivisionID</th>
+            <th>Equipe</th>
+            <th>Cat</th>
+            <th>Match type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr mdbTableCol *ngFor="let el of afttDivisions; let ix=index">
+            <th scope="row">{{ix+1}}</th>
+            <td>{{el.DivisionId}}</td>
+            <td>{{el.DivisionName}}</td>
+            <td>{{el.DivisionCategory}}</td>
+            <td>{{el.MatchType}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>

@@ -7,11 +7,6 @@ export const environment = {
   apiUrl: 'http://localhost:3000/api',
   angular_version: '9.0.1',
   app_version: ' 0.0.5 - 31/3/2020 01h30',
-  guyk286: 'je fais un fork puis un pull request depuis ce compte guyk286',
-  
-  guyk286_demo_maxime: 'valeur bidon',
-
-  wawa10_pour_maxime_from_kaising: 'test'
 };
 
 /*

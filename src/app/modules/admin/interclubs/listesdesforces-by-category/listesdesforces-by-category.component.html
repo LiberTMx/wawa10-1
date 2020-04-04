@@ -1,0 +1,56 @@
+<p>listesdesforces-by-category works!</p>
+<!--
+id: number;
+
+// tslint:disable-next-line:variable-name
+aftt_LastSyncId: number;
+divisionCategory: number;
+
+Position: number;
+UniqueIndex: number;
+RankingIndex: number;
+FirstName: string;
+LastName: string;
+Ranking: string;
+Status: string;
+Gender: string;
+Category: string;
+MedicalAttestation: boolean;
+-->
+
+<div *ngIf="afttMembers">
+    <table mdbTable small="true" hover="true">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>ID</th>
+            <th>Pos</th>
+            <th>Licence</th>
+            <th>Indice</th>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Classt</th>
+            <th>Statut</th>
+            <th>Sexe</th>
+            <th>Cat</th>
+            <th>Cert médical</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr mdbTableCol *ngFor="let e of afttMembers; let ix=index">
+            <th scope="row">{{ix+1}}</th>
+            <td>{{e.id}}</td>
+            <td>{{e.Position}}</td>
+            <td>{{e.UniqueIndex}}</td>
+            <td>{{e.RankingIndex}}</td>
+            <td>{{e.FirstName}}</td>
+            <td>{{e.LastName}}</td>
+            <td>{{e.Ranking}}</td>
+            <td>{{e.Status}}</td>
+            <td>{{e.Gender}}</td>
+            <td>{{e.Category}}</td>
+            <td>{{e.MedicalAttestation}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>

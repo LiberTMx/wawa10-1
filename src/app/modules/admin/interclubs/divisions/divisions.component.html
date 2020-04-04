@@ -1,0 +1,17 @@
+
+<h4>Les divisions</h4>
+
+<!-- <mdb-tabset #staticTabs [buttonClass]="'md-tabs'" [contentClass]="'card'" *ngIf="afttDivisionCategories"> -->
+<mdb-tabset #staticTabs [buttonClass]="'nav md-pills pills-secondary mb-2'"
+    [justified]="true" [contentClass]="'card'" *ngIf="afttDivisionCategories">
+
+    <mdb-tab  [heading]="categorie.name" *ngFor="let categorie of afttDivisionCategories">
+      <app-divisions-by-category [afttDivisions]="getFilteredDivisionsByCategory(categorie)"></app-divisions-by-category>
+    </mdb-tab>
+
+
+</mdb-tabset>
+
+<br>
+<br>
+<br>
