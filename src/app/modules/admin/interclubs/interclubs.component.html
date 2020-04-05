@@ -8,9 +8,11 @@
   <ng-template #no_sync_info>
 
   </ng-template>
+  <button class="btn btn-sm" (click)="onSynchroniseNow()" [disabled]="synchronizing">Lire les données AFTT</button>
+  <!-- <button class="btn btn-sm" (click)="onProcessNow()" [disabled]="synchronizing">Sync les données AFTT</button> -->
 </div>
 
-<mdb-tabset #staticTabs [buttonClass]="'md-tabs'" [contentClass]="'card'">
+<mdb-tabset #staticTabs [buttonClass]="'md-tabs'" [contentClass]="'card'" *ngIf="afttSyncInfo">
 
   <mdb-tab heading="Equipes">
     <app-admin-equipes *ngIf="afttTeams && afttDivisionCategories" 

@@ -10,6 +10,7 @@ import { AfttDivisionCategoryEntity } from '../interclubs/model/aftt/aftt-divisi
 import { AfttTeamEntity } from '../interclubs/model/aftt/aftt-team.entity';
 import { AfttDivisionEntity } from '../interclubs/model/aftt/aftt-division.entity';
 import { AfttMemberByCategoryEntity } from '../interclubs/model/aftt/aftt-member-by-category.entity';
+import { MessageModel } from '../../../common/model/message.model';
 
 @Injectable({
   providedIn: 'root'
@@ -76,4 +77,18 @@ export class AdminService {
     return this.httpClient.get<Array<AfttMemberByCategoryEntity>>(apiUrl);
   }
 
+  // allFromAftt
+  synchronizeNow(): Observable<MessageModel>
+  {
+    const url=`${environment.apiUrl}`;  
+    const apiUrl = `${url}/admin/allFromAftt/`;
+    return this.httpClient.get<MessageModel>(apiUrl);
+  }
+
+  processSyncData(): Observable<MessageModel>
+  {
+    const url=`${environment.apiUrl}`;  
+    const apiUrl = `${url}/admin/processLastSync/`;
+    return this.httpClient.get<MessageModel>(apiUrl);
+  }
 }
