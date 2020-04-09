@@ -1,3 +1,23 @@
+
+<h4>Les équipes</h4>
+
+<!-- <mdb-tabset #staticTabs [buttonClass]="'md-tabs'" [contentClass]="'card'" *ngIf="afttDivisionCategories"> -->
+<mdb-tabset #staticTabs [buttonClass]="'nav md-pills pills-secondary mb-2'"
+    [justified]="true" [contentClass]="'card'" *ngIf="afttDivisionCategories">
+
+    <mdb-tab  [heading]="categorie.name" *ngFor="let categorie of afttDivisionCategories">
+      <app-admin-equipes-by-category [teams]="getFilteredTeamsByCategory(categorie)"></app-admin-equipes-by-category>
+    </mdb-tab>
+
+
+</mdb-tabset>
+
+<br>
+<br>
+<br>
+
+
+<!--
 <button mdbBtn type="button" gradient="purple" size="sm" mdbWavesEffect (click)="onLoadEquipesFromAftt()">Charger les équipes - AFTT</button>
 
 <div *ngIf="afttClubTeamModel">
@@ -7,7 +27,7 @@
     <br>
 
     
-    <!-- {{ afttClubTeamModel.TeamEntries | json }} -->
+    < ! -- {{ afttClubTeamModel.TeamEntries | json }} - - >
     <div *ngIf="afttClubTeamModel.TeamEntries">
         <h5>Les équipes:</h5>
         <br>
@@ -37,3 +57,4 @@
           </table>
     </div>
 </div>
+-->

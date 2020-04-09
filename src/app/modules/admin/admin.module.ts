@@ -39,7 +39,6 @@ import { SemainesByCategoryComponent } from './interclubs/semaines-by-category/s
     ListesdesforcesByCategoryComponent, 
     ListesdesforcesComponent, 
     DivisionsByCategoryComponent, SynchronisationComponent, CalendriersComponent, CalendriersByCategoryComponent, SemainesComponent, SemainesByCategoryComponent,
-    EquipesComponent, EquipesByCategoryComponent, RolesComponent, DomainsComponent, GroupesComponent, RoleComponent, GroupRoleComponent,
   ],
   imports: [
     CommonModule,
