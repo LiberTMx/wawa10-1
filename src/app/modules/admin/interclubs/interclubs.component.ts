@@ -16,7 +16,6 @@ export class InterclubsComponent implements OnInit {
 
   constructor() { }
 
-<<<<<<< HEAD
   afttTeams: Array<AfttTeamEntity>=null;
   afttDivisions: Array<AfttDivisionEntity>=null;
   afttMembers: Array<AfttMemberByCategoryEntity>=null;
@@ -60,9 +59,7 @@ export class InterclubsComponent implements OnInit {
           //console.log('interclubs - afttMembers', afttMembers);
         });
     });
-=======
   ngOnInit(): void {
->>>>>>> be5f0c7d31d208cc67c3429fd0177b8f2d7f0397
   }
 
   onReceiveTeams(type: number, event)
@@ -76,12 +73,9 @@ export class InterclubsComponent implements OnInit {
       case 4: this.afttClubAineesTeamModel=event; break;
       case 5: this.afttClubJeunesTeamModel=event; break;
     }
-<<<<<<< HEAD
   } */
 
   
 
-=======
   }
->>>>>>> be5f0c7d31d208cc67c3429fd0177b8f2d7f0397
 }
