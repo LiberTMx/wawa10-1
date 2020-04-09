@@ -14,14 +14,12 @@ import { LoginComponent } from './login/login.component';
 import { MdBootstrapProModule } from '../../modules.vendors/mdbootstrap/md-bootstrap-pro.module';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
-import { UserListeComponent } from './user/user-liste/user-liste.component';
 //import { ComTranslateModule } from '../../modules.vendors/com.translate/com.translate.module';
 
 @NgModule({
   declarations: [
     LoginComponent,
     ChangePasswordComponent,
-    UserListeComponent,
   ],
   imports: [
     CommonModule,

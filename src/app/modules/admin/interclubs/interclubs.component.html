@@ -1,5 +1,5 @@
-
 <h2>Gestion des interclubs via AFTT</h2>
+<<<<<<< HEAD
 
 
 <mdb-tabset #staticTabs [buttonClass]="'md-tabs'" [contentClass]="'card'" *ngIf="afttSyncInfo">
@@ -15,13 +15,46 @@
       [afttDivisionCategories]="afttDivisionCategories"
       [afttDivisions]="afttDivisions"></app-admin-divisions>
   </mdb-tab>
+=======
+<br>
+>>>>>>> be5f0c7d31d208cc67c3429fd0177b8f2d7f0397
 
-  <mdb-tab heading="Listes des forces">
-    <app-admin-listesdesforces *ngIf="afttMembers && afttDivisionCategories"
-      [afttDivisionCategories]="afttDivisionCategories"
-      [afttMembers]="afttMembers"></app-admin-listesdesforces>
-  </mdb-tab>
+<!-- Nav Tabs -->
+<!-- [buttonClass]="'pills-secondary white mb-2'" [contentClass]="'card'" -->
+<!-- [buttonClass]="'md-tabs tabs-3'"-->
+<mdb-tabset #staticTabs [buttonClass]="'md-tabs'" [contentClass]="'card'">
+    <!--Panel 1-->
+    <mdb-tab heading="Equipes">
+        <app-admin-equipes 
+          (messieursTeams)="onReceiveTeams(1, $event)"
+          (damesTeams)="onReceiveTeams(2, $event)"
+          (veteransTeams)="onReceiveTeams(3, $event)"
+          (aineesTeams)="onReceiveTeams(4, $event)"
+          (jeunesTeams)="onReceiveTeams(5, $event)"
+          ></app-admin-equipes>
+    </mdb-tab>
+    <!--Panel 2-->
+    <mdb-tab heading="Messieurs">
+      <app-admin-equipes-by-category [teams]="afttClubMessieursTeamModel" [category]="1" [matchType]="2"></app-admin-equipes-by-category>
+    </mdb-tab>
+    <mdb-tab heading="Dames">
+      <app-admin-equipes-by-category [teams]="afttClubDamesTeamModel" [category]="2" [matchType]="4"></app-admin-equipes-by-category>
+    </mdb-tab>
+    <!--Panel 3-->
+    <mdb-tab heading="Vétérans">
+      <app-admin-equipes-by-category [teams]="afttClubVeteransTeamModel" [category]="3" [matchType]="4"></app-admin-equipes-by-category>
+    </mdb-tab>
+    <!--Panel 4-->
+    <mdb-tab heading="Aînées">
+      <app-admin-equipes-by-category [teams]="afttClubAineesTeamModel" [category]="4" [matchType]="4"></app-admin-equipes-by-category>
+    </mdb-tab>
+    <!--Panel 5-->
+    <mdb-tab heading="Jeunes">
+      <app-admin-equipes-by-category [teams]="afttClubJeunesTeamModel" [category]="13" [matchType]="4"></app-admin-equipes-by-category>
+    </mdb-tab>
+  </mdb-tabset>
 
+<<<<<<< HEAD
   <mdb-tab heading="Les semaines">
     <app-admin-semaines
       [afttSyncInfo]="afttSyncInfo"
@@ -39,3 +72,5 @@
   </mdb-tab>
 
 </mdb-tabset>
+=======
+>>>>>>> be5f0c7d31d208cc67c3429fd0177b8f2d7f0397

@@ -1,11 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AfttClubTeamModel } from './model/aftt-team.model';
-import { AfttAllDataEntity } from './model/aftt/aftt-all-data.entity';
-import { AdminService } from '../services/admin.service';
-import { AfttDivisionCategoryEntity } from './model/aftt/aftt-division-category.entity';
-import { AfttTeamEntity } from './model/aftt/aftt-team.entity';
-import { AfttDivisionEntity } from './model/aftt/aftt-division.entity';
-import { AfttMemberByCategoryEntity } from './model/aftt/aftt-member-by-category.entity';
 
 @Component({
   selector: 'app-interclubs',
@@ -14,15 +8,15 @@ import { AfttMemberByCategoryEntity } from './model/aftt/aftt-member-by-category
 })
 export class InterclubsComponent implements OnInit {
 
-/*   afttClubMessieursTeamModel: AfttClubTeamModel=null;
+  afttClubMessieursTeamModel: AfttClubTeamModel=null;
   afttClubDamesTeamModel: AfttClubTeamModel=null;
   afttClubAineesTeamModel: AfttClubTeamModel=null;
   afttClubVeteransTeamModel: AfttClubTeamModel=null;
-  afttClubJeunesTeamModel: AfttClubTeamModel=null; */
+  afttClubJeunesTeamModel: AfttClubTeamModel=null;
 
-  afttSyncInfo: AfttAllDataEntity=null;
-  afttDivisionCategories: Array<AfttDivisionCategoryEntity>=null;
+  constructor() { }
 
+<<<<<<< HEAD
   afttTeams: Array<AfttTeamEntity>=null;
   afttDivisions: Array<AfttDivisionEntity>=null;
   afttMembers: Array<AfttMemberByCategoryEntity>=null;
@@ -66,9 +60,12 @@ export class InterclubsComponent implements OnInit {
           //console.log('interclubs - afttMembers', afttMembers);
         });
     });
+=======
+  ngOnInit(): void {
+>>>>>>> be5f0c7d31d208cc67c3429fd0177b8f2d7f0397
   }
 
-/*   onReceiveTeams(type: number, event)
+  onReceiveTeams(type: number, event)
   {
     console.log('onReceiveTeams', event);
     switch(type)
@@ -79,8 +76,12 @@ export class InterclubsComponent implements OnInit {
       case 4: this.afttClubAineesTeamModel=event; break;
       case 5: this.afttClubJeunesTeamModel=event; break;
     }
+<<<<<<< HEAD
   } */
 
   
 
+=======
+  }
+>>>>>>> be5f0c7d31d208cc67c3429fd0177b8f2d7f0397
 }
