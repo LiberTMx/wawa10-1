@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AfttClubTeamModel } from './model/aftt-team.model';
+import { AfttAllDataEntity } from './model/aftt/aftt-all-data.entity';
+import { AdminService } from '../services/admin.service';
+import { AfttDivisionCategoryEntity } from './model/aftt/aftt-division-category.entity';
+import { AfttTeamEntity } from './model/aftt/aftt-team.entity';
+import { AfttDivisionEntity } from './model/aftt/aftt-division.entity';
+import { AfttMemberByCategoryEntity } from './model/aftt/aftt-member-by-category.entity';
 
 @Component({
   selector: 'app-interclubs',
@@ -8,13 +14,14 @@ import { AfttClubTeamModel } from './model/aftt-team.model';
 })
 export class InterclubsComponent implements OnInit {
 
-  afttClubMessieursTeamModel: AfttClubTeamModel=null;
+/*   afttClubMessieursTeamModel: AfttClubTeamModel=null;
   afttClubDamesTeamModel: AfttClubTeamModel=null;
   afttClubAineesTeamModel: AfttClubTeamModel=null;
   afttClubVeteransTeamModel: AfttClubTeamModel=null;
-  afttClubJeunesTeamModel: AfttClubTeamModel=null;
+  afttClubJeunesTeamModel: AfttClubTeamModel=null; */
 
-  constructor() { }
+  afttSyncInfo: AfttAllDataEntity=null;
+  afttDivisionCategories: Array<AfttDivisionCategoryEntity>=null;
 
   afttTeams: Array<AfttTeamEntity>=null;
   afttDivisions: Array<AfttDivisionEntity>=null;
@@ -59,10 +66,9 @@ export class InterclubsComponent implements OnInit {
           //console.log('interclubs - afttMembers', afttMembers);
         });
     });
-  ngOnInit(): void {
   }
 
-  onReceiveTeams(type: number, event)
+/*   onReceiveTeams(type: number, event)
   {
     console.log('onReceiveTeams', event);
     switch(type)
@@ -77,5 +83,4 @@ export class InterclubsComponent implements OnInit {
 
   
 
-  }
 }
