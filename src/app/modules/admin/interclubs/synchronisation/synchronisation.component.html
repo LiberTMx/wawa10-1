@@ -1,0 +1,13 @@
+<h4>Les synchronisations</h4>
+
+<div>
+    Information sur la dernière synchronisation:
+    <div *ngIf="afttSyncInfo; else no_sync_info">
+      <p>ID: {{afttSyncInfo.id}}, &nbsp;Synchronisation effectuée: {{ afttSyncInfo.createdAt | date: 'dd/MM/yyyy hh:mm'}}</p>
+    </div>
+    <ng-template #no_sync_info>
+  
+    </ng-template>
+    <button class="btn btn-sm" (click)="onSynchroniseNow()" [disabled]="synchronizing">Lire les données AFTT</button>
+    <!-- <button class="btn btn-sm" (click)="onProcessNow()" [disabled]="synchronizing">Sync les données AFTT</button> -->
+  </div>

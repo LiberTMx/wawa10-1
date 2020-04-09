@@ -27,7 +27,7 @@ export class InterclubsComponent implements OnInit {
   afttDivisions: Array<AfttDivisionEntity>=null;
   afttMembers: Array<AfttMemberByCategoryEntity>=null;
 
-  synchronizing=false;
+ 
 
   constructor(
     private adminService: AdminService,
@@ -81,68 +81,6 @@ export class InterclubsComponent implements OnInit {
     }
   } */
 
-  onSynchroniseNow()
-  {
-    this.synchronizing = true;
-    
-    this.adminService.synchronizeNow()
-      .subscribe(
-        res => {
-          this.adminService.processSyncData()
-            .subscribe(
-              sync => this.loadData(),
-              err => console.error('Processing sync error !', err),
-              () => this.synchronizing=false
-            );
-        },
-        err => {
-          console.error('synchronize error !', err);
-          this.synchronizing=false;
-        }
-      );
-      
-
-      /*
-    this.adminService.synchronizeNow()
-      .subscribe(
-        res => {
-          console.log('sync', res);
-        },
-        err => {
-          console.error('synchronize error !', err);
-          
-        },
-        () => this.synchronizing=false
-      );
-      */
-  }
-
-  onProcessNow()
-  {
-    this.synchronizing = true;
-    /*
-    this.adminService.synchronizeNow()
-      .subscribe(
-        res => {
-          this.adminService.processSyncData()
-            .subscribe(
-              sync => this.loadData(),
-              err => console.error('Processing sync error !', err),
-              () => this.synchronizing=false
-            );
-        },
-        err => {
-          console.error('synchronize error !', err);
-          this.synchronizing=false;
-        }
-      );
-    */
-    this.adminService.processSyncData()
-          .subscribe(
-            sync => this.loadData(),
-            err => console.error('Processing sync error !', err),
-            () => this.synchronizing=false
-          );
-  }
+  
 
 }

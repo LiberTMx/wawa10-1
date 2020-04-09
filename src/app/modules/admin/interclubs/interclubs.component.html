@@ -1,16 +1,6 @@
 
 <h2>Gestion des interclubs via AFTT</h2>
-<div>
-  Information sur la dernière synchronisation:
-  <div *ngIf="afttSyncInfo; else no_sync_info">
-    <p>ID: {{afttSyncInfo.id}}, &nbsp;Synchronisation effectuée: {{ afttSyncInfo.createdAt | date: 'dd/MM/yyyy hh:mm'}}</p>
-  </div>
-  <ng-template #no_sync_info>
 
-  </ng-template>
-  <button class="btn btn-sm" (click)="onSynchroniseNow()" [disabled]="synchronizing">Lire les données AFTT</button>
-  <!-- <button class="btn btn-sm" (click)="onProcessNow()" [disabled]="synchronizing">Sync les données AFTT</button> -->
-</div>
 
 <mdb-tabset #staticTabs [buttonClass]="'md-tabs'" [contentClass]="'card'" *ngIf="afttSyncInfo">
 
@@ -30,6 +20,22 @@
     <app-admin-listesdesforces *ngIf="afttMembers && afttDivisionCategories"
       [afttDivisionCategories]="afttDivisionCategories"
       [afttMembers]="afttMembers"></app-admin-listesdesforces>
+  </mdb-tab>
+
+  <mdb-tab heading="Les semaines">
+    <app-admin-semaines
+      [afttSyncInfo]="afttSyncInfo"
+      [afttDivisionCategories]="afttDivisionCategories"></app-admin-semaines>
+  </mdb-tab>
+
+  <mdb-tab heading="Les calendriers">
+    <app-admin-calendriers *ngIf="afttDivisionCategories"
+      [afttSyncInfo]="afttSyncInfo"
+      [afttDivisionCategories]="afttDivisionCategories"></app-admin-calendriers>
+  </mdb-tab>
+
+  <mdb-tab heading="Synchronisations AFTT">
+    <app-admin-synchronisation [afttSyncInfo]="afttSyncInfo"></app-admin-synchronisation>
   </mdb-tab>
 
 </mdb-tabset>
