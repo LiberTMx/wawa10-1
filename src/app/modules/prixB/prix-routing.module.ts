@@ -8,7 +8,7 @@ import { PrixComponent } from './prix/prix.component';
 export const CONTACT_ROUTES: Routes =
 [
     { path: 'prix',  children: [
-        { path: 'test', component: PrixComponent },
+        { path: 'liste', component: PrixComponent },
         ] }
 ];
 

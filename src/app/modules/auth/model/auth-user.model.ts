@@ -13,30 +13,7 @@ export class AuthUserModel {
     changePasswordJeton: string;
     enabled: boolean;
     authUserGroup: AuthUserGroupModel;
-    //----
-    sexe: string;
-    dateNaissance: Date;
-    rue: string;
-    numero: string;
-    boite: string;
-    codePostal: string;
-    localite: string;
-    numTel: string;
-    numTelPrive: string;
-    numMobile: string;
-    licence: string;
-    classementMessieur: string;
-    classementDame: string;
-    createdAt: Date;
-    updateddAt: Date;
-    comment: string;
-    photo: string;
-    deletedAt: Date;
-    notifyParents: boolean;
-    initCredential: boolean;
-    lastLoginAt: Date;
     
-    //----
     getFullName(): string
     {
         return StringUtils.titleCase( this.prenom + ' ' + this.nom );
