@@ -232,4 +232,9 @@ export class AuthService {
       return role !==null && role !== undefined;
     }
 
+    getUserList(): Observable<Array<AuthUserModel>>
+    {
+      const apiUrl=`${environment.apiUrl}/auth/liste`;
+      return this.httpClient.get<Array<AuthUserModel>>( apiUrl );
+    }
 }

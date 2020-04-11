@@ -1,11 +1,11 @@
-<h4>Les listes des forces</h4>
+<h4>Les calendriers</h4>
 
 <!-- <mdb-tabset #staticTabs [buttonClass]="'md-tabs'" [contentClass]="'card'" *ngIf="afttDivisionCategories"> -->
 <mdb-tabset #staticTabs [buttonClass]="'nav md-pills pills-secondary mb-2'"
     [justified]="true" [contentClass]="'card'" *ngIf="afttDivisionCategories">
 
     <mdb-tab  [heading]="categorie.name" *ngFor="let categorie of afttDivisionCategories">
-      <app-admin-listesdesforces-by-category [afttMembers]="getFilteredMembersByCategory(categorie)"></app-admin-listesdesforces-by-category>
+      <app-admin-calendriers-by-category [afttDivisionCategory]="categorie"></app-admin-calendriers-by-category>
     </mdb-tab>
 
 

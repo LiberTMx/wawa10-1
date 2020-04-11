@@ -1,38 +1,41 @@
+
 <h2>Gestion des interclubs via AFTT</h2>
-<br>
 
-<!-- Nav Tabs -->
-<!-- [buttonClass]="'pills-secondary white mb-2'" [contentClass]="'card'" -->
-<!-- [buttonClass]="'md-tabs tabs-3'"-->
-<mdb-tabset #staticTabs [buttonClass]="'md-tabs'" [contentClass]="'card'">
-    <!--Panel 1-->
-    <mdb-tab heading="Equipes">
-        <app-admin-equipes 
-          (messieursTeams)="onReceiveTeams(1, $event)"
-          (damesTeams)="onReceiveTeams(2, $event)"
-          (veteransTeams)="onReceiveTeams(3, $event)"
-          (aineesTeams)="onReceiveTeams(4, $event)"
-          (jeunesTeams)="onReceiveTeams(5, $event)"
-          ></app-admin-equipes>
-    </mdb-tab>
-    <!--Panel 2-->
-    <mdb-tab heading="Messieurs">
-      <app-admin-equipes-by-category [teams]="afttClubMessieursTeamModel" [category]="1" [matchType]="2"></app-admin-equipes-by-category>
-    </mdb-tab>
-    <mdb-tab heading="Dames">
-      <app-admin-equipes-by-category [teams]="afttClubDamesTeamModel" [category]="2" [matchType]="4"></app-admin-equipes-by-category>
-    </mdb-tab>
-    <!--Panel 3-->
-    <mdb-tab heading="Vétérans">
-      <app-admin-equipes-by-category [teams]="afttClubVeteransTeamModel" [category]="3" [matchType]="4"></app-admin-equipes-by-category>
-    </mdb-tab>
-    <!--Panel 4-->
-    <mdb-tab heading="Aînées">
-      <app-admin-equipes-by-category [teams]="afttClubAineesTeamModel" [category]="4" [matchType]="4"></app-admin-equipes-by-category>
-    </mdb-tab>
-    <!--Panel 5-->
-    <mdb-tab heading="Jeunes">
-      <app-admin-equipes-by-category [teams]="afttClubJeunesTeamModel" [category]="13" [matchType]="4"></app-admin-equipes-by-category>
-    </mdb-tab>
-  </mdb-tabset>
 
+<mdb-tabset #staticTabs [buttonClass]="'md-tabs'" [contentClass]="'card'" *ngIf="afttSyncInfo">
+
+  <mdb-tab heading="Equipes">
+    <app-admin-equipes *ngIf="afttTeams && afttDivisionCategories" 
+      [afttDivisionCategories]="afttDivisionCategories"
+      [afttTeams]="afttTeams"></app-admin-equipes>
+  </mdb-tab>
+
+  <mdb-tab heading="Divisions">
+    <app-admin-divisions *ngIf="afttDivisions && afttDivisionCategories" 
+      [afttDivisionCategories]="afttDivisionCategories"
+      [afttDivisions]="afttDivisions"></app-admin-divisions>
+  </mdb-tab>
+
+  <mdb-tab heading="Listes des forces">
+    <app-admin-listesdesforces *ngIf="afttMembers && afttDivisionCategories"
+      [afttDivisionCategories]="afttDivisionCategories"
+      [afttMembers]="afttMembers"></app-admin-listesdesforces>
+  </mdb-tab>
+
+  <mdb-tab heading="Les semaines">
+    <app-admin-semaines
+      [afttSyncInfo]="afttSyncInfo"
+      [afttDivisionCategories]="afttDivisionCategories"></app-admin-semaines>
+  </mdb-tab>
+
+  <mdb-tab heading="Les calendriers">
+    <app-admin-calendriers *ngIf="afttDivisionCategories"
+      [afttSyncInfo]="afttSyncInfo"
+      [afttDivisionCategories]="afttDivisionCategories"></app-admin-calendriers>
+  </mdb-tab>
+
+  <mdb-tab heading="Synchronisations AFTT">
+    <app-admin-synchronisation [afttSyncInfo]="afttSyncInfo"></app-admin-synchronisation>
+  </mdb-tab>
+
+</mdb-tabset>

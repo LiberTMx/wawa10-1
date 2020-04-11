@@ -81,6 +81,7 @@ export class LoginComponent implements OnInit
         err =>{
           this.error='InvalidUserOrPassword';
           console.error('login fails - '+err.error.message, err );
+          this.toastMessageService.addError('Login erroné - Accès refusé!', 'Désolé, username et/ou mot de passe incorrect(s)!');
         }
     );
     
