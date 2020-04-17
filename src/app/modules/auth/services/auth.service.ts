@@ -97,6 +97,9 @@ export class AuthService {
         const tokens = new TokensModel();
         Object.assign(tokens, this.getTokens());
         user.tokens = tokens;
+        const newUser: AuthenticatedUserModel = new AuthenticatedUserModel();
+        Object.assign(newUser, user);
+        user = newUser;
         this.store.dispatch( new LoginAction({user}) );
       }
       return user;

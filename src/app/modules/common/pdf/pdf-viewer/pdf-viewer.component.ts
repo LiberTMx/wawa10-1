@@ -19,7 +19,8 @@ export class PdfViewerComponent implements OnInit {
 
   ngOnInit(): void 
   {
-    console.log('selected document input:', this.selectedDocument);
+    // console.log('selected document input:', this.selectedDocument);
+    this.pdfDocument = this.selectedDocument;
   }
 
   onSwitchWithDetails()

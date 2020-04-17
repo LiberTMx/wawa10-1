@@ -1,0 +1,68 @@
+
+
+
+<div class="d-flex bd-highlight mb-3 status-header" >
+    <div class="p-2 bd-highlight">
+        <img [src]="'assets/img/roi/roi_1.jpg'" height="150px"></div>
+<!--         <div class="p-2 bd-highlight">
+            <img [src]="'assets/img/roi/roi_5.jpg'" ></div> -->
+    <div class="p-2 bd-highlight mx-auto uk-vertical-align-middle" >
+        <span class="align-middle"><h1>Règlement d'ordre interieur</h1></span>
+    </div>
+    <div class="ml-auto p-2 bd-highlight">
+        <img [src]="'assets/img/roi/roi_5.jpg'" ></div>
+  </div>
+
+  <div *ngIf=" isUserClubAdmin() ">
+
+    <h3>Charger le fichier Reglement Ordre Intérieur</h3>
+    
+    <form [formGroup]="statusForm" (ngSubmit)="onCreateOrUpdateStatus()">
+    
+    <div class="md-form row">
+        <div class="col-lg-2 col-xl-2 justify-content-end">
+            <label for="pdfFile">Ajouter un pdf</label>
+        </div>
+        <div class="col-lg-3 col-xl-4">
+            <input type="file" name="pdf" accept="application/pdf"  
+                    id="pdfFile" formControlName="pdf" (change)="preloadPdf($event)"/>
+        </div>
+        
+    </div>
+    <div>
+        <button class="btn btn-sm" (click)="onRemovePdf()">Supprimer le pdf</button>
+        <div *ngIf="pdfUrl!==null">
+            <button class="btn btn-sm" *ngIf="!viewPdf" (click)="onShowPdf(true)">Voir le pdf</button>
+            <button class="btn btn-sm" *ngIf="viewPdf" (click)="onShowPdf(false)">Cacher le pdf</button>
+        </div>
+    </div>
+    
+    <!-- Post data -->
+    <div class="md-form row">
+        <div class="col-lg-2 col-xl-2 justify-content-end">
+            <label>Auteur: <a class="font-weight-bold">{{ getUserFullName() }}</a>, 19/04/2018</label>
+        </div>
+
+        <div class="col-lg-3 col-xl-4">
+            <button mdbBtn  type="submit" class="btn btn-sm">Créer la news</button>
+        </div>
+    </div>
+
+    </form>
+    
+    <hr>
+    <div *ngIf="pdfUrl!==null">
+            <div *ngIf="viewPdf">
+                <app-pdf-viewer [selectedDocument]="pdfUrl"></app-pdf-viewer>
+            </div>
+    </div>
+  </div>
+
+   <div *ngIf=" ! isDocumentLoading && documentUrl">
+        <hr>
+        <app-pdf-viewer [selectedDocument]="documentUrl"></app-pdf-viewer>
+    </div>
+
+    <div *ngIf=" ! isDocumentLoading && !documentUrl" >
+        <span style="color: red; font-weight: bold; font-size: larger;" >Erreur lors du chargement du document ou document non trouvé !</span>
+    </div>
