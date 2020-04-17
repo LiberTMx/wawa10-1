@@ -17,13 +17,28 @@ export class SemainesComponent implements OnInit {
   @Input()
   afttSyncInfo: AfttAllDataEntity;
   
-  weeks: Array<AfttWeekByCategory>=null;
+  @Input()
+  weeks: Array<AfttWeekByCategory>;
   
   constructor(
-    private adminService: AdminService,
+    // private adminService: AdminService,
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
+    //this.adminService.getAfttWeeks(this.afttSyncInfo.id)
+    //  .subscribe( res => this.weeks = res );
+  }
+
+  getFilteredWeeksByCategory(category: AfttDivisionCategoryEntity)
+  {
+    const wk = this.weeks.filter( t => t.divisionCategoryId===category.playercategory );
+    wk.sort( (a,b) => {
+      if(a.weekName < b.weekName) return -1;
+      if (a.weekName > b.weekName) return 1;
+      return 0;
+    });
+    return wk;
   }
 
 }

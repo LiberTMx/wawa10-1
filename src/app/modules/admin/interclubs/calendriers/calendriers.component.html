@@ -2,10 +2,15 @@
 
 <!-- <mdb-tabset #staticTabs [buttonClass]="'md-tabs'" [contentClass]="'card'" *ngIf="afttDivisionCategories"> -->
 <mdb-tabset #staticTabs [buttonClass]="'nav md-pills pills-secondary mb-2'"
-    [justified]="true" [contentClass]="'card'" *ngIf="afttDivisionCategories">
+    [justified]="true" [contentClass]="'card'" *ngIf="afttDivisionCategories && afttMatches">
 
     <mdb-tab  [heading]="categorie.name" *ngFor="let categorie of afttDivisionCategories">
-      <app-admin-calendriers-by-category [afttDivisionCategory]="categorie"></app-admin-calendriers-by-category>
+      <app-admin-calendriers-by-category 
+        [afttDivisionCategory]="categorie"
+        [afttWeeks]="getFilteredWeeksByCategory(categorie)"
+        [afttMatches]="getFilteredMatchesByCategory(categorie)"
+        [afttTeams]="getFilteredTeamsByCategory(categorie)"
+      ></app-admin-calendriers-by-category>
     </mdb-tab>
 
 

@@ -25,13 +25,16 @@
   <mdb-tab heading="Les semaines">
     <app-admin-semaines
       [afttSyncInfo]="afttSyncInfo"
-      [afttDivisionCategories]="afttDivisionCategories"></app-admin-semaines>
+      [afttDivisionCategories]="afttDivisionCategories"
+      [weeks]="afttWeekByCategory"></app-admin-semaines>
   </mdb-tab>
 
   <mdb-tab heading="Les calendriers">
     <app-admin-calendriers *ngIf="afttDivisionCategories"
       [afttSyncInfo]="afttSyncInfo"
-      [afttDivisionCategories]="afttDivisionCategories"></app-admin-calendriers>
+      [afttTeams]="afttTeams"
+      [afttDivisionCategories]="afttDivisionCategories"
+      [afttWeekByCategory]="afttWeekByCategory"></app-admin-calendriers>
   </mdb-tab>
 
   <mdb-tab heading="Synchronisations AFTT">

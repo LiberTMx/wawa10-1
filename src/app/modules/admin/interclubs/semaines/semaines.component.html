@@ -2,10 +2,11 @@
 
 <!-- <mdb-tabset #staticTabs [buttonClass]="'md-tabs'" [contentClass]="'card'" *ngIf="afttDivisionCategories"> -->
 <mdb-tabset #staticTabs [buttonClass]="'nav md-pills pills-secondary mb-2'"
-    [justified]="true" [contentClass]="'card'" *ngIf="afttDivisionCategories">
+    [justified]="true" [contentClass]="'card'" *ngIf="afttDivisionCategories && weeks">
 
     <mdb-tab  [heading]="categorie.name" *ngFor="let categorie of afttDivisionCategories">
-      <app-admin-semaines-by-category [afttDivisionCategory]="categorie"></app-admin-semaines-by-category>
+      <app-admin-semaines-by-category [afttDivisionCategory]="categorie"
+      [weeks]="getFilteredWeeksByCategory(categorie)"></app-admin-semaines-by-category>
     </mdb-tab>
 
 
