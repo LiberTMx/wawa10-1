@@ -1,1 +1,69 @@
 
+<div *ngIf="afttFilteredMatches">
+<div class="row mx-2">
+    <div class="mx-2">
+        <span>Filtres:</span>
+    </div>
+
+    <div class="mx-2">
+        <mat-form-field>
+            <mat-label>Semaine</mat-label>
+            <mat-select matNativeControl [(ngModel)]="selectedWeek" name="semaine" (selectionChange)="onChangeWeek($event)">
+              <mat-option value="" selected></mat-option>
+              <mat-option *ngFor="let w of afttWeeks" [value]="w">
+                {{w.weekName}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="mx-2">
+        <mat-form-field>
+            <mat-label>Equipe:</mat-label>
+            <mat-select matNativeControl [(ngModel)]="selectedTeam" name="car"  (selectionChange)="onChangeTeam($event)">
+              <mat-option value="" selected></mat-option>
+              <mat-option *ngFor="let t of afttTeams" [value]="t">
+                {{t.Team}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="mx-2">
+        <button class="btn btn-sm" (click)="onClearFilter()">Effacer les filtre</button>
+    </div>
+</div>
+    <table mdbTable small="true" hover="true">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Match</th>
+            <th>Sem</th>
+            <th>Date</th>
+            <th>Heure</th>
+            <th>HomeClub</th>
+            <th>HomeTeam</th>
+            <th>H Team Id</th>
+            <th>AwayClub</th>
+            <th>AwayTeam</th>
+            <th>A Team Id</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr mdbTableCol *ngFor="let e of afttFilteredMatches; let ix=index">
+            <th scope="row">{{ix+1}}</th>
+            <td>{{e.MatchId}}</td>
+            <td>{{e.WeekName}}</td>
+            <td>{{e.matchDate | date:'EEEE dd/MM/yyyy' }}</td>
+            <td>{{e.Time}}</td>
+            <td>{{e.HomeClub}}</td>
+            <td>{{e.HomeTeam}}</td>
+            <td>{{e.homeTeamId}}</td>
+            <td>{{e.AwayClub}}</td>
+            <td>{{e.AwayTeam}}</td>
+            <td>{{e.awayTeamId}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+</div>

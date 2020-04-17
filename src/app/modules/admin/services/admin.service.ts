@@ -11,6 +11,8 @@ import { AfttTeamEntity } from '../interclubs/model/aftt/aftt-team.entity';
 import { AfttDivisionEntity } from '../interclubs/model/aftt/aftt-division.entity';
 import { AfttMemberByCategoryEntity } from '../interclubs/model/aftt/aftt-member-by-category.entity';
 import { MessageModel } from '../../../common/model/message.model';
+import { AfttWeekByCategory } from '../interclubs/model/aftt/aftt-week-by-category.entity';
+import { AfttMatchEntity } from '../interclubs/model/aftt/aftt-match.entity';
 
 @Injectable({
   providedIn: 'root'
@@ -90,5 +92,19 @@ export class AdminService {
     const url=`${environment.apiUrl}`;  
     const apiUrl = `${url}/admin/processLastSync/`;
     return this.httpClient.get<MessageModel>(apiUrl);
+  }
+
+  getAfttWeeks(syncId: number): Observable<Array<AfttWeekByCategory>>
+  {
+    const url=`${environment.apiUrl}`;  
+    const apiUrl = `${url}/admin/afttWeeks/${syncId}`;
+    return this.httpClient.get<Array<AfttWeekByCategory>>(apiUrl);
+  }
+
+  getAfttMatches(syncId: number): Observable<Array<AfttMatchEntity>>
+  {
+    const url=`${environment.apiUrl}`;  
+    const apiUrl = `${url}/admin/afttMatches/${syncId}`;
+    return this.httpClient.get<Array<AfttMatchEntity>>(apiUrl);
   }
 }

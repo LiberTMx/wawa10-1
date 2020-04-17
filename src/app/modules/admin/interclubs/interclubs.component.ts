@@ -6,6 +6,7 @@ import { AfttDivisionCategoryEntity } from './model/aftt/aftt-division-category.
 import { AfttTeamEntity } from './model/aftt/aftt-team.entity';
 import { AfttDivisionEntity } from './model/aftt/aftt-division.entity';
 import { AfttMemberByCategoryEntity } from './model/aftt/aftt-member-by-category.entity';
+import { AfttWeekByCategory } from './model/aftt/aftt-week-by-category.entity';
 
 @Component({
   selector: 'app-interclubs',
@@ -28,6 +29,7 @@ export class InterclubsComponent implements OnInit {
   afttMembers: Array<AfttMemberByCategoryEntity>=null;
 
  
+  afttWeekByCategory: Array<AfttWeekByCategory>=null;
 
   constructor(
     private adminService: AdminService,
@@ -65,6 +67,11 @@ export class InterclubsComponent implements OnInit {
           this.afttMembers = afttMembers;
           //console.log('interclubs - afttMembers', afttMembers);
         });
+
+      this.adminService.getAfttWeeks(this.afttSyncInfo.id)
+        .subscribe( weeks => this.afttWeekByCategory = weeks );
+
+        
     });
   }
 

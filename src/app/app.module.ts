@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA, LOCALE_ID} from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,6 +32,13 @@ export function jwtOptionsFactory() {
     // whitelistedDomains: ['localhost:3000'], // list of domains to which an authenticated request is sent
   };
 }
+
+
+// langue
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+
+registerLocaleData(localeFr);
 
 // technical module
 import { DeviceDetectorModule } from 'ngx-device-detector';
@@ -107,6 +114,7 @@ import { SponsorsModule } from './modules/sponsors/sponsors.module';
   ],
   providers: [
     MessageService,
+    {provide: LOCALE_ID, useValue: 'fr-CA' }
   ],
   bootstrap: [AppComponent],
 

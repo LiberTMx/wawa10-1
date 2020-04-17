@@ -1,1 +1,26 @@
-<p>semaines-by-category works!</p>
+<div *ngIf="weeks">
+    <table mdbTable small="true" hover="true">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Année</th>
+            <th>Numéro</th>
+            <th>Date début</th>
+            <th>Date fin</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr mdbTableCol *ngFor="let e of weeks; let ix=index">
+            <th scope="row">{{ix+1}}</th>
+            <td>{{e.id}}</td>
+            <td>{{e.weekName}}</td>
+            <td>{{e.year}}</td>
+            <td>{{e.weekNumber}}</td>
+            <td>{{e.startOfWeek | date:'EEEE dd/MM/yyyy' }}</td>
+            <td>{{e.endOfWeek | date:'EEEE dd/MM/yyyy'}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
