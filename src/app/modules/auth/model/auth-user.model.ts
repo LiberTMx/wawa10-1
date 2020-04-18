@@ -35,6 +35,7 @@ export class AuthUserModel {
     notifyParents: boolean;
     initCredential: boolean;
     lastLoginAt: Date;
+    membreComite: boolean;
     
     //----
     getFullName(): string

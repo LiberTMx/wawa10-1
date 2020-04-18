@@ -46,9 +46,10 @@
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false"><i class="fa fa-trophy" aria-hidden="true"></i> Competitions</a>
         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Messieurs/Dames</a></li>
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Aînées</a></li>
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Vétérans</a></li>
+          <li><a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/dames">Dames</a></li>
+          <li><a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/messieurs">Messieurs</a></li>
+          <li><a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/ainees">Aînées</a></li>
+          <li><a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/veterans">Vétérans</a></li>
           <div class="divider dropdown-divider"></div>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="tournoi/new">Listes des forces</a></li>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="criterium/new">Challenge</a></li>
@@ -62,7 +63,7 @@
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false"><i class="fa fa-calendar" aria-hidden="true"></i> Activités</a>
         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Entraînements</a></li>
+          <li><a class="dropdown-item" routerLinkActive="active" routerLink="entrainements">Entraînements</a></li>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Stages</a></li></div>
       </li>
 
@@ -78,9 +79,9 @@
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false"><i class="fa fa-calendar" aria-hidden="true"></i>  Admin</a>
         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="admin/initdata" *ngIf="getAuthService().isUserSuperAdmin()">Init Data</a></li>
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="admin/interclubs">Interclubs</a></li>
+          <li><a class="dropdown-item" routerLinkActive="active" routerLink="auth/fonctions">Les fonctions</a></li>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="admin/roles" *ngIf="getAuthService().isUserSuperAdmin()">Gestion des rôles</a></li>
+          <li><a class="dropdown-item" routerLinkActive="active" routerLink="admin/interclubs">Interclubs</a></li>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="contact/black-list">Contact black list</a></li>
 
 <!--           <li><a class="dropdown-item" routerLinkActive="active" routerLink="admin/saisons">Saisons</a></li>

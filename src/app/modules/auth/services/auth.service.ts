@@ -101,7 +101,9 @@ export class AuthService {
         Object.assign(newUser, user);
         user = newUser;
         this.store.dispatch( new LoginAction({user}) );
+        this.userEvents.next(user);
       }
+      
       return user;
     }
 

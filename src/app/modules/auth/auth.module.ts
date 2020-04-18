@@ -15,6 +15,8 @@ import { MdBootstrapProModule } from '../../modules.vendors/mdbootstrap/md-boots
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import { UserListeComponent } from './user/user-liste/user-liste.component';
+import { FonctionsComponent } from './fonctions/fonctions.component';
+import { FonctionService } from './services/fonction.service';
 //import { ComTranslateModule } from '../../modules.vendors/com.translate/com.translate.module';
 
 @NgModule({
@@ -22,6 +24,7 @@ import { UserListeComponent } from './user/user-liste/user-liste.component';
     LoginComponent,
     ChangePasswordComponent,
     UserListeComponent,
+    FonctionsComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +52,7 @@ export class AuthModule {
         ngModule: AuthModule,
         providers: [
           AuthService,
+          FonctionService,
           AuthGuard,
         ]
       };

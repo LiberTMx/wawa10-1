@@ -39,7 +39,8 @@ import { MaterialModule } from '../../modules.vendors/google.angular.material/ma
     DivisionsComponent, 
     ListesdesforcesByCategoryComponent, 
     ListesdesforcesComponent, 
-    DivisionsByCategoryComponent, SynchronisationComponent, CalendriersComponent, CalendriersByCategoryComponent, SemainesComponent, SemainesByCategoryComponent,
+    DivisionsByCategoryComponent, SynchronisationComponent, 
+    CalendriersComponent, CalendriersByCategoryComponent, SemainesComponent, SemainesByCategoryComponent, 
   ],
   imports: [
     CommonModule,

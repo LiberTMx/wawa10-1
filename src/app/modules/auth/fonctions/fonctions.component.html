@@ -1,0 +1,72 @@
+<div>
+    <mat-card>
+        <mat-card-title>Gestion des fonctions</mat-card-title>
+        <mat-card-content>
+
+            <h5>Ajouter une fonction</h5>
+            <form [formGroup]="fonctionForm" (ngSubmit)="onCreateFonction()" class="border border-black">
+                <div class="fonction-form" fxLayoutGap="5px">
+
+                    <div class="md-form form-sm" fxFlex="10%">
+                        <i class="fa fa-envelope prefix grey-text"></i>
+                        <input type="text" id="code" formControlName="code" class="form-control form-control-sm" mdbInput minLength="3">
+                        <label for="code">Code</label>
+                        <mdb-error *ngIf="code.invalid && (code.dirty || code.touched)">Min 3 car</mdb-error>
+                        <mdb-success *ngIf="code.valid && (code.dirty || code.touched)"></mdb-success>
+                    </div>
+
+                    <div class="md-form form-sm" fxFlex="28%">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <input type="text" id="designation" formControlName="designation" class="form-control form-control-sm" mdbInput minLength="5">
+                        <label for="designation">Désignation</label>
+                        <mdb-error *ngIf="designation.invalid && (designation.dirty || designation.touched)">Min 5 car</mdb-error>
+                        <mdb-success *ngIf="designation.valid && (designation.dirty || designation.touched)"></mdb-success>
+                    </div>
+
+                    <div class="md-form form-sm" fxFlex="40%">
+                        <i class="fa fa-envelope prefix grey-text"></i>
+                        <input type="text" id="description" formControlName="description" class="form-control form-control-sm" mdbInput>
+                        <label for="description">Description</label>
+                    </div>
+        
+                    <div class="md-form form-sm" fxFlex="20%">
+                        <button  type="submit" class="btn btn-sm btn-unique button-small waves-light" mdbWavesEffect [disabled]="fonctionForm.invalid">
+                          <i class="fa fa-paper-plane-o ml-1"></i> &nbsp; Créer la fonction
+                        </button>
+                      </div>
+                </div>
+            </form>
+
+            <hr>
+            <h5>Liste des fonctions</h5>
+
+            <div *ngIf="authFonctions">
+                <br>
+                <table mdbTable small="true" hover="true">
+                    <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Code</th>
+                        <th>Désignation</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                        <th>ID</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr mdbTableCol *ngFor="let e of authFonctions; let ix=index">
+                        <th scope="row">{{ix+1}}</th>
+                        <th>{{e.code}}</th>
+                        <td>{{e.designation}}</td>
+                        <td>{{e.description}}</td>
+                        <td>... todo ...</td>
+                        <td>{{e.id}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<br><br><br>
