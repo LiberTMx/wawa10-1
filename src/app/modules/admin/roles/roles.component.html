@@ -7,12 +7,21 @@
     <mdb-tab heading="Groupes">
         <app-admin-groupes [groups]="groups"></app-admin-groupes>
     </mdb-tab>
-    <mdb-tab heading="Roles/Domaine">
-      <app-admin-role></app-admin-role>
+    <mdb-tab heading="Roles/Domaine" >
+      <app-admin-role *ngIf="domains && roles"
+       [domains]="domains"
+       [roles]="roles"></app-admin-role>
     </mdb-tab>
     <!--Panel 3-->
     <mdb-tab heading="Groupes-roles">
-      <app-admin-group-role></app-admin-group-role>
+      <app-admin-group-role *ngIf="groups && roles && groupRoles"
+        [groups]="groups"
+        [roles]="roles"
+        [groupRoles]="groupRoles"></app-admin-group-role>
     </mdb-tab>
  
   </mdb-tabset>
+
+  <br>
+<br>
+<br>

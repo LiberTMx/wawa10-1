@@ -54,11 +54,7 @@ export class AuthDomainModel
     id: number;
     domain: string;
     commentaire: string;
+    showOrdre: number;
 }
 
-export class AuthRoleModel 
-{
-    id: number;
-    role: string;
-    authDomain: AuthDomainModel;
-}
+

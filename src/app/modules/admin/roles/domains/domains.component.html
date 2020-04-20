@@ -11,6 +11,12 @@
                 <label for="nom">Domaine</label>
             </div>
             
+            <div class="md-form">
+              <i class="fa fa-user prefix grey-text"></i>
+              <input type="text" id="ordre" formControlName="ordre" class="form-control" mdbInput width="300px">
+              <label for="ordre">Ordre affichage</label>
+          </div>
+
             <div class="md-form" fxFlex="50%">
                 <i class="fa fa-envelope prefix grey-text"></i>
                 <input type="text" id="commentaire" formControlName="commentaire" class="form-control" mdbInput>
@@ -38,6 +44,7 @@
             <th>Domaine</th>
             <th>Commentaire</th>
             <th>Actions</th>
+            <th>Ordre</th>
           </tr>
         </thead>
         <tbody>
@@ -47,6 +54,7 @@
             <td>{{domain.domain}}</td>
             <td>{{domain.commentaire}}</td>
             <td>... todo ...</td>
+            <td>{{domain.showOrdre}}</td>
           </tr>
         </tbody>
       </table>

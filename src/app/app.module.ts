@@ -58,6 +58,7 @@ import { RequestInterceptor } from './common/utils/http-interceptor/request.inte
 import { StatusModule } from './modules/status/status.module';
 import { RoiModule } from './modules/roi/roi.module';
 import { EntrainementsModule } from './modules/entrainements/entrainements.module';
+import { NewsletterModule } from './modules/newsletter/newsletter.module';
 // import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 //import { MDBSpinningPreloader } from 'ng-uikit-pro-standard';
 //import { ButtonsModule, WavesModule, CollapseModule } from 'ng-uikit-pro-standard'
@@ -116,6 +117,7 @@ import { EntrainementsModule } from './modules/entrainements/entrainements.modul
     StatusModule,
     RoiModule,
     EntrainementsModule,
+    NewsletterModule,
     // Import the app routing module after the other app modules, so that the routes are merged
     AppRoutingModule, 
   ],

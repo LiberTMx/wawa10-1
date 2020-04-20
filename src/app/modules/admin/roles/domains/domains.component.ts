@@ -33,6 +33,7 @@ export class DomainsComponent implements OnInit {
   {
     this.domainForm = this.formBuilder.group({
       nom: ['', Validators.required],
+      ordre: ['', Validators.required],
       commentaire: [''],
     });
   }
@@ -41,7 +42,7 @@ export class DomainsComponent implements OnInit {
   {
     const formValue=this.domainForm.value;
     console.log('Creating new auth domain', formValue.nom, formValue.commentaire);
-    this.adminRoleService.createNewDomain(formValue.nom, formValue.commentaire)
+    this.adminRoleService.createNewDomain(formValue.nom, formValue.commentaire, formValue.ordre)
       .subscribe( (res: AuthDomainModel) => {
         if(res!==null && res!==undefined)
         {

@@ -1,5 +1,6 @@
 import { TokensModel } from './tokens.model';
-import { AuthUserModel, AuthRoleModel } from './auth-user.model';
+import { AuthUserModel } from './auth-user.model';
+import { AuthRoleModel } from './auth-role.model';
 
 export class AuthenticatedUserModel extends AuthUserModel {
     tokens: TokensModel;

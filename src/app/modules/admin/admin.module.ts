@@ -23,6 +23,7 @@ import { CalendriersByCategoryComponent } from './interclubs/calendriers-by-cate
 import { SemainesComponent } from './interclubs/semaines/semaines.component';
 import { SemainesByCategoryComponent } from './interclubs/semaines-by-category/semaines-by-category.component';
 import { MaterialModule } from '../../modules.vendors/google.angular.material/material.module';
+import { PrimengModule } from '../../modules.vendors/primeng/primeng.module';
 
 
 
@@ -47,6 +48,7 @@ import { MaterialModule } from '../../modules.vendors/google.angular.material/ma
     AdminRoutingModule,
     MaterialModule,
     MdBootstrapProModule,
+    PrimengModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
