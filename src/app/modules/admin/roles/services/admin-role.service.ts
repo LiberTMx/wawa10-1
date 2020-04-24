@@ -4,6 +4,8 @@ import { AuthDomainModel } from '../../../auth/model/auth-user.model';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../../environments/environment';
 import { AuthGroupModel } from '../../../auth/model/auth-group.model';
+import { AuthGroupRoleModel } from '../../../auth/model/auth-group-role.model';
+import { AuthRoleModel } from '../../../auth/model/auth-role.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +23,11 @@ export class AdminRoleService {
     return this.httpClient.get<Array<AuthDomainModel>>(apiUrl);
   }
 
-  createNewDomain(domainName: string, domainCommentaire: string): Observable<AuthDomainModel>
+  createNewDomain(domainName: string, domainCommentaire: string, showOrdre: number): Observable<AuthDomainModel>
   {
     const url=`${environment.apiUrl}`;  
     const apiUrl = `${url}/auth/domainCreate`;
-    return this.httpClient.post<AuthDomainModel>(apiUrl, { domainName, domainCommentaire });
+    return this.httpClient.post<AuthDomainModel>(apiUrl, { domainName, domainCommentaire, showOrdre });
   }
 
   getAllGroups(): Observable<Array<AuthGroupModel>>
@@ -40,6 +42,20 @@ export class AdminRoleService {
     const url=`${environment.apiUrl}`;  
     const apiUrl = `${url}/auth/groupCreate`;
     return this.httpClient.post<AuthGroupModel>(apiUrl, { name, commentaire });
+  }
+
+  getAllRoles(): Observable<Array<AuthRoleModel>>
+  {
+    const url=`${environment.apiUrl}`;  
+    const apiUrl = `${url}/auth/roleList`;
+    return this.httpClient.get<Array<AuthRoleModel>>(apiUrl);
+  }
+
+  getAllGroupRoles(): Observable<Array<AuthGroupRoleModel>>
+  {
+    const url=`${environment.apiUrl}`;  
+    const apiUrl = `${url}/auth/groupRoleList`;
+    return this.httpClient.get<Array<AuthGroupRoleModel>>(apiUrl);
   }
 
 }

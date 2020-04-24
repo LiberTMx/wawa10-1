@@ -6,7 +6,7 @@ import { NgModule, NO_ERRORS_SCHEMA, LOCALE_ID} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // REDUX - ngRx
 import { EffectsModule } from '@ngrx/effects';
@@ -54,6 +54,11 @@ import { ContactModule } from './modules/contact/contact.module';
 import { LocalModule } from './modules/local/local.module';
 import { PrixModule } from './modules/prix/prix.module';
 import { SponsorsModule } from './modules/sponsors/sponsors.module';
+import { RequestInterceptor } from './common/utils/http-interceptor/request.interceptor';
+import { StatusModule } from './modules/status/status.module';
+import { RoiModule } from './modules/roi/roi.module';
+import { EntrainementsModule } from './modules/entrainements/entrainements.module';
+import { NewsletterModule } from './modules/newsletter/newsletter.module';
 // import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 //import { MDBSpinningPreloader } from 'ng-uikit-pro-standard';
 //import { ButtonsModule, WavesModule, CollapseModule } from 'ng-uikit-pro-standard'
@@ -109,12 +114,17 @@ import { SponsorsModule } from './modules/sponsors/sponsors.module';
     LocalModule,
     PrixModule,
     SponsorsModule,
+    StatusModule,
+    RoiModule,
+    EntrainementsModule,
+    NewsletterModule,
     // Import the app routing module after the other app modules, so that the routes are merged
     AppRoutingModule, 
   ],
   providers: [
     MessageService,
-    {provide: LOCALE_ID, useValue: 'fr-CA' }
+    {provide: LOCALE_ID, useValue: 'fr-CA' },
+    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true, },
   ],
   bootstrap: [AppComponent],
 

@@ -1,0 +1,20 @@
+
+.status-header {
+
+    display: inline-block;
+    background-color: lightgrey;
+    align-items: center;
+    .image1 {
+        text-align: start; 
+        //float: left;
+          margin-right: 5px;
+          display: inline-block;
+    }
+
+    .image2 {
+        text-align: end; 
+        //float: right;
+          margin-right: 5px;
+          display: inline-block;
+    }
+}

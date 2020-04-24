@@ -11,6 +11,7 @@ export const ADMIN_ROUTES: Routes =
     { path: 'admin',  children: [
         { path: 'interclubs', component: InterclubsComponent },
         { path: 'roles', component: RolesComponent },
+        
         ] }
 ];
 

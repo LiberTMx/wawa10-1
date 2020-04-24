@@ -21,6 +21,8 @@ import {ConfirmationService} from 'primeng/api';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {CalendarModule} from 'primeng/calendar';
 
+import {PanelModule} from 'primeng/panel';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -42,7 +44,8 @@ import {CalendarModule} from 'primeng/calendar';
     ToastModule,
     ToolbarModule,
     MultiSelectModule,
-    CalendarModule
+    CalendarModule,
+    PanelModule,
   ],
   exports: [
     AccordionModule,
@@ -60,7 +63,8 @@ import {CalendarModule} from 'primeng/calendar';
     ToastModule,
     ToolbarModule,
     MultiSelectModule,
-    CalendarModule
+    CalendarModule,
+    PanelModule,
   ],
   providers: [
     ConfirmationService

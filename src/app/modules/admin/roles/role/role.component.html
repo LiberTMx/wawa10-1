@@ -1,1 +1,63 @@
-<p>role works!</p>
+<h2>Les rôles par domaine</h2>
+<h5>Ajouter un rôle</h5>
+
+<div *ngIf="domainsSelect">
+
+    <form [formGroup]="roleForm" (ngSubmit)="onCreateRole()" class="border border-black">
+        <div class="role-form" fxLayoutGap="35px">
+    
+            <div class="md-form" fxFlex="20%">
+                <i class="fa fa-envelope prefix grey-text"></i>
+                <mdb-select class="col-md-12"
+                [options]="domainsSelect" id="domain" formControlName="domain" placeholder="Choisir un domaine"></mdb-select>
+                <label for="domain">Domaine</label>
+            </div>
+    
+            <div class="md-form" fxFlex="30%">
+                <i class="fa fa-user prefix grey-text"></i>
+                <input type="text" id="role" formControlName="role" class="form-control" mdbInput minLength="5">
+                <label for="role">Rôle</label>
+
+            </div>
+    
+    
+            <div class="md-form" fxFlex="20%">
+                <button  type="submit" class="btn btn-sm btn-unique button-small waves-light" mdbWavesEffect [disabled]="roleForm.invalid">
+                  <i class="fa fa-paper-plane-o ml-1"></i> &nbsp; Créer le rôle
+                </button>
+              </div>
+        </div>
+    </form>
+
+</div>
+
+<hr>
+<h6>Liste des rôles par domaine:</h6>
+<div *ngIf="domains">
+    
+  <div *ngFor="let domain of domains; let ix = index">
+    <br>
+    <p-panel header="Domaine: {{ domain.domain }}" [toggleable]="true" [toggler]="'header'" >
+      {{ domain.commentaire }} 
+      <br>
+      <table mdbTable small="true" hover="true">
+          <thead>
+            <tr>
+              <th>N°</th>
+              <th>Role_ID</th>
+              <th>Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr mdbTableCol *ngFor="let role of getRoleForDomain(domain); let ix=index">
+              <th scope="row">{{ix+1}}</th>
+              <th>{{role.id}}</th>
+              <td>{{role.role}}</td>
+              <td>... todo ...</td>
+            </tr>
+          </tbody>
+        </table>
+    </p-panel>
+  </div>
+</div>

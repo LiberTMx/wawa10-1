@@ -1,4 +1,8 @@
-export class AuthRoleModel {
+import { AuthDomainModel } from './auth-user.model';
+
+export class AuthRoleModel 
+{
     id: number;
-    name: string;
+    role: string;
+    authDomain: AuthDomainModel;
 }
