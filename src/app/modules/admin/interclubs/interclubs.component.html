@@ -1,6 +1,10 @@
 
 <h2>Gestion des interclubs via AFTT</h2>
 
+<span class="badge badge-success badge_style" title="Importer les semaines" *ngIf="! importingInterclubsCategories"
+        (click)="onImportInterclubsCategoriesAfttToClub()">Importer les catégories interclubs de AFTT</span>
+<br>
+<br>
 
 <mdb-tabset #staticTabs [buttonClass]="'md-tabs'" [contentClass]="'card'" *ngIf="afttSyncInfo">
 

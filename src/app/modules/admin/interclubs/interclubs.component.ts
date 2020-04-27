@@ -7,6 +7,7 @@ import { AfttTeamEntity } from './model/aftt/aftt-team.entity';
 import { AfttDivisionEntity } from './model/aftt/aftt-division.entity';
 import { AfttMemberByCategoryEntity } from './model/aftt/aftt-member-by-category.entity';
 import { AfttWeekByCategory } from './model/aftt/aftt-week-by-category.entity';
+import { ToastMessageService } from '../../../common/services/toast-message.service';
 
 @Component({
   selector: 'app-interclubs',
@@ -31,8 +32,11 @@ export class InterclubsComponent implements OnInit {
  
   afttWeekByCategory: Array<AfttWeekByCategory>=null;
 
+  importingInterclubsCategories=false;
+
   constructor(
     private adminService: AdminService,
+    private toastMessageService: ToastMessageService,
   ) { }
 
   ngOnInit(): void 
@@ -88,6 +92,22 @@ export class InterclubsComponent implements OnInit {
     }
   } */
 
+  onImportInterclubsCategoriesAfttToClub()
+  {
+    this.toastMessageService.addWarn('Importation données AFFT', 'Importation des catégories interclubs de l\'AFTT en cours...');
+    this.adminService.importInterclubsCategoriesAfttToClub()
+      .subscribe(
+        res => {
+          this.toastMessageService.addSuccess('Importation données AFFT', 'Les catégories interclubs de l\'AFTT ont été importées');
+        }
+        ,
+        err => {
+          this.toastMessageService.addError('Importation données AFFT', 'Une erreur s\'est produite lors de l\'importation:'+err.message);
+
+          console.error(err);
+        }
+      );
+  }
   
 
 }
