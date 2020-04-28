@@ -7,11 +7,12 @@ import { PrimengModule } from '../../modules.vendors/primeng/primeng.module';
 import { MdBootstrapProModule } from '../../modules.vendors/mdbootstrap/md-bootstrap-pro.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { SelectionComponent } from './selections/selection/selection.component';
 
 
 
 @NgModule({
-  declarations: [FeuilleDeMatchComponent],
+  declarations: [FeuilleDeMatchComponent, SelectionComponent],
   imports: [
     CommonModule,
     InterclubsRoutingModule,
