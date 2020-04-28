@@ -59,6 +59,7 @@ import { StatusModule } from './modules/status/status.module';
 import { RoiModule } from './modules/roi/roi.module';
 import { EntrainementsModule } from './modules/entrainements/entrainements.module';
 import { NewsletterModule } from './modules/newsletter/newsletter.module';
+import { InterclubsModule } from './modules/interclubs/interclubs.module';
 // import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 //import { MDBSpinningPreloader } from 'ng-uikit-pro-standard';
 //import { ButtonsModule, WavesModule, CollapseModule } from 'ng-uikit-pro-standard'
@@ -118,6 +119,7 @@ import { NewsletterModule } from './modules/newsletter/newsletter.module';
     RoiModule,
     EntrainementsModule,
     NewsletterModule,
+    InterclubsModule,
     // Import the app routing module after the other app modules, so that the routes are merged
     AppRoutingModule, 
   ],

@@ -25,7 +25,6 @@ export class SelectionComponent implements OnInit {
         ,
         () => {
           console.log('semaines terminee');
-          const x = +1;
         }
       )
     ;

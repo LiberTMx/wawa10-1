@@ -4,6 +4,7 @@ import { AuthService } from '../../../auth/services/auth.service';
 import { AuthenticatedUserModel } from '../../../auth/model/authenticated-user.model';
 import { Subscription } from 'rxjs';
 import { NavbarComponent } from 'ng-uikit-pro-standard';
+import { SelectionService } from '../../../interclubs/selections/services/selection.service';
 
 @Component({
   selector: 'app-menu',
@@ -20,6 +21,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private router: Router,
+    private selectionService: SelectionService,
   ) { }
 
   ngOnInit(): void 
@@ -27,6 +29,9 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.userEventsSubscription = this.authService.userEvents.subscribe(user => {
       this.user = user;
     });
+
+    this.selectionService.getInterclubsCategories()
+      .subscribe(res=> console.log('les categories interclubs:', res));
   }
 
   ngOnDestroy() 

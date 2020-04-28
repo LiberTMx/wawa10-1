@@ -7,6 +7,8 @@ import { Subscription } from 'rxjs';
 import { ToastMessageService, ToastMessage } from './common/services/toast-message.service';
 
 import { MessageService as PrimengMessageService } from 'primeng/api';
+import { State } from '@ngrx/store';
+import { AppState } from './state/app.state';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +31,7 @@ export class AppComponent implements OnInit, OnDestroy
     private primengMessageService: PrimengMessageService,
     private router: Router, 
     private toastMessageService: ToastMessageService,
+    private store: State<AppState>,
   ) {
     console.log('app constructor called !');
   }
@@ -46,7 +49,8 @@ export class AppComponent implements OnInit, OnDestroy
     }
     this.ckeckingBrowser=false;
 
-    
+    this.preloadStaticData();
+
     this.router.navigate(['default']);
   }
 
@@ -59,4 +63,8 @@ export class AppComponent implements OnInit, OnDestroy
   }
 
  
+  preloadStaticData()
+  {
+
+  }
 }
