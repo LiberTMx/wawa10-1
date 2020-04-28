@@ -18,6 +18,7 @@ import { NewsCreateComponent } from './news/news-create/news-create.component';
 import { NewsComponent } from './news/news/news.component';
 import { NewsDetailsComponent } from './news/news-details/news-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InterclubsModule } from '../interclubs/interclubs.module';
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, MenuComponent, HomeComponent, PdfViewerComponent,
     NewsListeComponent, NewsCreateComponent, NewsComponent, NewsDetailsComponent],
@@ -32,6 +33,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     PdfViewerModule,
     NgxExtendedPdfViewerModule,
+    InterclubsModule,
   ],
   exports: [
     AppCommonRoutingModule,

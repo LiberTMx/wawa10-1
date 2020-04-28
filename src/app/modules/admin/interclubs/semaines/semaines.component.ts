@@ -20,8 +20,10 @@ export class SemainesComponent implements OnInit {
   @Input()
   weeks: Array<AfttWeekByCategory>;
   
+  importing=false;
+
   constructor(
-    // private adminService: AdminService,
+    private adminService: AdminService,
   ) { }
 
   ngOnInit(): void 
@@ -41,4 +43,10 @@ export class SemainesComponent implements OnInit {
     return wk;
   }
 
+  onImportSemainesFromAfttToClub()
+  {
+    this.importing=true;
+    this.adminService.importSemainesFromAfttToClub()
+      .subscribe();
+  }
 }

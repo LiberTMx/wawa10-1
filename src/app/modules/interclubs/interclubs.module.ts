@@ -8,6 +8,9 @@ import { MdBootstrapProModule } from '../../modules.vendors/mdbootstrap/md-boots
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SelectionComponent } from './selections/selection/selection.component';
+import { StoreModule } from '@ngrx/store';
+import { interclubsReducer } from './state/reducers/interclubs.reducer';
+import { SelectionService } from './selections/services/selection.service';
 
 
 
@@ -20,12 +23,18 @@ import { SelectionComponent } from './selections/selection/selection.component';
     PrimengModule,
     MdBootstrapProModule,
 
+    StoreModule.forFeature('interclubsModule', interclubsReducer ),
+
     FormsModule,
     FlexLayoutModule,
     ReactiveFormsModule,
   ],
   exports: [
     InterclubsRoutingModule,
+    SelectionService,
+  ],
+  providers: [
+    SelectionService,
   ]
 })
 export class InterclubsModule { }

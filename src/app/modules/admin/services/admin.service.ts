@@ -107,4 +107,18 @@ export class AdminService {
     const apiUrl = `${url}/admin/afttMatches/${syncId}`;
     return this.httpClient.get<Array<AfttMatchEntity>>(apiUrl);
   }
+
+  importSemainesFromAfttToClub(): Observable<MessageModel>
+  {
+    const url=`${environment.apiUrl}`;  
+    const apiUrl = `${url}/admin/ImportSemainesFromAfttToClub/`;
+    return this.httpClient.get<MessageModel>(apiUrl);
+  }
+
+  importInterclubsCategoriesAfttToClub(): Observable<MessageModel>
+  {
+    const url=`${environment.apiUrl}`;  
+    const apiUrl = `${url}/admin/importInterclubsCategoriesFromAfttToClub/`;
+    return this.httpClient.get<MessageModel>(apiUrl);
+  }
 }
