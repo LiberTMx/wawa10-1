@@ -10,6 +10,9 @@ import { environment } from '../../../../../environments/environment';
 })
 export class SelectionService {
 
+  selectedCategory: number;
+  categories: Array<InterclubsCategoryModel>;
+
   constructor(
     private httpClient: HttpClient,
   ) { }
@@ -37,4 +40,24 @@ export class SelectionService {
     const apiUrl = `${url}/interclubs/listeInterclubsCategories`;
     return this.httpClient.get<Array<InterclubsCategoryModel>>(apiUrl);
   }
+
+  setSelectedInterclubCategory(selectedCategory: number)
+  {
+    this.selectedCategory = selectedCategory;
+  }
+
+  setCategories(categories: Array<InterclubsCategoryModel>)
+  {
+    this.categories = categories;
+  }
+
+  findInterclubCategoryById(categoryId: number): InterclubsCategoryModel
+  {
+    if( this.categories !==null && this.categories!==undefined)
+    {
+      return this.categories.find( c => c.id === categoryId);
+    }
+    return null;
+  }
+  
 }

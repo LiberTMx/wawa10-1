@@ -1,8 +1,7 @@
-<table>
-    <tbody>
-        <tr *ngFor = "let semaine of semaines"> 
-            <td>{{semaine.weekName}}</td>
-            <td>{{semaine.weekNumber}}</td>
-        </tr>
-    </tbody>
-</table>
+
+
+<app-interclubs-selections-hommes 
+    [semaines]=" getFilteredSemaineByInterclubCategory( selectedInterclubCategory )  "
+    *ngIf = "selectedInterclubCategoryId === 1">
+
+</app-interclubs-selections-hommes>
