@@ -98,7 +98,8 @@ export class InterclubsComponent implements OnInit {
     this.adminService.importInterclubsCategoriesAfttToClub()
       .subscribe(
         res => {
-          this.toastMessageService.addSuccess('Importation données AFFT', 'Les catégories interclubs de l\'AFTT ont été importées');
+          console.log('Interclub categories:', res);
+          this.toastMessageService.addSuccess('Importation données AFFT', 'Les catégories interclubs de l\'AFTT ont été importées', 5000);
         }
         ,
         err => {
