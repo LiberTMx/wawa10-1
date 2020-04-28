@@ -42,14 +42,20 @@
         </div>
       </li>
 
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown" *ngIf=" ! loading">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false"><i class="fa fa-trophy" aria-hidden="true"></i> Competitions</a>
         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/dames">Dames</a></li>
+          
+          <!-- <li><a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/dames">Dames</a></li>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/messieurs">Messieurs</a></li>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/ainees">Aînées</a></li>
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/veterans">Vétérans</a></li>
+          <li><a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/veterans">Vétérans</a></li> -->
+
+          <li *ngFor="let cat of interclubCategories">
+            <a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/{{cat.id}}">{{ cat.name }}</a>
+          </li>
+
           <div class="divider dropdown-divider"></div>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="tournoi/new">Listes des forces</a></li>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="criterium/new">Challenge</a></li>

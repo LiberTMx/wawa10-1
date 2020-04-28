@@ -5,6 +5,7 @@ import { AuthenticatedUserModel } from '../../../auth/model/authenticated-user.m
 import { Subscription } from 'rxjs';
 import { NavbarComponent } from 'ng-uikit-pro-standard';
 import { SelectionService } from '../../../interclubs/selections/services/selection.service';
+import { InterclubsCategoryModel } from 'src/app/modules/interclubs/selections/model/interclubs-category.model';
 
 @Component({
   selector: 'app-menu',
@@ -15,7 +16,9 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   user: AuthenticatedUserModel = null;
   userEventsSubscription: Subscription;
+  interclubCategories: Array<InterclubsCategoryModel>;
 
+  loading = true;
   @ViewChild('navbar', { static: true }) navbar: NavbarComponent;
   
   constructor(
@@ -31,7 +34,15 @@ export class MenuComponent implements OnInit, OnDestroy {
     });
 
     this.selectionService.getInterclubsCategories()
-      .subscribe(res=> console.log('les categories interclubs:', res));
+      .subscribe(res=> {
+        this.interclubCategories = res;
+        console.log('les categories interclubs:', res); 
+        this.selectionService.setCategories(res);
+      },
+      err => console.error('erreur', err)
+      ,
+      () => this.loading = false
+    );
   }
 
   ngOnDestroy() 

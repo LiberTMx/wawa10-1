@@ -11,11 +11,12 @@ import { SelectionComponent } from './selections/selection/selection.component';
 import { StoreModule } from '@ngrx/store';
 import { interclubsReducer } from './state/reducers/interclubs.reducer';
 import { SelectionService } from './selections/services/selection.service';
+import { HommesComponent } from './selections/selection/hommes/hommes.component';
 
 
 
 @NgModule({
-  declarations: [FeuilleDeMatchComponent, SelectionComponent],
+  declarations: [FeuilleDeMatchComponent, SelectionComponent, HommesComponent],
   imports: [
     CommonModule,
     InterclubsRoutingModule,
