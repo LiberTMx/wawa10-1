@@ -2,6 +2,6 @@
 
 <app-interclubs-selections-hommes 
     [semaines]=" getFilteredSemaineByInterclubCategory( selectedInterclubCategory )  "
-    *ngIf = "selectedInterclubCategoryId === 1">
+    *ngIf = "! loading && selectedInterclubCategoryId === 1">
 
 </app-interclubs-selections-hommes>

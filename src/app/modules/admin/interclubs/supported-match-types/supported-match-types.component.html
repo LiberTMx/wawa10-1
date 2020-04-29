@@ -1,0 +1,22 @@
+<div *ngIf="afttMatchTypes">
+    <table mdbTable small="true" hover="true">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>ID</th>
+            <th>Type de match</th>
+            <th>Description</th>
+            <th>Supporté?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr mdbTableCol *ngFor="let e of afttMatchTypes; let ix=index">
+            <th scope="row">{{ix+1}}</th>
+            <td>{{e.id}}</td>
+            <td>{{e.matchType}}</td>
+            <td>{{e.comment}}</td>
+            <td>{{e.supportedByClub=== true ? 'Oui' : 'Non'}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>

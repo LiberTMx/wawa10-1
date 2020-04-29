@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { InterclubsSemaineModel } from '../model/interclubs-semaine.model';
 import { InterclubsCategoryModel } from '../model/interclubs-category.model';
 import { environment } from '../../../../../environments/environment';
+import { InterclubsDivisionModel } from '../model/interclubs-division.model';
+import { InterclubsTeamModel } from '../model/interclubs-team.model';
 
 @Injectable({
   providedIn: 'root'
@@ -59,5 +61,21 @@ export class SelectionService {
     }
     return null;
   }
+  
+
+  getInterclubsDivisions(): Observable< Array<InterclubsDivisionModel> >
+  {
+    const url=`${environment.apiUrl}`;  
+    const apiUrl = `${url}/interclubs/listeInterclubsDivisions`;
+    return this.httpClient.get<Array<InterclubsDivisionModel>>(apiUrl);
+  }
+
+  getInterclubsTeams(): Observable< Array<InterclubsTeamModel> >
+  {
+    const url=`${environment.apiUrl}`;  
+    const apiUrl = `${url}/interclubs/listeInterclubsTeams`;
+    return this.httpClient.get<Array<InterclubsTeamModel>>(apiUrl);
+  }
+
   
 }

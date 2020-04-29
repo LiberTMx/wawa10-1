@@ -4,11 +4,14 @@ import { MDBSpinningPreloader, MDBBootstrapModulesPro } from 'ng-uikit-pro-stand
 import { InputsModule, ButtonsModule } from 'ng-uikit-pro-standard';
 import { PreloadersModule } from 'ng-uikit-pro-standard';
 import { CollapseModule } from 'ng-uikit-pro-standard';
+// MDB Angular Pro
+//import {  WavesModule, DropdownModule.forRoot() } from 'ng-uikit-pro-standard';
+
 
 @NgModule({
   imports: [
-    MDBBootstrapModulesPro.forRoot(),
-    DropdownModule,
+    /*
+    DropdownModule.forRoot(),
     TabsModule,
     WavesModule,
     
@@ -16,19 +19,21 @@ import { CollapseModule } from 'ng-uikit-pro-standard';
     InputsModule,
     ButtonsModule,
     PreloadersModule,
-    CollapseModule,
+    CollapseModule,*/
+    MDBBootstrapModulesPro.forRoot(),
   ],
 
   exports: [
+    /*
     DropdownModule,
     TabsModule,
     WavesModule,
-    MDBBootstrapModulesPro,
     //ToastModule
     InputsModule,
     ButtonsModule,
     PreloadersModule,
-    CollapseModule,
+    CollapseModule,*/
+    MDBBootstrapModulesPro,
   ],
 
   declarations: [],
