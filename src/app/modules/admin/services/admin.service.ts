@@ -13,6 +13,7 @@ import { AfttMemberByCategoryEntity } from '../interclubs/model/aftt/aftt-member
 import { MessageModel } from '../../../common/model/message.model';
 import { AfttWeekByCategory } from '../interclubs/model/aftt/aftt-week-by-category.entity';
 import { AfttMatchEntity } from '../interclubs/model/aftt/aftt-match.entity';
+import { AfttMatchTypeEntity } from '../interclubs/model/aftt/aftt-match-type.model';
 
 @Injectable({
   providedIn: 'root'
@@ -119,6 +120,48 @@ export class AdminService {
   {
     const url=`${environment.apiUrl}`;  
     const apiUrl = `${url}/admin/importInterclubsCategoriesFromAfttToClub/`;
+    return this.httpClient.get<MessageModel>(apiUrl);
+  }
+
+  importInterclubsSemainesAfttToClub(): Observable<MessageModel>
+  {
+    const url=`${environment.apiUrl}`;  
+    const apiUrl = `${url}/admin/importInterclubsSemainesAfttToClub/`;
+    return this.httpClient.get<MessageModel>(apiUrl);
+  }
+
+  getAfttMatchTypes(): Observable< Array<AfttMatchTypeEntity> >
+  {
+    const url=`${environment.apiUrl}`;  
+    const apiUrl = `${url}/admin/matchTypes/`;
+    return this.httpClient.get<Array<AfttMatchTypeEntity>>(apiUrl);
+  }
+
+  importInterclubsDivisionsAfttToClub(): Observable<MessageModel>
+  {
+    const url=`${environment.apiUrl}`;  
+    const apiUrl = `${url}/admin/importInterclubsDivisionsFromAfttToClub/`;
+    return this.httpClient.get<MessageModel>(apiUrl);
+  }
+
+  importInterclubsTeamsAfttToClub(): Observable<MessageModel>
+  {
+    const url=`${environment.apiUrl}`;  
+    const apiUrl = `${url}/admin/importInterclubsTeamsFromAfttToClub/`;
+    return this.httpClient.get<MessageModel>(apiUrl);
+  }
+
+  importInterclubsMatchesAfttToClub(): Observable<MessageModel>
+  {
+    const url=`${environment.apiUrl}`;  
+    const apiUrl = `${url}/admin/importInterclubsMatchesFromAfttToClub/`;
+    return this.httpClient.get<MessageModel>(apiUrl);
+  }
+
+  importInterclubsListesDesForcesAfttToClub(): Observable<MessageModel>
+  {
+    const url=`${environment.apiUrl}`;  
+    const apiUrl = `${url}/admin/importInterclubsAllLDFFromAfttToClub/`;
     return this.httpClient.get<MessageModel>(apiUrl);
   }
 }

@@ -2,7 +2,26 @@
 <h2>Gestion des interclubs via AFTT</h2>
 
 <span class="badge badge-success badge_style" title="Importer les semaines" *ngIf="! importingInterclubsCategories"
-        (click)="onImportInterclubsCategoriesAfttToClub()">Importer les catégories interclubs de AFTT</span>
+        (click)="onImportInterclubsCategoriesAfttToClub()">Importer catégories interclubs de AFTT</span>
+&nbsp;
+<span class="badge badge-info badge_style" title="Importer les semaines" *ngIf="! importingInterclubsCategories"
+        (click)="onImportInterclubsSemainesAfttToClub()">Importer Semaines interclubs de AFTT</span>   
+        
+&nbsp;
+<span class="badge badge-info badge_style" title="Importer les divisions" *ngIf="! importingInterclubsCategories"
+        (click)="onImportInterclubsDivisionsAfttToClub()">Importer Divisions interclubs de AFTT</span>   
+        
+&nbsp;
+<span class="badge badge-info badge_style" title="Importer les Equipes" *ngIf="! importingInterclubsCategories"
+        (click)="onImportInterclubsTeamsAfttToClub()">Importer Equipes interclubs de AFTT</span>          
+
+&nbsp;
+<span class="badge badge-info badge_style" title="Importer les Matches" *ngIf="! importingInterclubsCategories"
+        (click)="onImportInterclubsMatchesAfttToClub()">Importer Matches interclubs de AFTT</span>          
+        
+&nbsp;
+<span class="badge badge-info badge_style" title="Importer les Matches" *ngIf="! importingInterclubsCategories"
+        (click)="onImportInterclubsListesDesForcesAfttToClub()">Importer listes des forces interclubs de AFTT</span>        
 <br>
 <br>
 
@@ -41,7 +60,12 @@
       [afttWeekByCategory]="afttWeekByCategory"></app-admin-calendriers>
   </mdb-tab>
 
-  <mdb-tab heading="Synchronisations AFTT">
+
+  <mdb-tab heading="Type de matches" >
+    <app-admin-supported-match-types [afttMatchTypes]="afttMatchTypes" ></app-admin-supported-match-types>
+  </mdb-tab>
+
+  <mdb-tab heading="Synchronisations AFTT" *ngIf="showable">
     <app-admin-synchronisation [afttSyncInfo]="afttSyncInfo"></app-admin-synchronisation>
   </mdb-tab>
 

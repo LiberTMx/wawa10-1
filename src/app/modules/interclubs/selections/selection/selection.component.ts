@@ -16,6 +16,7 @@ export class SelectionComponent implements OnInit {
 
   selectedInterclubCategory: InterclubsCategoryModel;
   
+  loading=true;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -32,8 +33,9 @@ export class SelectionComponent implements OnInit {
         this.selectedInterclubCategoryId  = +this.activatedRoute.snapshot.paramMap.get('id');
     });
     */
+    this.loading=true;
 
-    this.activatedRoute.paramMap.subscribe((params : ParamMap)=> {  
+    this.activatedRoute.paramMap.subscribe((params: ParamMap)=> {  
       this.selectedInterclubCategoryId= +params.get('id');  
       this.selectionService.setSelectedInterclubCategory(this.selectedInterclubCategoryId);
       this.selectedInterclubCategory = this.selectionService.findInterclubCategoryById(this.selectedInterclubCategoryId);
@@ -50,6 +52,7 @@ export class SelectionComponent implements OnInit {
         ,
         () => {
           console.log('semaines terminee');
+          this.loading=false;
         }
       )
     ;
@@ -57,6 +60,7 @@ export class SelectionComponent implements OnInit {
 
   getFilteredSemaineByInterclubCategory(category: InterclubsCategoryModel): Array<InterclubsSemaineModel>
   {
+    if(this.semaines===null || this.semaines===undefined) return null;
     return this.semaines.filter( s => s.afftDivisionCategoryId === category.playerCategory );
   }
 }

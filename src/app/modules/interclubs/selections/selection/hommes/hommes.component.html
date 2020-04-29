@@ -2,19 +2,12 @@
  <table>
     <tbody>
         <tr *ngFor = "let semaine of semaines"> 
-            <td> Semaine {{semaine.weekNumber}} du {{semaine.startOfWeek}} au {{semaine.endOfWeek}}.</td>
+            <td> Semaine {{semaine.weekName}} du {{semaine.startOfWeek}} au {{semaine.endOfWeek}}.</td>
             
         </tr>
     </tbody>
 </table>  
 
-<!-- <div class="row">
-    <div class="col">
-      <div ngbDropdown class="d-inline-block">
-        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
-        <div ngbDropdownMenu aria-labelledby="dropdownBasic1" *ngFor = "let semaine of semaines">
-          <button ngbDropdownItem>{{semaine.weekNumber}} {{semaine.startOfWeek}} {{semaine.endOfWeek}}</button>
-        </div>
-      </div>
-    </div>
- -->
+
+
+  
