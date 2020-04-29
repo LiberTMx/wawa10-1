@@ -3,6 +3,9 @@ import { InterclubsSemaineModel } from '../model/interclubs-semaine.model';
 import { SelectionService } from '../services/selection.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { InterclubsCategoryModel } from '../model/interclubs-category.model';
+import { InterclubsTeamModel } from '../model/interclubs-team.model';
+import { InterclubsDivisionModel } from '../model/interclubs-division.model';
+import { InterclubsMatchModel } from '../model/interclubs-match.model';
 
 @Component({
   selector: 'app-selection',
@@ -17,6 +20,10 @@ export class SelectionComponent implements OnInit {
   selectedInterclubCategory: InterclubsCategoryModel;
   
   loading=true;
+
+  teams: Array<InterclubsTeamModel>;
+  divisions: Array<InterclubsDivisionModel>;
+  matches: Array<InterclubsMatchModel>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -46,14 +53,40 @@ export class SelectionComponent implements OnInit {
 
     this.selectionService.getInterclubsSemaineByInterclubType(null)
       .subscribe(
-        res => this.semaines = res
+        res => {
+          this.semaines = res;
+
+          // chargement des equipes
+          this.selectionService.getInterclubsTeams()
+            .subscribe(
+              teams => {
+                this.teams = teams;
+
+                // chargement des divisions
+                this.selectionService.getInterclubsDivisions()
+                  .subscribe(
+                    divisions => {
+                      this.divisions = divisions;
+
+                      // chargement des matches
+                      this.selectionService.getInterclubsMatches()
+                        .subscribe(
+                          matches => {
+                            this.matches = matches;
+                            console.log('Toutes les données interclubs ont étées lues');
+                          },
+                          err => console.error('error loading matches', err)
+                          ,
+                          () => this.loading=false
+                        );
+                    }
+                  );
+              }
+            );
+        }
         , 
         error => console.error (error)
-        ,
-        () => {
-          console.log('semaines terminee');
-          this.loading=false;
-        }
+        
       )
     ;
   }
