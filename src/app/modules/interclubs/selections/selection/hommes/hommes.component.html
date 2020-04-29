@@ -1,13 +1,25 @@
  <p>Faire les sélections des interclubs hommes</p>
- <table>
+ <!-- <table>
     <tbody>
         <tr *ngFor = "let semaine of semaines"> 
-            <td> Semaine {{semaine.weekName}} du {{semaine.startOfWeek}} au {{semaine.endOfWeek}}.</td>
-            
+
+            <td> Semaine {{semaine.weekNumber}} du {{semaine.startOfWeek | date:'dd/MM/yyyy'}} au {{semaine.endOfWeek | date:'dd/MM/yyyy' }}.</td>
+
         </tr>
     </tbody>
-</table>  
+</table> -->  
 
 
+<div class="dropdown" mdbDropdown>
 
-  
+    <button mdbDropdownToggle mdbBtn color="danger" class="dropdown-toggle waves-light" type="button"
+      mdbWavesEffect>
+      Sélectionnez une semaine
+    </button>
+    <div class="dropdown-menu dropdown-danger" >
+        <div *ngFor = "let semaine of semaines">
+            <button class="dropdown-item" href="#">Semaine {{semaine.weekNumber}} du {{semaine.startOfWeek | date:'dd/MM/yyyy'}} au {{semaine.endOfWeek | date:'dd/MM/yyyy' }}.</button>
+        </div>
+    </div>
+  </div>
+
