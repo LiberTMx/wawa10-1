@@ -1,6 +1,6 @@
 
 
-export class InterclubsLdfParticipantEntity
+export class InterclubsLdfParticipantModel
 {
     id: number;
     nom: string;//  varchar(255) DEFAULT NULL,

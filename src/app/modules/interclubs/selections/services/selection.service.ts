@@ -7,7 +7,7 @@ import { environment } from '../../../../../environments/environment';
 import { InterclubsDivisionModel } from '../model/interclubs-division.model';
 import { InterclubsTeamModel } from '../model/interclubs-team.model';
 import { InterclubsMatchModel } from '../model/interclubs-match.model';
-import { InterclubsLdfParticipantEntity } from '../model/interclubs-ldf-participant.model';
+import { InterclubsLdfParticipantModel } from '../model/interclubs-ldf-participant.model';
 import { InterclubsLdfByCategoryModel } from '../model/interclubs-ldf-by-category.model';
 
 @Injectable({
@@ -87,11 +87,11 @@ export class SelectionService {
     return this.httpClient.get<Array<InterclubsMatchModel>>(apiUrl);
   }
 
-  getInterclubsLDFParticipants(): Observable< Array<InterclubsLdfParticipantEntity> >
+  getInterclubsLDFParticipants(): Observable< Array<InterclubsLdfParticipantModel> >
   {
     const url=`${environment.apiUrl}`;  
     const apiUrl = `${url}/interclubs/LDFParticipants`;
-    return this.httpClient.get<Array<InterclubsLdfParticipantEntity>>(apiUrl);
+    return this.httpClient.get<Array<InterclubsLdfParticipantModel>>(apiUrl);
   }
 
   getInterclubsLDFByCategory(): Observable< Array<InterclubsLdfByCategoryModel> >
