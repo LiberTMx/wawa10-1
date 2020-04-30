@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import * as moment from 'moment';
 
 import { NgModule, NO_ERRORS_SCHEMA, LOCALE_ID} from '@angular/core';
 
@@ -60,6 +61,8 @@ import { RoiModule } from './modules/roi/roi.module';
 import { EntrainementsModule } from './modules/entrainements/entrainements.module';
 import { NewsletterModule } from './modules/newsletter/newsletter.module';
 import { InterclubsModule } from './modules/interclubs/interclubs.module';
+import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
+import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 // import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 //import { MDBSpinningPreloader } from 'ng-uikit-pro-standard';
 //import { ButtonsModule, WavesModule, CollapseModule } from 'ng-uikit-pro-standard'
@@ -126,11 +129,20 @@ import { InterclubsModule } from './modules/interclubs/interclubs.module';
   providers: [
     MessageService,
     {provide: LOCALE_ID, useValue: 'fr-CA' },
-    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true, },
+    {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true, },
+    {provide: MAT_DATE_LOCALE, useValue: 'fr-BE'},
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
   ],
   bootstrap: [AppComponent],
 
   schemas: [ NO_ERRORS_SCHEMA ]
   
 })
-export class AppModule { }
+export class AppModule 
+{
+  constructor()
+  {
+    moment.locale('fr');
+  }
+}
