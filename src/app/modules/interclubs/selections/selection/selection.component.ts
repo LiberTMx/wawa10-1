@@ -3,6 +3,13 @@ import { InterclubsSemaineModel } from '../model/interclubs-semaine.model';
 import { SelectionService } from '../services/selection.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { InterclubsCategoryModel } from '../model/interclubs-category.model';
+import { InterclubsTeamModel } from '../model/interclubs-team.model';
+import { InterclubsDivisionModel } from '../model/interclubs-division.model';
+import { InterclubsMatchModel } from '../model/interclubs-match.model';
+import { InterclubsLdfParticipantModel } from '../model/interclubs-ldf-participant.model';
+import { InterclubsLdfByCategoryModel } from '../model/interclubs-ldf-by-category.model';
+import { InterclubsLDF } from '../model/interclubs-ldf.model';
+
 
 @Component({
   selector: 'app-selection',
@@ -18,6 +25,13 @@ export class SelectionComponent implements OnInit {
   
   loading=true;
 
+  teams: Array<InterclubsTeamModel>;
+  divisions: Array<InterclubsDivisionModel>;
+  matches: Array<InterclubsMatchModel>;
+
+  ldfParticipants: Array<InterclubsLdfParticipantModel>;
+  ldfByCategory: Array<InterclubsLdfByCategoryModel>;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private selectionService: SelectionService,
@@ -25,14 +39,6 @@ export class SelectionComponent implements OnInit {
 
   ngOnInit(): void {
 
-    //this.selectedInterclubCategoryId = +this.activatedRoute.snapshot.paramMap.get('id');
-
-    /*
-    this.activatedRoute.params
-      .subscribe(params => {
-        this.selectedInterclubCategoryId  = +this.activatedRoute.snapshot.paramMap.get('id');
-    });
-    */
     this.loading=true;
 
     this.activatedRoute.paramMap.subscribe((params: ParamMap)=> {  
@@ -43,24 +49,93 @@ export class SelectionComponent implements OnInit {
 
     console.log('selected cat:', this.selectedInterclubCategoryId);
 
-
     this.selectionService.getInterclubsSemaineByInterclubType(null)
       .subscribe(
-        res => this.semaines = res
+        res => {
+          this.semaines = res;
+
+          // chargement des equipes
+          this.selectionService.getInterclubsTeams()
+            .subscribe(
+              teams => {
+                this.teams = teams;
+
+                // chargement des divisions
+                this.selectionService.getInterclubsDivisions()
+                  .subscribe(
+                    divisions => {
+                      this.divisions = divisions;
+
+                      // chargement des matches
+                      this.selectionService.getInterclubsMatches()
+                        .subscribe(
+                          matches => {
+                            this.matches = matches;
+
+                            // Chargement des infos liste des forces - participants
+                            this.selectionService.getInterclubsLDFParticipants()
+                              .subscribe(
+                                participants => {
+                                  this.ldfParticipants = participants;
+
+                                  // Chargement de la composition des listes de forces
+                                  this.selectionService.getInterclubsLDFByCategory()
+                                    .subscribe(
+                                      compositions => {
+                                        this.ldfByCategory = compositions;
+                                        console.log('Toutes les données interclubs ont étées lues');
+                                      }
+                                      ,
+                                      err => console.error('error loading matches', err)
+                                      ,
+                                      () => this.loading=false
+                                    );
+                                }
+                              );
+                          }
+                        );
+                    }
+                  );
+              }
+            );
+        }
         , 
         error => console.error (error)
-        ,
-        () => {
-          console.log('semaines terminee');
-          this.loading=false;
-        }
+        
       )
     ;
   }
 
-  getFilteredSemaineByInterclubCategory(category: InterclubsCategoryModel): Array<InterclubsSemaineModel>
+  getFilteredSemaineByCategory(category: InterclubsCategoryModel): Array<InterclubsSemaineModel>
   {
     if(this.semaines===null || this.semaines===undefined) return null;
     return this.semaines.filter( s => s.afftDivisionCategoryId === category.playerCategory );
+  }
+
+  buildListeDesForcesByCategory(category: InterclubsCategoryModel): Array<InterclubsLDF>
+  {
+    const ldf=new Array<InterclubsLDF>();
+
+    const ldfCats = this.ldfByCategory.filter( c => c.playerCategory === category.playerCategory);
+    if(ldfCats!==null && ldfCats!==undefined)
+    {
+      for(const ldfCat of ldfCats)
+      {
+        const participant = this.ldfParticipants.find( p => p.id === ldfCat.participantId);
+        if(participant!==null && participant!==undefined)
+        {
+          ldf.push( new InterclubsLDF( participant, ldfCat) );
+        }
+      }
+    }
+
+    // Faut maintenant trier la ldf dans le bon ordre !
+    ldf.sort( (p1, p2) => {
+      if(p1.listeDeForce.position < p2.listeDeForce.position) return -1;
+      if(p1.listeDeForce.position > p2.listeDeForce.position) return +1;
+      return 0;
+    } );
+
+    return ldf;
   }
 }

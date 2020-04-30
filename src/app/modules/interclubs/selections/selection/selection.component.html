@@ -1,7 +1,22 @@
 
-
+<!-- 
 <app-interclubs-selections-hommes 
     [semaines]=" getFilteredSemaineByInterclubCategory( selectedInterclubCategory )  "
     *ngIf = "! loading && selectedInterclubCategoryId === 1">
 
-</app-interclubs-selections-hommes>
+</app-interclubs-selections-hommes> -->
+
+<div *ngIf="loading">
+    Chargement des données en cours...
+</div>
+
+<div *ngIf="! loading">
+
+    <app-interclubs-selections-hommes *ngIf = "! loading && selectedInterclubCategoryId === 1"
+        [semaines]=" getFilteredSemaineByCategory( selectedInterclubCategory )  "
+        [listeDesForces]=" buildListeDesForcesByCategory( selectedInterclubCategory ) "
+        >
+    
+    </app-interclubs-selections-hommes>
+
+</div>

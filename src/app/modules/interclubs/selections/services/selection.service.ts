@@ -6,6 +6,9 @@ import { InterclubsCategoryModel } from '../model/interclubs-category.model';
 import { environment } from '../../../../../environments/environment';
 import { InterclubsDivisionModel } from '../model/interclubs-division.model';
 import { InterclubsTeamModel } from '../model/interclubs-team.model';
+import { InterclubsMatchModel } from '../model/interclubs-match.model';
+import { InterclubsLdfParticipantModel } from '../model/interclubs-ldf-participant.model';
+import { InterclubsLdfByCategoryModel } from '../model/interclubs-ldf-by-category.model';
 
 @Injectable({
   providedIn: 'root'
@@ -77,5 +80,25 @@ export class SelectionService {
     return this.httpClient.get<Array<InterclubsTeamModel>>(apiUrl);
   }
 
-  
+  getInterclubsMatches(): Observable< Array<InterclubsMatchModel> >
+  {
+    const url=`${environment.apiUrl}`;  
+    const apiUrl = `${url}/interclubs/listeInterclubsMatches`;
+    return this.httpClient.get<Array<InterclubsMatchModel>>(apiUrl);
+  }
+
+  getInterclubsLDFParticipants(): Observable< Array<InterclubsLdfParticipantModel> >
+  {
+    const url=`${environment.apiUrl}`;  
+    const apiUrl = `${url}/interclubs/LDFParticipants`;
+    return this.httpClient.get<Array<InterclubsLdfParticipantModel>>(apiUrl);
+  }
+
+  getInterclubsLDFByCategory(): Observable< Array<InterclubsLdfByCategoryModel> >
+  {
+    const url=`${environment.apiUrl}`;  
+    const apiUrl = `${url}/interclubs/LDFByCategory`;
+    return this.httpClient.get<Array<InterclubsLdfByCategoryModel>>(apiUrl);
+  }
+
 }

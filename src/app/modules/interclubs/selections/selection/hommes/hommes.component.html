@@ -1,4 +1,5 @@
- <p>Faire les sélections des interclubs hommes</p>
+
+
  <!-- <table>
     <tbody>
         <tr *ngFor = "let semaine of semaines"> 
@@ -9,8 +10,9 @@
     </tbody>
 </table> -->  
 
+<p>Faire les sélections des interclubs hommes</p>
 
-<div class="dropdown" mdbDropdown>
+<!-- <div class="dropdown" mdbDropdown>
 
     <button mdbDropdownToggle mdbBtn color="danger" class="dropdown-toggle waves-light" type="button"
       mdbWavesEffect>
@@ -21,5 +23,35 @@
             <button class="dropdown-item" href="#">Semaine {{semaine.weekNumber}} du {{semaine.startOfWeek | date:'dd/MM/yyyy'}} au {{semaine.endOfWeek | date:'dd/MM/yyyy' }}.</button>
         </div>
     </div>
-  </div>
+  </div> -->
 
+<hr>
+
+
+
+
+<mdb-card>
+    <mdb-card-header>Faire les sélections des interclubs hommes</mdb-card-header>
+    <mdb-card-body>
+        <mdb-card-title>
+            <h5>Special title treatment</h5>
+        </mdb-card-title>
+        <mdb-card-text>With supporting text below as a natural lead-in to additional content.</mdb-card-text>
+        <a href="" mdbBtn color="primary">Go somewhere!</a>
+
+
+        <div>
+            <mat-form-field>
+                <mat-label>Semaine</mat-label>
+                <mat-select matNativeControl [(ngModel)]="selectedSemaine" name="semaine" 
+                    (selectionChange)="onChangeSemaine($event)">
+                <mat-option value="" selected></mat-option>
+                <mat-option *ngFor="let w of semaines" [value]="w">
+                    Semaine {{w.weekName}} du {{w.startOfWeek | date:'dd/MM/yyyy'}} au {{w.endOfWeek | date:'dd/MM/yyyy' }}.
+                </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+    </mdb-card-body>
+  </mdb-card>
