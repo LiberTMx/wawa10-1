@@ -38,6 +38,9 @@ export class FonctionsComponent implements OnInit {
       code: ['', [Validators.required, Validators.minLength(3)] ],
       designation: ['', [Validators.required, Validators.minLength(5)] ],
       description: [''],
+      membreComite: [''],
+      deletable: [''],
+      ordreAffichage: ['100']
     });
   }
 
@@ -48,7 +51,7 @@ export class FonctionsComponent implements OnInit {
   {
     const formValue=this.fonctionForm.value;
     console.log('Creating new auth fonction', formValue.designation, formValue.code, formValue.description);
-    this.fonctionService.createNewFonction(formValue.code.toUpperCase(), formValue.designation, formValue.description)
+    this.fonctionService.createNewFonction(formValue)
       .subscribe( (res: AuthFonctionModel) => {
         if(res!==null && res!==undefined)
         {

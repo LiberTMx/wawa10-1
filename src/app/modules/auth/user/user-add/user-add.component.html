@@ -37,19 +37,26 @@
                                 
                                 <label for="email">E-Mail 
                                     <span class="badge badge-info badge_style" title="E-Mail inconnu" 
-                                        (click)="onEMailInconnu()"> ? </span> 
+                                        (click)="onEMailInconnu()"> Inconnue </span> 
                                 </label>
                                 <!-- <mdb-error *ngIf="code.invalid && (code.dirty || code.touched)">Min 3 car</mdb-error>
                                 <mdb-success *ngIf="code.valid && (code.dirty || code.touched)"></mdb-success> -->
                             </div>
                             <!-- Date Naissance -->
                             <div class="md-form form-sm form-field">
+                                <!--
                                 <mat-form-field>
                                     <mat-label>Date de naissance</mat-label>
-                                    <input matInput [matDatepicker]="picker">
+                                    <input matInput [matDatepicker]="picker" formControlName="dateNaissance">
                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                     <mat-datepicker #picker></mat-datepicker>
                                   </mat-form-field>
+                                -->
+                                <mdb-date-picker #datePicker name="mydate" [options]="myDatePickerOptions" 
+                                    [label]="'Date de naissance.'"
+                                    [placeholder]="'Selected date'" 
+                                    [locale]="lang"
+                                    formControlName="dateNaissance" ></mdb-date-picker>
                             </div>
                             <div class="md-form form-sm form-field"></div>
                         </div>
@@ -286,7 +293,7 @@
 
             <div fxLayout="row">
                 <div class="md-form form-sm" fxFlex="20%">
-                    <button  type="submit" class="btn btn-sm btn-unique button-small waves-light" mdbWavesEffect [disabled]="userForm.invalid">
+                    <button  type="submit" class="btn btn-sm btn-unique button-small waves-light" mdbWavesEffect>
                         <i class="fa fa-paper-plane-o ml-1"></i> &nbsp; Créer l'utilisateur
                     </button>
                 </div>

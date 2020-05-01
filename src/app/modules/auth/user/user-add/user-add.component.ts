@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { KvpModel } from '../../../../common/model/kvp.model';
 import { ListeService } from '../../../../common/services/liste.service';
@@ -8,13 +8,24 @@ import { MatSelectChange } from '@angular/material/select';
 import { AuthGroupRoleModel } from '../../model/auth-group-role.model';
 import { AdminRoleService } from '../../../admin/roles/services/admin-role.service';
 import { AuthGroupModel } from '../../model/auth-group.model';
-
+import { AuthService } from '../../services/auth.service';
+import { MDBDatePickerComponent, IMyOptions, LocaleService } from 'ng-uikit-pro-standard';
+import * as moment from 'moment';
+import { mdbdatepicker_locales } from '../../../../common/interfaces/mdbdatepicker.locale';
 @Component({
   selector: 'app-user-add',
   templateUrl: './user-add.component.html',
   styleUrls: ['./user-add.component.scss']
 })
 export class UserAddComponent implements OnInit {
+
+  @ViewChild('datePicker', {static: true}) datePicker: MDBDatePickerComponent;
+  
+  public myDatePickerOptions: IMyOptions = {
+    // Your options
+    };
+    
+  lang='fr';
 
   userForm: FormGroup;
 
@@ -36,13 +47,23 @@ export class UserAddComponent implements OnInit {
 
   constructor(
     private adminRoleService: AdminRoleService,
+    private authService: AuthService,
     private formBuilder: FormBuilder, 
     private fonctionService: FonctionService,
     private listeService: ListeService,
-  ) { }
+    // MDB PRO Service !
+    private localeService: LocaleService,
+  ) 
+  { 
+    moment.locale('fr');
+  }
 
   ngOnInit(): void 
   {
+    //this.datePicker.addLocale(mdbdatepicker_locales);
+    //this.datePicker.setLocaleOptions(mdbdatepicker_locales);
+    this.localeService.setLocaleOptions(mdbdatepicker_locales);
+    
     this.sexes = this.listeService.sexes();
 
     this.fonctionService.getAllFonctions()
@@ -175,6 +196,7 @@ export class UserAddComponent implements OnInit {
 
   onCreateUser()
   {
-
+    this.authService.createUser(this.userForm.value, this.assignedFonctions, this.assignedRoles)
+      .subscribe();
   }
 }

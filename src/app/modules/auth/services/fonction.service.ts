@@ -20,10 +20,17 @@ export class FonctionService
     return this.httpClient.get<Array<AuthFonctionModel>>( apiUrl );
   } 
 
-  createNewFonction(code: string, designation: string, description: string): Observable<AuthFonctionModel>
+  createNewFonction(formValue: any): Observable<AuthFonctionModel>
   {
     const url=`${environment.apiUrl}`;  
     const apiUrl = `${url}/auth/createFonction`;
-    return this.httpClient.post<AuthFonctionModel>(apiUrl, { code, designation, description });
+    return this.httpClient.post<AuthFonctionModel>(apiUrl, { 
+        code: formValue.code,
+        designation: formValue.designation,
+        description: formValue.description,
+        membreComite: formValue.membreComite,
+        deletable: formValue.deletable,
+        ordreAffichage: formValue.ordreAffichage
+    });
   }
 }
