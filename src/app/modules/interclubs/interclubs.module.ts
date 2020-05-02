@@ -32,7 +32,7 @@ import { HommesComponent } from './selections/selection/hommes/hommes.component'
   ],
   exports: [
     InterclubsRoutingModule,
-    SelectionService,
+    // SelectionService,
   ],
   providers: [
     SelectionService,

@@ -111,7 +111,9 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     }),
 
     // Application Modules
-    AuthModule.forRoot(),
+    //AuthModule.forRoot(),
+    InterclubsModule,
+    AuthModule,
     AppCommonModule,
     AdminModule,
     ContactModule,
@@ -122,7 +124,6 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     RoiModule,
     EntrainementsModule,
     NewsletterModule,
-    InterclubsModule,
     // Import the app routing module after the other app modules, so that the routes are merged
     AppRoutingModule, 
   ],

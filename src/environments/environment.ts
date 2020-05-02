@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost:3000/api',
   angular_version: '9.0.1',
-  app_version: ' 0.0.9 - 20/4/2020 18h30'
+  app_version: ' 0.0.10 - 1/5/2020 4h00'
 };
 
 /*

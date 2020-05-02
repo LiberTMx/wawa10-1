@@ -46,9 +46,15 @@ import { UserAddComponent } from './user/user-add/user-add.component';
   exports: [
     AuthRoutingModule,
     LoginComponent,
+  ],
+  providers: [
+    AuthService,
+    FonctionService,
+    AuthGuard,
   ]
 })
 export class AuthModule {
+  /*
   static forRoot(): ModuleWithProviders {
     return {
         ngModule: AuthModule,
@@ -59,4 +65,5 @@ export class AuthModule {
         ]
       };
   }
+  */
 }

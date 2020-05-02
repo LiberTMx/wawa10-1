@@ -7,7 +7,7 @@ import { AuthFonctionModel } from '../model/auth-fonction.model';
 @Injectable({
   providedIn: 'root'
 })
-export class FonctionService 
+export class FonctionService
 {
 
   constructor(
@@ -20,6 +20,7 @@ export class FonctionService
     return this.httpClient.get<Array<AuthFonctionModel>>( apiUrl );
   } 
 
+  // Create a new fonction
   createNewFonction(formValue: any): Observable<AuthFonctionModel>
   {
     const url=`${environment.apiUrl}`;  
