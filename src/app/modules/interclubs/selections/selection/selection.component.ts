@@ -138,4 +138,9 @@ export class SelectionComponent implements OnInit {
 
     return ldf;
   }
+
+  getFilterTeamsByCategory(category: InterclubsCategoryModel): Array<InterclubsTeamModel>
+  {
+    return null;
+  }
 }
