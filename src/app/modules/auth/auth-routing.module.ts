@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { UserListeComponent } from './user/user-liste/user-liste.component';
 import { FonctionsComponent } from './fonctions/fonctions.component';
+import { UserAddComponent } from './user/user-add/user-add.component';
 
 
 // const routes: Routes = [];
@@ -19,6 +20,7 @@ export const AUTH_ROUTES: Routes =
     },
     { path: 'user',  children: [
       { path: 'liste', component: UserListeComponent },
+      { path: 'add', component: UserAddComponent },
     ] 
   }
 ];

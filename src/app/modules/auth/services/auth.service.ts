@@ -15,6 +15,8 @@ import { AuthUserModel } from '../model/auth-user.model';
 import { environment } from '../../../../environments/environment';
 import { MessageModel } from '../../../common/model/message.model';
 import { LogoutAction } from '../state/actions/auth-logout.action';
+import { AuthFonctionModel } from '../model/auth-fonction.model';
+import { AuthGroupModel } from '../model/auth-group.model';
 
 @Injectable({
   providedIn: 'root'
@@ -196,7 +198,7 @@ export class AuthService {
 
     resentPassword( username: string ): Observable<MessageModel>
     {
-        const apiUrl=`${environment.apiUrl}/auth/resendPassword.json`;
+        const apiUrl=`${environment.apiUrl}/auth/resendPassword`;
         const postData = new FormData();
         postData.append('username' , username );
         return this.httpClient.post<MessageModel>( apiUrl, postData );
@@ -241,5 +243,23 @@ export class AuthService {
     {
       const apiUrl=`${environment.apiUrl}/auth/liste`;
       return this.httpClient.get<Array<AuthUserModel>>( apiUrl );
+    }
+
+    createUser(userFormValue: any, assignedFonctions: Array<AuthFonctionModel>, assignedRoles: Array<AuthGroupModel>): Observable<AuthUserModel>
+    {
+      const apiUrl=`${environment.apiUrl}/auth/createUser`;
+      /*
+      const postData = new FormData();
+      postData.append('userFormValue' , userFormValue );
+      postData.append('assignedFonctions' , JSON.stringify(assignedFonctions) );
+      postData.append('assignedRoles' , JSON.stringify(assignedRoles) );
+      return this.httpClient.post<AuthUserModel>( apiUrl, postData );
+      */
+      return this.httpClient.post<AuthUserModel>(apiUrl, 
+          { 
+            userFormValue, 
+            assignedFonctions: JSON.stringify(assignedFonctions), 
+            assignedRoles:  JSON.stringify(assignedRoles)
+          });
     }
 }

@@ -17,6 +17,7 @@ import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import { UserListeComponent } from './user/user-liste/user-liste.component';
 import { FonctionsComponent } from './fonctions/fonctions.component';
 import { FonctionService } from './services/fonction.service';
+import { UserAddComponent } from './user/user-add/user-add.component';
 //import { ComTranslateModule } from '../../modules.vendors/com.translate/com.translate.module';
 
 @NgModule({
@@ -25,6 +26,7 @@ import { FonctionService } from './services/fonction.service';
     ChangePasswordComponent,
     UserListeComponent,
     FonctionsComponent,
+    UserAddComponent,
   ],
   imports: [
     CommonModule,

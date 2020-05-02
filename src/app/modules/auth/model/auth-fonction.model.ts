@@ -5,4 +5,7 @@ export class AuthFonctionModel
   code: string;
   designation: string;
   description: string;
+  membreComite: boolean;
+  deletable: boolean;
+  ordreAffichage: number;
 } 

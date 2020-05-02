@@ -34,6 +34,7 @@
         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="user/liste">Les membres</a></li>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Devenir membre</a></li>
+          <li><a class="dropdown-item" routerLinkActive="active" routerLink="user/add" *ngIf="getAuthService().isUserClubAdmin()">Ajouter un membre</a></li>
           <div class="divider dropdown-divider"></div>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="local/local">Local</a></li>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="tournoi/new">Comité et organisation</a></li>
