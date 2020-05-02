@@ -36,6 +36,7 @@ export class AuthUserModel {
     initCredential: boolean;
     lastLoginAt: Date;
     membreComite: boolean;
+    isStageParticipantDiscret: boolean;
     
     //----
     getFullName(): string

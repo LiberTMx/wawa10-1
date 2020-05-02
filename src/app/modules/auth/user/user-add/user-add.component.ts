@@ -12,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
 import { MDBDatePickerComponent, IMyOptions, LocaleService } from 'ng-uikit-pro-standard';
 import * as moment from 'moment';
 import { mdbdatepicker_locales } from '../../../../common/interfaces/mdbdatepicker.locale';
+import { ToastMessageService } from '../../../../common/services/toast-message.service';
 @Component({
   selector: 'app-user-add',
   templateUrl: './user-add.component.html',
@@ -53,6 +54,8 @@ export class UserAddComponent implements OnInit {
     private listeService: ListeService,
     // MDB PRO Service !
     private localeService: LocaleService,
+    //
+    private toastMessageService: ToastMessageService,
   ) 
   { 
     moment.locale('fr');
@@ -141,8 +144,10 @@ export class UserAddComponent implements OnInit {
       classementD: [''],
       comment: [''],
       commentComite: [''],
+      isStageParticipantDiscret: [''],
     });
   }
+
 
   onSexeChanged(event: MatSelectChange)
   {
@@ -194,9 +199,38 @@ export class UserAddComponent implements OnInit {
     this.assignedRoles = this.assignedRoles.filter( ar => ar.id !== r.id);
   }
 
+  isStageParticipant(): boolean
+  {
+    if(this.assignedRoles===null || this.assignedRoles===undefined) return false;
+    for(const r of this.assignedRoles)
+    {
+      if(r.name==='stage_participant') return true;
+    }
+    return false;
+  }
+
   onCreateUser()
   {
     this.authService.createUser(this.userForm.value, this.assignedFonctions, this.assignedRoles)
-      .subscribe();
+      .subscribe(
+        user => {
+          // Ok utilisateur créé
+          this.toastMessageService.addSuccess('Création utilisateur', 'Un utilisateur a été créé: '+user.nom+' '+user.prenom+', '+user.username, 5000);
+        }
+        ,
+        err => {
+          console.error('erreur creation user', err);
+          this.toastMessageService.addError('Création utilisateur', 'Une erreur s\'est produite:'+err.message, 10000);
+          if(err.error)
+          {
+            this.toastMessageService.addError('Création utilisateur', 'Une erreur s\'est produite:'+err.error.message, 11000);
+          }
+        }
+      );
+  }
+
+  onClearForm()
+  {
+    this.userForm.reset();
   }
 }

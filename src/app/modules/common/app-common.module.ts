@@ -33,7 +33,7 @@ import { InterclubsModule } from '../interclubs/interclubs.module';
     MaterialModule,
     PdfViewerModule,
     NgxExtendedPdfViewerModule,
-    InterclubsModule,
+    //InterclubsModule,
   ],
   exports: [
     AppCommonRoutingModule,

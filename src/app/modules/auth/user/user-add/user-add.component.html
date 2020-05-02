@@ -15,44 +15,37 @@
                         <div class="user-identification-row">
                             <!-- PRENOM -->
                             <div class="md-form form-sm form-field">
-                                <input type="text" id="prenom" formControlName="prenom" class="form-control form-control-sm" mdbInput minLength="3">
+                                <input type="text" id="prenom" formControlName="prenom" 
+                                    class="form-control form-control-sm" mdbInput minLength="1" mdbValidate  >
                                 <label for="prenom">Prénom</label>
                             </div>
                             <!-- NOM -->
                             <div class="md-form form-sm form-field">
-                                <input type="text" id="nom" formControlName="nom" class="form-control form-control-sm" mdbInput minLength="3">
+                                <input type="text" id="nom" formControlName="nom" 
+                                    class="form-control form-control-sm" mdbInput minLength="2" mdbValidate  >
                                 <label for="nom">Nom</label>
                             </div>
                             <!-- USERNAME -->
                             <div class="md-form form-sm form-field">
-                                <input type="text" id="username" formControlName="username" class="form-control form-control-sm" mdbInput minLength="3">
+                                <input type="text" id="username" formControlName="username" 
+                                    class="form-control form-control-sm" mdbInput minLength="6" mdbValidate  >
                                 <label for="username">Utilisateur</label>
-                                <!-- <mdb-error *ngIf="code.invalid && (code.dirty || code.touched)">Min 3 car</mdb-error>
-                                <mdb-success *ngIf="code.valid && (code.dirty || code.touched)"></mdb-success> -->
                             </div>
                             <!-- ADRESSE EMAIL -->
                             <div class="md-form form-sm form-field">
                                     
-                                <input type="text" id="email" formControlName="email" class="form-control form-control-sm" mdbInput minLength="3">
+                                <input type="text" id="email" formControlName="email" 
+                                    class="form-control form-control-sm" mdbInput minLength="3" mdbValidate  >
                                 
                                 <label for="email">E-Mail 
                                     <span class="badge badge-info badge_style" title="E-Mail inconnu" 
                                         (click)="onEMailInconnu()"> Inconnue </span> 
                                 </label>
-                                <!-- <mdb-error *ngIf="code.invalid && (code.dirty || code.touched)">Min 3 car</mdb-error>
-                                <mdb-success *ngIf="code.valid && (code.dirty || code.touched)"></mdb-success> -->
                             </div>
                             <!-- Date Naissance -->
                             <div class="md-form form-sm form-field">
-                                <!--
-                                <mat-form-field>
-                                    <mat-label>Date de naissance</mat-label>
-                                    <input matInput [matDatepicker]="picker" formControlName="dateNaissance">
-                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker></mat-datepicker>
-                                  </mat-form-field>
-                                -->
                                 <mdb-date-picker #datePicker name="mydate" [options]="myDatePickerOptions" 
+                                    
                                     [label]="'Date de naissance.'"
                                     [placeholder]="'Selected date'" 
                                     [locale]="lang"
@@ -65,22 +58,16 @@
                             <div class="md-form form-sm form-field">
                                 <input type="text" id="tel" formControlName="tel" class="form-control form-control-sm" mdbInput minLength="3">
                                 <label for="tel">Tel</label>
-                                <!-- <mdb-error *ngIf="code.invalid && (code.dirty || code.touched)">Min 3 car</mdb-error>
-                                <mdb-success *ngIf="code.valid && (code.dirty || code.touched)"></mdb-success> -->
                             </div>
                             <!-- TEL PRIVE -->
                             <div class="md-form form-sm form-field">
                                 <input type="text" id="telPrive" formControlName="telPrive" class="form-control form-control-sm" mdbInput minLength="3">
                                 <label for="telPrive">Tel privé</label>
-                                <!-- <mdb-error *ngIf="code.invalid && (code.dirty || code.touched)">Min 3 car</mdb-error>
-                                <mdb-success *ngIf="code.valid && (code.dirty || code.touched)"></mdb-success> -->
                             </div>
                             <!-- GSM -->
                             <div class="md-form form-sm form-field">
                                 <input type="text" id="gsm" formControlName="gsm" class="form-control form-control-sm" mdbInput minLength="3">
                                 <label for="gsm">GSM</label>
-                                <!-- <mdb-error *ngIf="code.invalid && (code.dirty || code.touched)">Min 3 car</mdb-error>
-                                <mdb-success *ngIf="code.valid && (code.dirty || code.touched)"></mdb-success> -->
                             </div>
                             <!-- SEXE -->
                             <div class="md-form form-sm form-field-right">
@@ -94,8 +81,6 @@
                             <!-- GESTION PARENTALE -->
                             <div class="md-form form-sm form-field">
                                 <mdb-checkbox formControlName="gestionParentale">Gestion parentale</mdb-checkbox>
-                                <!-- <mdb-error *ngIf="code.invalid && (code.dirty || code.touched)">Min 3 car</mdb-error>
-                                <mdb-success *ngIf="code.valid && (code.dirty || code.touched)"></mdb-success> -->
                             </div>
                             <div class="md-form form-sm form-field">
                                 &nbsp;
@@ -115,22 +100,16 @@
                             <div class="md-form form-sm form-field">
                                 <input type="text" id="rue" formControlName="rue" class="form-control form-control-sm" mdbInput minLength="3">
                                 <label for="rue">Rue</label>
-                                <!-- <mdb-error *ngIf="code.invalid && (code.dirty || code.touched)">Min 3 car</mdb-error>
-                                <mdb-success *ngIf="code.valid && (code.dirty || code.touched)"></mdb-success> -->
                             </div>
                             <!-- ADRESSE NUMERO -->
                             <div class="md-form form-sm form-field">
                                 <input type="text" id="numero" formControlName="numero" class="form-control form-control-sm" mdbInput minLength="3">
                                 <label for="numero">Numéro</label>
-                                <!-- <mdb-error *ngIf="code.invalid && (code.dirty || code.touched)">Min 3 car</mdb-error>
-                                <mdb-success *ngIf="code.valid && (code.dirty || code.touched)"></mdb-success> -->
                             </div>
                             <!-- ADRESSE BOITE -->
                             <div class="md-form form-sm form-field">
                                 <input type="text" id="boite" formControlName="boite" class="form-control form-control-sm" mdbInput minLength="3">
                                 <label for="boite">Boite</label>
-                                <!-- <mdb-error *ngIf="code.invalid && (code.dirty || code.touched)">Min 3 car</mdb-error>
-                                <mdb-success *ngIf="code.valid && (code.dirty || code.touched)"></mdb-success> -->
                             </div>
                         </div>
                         <div class="user-address-row">
@@ -139,15 +118,11 @@
                                 <input type="text" id="codePostal" formControlName="codePostal" 
                                         class="form-control form-control-sm" mdbInput>
                                 <label for="codePostal">Code postal</label>
-                                <!-- <mdb-error *ngIf="code.invalid && (code.dirty || code.touched)">Min 3 car</mdb-error>
-                                <mdb-success *ngIf="code.valid && (code.dirty || code.touched)"></mdb-success> -->
                             </div>
                             <!-- ADRESSE LOCALITE -->
                             <div class="md-form form-sm form-field">
                                 <input type="text" id="localite" formControlName="localite" class="form-control form-control-sm" mdbInput minLength="3">
                                 <label for="localite">Localité</label>
-                                <!-- <mdb-error *ngIf="code.invalid && (code.dirty || code.touched)">Min 3 car</mdb-error>
-                                <mdb-success *ngIf="code.valid && (code.dirty || code.touched)"></mdb-success> -->
                             </div>
                         </div>
                     </fieldset>
@@ -163,22 +138,16 @@
                             <div class="md-form form-sm">
                                 <input type="text" id="licence" formControlName="licence" class="form-control form-control-sm" mdbInput minLength="6">
                                 <label for="licence">N° Licence</label>
-                                <!-- <mdb-error *ngIf="code.invalid && (code.dirty || code.touched)">Min 3 car</mdb-error>
-                                <mdb-success *ngIf="code.valid && (code.dirty || code.touched)"></mdb-success> -->
                             </div>
                             <!-- Classment M -->
                             <div class="md-form form-sm">
                                 <input type="text" id="classementH" formControlName="classementH" class="form-control form-control-sm" mdbInput minLength="3">
                                 <label for="classementH">Classement Messieurs</label>
-                                <!-- <mdb-error *ngIf="code.invalid && (code.dirty || code.touched)">Min 3 car</mdb-error>
-                                <mdb-success *ngIf="code.valid && (code.dirty || code.touched)"></mdb-success> -->
                             </div>
                             <!-- Classment D -->
                             <div class="md-form form-sm">
                                 <input type="text" id="classementD" formControlName="classementD" class="form-control form-control-sm" mdbInput minLength="3">
                                 <label for="classementD">Classement Dames</label>
-                                <!-- <mdb-error *ngIf="code.invalid && (code.dirty || code.touched)">Min 3 car</mdb-error>
-                                <mdb-success *ngIf="code.valid && (code.dirty || code.touched)"></mdb-success> -->
                             </div>
                             
                         </div>
@@ -200,7 +169,9 @@
                                         <mat-option *ngFor="let item of fonctions" [value]="item.key">{{ item.val }}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
+                                
                             </div>
+                            
                             <div class="md-form form-sm form-field">
                                 <button type="button" class="btn btn-sm btn-info" 
                                     [disabled] = "selectedFonction===null || selectedFonction===undefined"
@@ -237,6 +208,12 @@
                                 </mat-select>
                             </mat-form-field>
                         </div>
+                        <span *ngIf="isStageParticipant()">
+                            <br>
+                            <mdb-checkbox formControlName="isStageParticipantDiscret">
+                                <span style="color:red; font-weight: bold;">Participant discret</span>
+                            </mdb-checkbox>
+                        </span>
                         <div class="md-form form-sm form-field">
                             <button type="button" class="btn btn-sm btn-info" [disabled]="selectedRole===null || selectedRole===undefined"
                                 title="Ajouter le rôle sélectionné"
@@ -268,8 +245,6 @@
                                         class="pink-textarea-2 md-textarea form-control form-control-sm" mdbInput>
                                 </textarea>
                                 <label for="comment">Commentaires</label>
-                                <!-- <mdb-error *ngIf="code.invalid && (code.dirty || code.touched)">Min 3 car</mdb-error>
-                                <mdb-success *ngIf="code.valid && (code.dirty || code.touched)"></mdb-success> -->
                             </div>
                         
                     </fieldset>
@@ -284,19 +259,27 @@
                                     class="amber-textarea-2 md-textarea form-control form-control-sm" mdbInput>
                             </textarea>
                             <label for="commentComite">Informations comité (si applicable)</label>
-                            <!-- <mdb-error *ngIf="code.invalid && (code.dirty || code.touched)">Min 3 car</mdb-error>
-                            <mdb-success *ngIf="code.valid && (code.dirty || code.touched)"></mdb-success> -->
                         </div>
                     </fieldset>
                 </div>
             </div>
 
             <div fxLayout="row">
-                <div class="md-form form-sm" fxFlex="20%">
-                    <button  type="submit" class="btn btn-sm btn-unique button-small waves-light" mdbWavesEffect>
+                <div class="md-form form-sm">
+                    <button  type="submit" class="btn btn-sm btn-unique button-small" 
+                        [disabled]="userForm.invalid"
+                        mdbWavesEffect>
                         <i class="fa fa-paper-plane-o ml-1"></i> &nbsp; Créer l'utilisateur
                     </button>
                 </div>
+                <div class="md-form form-sm">
+                    <button  type="button" class="btn btn-sm btn-warning button-small" 
+                        (click)="onClearForm()"
+                        mdbWavesEffect>
+                        <i class="fa fa-paper-plane-o ml-1"></i> &nbsp; Vider le formulaire
+                    </button>
+                </div>
+
             </div>
         </form>
 
