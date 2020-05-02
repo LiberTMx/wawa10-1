@@ -262,4 +262,24 @@ export class AuthService {
             assignedRoles:  JSON.stringify(assignedRoles)
           });
     }
+
+    getUserGroupsByUserId(userId: number): Observable<Array<AuthGroupModel>>
+    {
+      const apiUrl=`${environment.apiUrl}/auth/groups/${userId}`;
+      return this.httpClient.get<Array<AuthGroupModel>>( apiUrl );
+    }
+
+    updateUser(userFormValue: any, assignedFonctions: Array<AuthFonctionModel>, assignedRoles: Array<AuthGroupModel>): Observable<AuthUserModel>
+    {
+      const apiUrl=`${environment.apiUrl}/auth/updateUser`;
+
+      return this.httpClient.post<AuthUserModel>(apiUrl, 
+          { 
+            userFormValue, 
+            assignedFonctions: JSON.stringify(assignedFonctions), 
+            assignedRoles:  JSON.stringify(assignedRoles)
+          });
+    }
+
+
 }

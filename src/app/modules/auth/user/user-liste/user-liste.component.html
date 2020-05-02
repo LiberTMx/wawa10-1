@@ -1,8 +1,13 @@
 
+<!-- 
+<p><mdb-icon fas icon="bell" size="3x" class="cyan-text pr-3" aria-hidden="true"></mdb-icon> cyan-text</p>
+
+<mdb-icon fas icon="camera-retro"></mdb-icon> camera-retro -->
+
 <div *ngIf="users">
     <!-- {{ users | json }} -->
 
-    <mdb-card>
+    <mdb-card [hidden]="showMode === 1">
         <!--Card image-->
         <!-- <mdb-card-img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg" alt="Card image cap"></mdb-card-img> -->
         <!--Card content-->
@@ -15,43 +20,94 @@
           <img alt="My image name" [src]="'assets/img/membres2.jpg'" class="img-fluid title-image">
       
           <!--Text-->
-          <mdb-card-text> Some quick example text to build on the card title and make up the bulk of the card's
+<!--           <mdb-card-text> Some quick example text to build on the card title and make up the bulk of the card's
             content.
-          </mdb-card-text>
+          </mdb-card-text> -->
       
-          <table mdbTable small="true">
-            <thead>
-              <tr>
-                <!-- <th *ngFor="let user of headElements" scope="col">{{head}} </th> -->
-                <th>N°</th>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Licence</th>
-                <th>Utilisateur</th>
-                <th>Dernière connexion</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr mdbTableCol *ngFor="let user of users; let ix=index">
-                <th scope="row">{{ix+1}}</th>
-                <th>{{user.id}}</th>
-                <td>{{user.nom}}</td>
-                <td>{{user.prenom}}</td>
-                <td>{{user.licence}}</td>
-                <td>{{user.username}}</td>
-                <td>{{ user.lastLoginAt | date:'dd/MM/yyyy HH:mm' }}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div >
+            <table mdbTable small="true">
+              <thead>
+                <tr>
+                  <!-- <th *ngFor="let user of headElements" scope="col">{{head}} </th> -->
+                  <!--
+                  
+                  <th>ID</th>
+                  <th>Nom</th>
+                  <th>Prénom</th>
+                  <th>Licence</th>
+                  <th>Utilisateur</th>
+                  <th>Dernière connexion</th>-->
+                  <th>N°</th>
+                  <th>ID</th>
+                  <th>Nom <span class="badge badge-info badge_style" 
+                    title="Trier selon le nom" 
+                    (click)="onSortByNom()"> <mdb-icon fas icon="sort"></mdb-icon> </span> 
+                  </th>
+
+                  <th>Prénom <span class="badge badge-info badge_style" 
+                    title="Trier selon le prénom" 
+                    (click)="onSortByPrenom()"> <mdb-icon fas icon="sort"></mdb-icon> </span>
+                  </th>
+
+                  <th>Licence
+                    <span class="badge badge-info badge_style" 
+                    title="Trier selon le numéro de licence" 
+                    (click)="onSortByLicence()"> <mdb-icon fas icon="sort"></mdb-icon> </span>
+                  </th>
+                  <th>Utilisateur</th>
+                  <th>Dernière connexion</th>
+<!--                   <th *ngFor="let head of headElements; let i = index" aria-controls="tableSortExample" scope="col" 
+                    [mdbTableSort]="users" 
+                    [sortBy]="headElements[i]">{{head | titlecase}}
+                    <mdb-icon fas icon="sort"></mdb-icon>
+                  </th> -->
+                  <th *ngIf="currentUser">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr mdbTableCol *ngFor="let user of users; let ix=index">
+                  <th scope="row">{{ix+1}}</th>
+                  <th>{{user.id}}</th>
+                  <td>{{user.nom}}</td>
+                  <td>{{user.prenom}}</td>
+                  <td>{{user.licence}}</td>
+                  <td>{{user.username}}</td>
+                  <td>{{ user.lastLoginAt | date:'dd/MM/yyyy HH:mm' }}</td>
+                  <td *ngIf="currentUser">
+                    
+
+                      <span class="badge badge_style" 
+                        title="Editer/Modifier" 
+                        (click)="onEditUser(user)"> <mdb-icon fas icon="edit"></mdb-icon> 
+                      </span> 
+                      &nbsp;
+                      <span class="badge badge_style" *ngIf="isUserClubAdmin"
+                        title="Supprimer" 
+                        (click)="onDeleteUser(user)"> <mdb-icon fas icon="user-minus" class="red-text pr-3"></mdb-icon> 
+                      </span> 
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+         
+
+          
 
         </mdb-card-body>
       </mdb-card>
 
-    <mat-card>
-        <mat-card-title>Les membres</mat-card-title>
-        <mat-card-content>
-            
-        </mat-card-content>
-    </mat-card>
+      <div [hidden]="showMode === 0">
+        <button type="button" class="btn btn-sm btn-success"
+                (click)="onShowListe()">Retour à la liste</button>
+        <app-user-edit [user]="selectedUser"></app-user-edit>
+        <button type="button" class="btn btn-sm btn-success"
+                (click)="onShowListe()">Retour à la liste</button>
+        <br>
+        <br>
+        <br>
+      </div>
+
 </div>

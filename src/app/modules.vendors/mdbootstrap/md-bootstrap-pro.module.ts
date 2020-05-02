@@ -7,7 +7,6 @@ import { CollapseModule } from 'ng-uikit-pro-standard';
 // MDB Angular Pro
 //import {  WavesModule, DropdownModule.forRoot() } from 'ng-uikit-pro-standard';
 
-
 @NgModule({
   imports: [
     /*

@@ -69,7 +69,7 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
 
 // import { PdfViewerModule } from 'ng2-pdf-viewer';
 // import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,7 +80,7 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     BrowserModule,
     BrowserAnimationsModule,
     
-
+    FontAwesomeModule,
     //
     // PasswordStrengthMeterModule,
     FlexLayoutModule,
@@ -109,6 +109,8 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
       //serializer: CustomRouteSerializer,
       routerState: RouterState.Minimal
     }),
+
+    //FontAwesomeModule,
 
     // Application Modules
     //AuthModule.forRoot(),

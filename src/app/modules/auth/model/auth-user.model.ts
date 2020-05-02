@@ -1,5 +1,6 @@
 import { AuthUserGroupModel } from './auth-user-group.model';
 import { StringUtils } from '../../common/utils/string-utils';
+import { AuthFonctionModel } from './auth-fonction.model';
 
 export class AuthUserModel {
 
@@ -30,6 +31,7 @@ export class AuthUserModel {
     createdAt: Date;
     updateddAt: Date;
     comment: string;
+    commentComite: string;
     photo: string;
     deletedAt: Date;
     notifyParents: boolean;
@@ -37,7 +39,9 @@ export class AuthUserModel {
     lastLoginAt: Date;
     membreComite: boolean;
     isStageParticipantDiscret: boolean;
+    gestionParentale: boolean;
     
+    fonctions: Array<AuthFonctionModel>;
     //----
     getFullName(): string
     {
