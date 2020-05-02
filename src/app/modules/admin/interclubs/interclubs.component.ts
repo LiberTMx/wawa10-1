@@ -57,8 +57,6 @@ export class InterclubsComponent implements OnInit {
     this.afttDivisions=null;
     this.afttMembers=null;
 
-
-
     this.adminService.getLastAfttSyncInfo()
     .subscribe(res => {
       this.afttSyncInfo = res;
@@ -66,29 +64,42 @@ export class InterclubsComponent implements OnInit {
       this.adminService.getAfttDivisionCategories()
         .subscribe(div => this.afttDivisionCategories = div);
 
-      this.adminService.getAfttTeams(this.afttSyncInfo.id)
-        .subscribe(teams => this.afttTeams = teams);
-      
-      this.adminService.getAfttDivisions(this.afttSyncInfo.id)
-        .subscribe(divisions => this.afttDivisions = divisions);
+      if(this.afttSyncInfo!==null && this.afttSyncInfo!==undefined)
+      {
+        this.adminService.getAfttTeams(this.afttSyncInfo.id)
+          .subscribe(teams => this.afttTeams = teams);
 
-      this.adminService.getAfttMembers(this.afttSyncInfo.id)
-        .subscribe(afttMembers => {
-          this.afttMembers = afttMembers;
-          //console.log('interclubs - afttMembers', afttMembers);
-        });
+          this.adminService.getAfttDivisions(this.afttSyncInfo.id)
+            .subscribe(divisions => this.afttDivisions = divisions);
+            
+          this.adminService.getAfttMembers(this.afttSyncInfo.id)
+              .subscribe(afttMembers => {
+                this.afttMembers = afttMembers;
+                //console.log('interclubs - afttMembers', afttMembers);
+              });
 
-      this.adminService.getAfttWeeks(this.afttSyncInfo.id)
-        .subscribe( weeks => this.afttWeekByCategory = weeks );
+          this.adminService.getAfttWeeks(this.afttSyncInfo.id)
+                .subscribe( weeks => this.afttWeekByCategory = weeks );
+      }
+      else
+      {
+        this.showable=true;
+      }
 
       this.adminService.getAfttMatchTypes()
         .subscribe( matchTypes => {
           this.afttMatchTypes = matchTypes;
           this.showable=true;
         } 
-    );
+      );
       
-    });
+    }
+    ,
+    err => {
+        console.error('error loading last sync', err);
+        this.showable=true;
+      }
+    );
   }
 
 /*   onReceiveTeams(type: number, event)

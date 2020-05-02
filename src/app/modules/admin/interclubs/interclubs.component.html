@@ -25,34 +25,34 @@
 <br>
 <br>
 
-<mdb-tabset #staticTabs [buttonClass]="'md-tabs'" [contentClass]="'card'" *ngIf="afttSyncInfo">
+<mdb-tabset #staticTabs [buttonClass]="'md-tabs'" [contentClass]="'card'" >
 
-  <mdb-tab heading="Equipes">
+  <mdb-tab heading="Equipes" *ngIf="afttSyncInfo">
     <app-admin-equipes *ngIf="afttTeams && afttDivisionCategories" 
       [afttDivisionCategories]="afttDivisionCategories"
       [afttTeams]="afttTeams"></app-admin-equipes>
   </mdb-tab>
 
-  <mdb-tab heading="Divisions">
+  <mdb-tab heading="Divisions" *ngIf="afttSyncInfo">
     <app-admin-divisions *ngIf="afttDivisions && afttDivisionCategories" 
       [afttDivisionCategories]="afttDivisionCategories"
       [afttDivisions]="afttDivisions"></app-admin-divisions>
   </mdb-tab>
 
-  <mdb-tab heading="Listes des forces">
+  <mdb-tab heading="Listes des forces" *ngIf="afttSyncInfo">
     <app-admin-listesdesforces *ngIf="afttMembers && afttDivisionCategories"
       [afttDivisionCategories]="afttDivisionCategories"
       [afttMembers]="afttMembers"></app-admin-listesdesforces>
   </mdb-tab>
 
-  <mdb-tab heading="Les semaines">
+  <mdb-tab heading="Les semaines" *ngIf="afttSyncInfo">
     <app-admin-semaines
       [afttSyncInfo]="afttSyncInfo"
       [afttDivisionCategories]="afttDivisionCategories"
       [weeks]="afttWeekByCategory"></app-admin-semaines>
   </mdb-tab>
 
-  <mdb-tab heading="Les calendriers">
+  <mdb-tab heading="Les calendriers" *ngIf="afttSyncInfo">
     <app-admin-calendriers *ngIf="afttDivisionCategories"
       [afttSyncInfo]="afttSyncInfo"
       [afttTeams]="afttTeams"

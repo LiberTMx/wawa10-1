@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { InterclubsSemaineModel } from '../../model/interclubs-semaine.model';
 import { MatSelectChange } from '@angular/material/select';
 import { InterclubsLDF } from '../../model/interclubs-ldf.model';
+import { InterclubsTeamModel } from '../../model/interclubs-team.model';
 
 @Component({
   selector: 'app-interclubs-selections-hommes',
@@ -15,6 +16,9 @@ export class HommesComponent implements OnInit {
   
   @Input()
   listeDesForces: Array<InterclubsLDF>;
+  
+  @Input()
+  teams: Array<InterclubsTeamModel>;
   
   selectedSemaine: InterclubsSemaineModel=null;
 
