@@ -89,7 +89,7 @@
                         (click)="onDeleteUser(user)"> <mdb-icon fas icon="user-minus" class="red-text pr-1"></mdb-icon> 
                       </span> 
                       &nbsp;
-                      <span class="badge badge_style" *ngIf="isUserClubAdmin && hasValidEmailAddress(user.email) "
+                      <span class="badge badge_style" *ngIf="isUserClubAdmin && hasValidEmailAddress(user) "
                         title="Reinitiliser le mot de passe" 
                         (click)="onResetUserPassword(user)"> <mdb-icon fas icon="unlock-alt" class="amber-text pr-1"></mdb-icon> 
                       </span> 

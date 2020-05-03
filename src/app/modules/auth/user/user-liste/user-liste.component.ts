@@ -187,7 +187,8 @@ export class UserListeComponent implements OnInit {
   confirmResetUserPassword(user: AuthUserModel): Observable<boolean> 
   {
     const title = 'Confirmation';
-    const message = 'Voulez-vous vraiment ré-initialiser le mot de passe de cet utilisateur ? - '+ user.prenom+' '+user.nom+' ('+user.username+')';
+    const message = 'Voulez-vous vraiment ré-initialiser le mot de passe de cet utilisateur ? - '
+    + user.prenom+' '+user.nom+' ('+user.username+'). Nouveau pwd temporaire: newLiwaUserPwd';
     return this.dialogService.confirm(title, message);
   }
 
