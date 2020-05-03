@@ -12,13 +12,13 @@
 
 <div *ngIf="! loading">
 
-    <app-interclubs-selections-hommes *ngIf = "! loading && selectedInterclubCategoryId === 1"
-        [semaines]=" getFilteredSemaineByCategory( selectedInterclubCategory )  "
-        [listeDesForces]=" buildListeDesForcesByCategory( selectedInterclubCategory ) "
-        [teams]="getFilterTeamsByCategory( selectedInterclubCategory)"
-        
-        >
-    
-    </app-interclubs-selections-hommes>
+    <div *ngIf="selectedInterclubCategoryId === 1 && ldfParticipants && ldfByCategory">
+        <app-interclubs-selections-hommes 
+            [semaines]=" getFilteredSemaineByCategory( selectedInterclubCategory )  "
+            [listeDesForces]=" buildListeDesForcesByCategory( selectedInterclubCategory ) "
+            [teams]="getFilterTeamsByCategory( selectedInterclubCategory)"
+            >
+        </app-interclubs-selections-hommes>
+    </div>
 
 </div>
