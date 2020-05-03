@@ -8,11 +8,11 @@
 
         </tr>
     </tbody>
-</table> -->  
+</table>  
 
-<p>Faire les sélections des interclubs hommes</p>
+<p>Interclub Hommes</p>
 
-<!-- <div class="dropdown" mdbDropdown>
+ <div class="dropdown" mdbDropdown>
 
     <button mdbDropdownToggle mdbBtn color="danger" class="dropdown-toggle waves-light" type="button"
       mdbWavesEffect>
@@ -23,35 +23,71 @@
             <button class="dropdown-item" href="#">Semaine {{semaine.weekNumber}} du {{semaine.startOfWeek | date:'dd/MM/yyyy'}} au {{semaine.endOfWeek | date:'dd/MM/yyyy' }}.</button>
         </div>
     </div>
-  </div> -->
+  </div> 
 
-<hr>
-
-
-
-
-<mdb-card>
-    <mdb-card-header>Faire les sélections des interclubs hommes</mdb-card-header>
-    <mdb-card-body>
-        <mdb-card-title>
-            <h5>Special title treatment</h5>
-        </mdb-card-title>
-        <mdb-card-text>With supporting text below as a natural lead-in to additional content.</mdb-card-text>
-        <a href="" mdbBtn color="primary">Go somewhere!</a>
-
-
-        <div>
-            <mat-form-field>
-                <mat-label>Semaine</mat-label>
-                <mat-select matNativeControl [(ngModel)]="selectedSemaine" name="semaine" 
-                    (selectionChange)="onChangeSemaine($event)">
-                <mat-option value="" selected></mat-option>
-                <mat-option *ngFor="let w of semaines" [value]="w">
-                    Semaine {{w.weekName}} du {{w.startOfWeek | date:'dd/MM/yyyy'}} au {{w.endOfWeek | date:'dd/MM/yyyy' }}.
-                </mat-option>
-                </mat-select>
-            </mat-form-field>
+<hr>-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <mdb-card>
+                <mdb-card-header>Liste des joueurs sélectionnables</mdb-card-header>
+                <mdb-card-body>
+    
+                    <div *ngIf="listeDesForces">
+                        <mat-form-field>
+                            <mat-label>Joueurs sélectionnables</mat-label>
+                            <mat-select matNativeControl > 
+                                
+                                <mat-option value="" selected></mat-option>
+                                <mat-option *ngFor="let l of listeDesForces.participant" [value]="l.id">
+                                    {{l.nom}} {{ l.prenom }}
+            
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+    
+                </mdb-card-body>
+            </mdb-card>
         </div>
+        <div class="col-md-5">
+        <mdb-card>
+            <mdb-card-header>Choix des critères de sélections</mdb-card-header>
+            <mdb-card-body>
 
-    </mdb-card-body>
-  </mdb-card>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Semaine</mat-label>
+                        <mat-select matNativeControl [(ngModel)]="selectedSemaine" name="semaine" 
+                            (selectionChange)="onChangeSemaine($event)">
+                        <mat-option value="" selected></mat-option>
+                        <mat-option *ngFor="let w of semaines" [value]="w">
+                            Semaine {{w.weekName}} du {{w.startOfWeek | date:'dd/MM/yyyy'}} au {{w.endOfWeek | date:'dd/MM/yyyy' }}.
+                        </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Equipe</mat-label>
+                        <mat-select matNativeControl [(ngModel)]="selectedTeam" name="team" 
+                            (selectionChange)="onChangeTeam($event)">
+                        <mat-option value="" selected></mat-option>
+                        <mat-option *ngFor="let t of teams" [value]="t">
+                            Equipe {{t.Team}}
+                        </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+        
+            </mdb-card-body>
+          </mdb-card>
+        <div class="row">
+          <div class="col-md-6">Next</div>
+          <div class="col-md-6">.col-md-6</div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
