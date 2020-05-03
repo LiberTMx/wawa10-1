@@ -70,11 +70,15 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
 // import { PdfViewerModule } from 'ng2-pdf-viewer';
 // import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DialogConfirmComponent } from './common/utils/dialog-confirm/dialog-confirm.component';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { DialogService } from './common/services/dialog.service';
 @NgModule({
   declarations: [
     AppComponent,
     AppDefaultComponent,
     MessageComponent,
+    DialogConfirmComponent,
   ],
   imports: [
     BrowserModule,
@@ -130,14 +134,18 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AppRoutingModule, 
   ],
   providers: [
+    DialogService,
     MessageService,
     {provide: LOCALE_ID, useValue: 'fr-CA' },
     {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true, },
     {provide: MAT_DATE_LOCALE, useValue: 'fr-BE'},
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
   ],
   bootstrap: [AppComponent],
+
+  entryComponents: [DialogConfirmComponent],
 
   schemas: [ NO_ERRORS_SCHEMA ]
   
