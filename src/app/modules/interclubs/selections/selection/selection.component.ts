@@ -25,6 +25,7 @@ export class SelectionComponent implements OnInit {
   
   loading=true;
 
+  
   teams: Array<InterclubsTeamModel>;
   divisions: Array<InterclubsDivisionModel>;
   matches: Array<InterclubsMatchModel>;
@@ -112,6 +113,20 @@ export class SelectionComponent implements OnInit {
     return this.semaines.filter( s => s.afftDivisionCategoryId === category.playerCategory );
   }
 
+  getFilterTeamsByCategory(category: InterclubsCategoryModel): Array<InterclubsTeamModel>
+  {
+    if(this.teams===null || this.teams===undefined) return null;
+    const filterTeams =  this.teams.filter( t => t.DivisionCategory === category.id );
+
+    filterTeams.sort( (t1, t2) => {
+      if(t1.Team < t2.Team) return -1;
+      if(t1.Team > t2.Team) return +1;
+      return 0;
+    });
+    return filterTeams;
+  }
+
+
   buildListeDesForcesByCategory(category: InterclubsCategoryModel): Array<InterclubsLDF>
   {
     const ldf=new Array<InterclubsLDF>();
@@ -139,8 +154,5 @@ export class SelectionComponent implements OnInit {
     return ldf;
   }
 
-  getFilterTeamsByCategory(category: InterclubsCategoryModel): Array<InterclubsTeamModel>
-  {
-    return null;
-  }
+  
 }

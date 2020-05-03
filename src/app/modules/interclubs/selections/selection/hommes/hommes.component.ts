@@ -21,6 +21,7 @@ export class HommesComponent implements OnInit {
   teams: Array<InterclubsTeamModel>;
   
   selectedSemaine: InterclubsSemaineModel=null;
+  selectedTeam: InterclubsSemaineModel=null;
 
   loading=true;
 
@@ -36,5 +37,11 @@ export class HommesComponent implements OnInit {
   {
     this.selectedSemaine = event.value;
     console.log('semaine sélectionnée:', this.selectedSemaine);
+  }
+
+  onChangeTeam(event: MatSelectChange)
+  {
+    this.selectedTeam = event.value;
+    console.log('équipe sélectionnée:', this.selectedTeam);
   }
 }
