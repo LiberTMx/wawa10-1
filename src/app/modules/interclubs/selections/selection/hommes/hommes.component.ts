@@ -24,6 +24,7 @@ export class HommesComponent implements OnInit {
   selectedTeam: InterclubsSemaineModel=null;
 
   loading=true;
+  selectedLdfRow =-1;
 
   constructor() { }
 
@@ -43,5 +44,11 @@ export class HommesComponent implements OnInit {
   {
     this.selectedTeam = event.value;
     console.log('équipe sélectionnée:', this.selectedTeam);
+  }
+
+  setClickedLdfRow(index: number, item: InterclubsLDF)
+  {
+    console.log('ldf row clicked', index, item);
+    this.selectedLdfRow=index;
   }
 }

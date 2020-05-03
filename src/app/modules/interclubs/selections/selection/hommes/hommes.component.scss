@@ -4,3 +4,22 @@
     //background-color: rgb(132, 178, 247);
     font-size: 15px;   
 }
+
+
+/* .table tr.active td {
+    background-color:#123456 !important;
+    color: white;
+ } */
+
+.ldf-table {
+    //width: 716px; /* 140px * 5 column + 16px scrollbar width */
+    border-spacing: 0;
+    display: block;
+    height: calc(100vh - 250px);
+    overflow: auto;
+
+    tr.active td {
+        background-color:#123456 !important;
+        color: white;
+    }
+}

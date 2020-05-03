@@ -129,6 +129,8 @@ export class SelectionComponent implements OnInit {
 
   buildListeDesForcesByCategory(category: InterclubsCategoryModel): Array<InterclubsLDF>
   {
+    console.log('Building ldf for catg:', category);
+
     const ldf=new Array<InterclubsLDF>();
 
     const ldfCats = this.ldfByCategory.filter( c => c.playerCategory === category.playerCategory);
@@ -150,6 +152,8 @@ export class SelectionComponent implements OnInit {
       if(p1.listeDeForce.position > p2.listeDeForce.position) return +1;
       return 0;
     } );
+
+    // console.log('ldf', ldf);
 
     return ldf;
   }

@@ -33,20 +33,33 @@
                 <mdb-card-header>Liste des joueurs sélectionnables</mdb-card-header>
                 <mdb-card-body>
     
-                    <div *ngIf="listeDesForces">
-                        <mat-form-field>
+                 <div *ngIf="listeDesForces">
+                        <!-- <mat-form-field>
                             <mat-label>Joueurs sélectionnables</mat-label>
-                            <mat-select matNativeControl > 
-                                
+                            <mat-select > 
                                 <mat-option value="" selected></mat-option>
-                                <mat-option *ngFor="let l of listeDesForces.participant" [value]="l.id">
-                                    {{l.nom}} {{ l.prenom }}
+                                <mat-option *ngFor="let ldf of listeDesForces" [value]="ldf.participant.id">
+                                    {{ ldf.participant.nom}} {{ ldf.participant.prenom }}
             
                                 </mat-option>
                             </mat-select>
-                        </mat-form-field>
-                    </div>
-    
+                        </mat-form-field> -->
+      <!--                   <select>
+                            <option *ngFor="let item of listeDesForces" 
+                                value="item.participant.id">{{ item.participant.nom}} {{ item.participant.prenom}}</option>
+                        </select> -->
+
+                        <table mdbTable small="true" hover="true" class="ldf-table">
+                            <tr mdbTableCol  *ngFor="let item of listeDesForces; let ix = index" 
+                            (click)="setClickedLdfRow(ix, item)"
+                                [class.active]=" ix === selectedLdfRow ">
+                                    <td scope="row">{{ item.participant.nom}}</td>
+                                    <td>{{ item.participant.prenom}}</td>
+                            </tr>
+                        </table> 
+
+                    </div> 
+                    
                 </mdb-card-body>
             </mdb-card>
         </div>
