@@ -1,0 +1,16 @@
+
+<mat-card>
+
+  <h2 mat-dialog-title><strong>{{dialogData.title}}</strong></h2>
+  
+  <mat-dialog-content>
+    <div>{{dialogData.message}}</div>
+  </mat-dialog-content>
+ 
+  
+  <mat-dialog-actions>
+    <button type="button" class="btn btn-sm btn-success" (click)="onConfirm()" >Oui</button>
+    <button type="button" class="btn btn-sm btn-danger" (click)="onAbort()">Non</button>
+  </mat-dialog-actions>
+  
+</mat-card>

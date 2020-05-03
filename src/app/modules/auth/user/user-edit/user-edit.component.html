@@ -27,7 +27,7 @@
                             </div>
                             <!-- USERNAME -->
                             <div class="md-form form-sm form-field">
-                                <input type="text" id="username" formControlName="username" 
+                                <input type="text" id="username" formControlName="username" readonly
                                     class="form-control form-control-sm" mdbInput minLength="6" mdbValidate  >
                                 <label for="username">Utilisateur</label>
                             </div>
@@ -136,17 +136,23 @@
                         <div class="user-identification-row">
                             <!-- Licence -->
                             <div class="md-form form-sm">
-                                <input type="text" id="licence" formControlName="licence" class="form-control form-control-sm" mdbInput minLength="6">
+                                <input type="text" id="licence" formControlName="licence" 
+                                    [readonly]="!isAdmin"
+                                    class="form-control form-control-sm" mdbInput minLength="6">
                                 <label for="licence">N° Licence</label>
                             </div>
                             <!-- Classment M -->
                             <div class="md-form form-sm">
-                                <input type="text" id="classementH" formControlName="classementH" class="form-control form-control-sm" mdbInput minLength="3">
+                                <input type="text" id="classementH" formControlName="classementH" 
+                                    [readonly]="!isAdmin"
+                                    class="form-control form-control-sm" mdbInput minLength="3">
                                 <label for="classementH">Classement Messieurs</label>
                             </div>
                             <!-- Classment D -->
                             <div class="md-form form-sm">
-                                <input type="text" id="classementD" formControlName="classementD" class="form-control form-control-sm" mdbInput minLength="3">
+                                <input type="text" id="classementD" formControlName="classementD" 
+                                    [readonly]="!isAdmin"
+                                    class="form-control form-control-sm" mdbInput minLength="3">
                                 <label for="classementD">Classement Dames</label>
                             </div>
                             
@@ -162,7 +168,7 @@
                     <legend style="font-weight: bold; font-size: smaller;">Fonctions:</legend>
                         <div class="user-identification-row" *ngIf="fonctions">
                             <!-- Liste des fonctions possibles -->
-                            <div class="md-form form-sm form-field" >
+                            <div class="md-form form-sm form-field" *ngIf="isAdmin">
                                 <mat-form-field>
                                     <mat-select placeholder="Fonctions"
                                         (selectionChange)="onFunctionChanged($event)">
@@ -172,7 +178,7 @@
                                 
                             </div>
                             
-                            <div class="md-form form-sm form-field">
+                            <div class="md-form form-sm form-field" *ngIf="isAdmin">
                                 <button type="button" class="btn btn-sm btn-info" 
                                     [disabled] = "selectedFonction===null || selectedFonction===undefined"
                                     title="Ajouter la fonction sélectionnée"
@@ -181,11 +187,16 @@
                                 </button>
                             </div>
                             <!-- Liste des fonctions assignées-->
-                            <div class="md-form form-sm form-field">
+                            <div class="md-form form-sm form-field" *ngIf="isAdmin">
                                 <span *ngIf="assignedFonctions && assignedFonctions.length > 0">
                                     <button class="btn btn-sm" *ngFor="let f of assignedFonctions" 
                                     title="{{ f.designation }}"
                                     (click)="onRemoveFunction(f)">{{ f.code}}</button>
+                                </span>
+                            </div>
+                            <div class="md-form form-sm form-field" *ngIf=" ! isAdmin">
+                                <span *ngIf="assignedFonctions && assignedFonctions.length > 0">
+                                    <span class="btn btn-sm" *ngFor="let f of assignedFonctions" title="{{ f.designation }}">{{ f.code }}&nbsp;</span>
                                 </span>
                             </div>
                         </div>
@@ -200,7 +211,7 @@
                     <legend style="font-weight: bold; font-size: smaller;">Roles:</legend>
                     <div class="user-identification-row" *ngIf="roles">
                         <!-- Liste des roles possibles -->
-                        <div class="md-form form-sm form-field" >
+                        <div class="md-form form-sm form-field" *ngIf="isAdmin">
                             <mat-form-field>
                                 <mat-select placeholder="Roles"
                                     (selectionChange)="onRoleChanged($event)">
@@ -214,7 +225,7 @@
                                 <span style="color:red; font-weight: bold;">Participant discret</span>
                             </mdb-checkbox>
                         </span>
-                        <div class="md-form form-sm form-field">
+                        <div class="md-form form-sm form-field" *ngIf="isAdmin">
                             <button type="button" class="btn btn-sm btn-info" [disabled]="selectedRole===null || selectedRole===undefined"
                                 title="Ajouter le rôle sélectionné"
                                 (click)="onAddSelectedRole()">
@@ -222,11 +233,16 @@
                             </button>
                         </div>
                         <!-- Liste des roles assignées-->
-                        <div class="md-form form-sm form-field">
+                        <div class="md-form form-sm form-field" *ngIf="isAdmin">
                             <span *ngIf="assignedRoles && assignedRoles.length > 0">
                                 <button class="btn btn-sm" *ngFor="let r of assignedRoles" 
                                 title="{{ r.commentaire }}"
                                 (click)="onRemoveRole(r)">{{ r.name }}</button>
+                            </span>
+                        </div>
+                        <div class="md-form form-sm form-field" *ngIf=" ! isAdmin">
+                            <span *ngIf="assignedRoles && assignedRoles.length > 0">
+                                <span class="btn btn-sm" *ngFor="let r of assignedRoles" title="{{ r.commentaire }}">{{ r.name }}&nbsp;</span>
                             </span>
                         </div>
                     </div>
@@ -234,7 +250,7 @@
                 </div>
             </div>
                 
-            <div fxLayout="row">
+            <div fxLayout="row" *ngIf="isAdmin">
                 <div class="user-identification">
 
                     <fieldset>
@@ -250,7 +266,7 @@
                     </fieldset>
                 </div>
 
-                <div class="user-identification">
+                <div class="user-identification" >
 
                     <fieldset>
                     <legend style="font-weight: bold; font-size: smaller;">Information comité:</legend>

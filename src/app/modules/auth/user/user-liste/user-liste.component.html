@@ -18,7 +18,11 @@
             <h1>Les membres</h1>
           </mdb-card-title>
           <img alt="My image name" [src]="'assets/img/membres2.jpg'" class="img-fluid title-image">
-      
+          <br>
+          <div  *ngIf="isUserClubAdmin">
+            <mdb-checkbox [(ngModel)]="includeDeletedItems" (change)="onChangeIncludeDeletedItems($event)">Inclure les fiches supprimées</mdb-checkbox>
+            <br>
+          </div>
           <!--Text-->
 <!--           <mdb-card-text> Some quick example text to build on the card title and make up the bulk of the card's
             content.
@@ -61,35 +65,49 @@
                     [sortBy]="headElements[i]">{{head | titlecase}}
                     <mdb-icon fas icon="sort"></mdb-icon>
                   </th> -->
-                  <th *ngIf="currentUser">Actions</th>
+                  <th *ngIf="currentUser!==null && currentUser!==undefined">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 <tr mdbTableCol *ngFor="let user of users; let ix=index">
-                  <th scope="row">{{ix+1}}</th>
-                  <th>{{user.id}}</th>
-                  <td>{{user.nom}}</td>
-                  <td>{{user.prenom}}</td>
-                  <td>{{user.licence}}</td>
-                  <td>{{user.username}}</td>
+                  <td [ngStyle]="{'color': getColor(user), 'font-weight': 600 }" scope="row">{{ix+1}}</td>
+                  <td>{{user.id}}</td>
+                  <td [ngStyle]="{'color': getColor(user), 'font-weight': 600 }">{{user.nom}}</td>
+                  <td [ngStyle]="{'color': getColor(user), 'font-weight': 600 }">{{user.prenom}}</td>
+                  <td [ngStyle]="{'color': getColor(user), 'font-weight': 600 }">{{user.licence}}</td>
+                  <td [ngStyle]="{'color': getColor(user), 'font-weight': 600 }">{{user.username}}</td>
                   <td>{{ user.lastLoginAt | date:'dd/MM/yyyy HH:mm' }}</td>
-                  <td *ngIf="currentUser">
-                    
+                  <td *ngIf="currentUser!==null && currentUser!==undefined">
 
-                      <span class="badge badge_style" 
+                      <span class="badge badge_style" *ngIf="hasEditAccess(user)"
                         title="Editer/Modifier" 
-                        (click)="onEditUser(user)"> <mdb-icon fas icon="edit"></mdb-icon> 
+                        (click)="onEditUser(user)"> <mdb-icon fas icon="edit" class="indigo-text pr-1"></mdb-icon> 
                       </span> 
                       &nbsp;
                       <span class="badge badge_style" *ngIf="isUserClubAdmin"
                         title="Supprimer" 
-                        (click)="onDeleteUser(user)"> <mdb-icon fas icon="user-minus" class="red-text pr-3"></mdb-icon> 
+                        (click)="onDeleteUser(user)"> <mdb-icon fas icon="user-minus" class="red-text pr-1"></mdb-icon> 
+                      </span> 
+                      &nbsp;
+                      <span class="badge badge_style" *ngIf="isUserClubAdmin && hasValidEmailAddress(user.email) "
+                        title="Reinitiliser le mot de passe" 
+                        (click)="onResetUserPassword(user)"> <mdb-icon fas icon="unlock-alt" class="amber-text pr-1"></mdb-icon> 
                       </span> 
 
+                      &nbsp;
+                      <span class="badge badge_style" *ngIf="isUserClubAdmin && user.deletedAt !== null "
+                        title="Ré-activer cet utilisateur" 
+                        (click)="onReactivateUser(user)"><mdb-icon fas icon="long-arrow-alt-up" size="2x" class="green-text pr-1"></mdb-icon>
+                      </span> 
                   </td>
                 </tr>
               </tbody>
             </table>
+
+            <br>
+            <br>
+            <br>
+            
           </div>
 
          
@@ -102,7 +120,7 @@
       <div [hidden]="showMode === 0">
         <button type="button" class="btn btn-sm btn-success"
                 (click)="onShowListe()">Retour à la liste</button>
-        <app-user-edit [user]="selectedUser"></app-user-edit>
+        <app-user-edit [user]="selectedUser" [isAdmin]="isUserClubAdmin" (userEmitter)="onUserModified($event)"></app-user-edit>
         <button type="button" class="btn btn-sm btn-success"
                 (click)="onShowListe()">Retour à la liste</button>
         <br>

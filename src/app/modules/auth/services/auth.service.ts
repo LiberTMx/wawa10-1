@@ -239,9 +239,9 @@ export class AuthService {
       return role !==null && role !== undefined;
     }
 
-    getUserList(): Observable<Array<AuthUserModel>>
+    getUserList(readAll: boolean): Observable<Array<AuthUserModel>>
     {
-      const apiUrl=`${environment.apiUrl}/auth/liste`;
+      const apiUrl=`${environment.apiUrl}/auth/liste/?readAll=${readAll}`;
       return this.httpClient.get<Array<AuthUserModel>>( apiUrl );
     }
 
@@ -281,5 +281,43 @@ export class AuthService {
           });
     }
 
+    deleteUserLogically(user: AuthUserModel): Observable<MessageModel>
+    {
+      const apiUrl=`${environment.apiUrl}/auth/deleteUserLogically`;
 
+      return this.httpClient.post<MessageModel>(apiUrl, 
+          { 
+            userId: user.id, 
+          });
+    }
+
+    deleteUserPermanently(user: AuthUserModel): Observable<MessageModel>
+    {
+      const apiUrl=`${environment.apiUrl}/auth/deleteUserPermanently`;
+
+      return this.httpClient.post<MessageModel>(apiUrl, 
+          { 
+            userId: user.id, 
+          });
+    }
+
+    resetUserPassword(user: AuthUserModel): Observable<MessageModel>
+    {
+      const apiUrl=`${environment.apiUrl}/auth/resetUserPassword`;
+
+      return this.httpClient.post<MessageModel>(apiUrl, 
+          { 
+            userId: user.id, 
+          });
+    }
+
+    reactivateUser(user: AuthUserModel): Observable<MessageModel>
+    {
+      const apiUrl=`${environment.apiUrl}/auth/reactivateUser`;
+
+      return this.httpClient.post<MessageModel>(apiUrl, 
+          { 
+            userId: user.id, 
+          });
+    }
 }

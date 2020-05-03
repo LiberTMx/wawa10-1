@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { AuthUserModel } from '../../model/auth-user.model';
 import { AdminRoleService } from '../../../admin/roles/services/admin-role.service';
 import { AuthService } from '../../services/auth.service';
@@ -24,6 +24,12 @@ export class UserEditComponent implements OnInit, OnChanges {
 
   @Input()
   user: AuthUserModel=null;
+
+  @Input()
+  isAdmin=false;
+
+  @Output()
+  userEmitter = new EventEmitter<AuthUserModel>();
   
   public myDatePickerOptions: IMyOptions = {
     // Your options
@@ -210,8 +216,9 @@ export class UserEditComponent implements OnInit, OnChanges {
     this.authService.updateUser(this.userForm.value, this.assignedFonctions, this.assignedRoles)
       .subscribe(
         user => {
-          // Ok utilisateur créé
+          // Ok utilisateur modifié
           this.toastMessageService.addSuccess('Modification utilisateur', 'Un utilisateur a été modifié: '+user.nom+' '+user.prenom+', '+user.username, 5000);
+          this.userEmitter.emit(user);
         }
         ,
         err => {
