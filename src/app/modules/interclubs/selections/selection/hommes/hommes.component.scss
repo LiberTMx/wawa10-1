@@ -1,8 +1,9 @@
 
 ::ng-deep .mat-select{
-    min-width: 350px !important;
+    // min-width: 350px !important;
+    width: 350px;
     //background-color: rgb(132, 178, 247);
-    font-size: 15px;   
+    font-size: 12px;   
 }
 
 
@@ -17,8 +18,13 @@
     display: block;
     height: calc(100vh - 250px);
     overflow: auto;
+    font-size: 12px;
 
+    td{
+        font-size: 11px;
+    }
     tr.active td {
+        font-size: 13px;
         background-color:#123456 !important;
         color: white;
     }

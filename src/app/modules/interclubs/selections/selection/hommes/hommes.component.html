@@ -1,53 +1,12 @@
 
 
- <!-- <table>
-    <tbody>
-        <tr *ngFor = "let semaine of semaines"> 
-
-            <td> Semaine {{semaine.weekNumber}} du {{semaine.startOfWeek | date:'dd/MM/yyyy'}} au {{semaine.endOfWeek | date:'dd/MM/yyyy' }}.</td>
-
-        </tr>
-    </tbody>
-</table>  
-
-<p>Interclub Hommes</p>
-
- <div class="dropdown" mdbDropdown>
-
-    <button mdbDropdownToggle mdbBtn color="danger" class="dropdown-toggle waves-light" type="button"
-      mdbWavesEffect>
-      Sélectionnez une semaine
-    </button>
-    <div class="dropdown-menu dropdown-danger" >
-        <div *ngFor = "let semaine of semaines">
-            <button class="dropdown-item" href="#">Semaine {{semaine.weekNumber}} du {{semaine.startOfWeek | date:'dd/MM/yyyy'}} au {{semaine.endOfWeek | date:'dd/MM/yyyy' }}.</button>
-        </div>
-    </div>
-  </div> 
-
-<hr>-->
-<div class="container">
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-sm-3">
             <mdb-card>
                 <mdb-card-header>Liste des joueurs sélectionnables</mdb-card-header>
                 <mdb-card-body>
     
                  <div *ngIf="listeDesForces">
-                        <!-- <mat-form-field>
-                            <mat-label>Joueurs sélectionnables</mat-label>
-                            <mat-select > 
-                                <mat-option value="" selected></mat-option>
-                                <mat-option *ngFor="let ldf of listeDesForces" [value]="ldf.participant.id">
-                                    {{ ldf.participant.nom}} {{ ldf.participant.prenom }}
-            
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field> -->
-      <!--                   <select>
-                            <option *ngFor="let item of listeDesForces" 
-                                value="item.participant.id">{{ item.participant.nom}} {{ item.participant.prenom}}</option>
-                        </select> -->
 
                         <table mdbTable small="true" hover="true" class="ldf-table">
                             <tr mdbTableCol  *ngFor="let item of listeDesForces; let ix = index" 
@@ -55,6 +14,9 @@
                                 [class.active]=" ix === selectedLdfRow ">
                                     <td scope="row">{{ item.participant.nom}}</td>
                                     <td>{{ item.participant.prenom}}</td>
+                                    <td>{{ item.listeDeForce.rankingIndex}}</td>
+                                    <td>{{ item.listeDeForce.classement}}</td>
+
                             </tr>
                         </table> 
 
@@ -63,7 +25,7 @@
                 </mdb-card-body>
             </mdb-card>
         </div>
-        <div class="col-md-5">
+        <div class="col-sm-3">
         <mdb-card>
             <mdb-card-header>Choix des critères de sélections</mdb-card-header>
             <mdb-card-body>
@@ -91,16 +53,46 @@
                         </mat-option>
                         </mat-select>
                     </mat-form-field>
+
+                    <br>
+                    
                 </div>
         
             </mdb-card-body>
           </mdb-card>
+          <br>
         <div class="row">
-          <div class="col-md-6">Next</div>
-          <div class="col-md-6">.col-md-6</div>
+            <div class="col-sm-12">
+                <mdb-card>
+                    <mdb-card-header>Sélection de l'équipe</mdb-card-header>
+                    <mdb-card-body>
+        
+                        <div class="md-form form-sm form-field">
+                            <mdb-checkbox formControlName="membreComite">Valider la sélection</mdb-checkbox>
+                        </div>
+                
+                    </mdb-card-body>
+                  </mdb-card>
+            </div>
         </div>
       </div>
+      <div class="col-sm-4">
+        <mdb-card>
+            <mdb-card-header>Info sur le match selectionné</mdb-card-header>
+            <mdb-card-body>
+
+                 <b>Date</b>: {{ selectedMatch?.matchDate | date:'dd/MM/yyyy'}} 
+                 <br>
+                 <b>Match</b>: {{ selectedMatch?.HomeTeam}} contre {{ selectedMatch?.AwayTeam}}
+            </mdb-card-body>
+        </mdb-card>
+    </div>
       
     </div>
-  </div>
+  
 
+
+
+ 
+  
+  

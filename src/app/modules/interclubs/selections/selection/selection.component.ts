@@ -158,5 +158,11 @@ export class SelectionComponent implements OnInit {
     return ldf;
   }
 
+  getFilteredMatchesByCategory(category: InterclubsCategoryModel): Array<InterclubsMatchModel>
+  {
+    if(this.matches===null || this.matches===undefined) return null;
+    return this.matches.filter( m => (+m.DivisionCategory) === category.playerCategory );
+  }
+
   
 }
