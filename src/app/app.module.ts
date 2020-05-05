@@ -58,7 +58,6 @@ import { SponsorsModule } from './modules/sponsors/sponsors.module';
 import { RequestInterceptor } from './common/utils/http-interceptor/request.interceptor';
 import { StatusModule } from './modules/status/status.module';
 import { RoiModule } from './modules/roi/roi.module';
-import { EntrainementsModule } from './modules/entrainements/entrainements.module';
 import { NewsletterModule } from './modules/newsletter/newsletter.module';
 import { InterclubsModule } from './modules/interclubs/interclubs.module';
 import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
@@ -73,6 +72,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DialogConfirmComponent } from './common/utils/dialog-confirm/dialog-confirm.component';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { DialogService } from './common/services/dialog.service';
+import { ActivitesModule } from './modules/activites/activites.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -128,7 +128,7 @@ import { DialogService } from './common/services/dialog.service';
     SponsorsModule,
     StatusModule,
     RoiModule,
-    EntrainementsModule,
+    ActivitesModule,
     NewsletterModule,
     // Import the app routing module after the other app modules, so that the routes are merged
     AppRoutingModule, 

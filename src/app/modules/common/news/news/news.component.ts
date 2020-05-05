@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NewsModel } from '../model/news.model';
 import { NewsService } from '../services/news.service';
 import { Router } from '@angular/router';
-import { NewsType } from '../types/news-status.enum';
+import { NewsStatusType } from '../types/news-status.enum';
 import { NewsEvent, NewsEventType } from '../model/news-event.model';
 
 @Component({
@@ -46,7 +46,8 @@ export class NewsComponent implements OnInit {
     }
   }
 
-  getImageFromService() {
+  getImageFromService() 
+  {
       this.isImageLoading = true;
       this.newsService.downloadImageFile(this.news).subscribe(data => {
         this.createImageFromBlob(data);
@@ -57,7 +58,8 @@ export class NewsComponent implements OnInit {
       });
   }
 
-  createImageFromBlob(image: Blob) {
+  createImageFromBlob(image: Blob) 
+  {
       const reader = new FileReader();
       reader.addEventListener('load', () => {
         this.imageUrl = reader.result;
@@ -88,17 +90,17 @@ export class NewsComponent implements OnInit {
       );
   }
 
-  evaluateNewsStatus(show: boolean): NewsType
+  evaluateNewsStatus(show: boolean): NewsStatusType
   {
     if(show) 
-      return NewsType.VISIBLE;
+      return NewsStatusType.VISIBLE;
     else 
-      return NewsType.CACHEE;
+      return NewsStatusType.CACHEE;
   }
 
   isNewsVisible(): boolean
   {
-    return this.news.status === NewsType.VISIBLE;
+    return this.news.status === NewsStatusType.VISIBLE;
   }
 
   onDeleteNews()

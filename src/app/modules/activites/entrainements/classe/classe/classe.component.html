@@ -1,0 +1,39 @@
+<div *ngIf="classe" class="classe-preview">
+    <mdb-card>
+        <div class="view rgba-white-slight waves-light feature-image" mdbWavesEffect>
+          <!-- Card img -->
+          <mdb-card-img *ngIf="!isImageLoading && imageUrl!==null; else noImageFound"
+            class="img-fluid classe-image" 
+            [src]="imageUrl" 
+            alt="Card image cap">
+          </mdb-card-img>
+          <ng-template #noImageFound>
+              <mdb-card-img
+                class="img-fluid classe-image" 
+                [src]="noImageUrl"
+                alt="Card image cap">
+              </mdb-card-img>
+          </ng-template>
+          <a>
+            <div class="mask"></div>
+          </a>
+        </div>
+        <!--Card content-->
+        <mdb-card-body>
+          <!--Title-->
+          <mdb-card-title>
+            <h4>{{ classe.titre }}</h4>
+          </mdb-card-title>
+    
+          <!--Text-->
+          <mdb-card-text> {{ classe.presentation }} </mdb-card-text>
+    
+          <!-- <a href="#" mdbBtn color="primary" mdbWavesEffect (click)="onShowClasseDetails()">Button</a> -->
+          <button type="button" class="btn btn-sm btn-success" (click)="onShowClasseDetails()">Détails...</button>
+          <span *ngIf="classe.externalLink">
+            <br>
+            <a [href]="classe.externalLink" target="_blank" color="secondary" mdbWavesEffect>Infos externes</a>
+          </span>
+        </mdb-card-body>
+      </mdb-card>
+</div>

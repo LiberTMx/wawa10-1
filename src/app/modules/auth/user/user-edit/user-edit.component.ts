@@ -128,7 +128,7 @@ export class UserEditComponent implements OnInit, OnChanges {
       id: [''],
       nom: ['', [Validators.required, Validators.minLength(2)] ],
       prenom: ['', [Validators.required, Validators.minLength(1)] ],
-      username: ['', [Validators.required, Validators.minLength(6)] ],
+      username: ['', [Validators.required, Validators.minLength(3)] ],
       email: ['', [Validators.required, Validators.minLength(3), Validators.email] ],
       dateNaissance: [''],
       gestionParentale: [''],

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { NewsModel } from '../model/news.model';
 import { environment } from '../../../../../environments/environment';
 import { AuthenticatedUserModel } from '../../../auth/model/authenticated-user.model';
-import { NewsType } from '../types/news-status.enum';
+import { NewsStatusType } from '../types/news-status.enum';
 import { MessageModel } from '../../../../common/model/message.model';
 
 @Injectable({
@@ -74,7 +74,7 @@ export class NewsService {
     return this.httpClient.get(apiUrl, {responseType: /*ResponseContentType.Blob*/ 'blob'});
   }
 
-  updateStatus(news: NewsModel, newStatus: NewsType): Observable<NewsModel>
+  updateStatus(news: NewsModel, newStatus: NewsStatusType): Observable<NewsModel>
   {
     const apiUrl=`${environment.apiUrl}/news/updateStatus`;
     return this.httpClient.post<NewsModel>(apiUrl,  { newsId: news.id, newStatus});
