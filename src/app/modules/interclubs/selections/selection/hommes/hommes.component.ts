@@ -4,6 +4,8 @@ import { MatSelectChange } from '@angular/material/select';
 import { InterclubsLDF } from '../../model/interclubs-ldf.model';
 import { InterclubsTeamModel } from '../../model/interclubs-team.model';
 import { InterclubsMatchModel } from '../../model/interclubs-match.model';
+import { SelectionService } from '../../services/selection.service';
+import { InterclubsSemaineVersionModel } from '../../model/interclubs-semaine-version.model';
 
 @Component({
   selector: 'app-interclubs-selections-hommes',
@@ -30,8 +32,13 @@ export class HommesComponent implements OnInit {
 
   loading=true;
   selectedLdfRow =-1;
+  selectedJoueur: InterclubsLDF=null;
 
-  constructor() { }
+  semaineVersions: Array<InterclubsSemaineVersionModel> = null;
+
+  constructor(private selectionService: SelectionService) 
+  { 
+  }
 
   ngOnInit(): void 
   {
@@ -44,7 +51,9 @@ export class HommesComponent implements OnInit {
   {
     this.selectedSemaine = event.value;
     console.log('semaine sélectionnée:', this.selectedSemaine);
-    
+    this.selectionService.getSemaineVersions(this.selectedSemaine)
+      .subscribe(res =>this.semaineVersions =res);
+
   }
 
   onChangeTeam(event: MatSelectChange)
@@ -62,5 +71,31 @@ export class HommesComponent implements OnInit {
   {
     console.log('ldf row clicked', index, item);
     this.selectedLdfRow=index;
+    this.selectedJoueur=item;
+  }
+
+  onSemaineNextVersion(){
+    this.selectionService.getSemaineNextVersion(this.selectedSemaine)
+      .subscribe( res => this.semaineVersions=res);
+  }
+
+  onSelectionJoueur(index: number)
+  {
+    // s'assurer qu'un joueur a ete selectionner: this.selectJoueur !== null
+    // s'assurer qu'il n'y a pas encore de joueur sélectionné à la place selectionnée
+    // si oui: pre-requis:supprimer le joueur dejà selectionné à cette place
+    // enregistrer la selection ds le backend
+    // verifier la reponse du backend
+    // si tout est ok , placer le joueur ds la grille
+  }
+
+  onSelectionJoueurReserve(index: number)
+  {
+    // s'assurer qu'un joueur a ete selectionner: this.selectJoueur !== null
+    // s'assurer qu'il n'y a pas encore de joueur sélectionné à la place selectionnée
+    // si oui: pre-requis:supprimer le joueur dejà selectionné à cette place
+    // enregistrer la selection ds le backend
+    // verifier la reponse du backend
+    // si tout est ok , placer le joueur ds la grille
   }
 }

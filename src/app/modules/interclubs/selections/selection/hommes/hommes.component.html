@@ -1,8 +1,8 @@
 
 
     <div class="row">
-        <div class="col-sm-3">
-            <mdb-card>
+        <div class="col-sm-4">
+            <mdb-card >
                 <mdb-card-header>Liste des joueurs sélectionnables</mdb-card-header>
                 <mdb-card-body>
     
@@ -25,70 +25,131 @@
                 </mdb-card-body>
             </mdb-card>
         </div>
-        <div class="col-sm-3">
-        <mdb-card>
-            <mdb-card-header>Choix des critères de sélections</mdb-card-header>
-            <mdb-card-body>
-
-                <div>
-                    <mat-form-field>
-                        <mat-label>Semaine</mat-label>
-                        <mat-select matNativeControl [(ngModel)]="selectedSemaine" name="semaine" 
-                            (selectionChange)="onChangeSemaine($event)">
-                        <mat-option value="" selected></mat-option>
-                        <mat-option *ngFor="let w of semaines" [value]="w">
-                            Semaine {{w.weekName}} du {{w.startOfWeek | date:'dd/MM/yyyy'}} au {{w.endOfWeek | date:'dd/MM/yyyy' }}.
-                        </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div>
-                    <mat-form-field>
-                        <mat-label>Equipe</mat-label>
-                        <mat-select matNativeControl [(ngModel)]="selectedTeam" name="team" 
-                            (selectionChange)="onChangeTeam($event)">
-                        <mat-option value="" selected></mat-option>
-                        <mat-option *ngFor="let t of teams" [value]="t">
-                            Equipe {{t.Team}}
-                        </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-
-                    <br>
+        <div class="col-sm-8">
+            <div>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <mdb-card class="small">
+                                <mdb-card-header>Choix des critères de sélections</mdb-card-header>
+                                <mdb-card-body>
+                                    <div>
+                                        <mat-form-field>
+                                            <mat-label>Semaine</mat-label>
+                                            <mat-select matNativeControl [(ngModel)]="selectedSemaine" name="semaine" 
+                                                (selectionChange)="onChangeSemaine($event)">
+                                            <mat-option value="" selected></mat-option>
+                                            <mat-option *ngFor="let w of semaines" [value]="w">
+                                                Semaine {{w.weekName}} du {{w.startOfWeek | date:'dd/MM/yyyy'}} au {{w.endOfWeek | date:'dd/MM/yyyy' }}.
+                                            </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
                     
-                </div>
-        
-            </mdb-card-body>
-          </mdb-card>
-          <br>
-        <div class="row">
-            <div class="col-sm-12">
-                <mdb-card>
-                    <mdb-card-header>Sélection de l'équipe</mdb-card-header>
-                    <mdb-card-body>
-        
-                        <div class="md-form form-sm form-field">
-                            <mdb-checkbox formControlName="membreComite">Valider la sélection</mdb-checkbox>
+                                    <div>
+                                        <mat-form-field>
+                                            <mat-label>Version</mat-label>
+                                            <mat-select matNativeControl [(ngModel)]="selectedSemaineVersion" name="semaineversion" 
+                                                (selectionChange)="onChangeSemaineVersion($event)">
+                                            <mat-option value="" selected></mat-option>
+                                            <mat-option *ngFor="let s of semaineVersions" [value]="s">
+                                                version {{s.semaine_version}}: {{s.semaine_version_statut}}
+                                            </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <a (click)="onSemaineNextVersion()" mdbBtn floating="true" size="sm" gradient="blue" mdbWavesEffect>
+                                            <mdb-icon fas icon="plus"></mdb-icon>
+                                          </a>
+                                    </div>
+                    
+                                    <div>
+                                        <mat-form-field>
+                                            <mat-label>Equipe</mat-label>
+                                            <mat-select matNativeControl [(ngModel)]="selectedTeam" name="team" 
+                                                (selectionChange)="onChangeTeam($event)">
+                                            <mat-option value="" selected></mat-option>
+                                            <mat-option *ngFor="let t of teams" [value]="t">
+                                                Equipe {{t.Team}}
+                                            </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </mdb-card-body>
+                            </mdb-card>
                         </div>
-                
-                    </mdb-card-body>
-                  </mdb-card>
+                        <div class="col-sm-7">
+                            <mdb-card class="small">
+                                <mdb-card-header>Info sur le match selectionné</mdb-card-header>
+                                <mdb-card-body>
+                                    <table mdbTable small="true" hover="true">
+                                       <tr>
+                                        <td><b>Date</b>:</td>
+                                        <td><span *ngIf="selectedMatch">{{ selectedMatch?.matchDate | date:'dd/MM/yyyy'}}  <b>Heure</b>: {{ selectedMatch?.Time}}</span> </td>
+                                       </tr>
+                                       <tr>
+                                        <td><b>Match</b>:</td>
+                                        <td><span *ngIf="selectedMatch">{{ selectedMatch?.HomeTeam}} contre {{ selectedMatch?.AwayTeam}}</span></td>
+                                       </tr><tr>
+                                        <td><b>Adresse</b>:</td>
+                                        <td><span *ngIf="selectedMatch">{{ selectedMatch?.venueName}},{{ selectedMatch?.venueStreet}}, <b>{{ selectedMatch?.venueTown}}</b></span></td>
+                                       </tr>
+                                    </table> 
+                    
+                                </mdb-card-body>
+                            </mdb-card>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <br>
+                    <mdb-card>
+                        <mdb-card-header>Sélection de l'équipe</mdb-card-header>
+                        <mdb-card-body>
+                            <table mdbTable small="true" hover="true" style="height: calc(2vh - 100px);">
+                                <tr>
+                                    <th style="width: 20%" scope="col">N°</th>
+                                    <th style="width: 20%" scope="col">Indice</th>
+                                    <th style="width: 40%" scope="col">Joueur</th>
+                                    <th style="width: 20%" scope="col">Classement</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><button (click)="onSelectionJoueur(1)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>J1</button></th>
+                                    <td>1</td>
+                                    <td>Indeherberg Julien</td>
+                                    <td>B0</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><button (click)="onSelectionJoueur(2)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>J2</button></th>
+                                    <td>1</td>
+                                    <td>Indeherberg Julien</td>
+                                    <td>B0</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><button mdbBtn (click)="onSelectionJoueur(3)" type="button" color="danger" rounded="true" mdbWavesEffect>J3</button></th>
+                                    <td>1</td>
+                                    <td>Indeherberg Julien</td>
+                                    <td>B0</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><button mdbBtn (click)="onSelectionJoueur(4)" type="button" color="danger" rounded="true" mdbWavesEffect>J4</button></th>
+                                    <td>1</td>
+                                    <td>Indeherberg Julien</td>
+                                    <td>B0</td>
+                                </tr>
+                            </table>
+
+                            <!-- <div class="md-form form-sm form-field">
+                                <mdb-checkbox formControlName="membreComite">Valider la sélection</mdb-checkbox>
+                            </div> -->
+                    
+                        </mdb-card-body>
+                      </mdb-card>
+                </div>
             </div>
         </div>
-      </div>
-      <div class="col-sm-4">
-        <mdb-card>
-            <mdb-card-header>Info sur le match selectionné</mdb-card-header>
-            <mdb-card-body>
+    </div>
 
-                 <b>Date</b>: {{ selectedMatch?.matchDate | date:'dd/MM/yyyy'}} 
-                 <br>
-                 <b>Match</b>: {{ selectedMatch?.HomeTeam}} contre {{ selectedMatch?.AwayTeam}}
-            </mdb-card-body>
-        </mdb-card>
-    </div>
-      
-    </div>
+
   
 
 

@@ -1,11 +1,17 @@
 
 ::ng-deep .mat-select{
     // min-width: 350px !important;
-    width: 350px;
+    width: 200px;
     //background-color: rgb(132, 178, 247);
     font-size: 12px;   
 }
 
+.small{
+    height: 220px;
+}
+.selection-table{
+    height: 100px;
+}
 
 /* .table tr.active td {
     background-color:#123456 !important;

@@ -9,6 +9,8 @@ import { InterclubsTeamModel } from '../model/interclubs-team.model';
 import { InterclubsMatchModel } from '../model/interclubs-match.model';
 import { InterclubsLdfParticipantModel } from '../model/interclubs-ldf-participant.model';
 import { InterclubsLdfByCategoryModel } from '../model/interclubs-ldf-by-category.model';
+import { InterclubsSemaineVersionModel } from '../model/interclubs-semaine-version.model';
+import { InterclubsLDF } from '../model/interclubs-ldf.model';
 
 @Injectable({
   providedIn: 'root'
@@ -101,4 +103,21 @@ export class SelectionService {
     return this.httpClient.get<Array<InterclubsLdfByCategoryModel>>(apiUrl);
   }
 
+  //@Get('semaineNextVersion/:semaineId')
+  getSemaineNextVersion(semaine: InterclubsSemaineModel): Observable< Array<InterclubsSemaineVersionModel>>
+  {
+    const apiUrl=`${environment.apiUrl}/interclubs/semaineNextVersion/${semaine.id}`;
+    return this.httpClient.get<Array<InterclubsSemaineVersionModel>>(apiUrl);
+  }
+
+  getSemaineVersions(semaine: InterclubsSemaineModel): Observable <Array<InterclubsSemaineVersionModel>>
+  {
+    const apiUrl=`${environment.apiUrl}/interclubs/semaineVersions/${semaine.id}`;
+    return this.httpClient.get<Array<InterclubsSemaineVersionModel>>(apiUrl);
+  }
+
+  storeSelection(selection: InterclubsLDF): Observable<InterclubsLDF>
+  {
+    return Observable.of(selection);
+  }
 }
