@@ -1,0 +1,53 @@
+<div *ngIf="classe && groupe">
+    
+    <div classe="entrainement-classe">
+
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-11">
+                <div class="row">
+                    <h5>{{ groupe.titre }}</h5>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <img [src]="imageUrl" class="img-fluid groupe-image">
+                    </div>
+        
+                    <div class="col-9">
+                        <!-- <p>{{ groupe.titre }}</p> -->
+                        <p>{{ groupe.presentation }}</p>
+                        <p></p>
+                        <p>Horaire du groupe: &nbsp;
+                        <span class="badge badge-info badge_style" 
+                            title="Ajouter un groupe à la classe '{{classe.titre}}' '" 
+                            (click)="onAddGroupHoraire()">Ajouter une séance</span> 
+                        </p>
+                        <div *ngIf="seances">
+<!--                             <app-entrainement-groupe-seance 
+                                *ngFor="let seance of seances"
+                                [seance]="seance"></app-entrainement-groupe-seance> -->
+                                
+
+                                <table mdbTable small="true" hover="true">
+                                    <thead>
+                                        <tr>
+                                            <th>Jour</th>
+                                            <th>Début</th>
+                                            <th>Fin</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let s of seances">
+                                            <app-entrainement-groupe-seance [seance]="s"></app-entrainement-groupe-seance>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>

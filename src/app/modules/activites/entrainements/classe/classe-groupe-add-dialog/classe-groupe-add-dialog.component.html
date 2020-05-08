@@ -1,0 +1,122 @@
+<div class="card">
+    <div class="card-header">
+        <h3>{{ dialogData.classe.titre }} - Ajouter un groupe</h3>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="groupeForm" (ngSubmit)="onCreateGroupe()">
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-lg-5 col-xl-4">
+                   
+                   <!-- Featured image -->
+                   <div class="view overlay rounded z-depth-1-half mb-lg-0 mb-4 waves-light feature-image" mdbWavesEffect>
+                       <img class="img-fluid classe-image" [src]="imageUrl" alt="Sample image">
+                       <a>
+                       <div class="mask rgba-white-slight"></div>
+                       </a>
+                   </div>
+                   <div>
+   
+                       <button tyep="button" class="btn btn-sm" (click)="onDeleteImage()">Supprimer l'image</button>
+                       
+                       <input type="file" name="image" accept="image/*" formControlName="image" (change)="showPreview($event)"  />
+                   </div>
+                </div>
+                   <!-- Grid column -->
+                   <div class="col-lg-7 col-xl-8">
+                    <div class="md-form form-sm form-field">
+                        <input type="text" id="titre" formControlName="titre" 
+                            class="form-control form-control-sm" mdbInput minLength="3" mdbValidate  >
+                        <label for="username">Nom du groupe</label>
+                    </div>
+                    <div class="md-form form-sm form-field">
+                        <input type="text" id="presentation" formControlName="presentation" 
+                            class="form-control form-control-sm" mdbInput minLength="3" mdbValidate  >
+                        <label for="presentation">Présentation</label>
+                    </div>
+                   </div>
+            </div>
+
+            
+            <div class="row">
+                <div class="col-lg-6 col-xl-5">
+                    <!-- ordre d'affichage -->
+                    <div class="md-form form-sm">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <input type="text" id="showOrder" formControlName="showOrder" class="form-control" mdbInput width="300px">
+                        <label for="showOrder">Ordre d'affichage</label>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-xl-5">
+                    <!-- statut -->
+                    <div class="md-form form-sm">
+                        <select id="statut" formControlName="status">
+                            <option *ngFor="let kvp of groupeStatus" 
+                                [value]="kvp.key" 
+                                [label]="kvp.val"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-xl-5">
+                    <!-- Periode -->
+                    <div class="md-form form-sm">
+                        <select id="periode" formControlName="periodeId">
+                            <option *ngFor="let p of dialogData.periodes" 
+                                [value]="p.id" 
+                                [label]="p.nom"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <!-- limite age -->
+                <div class="col-lg-6 col-xl-5">
+
+                    <div class="md-form form-sm">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <input type="text" id="limiteAge" formControlName="limiteAge" class="form-control" mdbInput width="300px">
+                        <label for="limiteAge">Limite d'age</label>
+                    </div>
+                </div>
+                <!-- limite classement -->
+                <div class="col-lg-6 col-xl-5">
+
+                    <div class="md-form form-sm">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <input type="text" id="limiteClassement" formControlName="limiteClassement" class="form-control" mdbInput width="300px">
+                        <label for="limiteClassement">Limite de classement</label>
+                    </div>
+                </div>
+            </div>
+            <!-- Post data -->
+            <div class="md-form form-sm">
+                <button mdbBtn  type="submit" class="btn btn-sm btn-success">Créer le groupe</button>
+                &nbsp;<button type="button" class="btn btn-sm btn-warning" (click)="onCancel()">Cancel</button>
+            </div>
+        
+        </form>
+    </div>
+</div>
+
+
+
+<!-- <button type="button" class="btn btn-sm btn-primary" (click)="onCloseDialog()"><i class="fa fa-times"
+    aria-hidden="true"></i></button> -->
+
+<!--
+    id: number;
+    classeId: number;
+    titre: string;
+    presentation: string;
+    updatedAt: Date;
+    updatedBy: string;
+    mimeType: string;
+    imageFilename: string;
+    status: GroupeStatusType;
+    showOrder: number;
+    limiteAge: string;
+    limiteClassement: string;
+-->    

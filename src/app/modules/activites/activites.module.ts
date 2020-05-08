@@ -4,6 +4,7 @@ import { EntrainementsModule } from './entrainements/entrainements.module';
 import { ActivitesRoutingModule } from './activites-routing.module';
 import { CalendrierModule } from './calendrier/calendrier.module';
 import { StagesModule } from './stages/stages.module';
+import { PeriodesModule } from './periodes/periodes.module';
 
 
 
@@ -15,6 +16,7 @@ import { StagesModule } from './stages/stages.module';
     CalendrierModule,
     EntrainementsModule,
     StagesModule,
+    PeriodesModule,
     
     ActivitesRoutingModule,
   ],

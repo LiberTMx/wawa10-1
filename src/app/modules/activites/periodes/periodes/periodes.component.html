@@ -1,0 +1,46 @@
+<div class="card">
+    <div class="card-header">
+        <h3>Les périodes d'activités</h3>
+    </div>
+    <div class="card-body">
+
+        <span class="badge badge-info badge_style" 
+                        title="Ajouter une période d'activités" 
+                        (click)="onAddPeriod()">Ajouter une période</span> 
+
+        <div *ngIf="periodes">
+            <div *ngIf="periodes.length > 0; else noPeriodes">
+
+                <table mdbTable small="true" hover="true">
+                    <thead>
+                        <tr>
+                            <th>Début</th>
+                            <th>Fin</th>
+                            <th>Nom</th>
+                            <th>Description</th>
+                            <th>Entrainements</th>
+                            <th>Stages</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let p of periodes">
+                            <td>{{ p.dateDebut | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{ p.dateFin | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{ p.nom }}</td>
+                            <td>{{ p.description }}</td>
+                            <td>{{ p.isForEntrainements ? 'Oui': 'Non' }}</td>
+                            <td>{{ p.isForStages ? 'Oui':'Non' }}</td>
+                            <td>  </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            
+            <ng-template #noPeriodes>
+                Aucune période définie.
+            </ng-template>
+        </div>
+    </div>
+
+</div>

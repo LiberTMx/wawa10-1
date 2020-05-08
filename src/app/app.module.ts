@@ -73,6 +73,7 @@ import { DialogConfirmComponent } from './common/utils/dialog-confirm/dialog-con
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { DialogService } from './common/services/dialog.service';
 import { ActivitesModule } from './modules/activites/activites.module';
+import { ListeService } from './common/services/liste.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -134,6 +135,7 @@ import { ActivitesModule } from './modules/activites/activites.module';
     AppRoutingModule, 
   ],
   providers: [
+    ListeService,
     DialogService,
     MessageService,
     {provide: LOCALE_ID, useValue: 'fr-CA' },

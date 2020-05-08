@@ -60,6 +60,7 @@ export class AuthDomainModel
     domain: string;
     commentaire: string;
     showOrdre: number;
+    activity: string;
 }
 
 

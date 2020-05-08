@@ -29,7 +29,7 @@
           <mdb-card-text> {{ classe.presentation }} </mdb-card-text>
     
           <!-- <a href="#" mdbBtn color="primary" mdbWavesEffect (click)="onShowClasseDetails()">Button</a> -->
-          <button type="button" class="btn btn-sm btn-success" (click)="onShowClasseDetails()">Détails...</button>
+          <button type="button" class="btn btn-sm btn-success" (click)="onShowClasseGroupes()">Détails...</button>
           <span *ngIf="classe.externalLink">
             <br>
             <a [href]="classe.externalLink" target="_blank" color="secondary" mdbWavesEffect>Infos externes</a>

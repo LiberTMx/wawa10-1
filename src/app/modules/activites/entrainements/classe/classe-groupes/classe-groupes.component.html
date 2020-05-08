@@ -1,0 +1,65 @@
+
+<div *ngIf="classe">
+
+    <mdb-card>
+
+        
+
+        <mdb-card-body>
+
+            <mdb-card-title>
+                <h4>Les entraînements: {{ classe.titre }}</h4>
+            </mdb-card-title>
+
+            <hr>
+
+            <div classe="entrainement-classe">
+                <div class="row">
+        
+                    <div class="col-4">
+                        <img [src]="imageUrl" class="img-fluid classe-image">
+                    </div>
+        
+                    <div class="col-7">
+                        <h4>{{ classe.titre }}</h4>
+                        <p>{{ classe.presentation }}</p>
+                    </div>
+                </div>
+            </div>
+        
+            <hr>
+            <div classe="entrainement-classe-groupes">
+
+                <table>
+                    <tr>
+                        <td><h4>Les groupes:</h4></td>
+                        <td> &nbsp; &nbsp;<span class="badge badge-info badge_style" 
+                            title="Ajouter un groupe à la classe '{{classe.titre}}' '" 
+                            (click)="onAddGroup()">Ajouter un groupe</span> 
+                        </td>
+                    </tr>
+                </table>
+                
+                
+                <div *ngIf="groupes">
+                    <br>
+                    <br>
+                    <div *ngIf="groupes.length>0; else noGroupFound">
+                        <app-entrainement-classe-groupe 
+                            *ngFor="let groupe of groupes"
+                            [classe]="classe"
+                            [groupe]="groupe"></app-entrainement-classe-groupe>
+                    </div>
+                    <ng-template #noGroupFound>
+                        Cette classe n'a pas encore de groupe
+                    </ng-template>
+                </div>
+            </div>
+
+        </mdb-card-body>
+
+    </mdb-card>
+
+
+</div>
+

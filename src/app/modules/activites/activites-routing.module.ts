@@ -4,6 +4,7 @@ import { EntrainementsComponent } from './entrainements/entrainements/entraineme
 import { STAGES_ROUTES } from './stages/stages-routing.module';
 import { ENTRAINEMENTS_ROUTES } from './entrainements/entrainements-routing.module';
 import { CALENDRIER_ROUTES } from './calendrier/calendrier-routing.module';
+import { PERIODE_ROUTES } from './periodes/periode-routing.module';
 
 export const ACTIVITES_ROUTES: Routes =
 [
@@ -14,6 +15,7 @@ export const ACTIVITES_ROUTES: Routes =
     ...CALENDRIER_ROUTES,
     ...ENTRAINEMENTS_ROUTES,
     ...STAGES_ROUTES,
+    ...PERIODE_ROUTES,
 ];
 
 @NgModule({

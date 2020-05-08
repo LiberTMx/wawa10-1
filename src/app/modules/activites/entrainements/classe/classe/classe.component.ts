@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { EntrainementClasseModel } from '../../model/entrainement-classe.model';
 import { EntrainementsService } from '../../services/entrainements.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-entrainement-classe',
@@ -20,6 +21,7 @@ export class ClasseComponent implements OnInit {
 
   constructor(
     private entrainementsService: EntrainementsService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void 
@@ -60,8 +62,8 @@ export class ClasseComponent implements OnInit {
       }
   }
 
-  onShowClasseDetails()
+  onShowClasseGroupes()
   {
-    
+    this.router.navigate(['activites', 'entrainements', 'classe-groupes', this.classe.id]);
   }
 }
