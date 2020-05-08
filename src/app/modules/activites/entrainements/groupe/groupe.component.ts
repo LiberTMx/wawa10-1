@@ -6,6 +6,7 @@ import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { EntrainementGroupeSeanceModel } from '../model/entrainement-groupe-seance.model';
 import { PeriodesService } from '../../periodes/services/periodes.service';
 import { SeanceAddDialogComponent } from './seance-add-dialog/seance-add-dialog.component';
+import { ListeService } from '../../../../common/services/liste.service';
 
 @Component({
   selector: 'app-entrainement-classe-groupe',
@@ -29,11 +30,13 @@ export class GroupeComponent implements OnInit {
 
   
   seances: Array<EntrainementGroupeSeanceModel>;
+  jours = this.listeService.jours();
 
   constructor(
     private entrainementsService: EntrainementsService,
     private matDialog: MatDialog,
     private periodesService: PeriodesService,
+    private listeService: ListeService,
   ) { }
 
   ngOnInit(): void 
@@ -104,5 +107,11 @@ export class GroupeComponent implements OnInit {
         //this.addGroupeToList(groupe);
       }
     });
+  }
+
+  getJourNameFromIndex(index: number): string
+  {
+    const jour=this.jours.find( j => (+j.key) === index ) ;
+    return jour.val;
   }
 }
