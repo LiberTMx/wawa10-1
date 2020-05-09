@@ -74,6 +74,7 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { DialogService } from './common/services/dialog.service';
 import { ActivitesModule } from './modules/activites/activites.module';
 import { ListeService } from './common/services/liste.service';
+import { ClubModule } from './modules/club/club.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -131,6 +132,7 @@ import { ListeService } from './common/services/liste.service';
     RoiModule,
     ActivitesModule,
     NewsletterModule,
+    ClubModule,
     // Import the app routing module after the other app modules, so that the routes are merged
     AppRoutingModule, 
   ],

@@ -1,0 +1,29 @@
+th {
+    font-weight: bolder;
+}
+
+td {
+    font-weight: 600;
+}
+
+
+.comite-header {
+
+    display: inline-block;
+    background-color: lightgrey;
+    align-items: center;
+    height: 85px;
+    .image1 {
+        text-align: start; 
+        //float: left;
+          margin-right: 5px;
+          display: inline-block;
+    }
+
+    .image2 {
+        text-align: end; 
+        //float: right;
+          margin-right: 5px;
+          display: inline-block;
+    }
+}
