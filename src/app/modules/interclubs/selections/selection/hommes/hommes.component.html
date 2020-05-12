@@ -1,53 +1,12 @@
 
 
- <!-- <table>
-    <tbody>
-        <tr *ngFor = "let semaine of semaines"> 
-
-            <td> Semaine {{semaine.weekNumber}} du {{semaine.startOfWeek | date:'dd/MM/yyyy'}} au {{semaine.endOfWeek | date:'dd/MM/yyyy' }}.</td>
-
-        </tr>
-    </tbody>
-</table>  
-
-<p>Interclub Hommes</p>
-
- <div class="dropdown" mdbDropdown>
-
-    <button mdbDropdownToggle mdbBtn color="danger" class="dropdown-toggle waves-light" type="button"
-      mdbWavesEffect>
-      Sélectionnez une semaine
-    </button>
-    <div class="dropdown-menu dropdown-danger" >
-        <div *ngFor = "let semaine of semaines">
-            <button class="dropdown-item" href="#">Semaine {{semaine.weekNumber}} du {{semaine.startOfWeek | date:'dd/MM/yyyy'}} au {{semaine.endOfWeek | date:'dd/MM/yyyy' }}.</button>
-        </div>
-    </div>
-  </div> 
-
-<hr>-->
-<div class="container">
     <div class="row">
-        <div class="col-md-5">
-            <mdb-card>
+        <div class="col-sm-4">
+            <mdb-card >
                 <mdb-card-header>Liste des joueurs sélectionnables</mdb-card-header>
                 <mdb-card-body>
     
                  <div *ngIf="listeDesForces">
-                        <!-- <mat-form-field>
-                            <mat-label>Joueurs sélectionnables</mat-label>
-                            <mat-select > 
-                                <mat-option value="" selected></mat-option>
-                                <mat-option *ngFor="let ldf of listeDesForces" [value]="ldf.participant.id">
-                                    {{ ldf.participant.nom}} {{ ldf.participant.prenom }}
-            
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field> -->
-      <!--                   <select>
-                            <option *ngFor="let item of listeDesForces" 
-                                value="item.participant.id">{{ item.participant.nom}} {{ item.participant.prenom}}</option>
-                        </select> -->
 
                         <table mdbTable small="true" hover="true" class="ldf-table">
                             <tr mdbTableCol  *ngFor="let item of listeDesForces; let ix = index" 
@@ -55,6 +14,9 @@
                                 [class.active]=" ix === selectedLdfRow ">
                                     <td scope="row">{{ item.participant.nom}}</td>
                                     <td>{{ item.participant.prenom}}</td>
+                                    <td>{{ item.listeDeForce.rankingIndex}}</td>
+                                    <td>{{ item.listeDeForce.classement}}</td>
+
                             </tr>
                         </table> 
 
@@ -63,44 +25,205 @@
                 </mdb-card-body>
             </mdb-card>
         </div>
-        <div class="col-md-5">
-        <mdb-card>
-            <mdb-card-header>Choix des critères de sélections</mdb-card-header>
-            <mdb-card-body>
-
-                <div>
-                    <mat-form-field>
-                        <mat-label>Semaine</mat-label>
-                        <mat-select matNativeControl [(ngModel)]="selectedSemaine" name="semaine" 
-                            (selectionChange)="onChangeSemaine($event)">
-                        <mat-option value="" selected></mat-option>
-                        <mat-option *ngFor="let w of semaines" [value]="w">
-                            Semaine {{w.weekName}} du {{w.startOfWeek | date:'dd/MM/yyyy'}} au {{w.endOfWeek | date:'dd/MM/yyyy' }}.
-                        </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+        <div class="col-sm-8">
+            <div>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <mdb-card class="small">
+                                <mdb-card-header>Choix des critères de sélections</mdb-card-header>
+                                <mdb-card-body>
+                                    <div>
+                                        <mat-form-field>
+                                            <mat-label>Semaine</mat-label>
+                                            <mat-select matNativeControl [(ngModel)]="selectedSemaine" name="semaine" 
+                                                (selectionChange)="onChangeSemaine($event)">
+                                            <mat-option value="" selected></mat-option>
+                                            <mat-option *ngFor="let w of semaines" [value]="w">
+                                                Semaine {{w.weekName}} du {{w.startOfWeek | date:'dd/MM/yyyy'}} au {{w.endOfWeek | date:'dd/MM/yyyy' }}.
+                                            </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                    
+                                    <div>
+                                        <mat-form-field>
+                                            <mat-label>Version</mat-label>
+                                            <mat-select matNativeControl [(ngModel)]="selectedSemaineVersion" name="semaineversion" 
+                                                (selectionChange)="onChangeSemaineVersion($event)">
+                                            <mat-option value="" selected></mat-option>
+                                            <mat-option *ngFor="let s of semaineVersions" [value]="s">
+                                                version {{s.semaine_version}}: {{s.semaine_version_statut}}
+                                            </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <a (click)="onSemaineNextVersion()" mdbBtn floating="true" size="sm" gradient="blue" mdbWavesEffect>
+                                            <mdb-icon fas icon="plus"></mdb-icon>
+                                          </a>
+                                    </div>
+                    
+                                    <div>
+                                        <mat-form-field>
+                                            <mat-label>Equipe</mat-label>
+                                            <mat-select matNativeControl [(ngModel)]="selectedTeam" name="team" 
+                                                (selectionChange)="onChangeTeam($event)">
+                                            <mat-option value="" selected></mat-option>
+                                            <mat-option *ngFor="let t of teams" [value]="t">
+                                                Equipe {{t.Team}}
+                                            </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </mdb-card-body>
+                            </mdb-card>
+                        </div>
+                        <div class="col-sm-7">
+                            <mdb-card class="small">
+                                <mdb-card-header>Info sur le match selectionné</mdb-card-header>
+                                <mdb-card-body>
+                                    <table mdbTable small="true" hover="true">
+                                       <tr>
+                                        <td><b>Date</b>:</td>
+                                        <td><span *ngIf="selectedMatch">{{ selectedMatch?.matchDate | date:'dd/MM/yyyy'}}  <b>Heure</b>: {{ selectedMatch?.Time}}</span> </td>
+                                       </tr>
+                                       <tr>
+                                        <td><b>Match</b>:</td>
+                                        <td><span *ngIf="selectedMatch">{{ selectedMatch?.HomeTeam}} contre {{ selectedMatch?.AwayTeam}}</span></td>
+                                       </tr><tr>
+                                        <td><b>Adresse</b>:</td>
+                                        <td><span *ngIf="selectedMatch">{{ selectedMatch?.venueName}},{{ selectedMatch?.venueStreet}}, <b>{{ selectedMatch?.venueTown}}</b></span></td>
+                                       </tr>
+                                    </table> 
+                    
+                                </mdb-card-body>
+                            </mdb-card>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <mat-form-field>
-                        <mat-label>Equipe</mat-label>
-                        <mat-select matNativeControl [(ngModel)]="selectedTeam" name="team" 
-                            (selectionChange)="onChangeTeam($event)">
-                        <mat-option value="" selected></mat-option>
-                        <mat-option *ngFor="let t of teams" [value]="t">
-                            Equipe {{t.Team}}
-                        </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                <div class="col-sm-12">
+                    <br>
+                    <mdb-card>
+                        <mdb-card-header>Sélection de l'équipe</mdb-card-header>
+                        <mdb-card-body>
+                            <form [formGroup]="selectionForm">
+                            <table mdbTable small="true" hover="true" style="height: calc(2vh - 100px);">
+                                <tr>
+                                    <th style="width: 20%" scope="col">N°</th>
+                                    <th style="width: 20%" scope="col">Indice</th>
+                                    <th style="width: 40%" scope="col">Joueur</th>
+                                    <th style="width: 20%" scope="col">Classement</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><button class="button button" (click)="onSelectionJoueur(1)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>J1</button></th>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j1_indice" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j1_nom_prenom" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j1_classement" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><button class="button button" (click)="onSelectionJoueur(2)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>J2</button></th>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j2_indice" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j2_nom_prenom" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j2_classement" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><button class="button button" (click)="onSelectionJoueur(3)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>J3</button></th>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j3_indice" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j3_nom_prenom" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j3_classement" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><button class="button button" (click)="onSelectionJoueur(4)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>J4</button></th>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j4_indice" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j4_nom_prenom" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j4_classement" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><button class="button button" (click)="onSelectionReserve()" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>R1</button></th>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r1_indice" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r1_nom_prenom" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r1_classement" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><button class="button button" (click)="onSelectionReserve(2)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>R2</button></th>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r2_indice" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r2_nom_prenom" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r2_classement" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><button class="button button" (click)="onSelectionReserve(3)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>R3</button></th>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r3_indice" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r3_nom_prenom" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r3_classement" readonly>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <th scope="row"><button class="button button" (click)="onSelectionReserve(4)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>R4</button></th>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r4_indice" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r4_nom_prenom" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r4_classement" readonly>
+                                    </td>
+                                </tr>
+                            </table>
+                            </form>
+                        </mdb-card-body>
+                      </mdb-card>
                 </div>
-        
-            </mdb-card-body>
-          </mdb-card>
-        <div class="row">
-          <div class="col-md-6">Next</div>
-          <div class="col-md-6">.col-md-6</div>
+            </div>
         </div>
-      </div>
-      
     </div>
-  </div>
 
+
+  
+
+
+
+ 
+  
+  
