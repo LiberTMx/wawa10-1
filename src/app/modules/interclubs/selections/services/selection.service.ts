@@ -116,7 +116,12 @@ export class SelectionService {
     return this.httpClient.get<Array<InterclubsSemaineVersionModel>>(apiUrl);
   }
 
-  storeSelection(selection: InterclubsLDF): Observable<InterclubsLDF>
+  storeSelection(selection: InterclubsLDF, match: InterclubsMatchModel, position: number): Observable<InterclubsLDF>
+  {
+    return Observable.of(selection);
+  }
+
+  storeReserve(selection: InterclubsLDF, match: InterclubsMatchModel, position: number): Observable<InterclubsLDF>
   {
     return Observable.of(selection);
   }

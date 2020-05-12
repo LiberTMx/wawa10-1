@@ -105,6 +105,7 @@
                     <mdb-card>
                         <mdb-card-header>Sélection de l'équipe</mdb-card-header>
                         <mdb-card-body>
+                            <form [formGroup]="selectionForm">
                             <table mdbTable small="true" hover="true" style="height: calc(2vh - 100px);">
                                 <tr>
                                     <th style="width: 20%" scope="col">N°</th>
@@ -113,35 +114,104 @@
                                     <th style="width: 20%" scope="col">Classement</th>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><button (click)="onSelectionJoueur(1)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>J1</button></th>
-                                    <td>1</td>
-                                    <td>Indeherberg Julien</td>
-                                    <td>B0</td>
+                                    <th scope="row"><button class="button button" (click)="onSelectionJoueur(1)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>J1</button></th>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j1_indice" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j1_nom_prenom" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j1_classement" readonly>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><button (click)="onSelectionJoueur(2)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>J2</button></th>
-                                    <td>1</td>
-                                    <td>Indeherberg Julien</td>
-                                    <td>B0</td>
+                                    <th scope="row"><button class="button button" (click)="onSelectionJoueur(2)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>J2</button></th>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j2_indice" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j2_nom_prenom" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j2_classement" readonly>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><button mdbBtn (click)="onSelectionJoueur(3)" type="button" color="danger" rounded="true" mdbWavesEffect>J3</button></th>
-                                    <td>1</td>
-                                    <td>Indeherberg Julien</td>
-                                    <td>B0</td>
+                                    <th scope="row"><button class="button button" (click)="onSelectionJoueur(3)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>J3</button></th>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j3_indice" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j3_nom_prenom" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j3_classement" readonly>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><button mdbBtn (click)="onSelectionJoueur(4)" type="button" color="danger" rounded="true" mdbWavesEffect>J4</button></th>
-                                    <td>1</td>
-                                    <td>Indeherberg Julien</td>
-                                    <td>B0</td>
+                                    <th scope="row"><button class="button button" (click)="onSelectionJoueur(4)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>J4</button></th>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j4_indice" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j4_nom_prenom" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="j4_classement" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><button class="button button" (click)="onSelectionReserve()" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>R1</button></th>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r1_indice" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r1_nom_prenom" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r1_classement" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><button class="button button" (click)="onSelectionReserve(2)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>R2</button></th>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r2_indice" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r2_nom_prenom" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r2_classement" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><button class="button button" (click)="onSelectionReserve(3)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>R3</button></th>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r3_indice" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r3_nom_prenom" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r3_classement" readonly>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <th scope="row"><button class="button button" (click)="onSelectionReserve(4)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>R4</button></th>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r4_indice" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r4_nom_prenom" readonly>
+                                    </td>
+                                    <td>
+                                        <input type="text" mdbInput formControlName="r4_classement" readonly>
+                                    </td>
                                 </tr>
                             </table>
-
-                            <!-- <div class="md-form form-sm form-field">
-                                <mdb-checkbox formControlName="membreComite">Valider la sélection</mdb-checkbox>
-                            </div> -->
-                    
+                            </form>
                         </mdb-card-body>
                       </mdb-card>
                 </div>

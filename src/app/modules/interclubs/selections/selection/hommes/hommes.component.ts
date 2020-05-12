@@ -6,6 +6,7 @@ import { InterclubsTeamModel } from '../../model/interclubs-team.model';
 import { InterclubsMatchModel } from '../../model/interclubs-match.model';
 import { SelectionService } from '../../services/selection.service';
 import { InterclubsSemaineVersionModel } from '../../model/interclubs-semaine-version.model';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-interclubs-selections-hommes',
@@ -36,7 +37,14 @@ export class HommesComponent implements OnInit {
 
   semaineVersions: Array<InterclubsSemaineVersionModel> = null;
 
-  constructor(private selectionService: SelectionService) 
+  selectionForm: FormGroup;
+  selectionsMap: Map<number, InterclubsLDF> = new Map<number, InterclubsLDF>();
+  selectionsReserveMap: Map<number, InterclubsLDF> = new Map<number, InterclubsLDF>();
+
+  constructor(
+    private selectionService: SelectionService,
+    private formBuilder: FormBuilder,
+    ) 
   { 
   }
 
@@ -44,8 +52,45 @@ export class HommesComponent implements OnInit {
   {
     //console.log('Liste des forces - Hommes:', this.listeDesForces);
     console.log('Liste des matches - Hommes:', this.matches);
+    this.prepareSelectionForm();
   }
 
+  prepareSelectionForm()
+  {
+    this.selectionForm = this.formBuilder.group({
+      j1_nom_prenom:[''],
+      j1_indice:[''],
+      j1_classement: [''],
+      
+      j2_nom_prenom:[''],
+      j2_indice:[''],
+      j2_classement: [''],
+
+      j3_nom_prenom:[''],
+      j3_indice:[''],
+      j3_classement: [''],
+
+      j4_nom_prenom:[''],
+      j4_indice:[''],
+      j4_classement: [''],
+     
+      r1_nom_prenom:[''],
+      r1_indice:[''],
+      r1_classement: [''],
+      
+      r2_nom_prenom:[''],
+      r2_indice:[''],
+      r2_classement: [''],
+
+      r3_nom_prenom:[''],
+      r3_indice:[''],
+      r3_classement: [''],
+
+      r4_nom_prenom:[''],
+      r4_indice:[''],
+      r4_classement: [''],
+    });
+  }
   
   onChangeSemaine(event: MatSelectChange)
   {
@@ -81,15 +126,98 @@ export class HommesComponent implements OnInit {
 
   onSelectionJoueur(index: number)
   {
+    if(this.selectedJoueur===null || this.selectedJoueur===undefined) return;
+
+    this.selectionsMap.set(index, this.selectedJoueur);
+
+    this.selectionService.storeSelection(this.selectedJoueur, this.selectedMatch, index)
+      .subscribe(
+        res => {
+            console.log('selection stored');
+            this.updateSelectionOnForm(index);
+          }
+        ,
+        err => console.error(err)
+      
+     );
     // s'assurer qu'un joueur a ete selectionner: this.selectJoueur !== null
     // s'assurer qu'il n'y a pas encore de joueur sélectionné à la place selectionnée
     // si oui: pre-requis:supprimer le joueur dejà selectionné à cette place
     // enregistrer la selection ds le backend
     // verifier la reponse du backend
     // si tout est ok , placer le joueur ds la grille
+    
   }
 
-  onSelectionJoueurReserve(index: number)
+  onSelectionReserve(index: number)
+  {
+    if(this.selectedJoueur===null || this.selectedJoueur===undefined) return;
+
+    this.selectionsReserveMap.set(index, this.selectedJoueur);
+
+    this.selectionService.storeReserve(this.selectedJoueur, this.selectedMatch, index)
+      .subscribe(
+        res => {
+            console.log('selection stored');
+            this.updateSelectionReserveOnForm(index);
+          }
+        ,
+        err => console.error(err)
+      
+     );
+    // s'assurer qu'un joueur a ete selectionner: this.selectJoueur !== null
+    // s'assurer qu'il n'y a pas encore de joueur sélectionné à la place selectionnée
+    // si oui: pre-requis:supprimer le joueur dejà selectionné à cette place
+    // enregistrer la selection ds le backend
+    // verifier la reponse du backend
+    // si tout est ok , placer le joueur ds la grille
+    
+  }
+
+  private updateSelectionOnForm(index: number)
+  {
+    switch(index)
+    {
+      case 1: 
+        {
+          this.selectionForm.patchValue({
+            j1_nom_prenom: this.selectedJoueur.participant.nom + ' ' + this.selectedJoueur.participant.prenom,
+            j1_indice: this.selectedJoueur.listeDeForce.rankingIndex,
+            j1_classement: this.selectedJoueur.listeDeForce.classement,
+          });
+        }
+        break;
+        case 2: 
+        {
+          this.selectionForm.patchValue({
+            j2_nom_prenom: this.selectedJoueur.participant.nom + ' ' + this.selectedJoueur.participant.prenom,
+            j2_indice: this.selectedJoueur.listeDeForce.rankingIndex,
+            j2_classement: this.selectedJoueur.listeDeForce.classement,
+          });
+        }
+        break;
+        case 3: 
+        {
+          this.selectionForm.patchValue({
+            j3_nom_prenom: this.selectedJoueur.participant.nom + ' ' + this.selectedJoueur.participant.prenom,
+            j3_indice: this.selectedJoueur.listeDeForce.rankingIndex,
+            j3_classement: this.selectedJoueur.listeDeForce.classement,
+          });
+        }
+        break;
+        case 4: 
+        {
+          this.selectionForm.patchValue({
+            j4_nom_prenom: this.selectedJoueur.participant.nom + ' ' + this.selectedJoueur.participant.prenom,
+            j4_indice: this.selectedJoueur.listeDeForce.rankingIndex,
+            j4_classement: this.selectedJoueur.listeDeForce.classement,
+          });
+        }
+        break;
+    }
+  }
+
+  updateSelectionReserveOnForm(index: number)
   {
     // s'assurer qu'un joueur a ete selectionner: this.selectJoueur !== null
     // s'assurer qu'il n'y a pas encore de joueur sélectionné à la place selectionnée
@@ -97,5 +225,44 @@ export class HommesComponent implements OnInit {
     // enregistrer la selection ds le backend
     // verifier la reponse du backend
     // si tout est ok , placer le joueur ds la grille
+    switch(index)
+    {
+      case 1: 
+        {
+          this.selectionForm.patchValue({
+            r1_nom_prenom: this.selectedJoueur.participant.nom + ' ' + this.selectedJoueur.participant.prenom,
+            r1_indice: this.selectedJoueur.listeDeForce.rankingIndex,
+            r1_classement: this.selectedJoueur.listeDeForce.classement,
+          });
+        }
+        break;
+        case 2: 
+        {
+          this.selectionForm.patchValue({
+            r2_nom_prenom: this.selectedJoueur.participant.nom + ' ' + this.selectedJoueur.participant.prenom,
+            r2_indice: this.selectedJoueur.listeDeForce.rankingIndex,
+            r2_classement: this.selectedJoueur.listeDeForce.classement,
+          });
+        }
+        break;
+        case 3: 
+        {
+          this.selectionForm.patchValue({
+            r3_nom_prenom: this.selectedJoueur.participant.nom + ' ' + this.selectedJoueur.participant.prenom,
+            r3_indice: this.selectedJoueur.listeDeForce.rankingIndex,
+            r3_classement: this.selectedJoueur.listeDeForce.classement,
+          });
+        }
+        break;
+        case 4: 
+        {
+          this.selectionForm.patchValue({
+            r4_nom_prenom: this.selectedJoueur.participant.nom + ' ' + this.selectedJoueur.participant.prenom,
+            r4_indice: this.selectedJoueur.listeDeForce.rankingIndex,
+            r4_classement: this.selectedJoueur.listeDeForce.classement,
+          });
+        }
+        break;
+      }
   }
 }
