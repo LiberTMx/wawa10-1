@@ -320,4 +320,10 @@ export class AuthService {
             userId: user.id, 
           });
     }
+
+    findUserForClubComite(): Observable<Array<AuthUserModel>>
+    {
+      const apiUrl=`${environment.apiUrl}/auth/comite`;
+      return this.httpClient.get<Array<AuthUserModel>>( apiUrl );
+    }
 }

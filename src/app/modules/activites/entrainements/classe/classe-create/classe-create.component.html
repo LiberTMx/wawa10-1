@@ -1,0 +1,123 @@
+<div class="card">
+    <div class="card-header">
+        <strong>Créer une classe d'entraînements</strong>
+    </div>
+    <div class="card-body">
+        <!-- <h4 class="card-title">Se connecter</h4> -->
+            <div>
+                <!-- **************************************************************    -->
+                <form [formGroup]="classForm" (ngSubmit)="onCreateClasse()">
+                    <div class="row">
+
+                        <!-- Grid column -->
+                        <div class="col-lg-5 col-xl-4">
+                
+                        <!-- Featured image -->
+                        <div class="view overlay rounded z-depth-1-half mb-lg-0 mb-4 waves-light feature-image" mdbWavesEffect>
+                            <img class="img-fluid classe-image" [src]="imageUrl" alt="Sample image">
+                            <a>
+                            <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <div>
+
+                            <button tyep="button" class="btn btn-sm" (click)="onDeleteImage()">Supprimer l'image</button>
+                            
+                            <input type="file" name="image" accept="image/*" formControlName="image" (change)="showPreview($event)"  />
+                        </div>
+                        </div>
+                        <!-- Grid column -->
+                
+                        <!-- Grid column -->
+                        <div class="col-lg-7 col-xl-8">
+                
+                            <!-- Post title -->
+                            <!-- <h3 class="font-weight-bold mb-3"><strong>Title of the news</strong></h3> -->
+                            <div class="md-form form-sm">
+                                <i class="fa fa-user prefix grey-text"></i>
+                                <input type="text" id="title" formControlName="titre" class="form-control" mdbInput width="300px">
+                                <label for="title">Titre de la news</label>
+                            </div>
+                    
+                    
+                            <div class="md-form form-sm">
+                                <i class="fa fa-pencil prefix grey-text"></i>
+                                <textarea type="text" id="presentation" formControlName="presentation" 
+                                        class="md-textarea" style="height: 70px"
+                                        mdbInput></textarea>
+                                <label for="presentation">Présentation de la news</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- liaison externe -->
+                        <div class="md-form form-sm" style="width: 500px !important;">
+                            <i class="fa fa-user prefix grey-text"></i>
+                            <input type="text" id="externalLink" formControlName="externalLink" class="form-control" mdbInput width="300px">
+                            <label for="externalLink">Liaison externe </label>
+                        </div>
+
+                        <!-- ordre d'affichage -->
+                        <div class="md-form form-sm">
+                            <i class="fa fa-user prefix grey-text"></i>
+                            <input type="text" id="showOrder" formControlName="showOrder" class="form-control" mdbInput width="300px">
+                            <label for="showOrder">Ordre d'affichage</label>
+                        </div>
+
+                        <!-- statut -->
+                        <div class="md-form form-sm">
+                                <select id="statut" formControlName="status">
+                                    <option *ngFor="let kvp of classeStatus" 
+                                        [value]="kvp.key" 
+                                        [label]="kvp.val"></option>
+                                </select>
+                        </div>
+                    </div>
+
+                    <!-- Post data -->
+                    <div class="md-form form-sm">
+                        <button mdbBtn  type="submit" class="btn btn-sm">Créer la classe</button>
+                        &nbsp;<button type="button" class="btn btn-sm" (click)="onPreviewToggle()">Preview</button>
+                    </div>
+
+                        
+                </form>
+                
+            </div>
+
+        <!-- **************************************************************    -->
+
+            <div *ngIf="preview">
+                <hr>
+                <h5>Preview de la card de la classe:</h5>
+                <div class="classe-preview">
+                    <mdb-card>
+                        <div class="view rgba-white-slight waves-light feature-image" mdbWavesEffect>
+                          <!-- Card img -->
+                          <mdb-card-img class="img-fluid classe-image" [src]="imageUrl" alt="Card image cap"></mdb-card-img>
+                          <a>
+                            <div class="mask"></div>
+                          </a>
+                        </div>
+                        <!--Card content-->
+                        <mdb-card-body>
+                          <!--Title-->
+                          <mdb-card-title>
+                            <h4>{{ getClasseTitle() }}</h4>
+                          </mdb-card-title>
+                    
+                          <!--Text-->
+                          <mdb-card-text> {{ getClassePresentation() }} </mdb-card-text>
+                    
+                          <a href="#" mdbBtn color="primary" mdbWavesEffect>Button</a>
+                        </mdb-card-body>
+                      </mdb-card>
+                </div>
+            </div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>

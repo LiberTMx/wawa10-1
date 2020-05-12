@@ -1,0 +1,12 @@
+.my-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+    align-items: baseline;
+    align-content: space-around;
+    //margin: auto;
+    //row-gap: 2px;
+    //margin: 0em;
+    height: 3.1em;
+}

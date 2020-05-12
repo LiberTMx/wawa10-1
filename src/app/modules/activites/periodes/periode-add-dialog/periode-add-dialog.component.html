@@ -1,0 +1,76 @@
+<!-- 
+    nom: string;
+    dateDebut: Date;
+    dateFin: Date;
+    isForEntrainement: boolean;
+    isForStage: boolean;
+    description: string;
+-->
+
+<div class="card">
+    <div class="card-header">
+        <h3>Création d'une période d'activités</h3>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="periodeForm" (ngSubmit)="onCreatePeriode()">
+
+            <div class="md-form form-sm form-field">
+                <input type="text" id="nom" formControlName="nom" 
+                    class="form-control form-control-sm" mdbInput minLength="3" mdbValidate  >
+                <label for="nom">Nom</label>
+            </div>
+            <div class="md-form form-sm form-field">
+                <input type="text" id="description" formControlName="description" 
+                    class="form-control form-control-sm" mdbInput minLength="3" mdbValidate  >
+                <label for="description">Description</label>
+            </div>
+
+            <div formGroupName="datesForm">
+
+                <div class="row">
+                    <div class="md-form form-sm form-field">
+                        <mdb-date-picker #datePicker name="dateDebut" [options]="myDatePickerOptions" 
+                            [label]="'Date de debut.'"
+                            [placeholder]="'Debut'" 
+                            [locale]="lang"
+                            formControlName="dateDebut" ></mdb-date-picker>
+                    </div>
+    
+                    <div class="md-form form-sm form-field">
+                        <mdb-date-picker #datePicker name="dateFin" [options]="myDatePickerOptions" 
+                            [label]="'Date de fin.'"
+                            [placeholder]="'Fin'" 
+                            [locale]="lang"
+                            formControlName="dateFin" ></mdb-date-picker>
+                    </div>
+                </div>
+
+                <div id="dates-error" *ngIf="datesForm.dirty && datesForm.hasError('matchingError')" style="color: red;">Les dates ne sont pas successives</div>
+
+            </div>
+
+
+
+            <div formGroupName="domainesForm">
+                <div class="row">
+
+                    <div class="md-form form-sm form-field">
+                        <mdb-checkbox formControlName="isForEntrainements" name="isForEntrainements">Entrainements</mdb-checkbox>
+                    </div>
+                    <div class="md-form form-sm form-field">
+                        <mdb-checkbox formControlName="isForStages" name="isForStages">Stages</mdb-checkbox>
+                    </div>
+                </div>
+                <div id="domaines-error" *ngIf="domainesForm.dirty && domainesForm.hasError('matchingError')" style="color: red;">Il faut indiquer au moins un domaine</div>
+            </div>
+
+            <!-- Post data -->
+            <div class="md-form form-sm">
+                <button mdbBtn  type="submit" [disabled]="periodeForm.invalid" class="btn btn-sm btn-success">Créer la période</button>
+                &nbsp;<button type="button" class="btn btn-sm btn-warning" (click)="onCancel()">Cancel</button>
+            </div>
+
+        </form>
+    </div>
+
+</div>

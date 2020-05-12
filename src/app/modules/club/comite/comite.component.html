@@ -1,0 +1,61 @@
+<div class="card">
+    <div class="card-header">
+        
+        <div class="d-flex bd-highlight mb-1 comite-header" >
+            <div class="p-2 bd-highlight">
+                <img [src]="'assets/img/comite/comite-1.jpg'" height="80px"></div>
+            <div class="p-2 bd-highlight mx-auto uk-vertical-align-middle" >
+                <span class="align-middle"><h2>Composition du comité</h2></span>
+            </div>
+            <div class="ml-auto p-2 bd-highlight">
+                <img [src]="'assets/img/comite/comite-2.jpg'" height="80px"></div>
+          </div>
+    </div>
+    <div class="card-body">
+
+
+        <div *ngIf="comite">
+            <div *ngIf="comite.length > 0; else noPeriodes">
+
+                <table mdbTable small="true" hover="true">
+                    <thead>
+                        <tr>
+                            <th>Fonction(s)</th>
+                            <th>Nom et prénom</th>
+                            <th>Adresse</th>
+                            <th>Tel</th>
+                            <th>Gsm</th>
+                            <th>E-Mail</th>
+                            <th></th>
+                            <th>Commentaire</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let p of comite">
+                            <td>{{getFonctions(p)}}</td>
+                            <td>{{p.prenom + ' ' + p.nom}}</td>
+                            <td>{{p.rue + ' '+p.numero+ ' '+p.boite}},&nbsp;
+                                {{ p.codePostal + ' '+p.localite}}
+                            </td>
+                            <td>{{p.numTel}}</td>
+                            <td>{{p.numMobile}}</td>
+                            <td>{{p.email}}</td>
+                            <td></td>
+                            <td><small>{{p.commentComite}}</small></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            
+            <ng-template #noPeriodes>
+                Le comité ne comprend aucune personne !
+            </ng-template>
+        </div>
+        <br>
+        <hr>
+
+        <p>PS: Les membres du comité ont marqué leur accord pour que les informations ci-dessus soient affichées. (GDPR)</p>
+    </div>
+
+</div>

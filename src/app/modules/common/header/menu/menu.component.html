@@ -35,9 +35,10 @@
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="user/liste">Les membres</a></li>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Devenir membre</a></li>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="user/add" *ngIf="getAuthService().isUserClubAdmin()">Ajouter un membre</a></li>
+          <li><a class="dropdown-item" routerLinkActive="active" routerLink="user/entraineurs">Nos entraîneurs</a></li>
           <div class="divider dropdown-divider"></div>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="local/local">Local</a></li>
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="tournoi/new">Comité et organisation</a></li>
+          <li><a class="dropdown-item" routerLinkActive="active" routerLink="club/comite">Comité et organisation</a></li>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="status">Statuts</a></li>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="roi">Réglement Ordre Intérieur</a></li>
         </div>
@@ -70,8 +71,10 @@
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false"><i class="fa fa-calendar" aria-hidden="true"></i> Activités</a>
         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="entrainements">Entraînements</a></li>
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Stages</a></li></div>
+          <li><a class="dropdown-item" routerLinkActive="active" routerLink="activites/periodes">Périodes</a></li>
+          <li><a class="dropdown-item" routerLinkActive="active" routerLink="activites/calendrier">Calendrier</a></li>
+          <li><a class="dropdown-item" routerLinkActive="active" routerLink="activites/entrainements">Entraînements</a></li>
+          <li><a class="dropdown-item" routerLinkActive="active" routerLink="activites/stages">Stages</a></li></div>
       </li>
 
       <li><a class="nav-link" routerLinkActive="active" routerLink="prix/test"><i class="fa fa-eur" aria-hidden="true"></i> Devenir Membre<span class="sr-only">(current)</span></a></li>

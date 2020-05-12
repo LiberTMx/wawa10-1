@@ -1,0 +1,33 @@
+<mdb-card>
+    <mdb-card-body>
+      <mdb-card-title>
+        <h4>Les entraînements</h4>
+      </mdb-card-title>
+      <mdb-card-text>Nos classes d'entraînements <br>
+        <div *ngIf="isUserClubAdmin()">
+          <button type="button" class="btn btn-sm btn-outline-primary" (click)="onCreateNewClass()">Créer une classe</button>
+        </div>
+      
+      </mdb-card-text>
+<!--       <div class="flex-row">
+        <a class="card-link">Card link</a>
+        <a class="card-link">Another link</a>
+      </div> -->
+
+      <hr>
+      
+      <div class="card-deck" *ngIf="classes">
+        <!-- les classes dynamiques -->
+        <div *ngFor="let classe of classes">
+          <app-entrainement-classe [classe]="classe"></app-entrainement-classe>
+        </div>
+      </div>
+    </mdb-card-body>
+  </mdb-card>
+
+  
+
+  <br>
+  <br>
+  <br>
+  <br>

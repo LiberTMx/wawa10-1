@@ -1,4 +1,4 @@
-import { NewsType } from '../types/news-status.enum';
+import { NewsStatusType } from '../types/news-status.enum';
 import { AuthUserModel } from '../../../auth/model/auth-user.model';
 
 export class NewsModel
@@ -9,7 +9,7 @@ export class NewsModel
     auteurId: number;
     createdAt: Date;
     updatedAt: Date;
-    status: NewsType;
+    status: NewsStatusType;
     externalLink: string;
     showOrder: number;
 
