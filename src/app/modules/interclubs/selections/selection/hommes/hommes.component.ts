@@ -7,6 +7,7 @@ import { InterclubsMatchModel } from '../../model/interclubs-match.model';
 import { SelectionService } from '../../services/selection.service';
 import { InterclubsSemaineVersionModel } from '../../model/interclubs-semaine-version.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { InterclubsSelectionModel } from '../../model/interclubs-selection.model';
 
 @Component({
   selector: 'app-interclubs-selections-hommes',
@@ -39,6 +40,7 @@ export class HommesComponent implements OnInit {
 
   selectionForm: FormGroup;
   selectionsMap: Map<number, InterclubsLDF> = new Map<number, InterclubsLDF>();
+  storedSelectionsMap: Map<number, InterclubsSelectionModel> = new Map<number, InterclubsSelectionModel>();
   selectionsReserveMap: Map<number, InterclubsLDF> = new Map<number, InterclubsLDF>();
 
   constructor(
@@ -134,10 +136,14 @@ export class HommesComponent implements OnInit {
       .subscribe(
         res => {
             console.log('selection stored');
+            this.storedSelectionsMap.set(index, res);
             this.updateSelectionOnForm(index);
           }
         ,
-        err => console.error(err)
+        err => {
+                // message d'erreur a l'util Toast service
+                console.error(err);}
+
       
      );
     // s'assurer qu'un joueur a ete selectionner: this.selectJoueur !== null
