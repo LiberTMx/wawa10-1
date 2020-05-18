@@ -75,6 +75,7 @@ import { DialogService } from './common/services/dialog.service';
 import { ActivitesModule } from './modules/activites/activites.module';
 import { ListeService } from './common/services/liste.service';
 import { ClubModule } from './modules/club/club.module';
+import { InactivityTrackerModule } from './modules/inactivity-tracker/inactivity-tracker.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -133,6 +134,7 @@ import { ClubModule } from './modules/club/club.module';
     ActivitesModule,
     NewsletterModule,
     ClubModule,
+    InactivityTrackerModule,
     // Import the app routing module after the other app modules, so that the routes are merged
     AppRoutingModule, 
   ],

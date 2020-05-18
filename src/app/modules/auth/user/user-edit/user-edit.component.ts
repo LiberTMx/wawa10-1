@@ -13,6 +13,7 @@ import { AuthFonctionModel } from '../../model/auth-fonction.model';
 import { mdbdatepicker_locales } from '../../../../common/interfaces/mdbdatepicker.locale';
 import { MatSelectChange } from '@angular/material/select';
 import { DatePipe } from '@angular/common';
+import { AppUtils } from '../../../../common/utils/AppUtils';
 
 @Component({
   selector: 'app-user-edit',
@@ -31,6 +32,8 @@ export class UserEditComponent implements OnInit, OnChanges {
   @Output()
   userEmitter = new EventEmitter<AuthUserModel>();
   
+  dnn: any;
+
   public myDatePickerOptions: IMyOptions = {
     // Your options
     };
@@ -53,6 +56,8 @@ export class UserEditComponent implements OnInit, OnChanges {
   selectedRole: AuthGroupModel;
   assignedRoles: Array<AuthGroupModel> = new Array<AuthGroupModel>();
 
+  dateNaissanceValid=true;
+  
   constructor(
     private adminRoleService: AdminRoleService,
     private authService: AuthService,
@@ -172,11 +177,28 @@ export class UserEditComponent implements OnInit, OnChanges {
     
   }
 
+  /*
   onAddSelectedFunction()
   {
     console.log('adding function:', JSON.stringify( this.selectedFonction) );
     this.assignedFonctions.push(this.selectedFonction);
   }
+  */
+
+  onAddSelectedFunction()
+  {
+    console.log('adding function:', JSON.stringify( this.selectedFonction) );
+    const alreadyPresent=this.assignedFonctions.find( f => f.id === this.selectedFonction.id);
+    if(alreadyPresent===null || alreadyPresent===undefined)
+    {
+      this.assignedFonctions.push(this.selectedFonction);
+    }
+    else
+    {
+      this.toastMessageService.addWarn('Ajouter une fonction', 'La fonction sélectionnée est déjà présente !');
+    }
+  }
+
 
   onRemoveFunction(f: AuthFonctionModel)
   {
@@ -191,10 +213,26 @@ export class UserEditComponent implements OnInit, OnChanges {
     this.selectedRole = this.authRoles.find( r => (+r.id) === (+id) );
   }
 
+  /*
   onAddSelectedRole()
   {
     this.assignedRoles.push(this.selectedRole);
   }
+  */
+
+  onAddSelectedRole()
+  {
+    const alreadyPresent=this.assignedRoles.find( r => r.id === this.selectedRole.id);
+    if(alreadyPresent===null || alreadyPresent===undefined)
+    {
+      this.assignedRoles.push(this.selectedRole);
+    }
+    else
+    {
+      this.toastMessageService.addWarn('Ajouter un rôle', 'Le rôle sélectionné est déjà présent !');
+    }
+  }
+
 
   onRemoveRole(r: AuthGroupModel)
   {
@@ -213,12 +251,49 @@ export class UserEditComponent implements OnInit, OnChanges {
 
   onUpdateUser()
   {
+        // faut valider la date de naissance
+    const dateNaissanceFieldValue = this.userForm.get('dateNaissance').value;
+
+    this.dateNaissanceValid=true;
+    //const dateNaissance: Date= this.datePipe.transform(dateNaissanceFieldValue, 'dd/MM/yyyy');
+    if(dateNaissanceFieldValue===null || dateNaissanceFieldValue===undefined) 
+    {
+      // nothing to do
+    }
+    else
+    {
+      //const dateNaissance: Date=moment(dateNaissanceFieldValue, 'dd/MM/yyyy').toDate();//.format('dd/MM/yyyy');
+      // 16/09/1962
+      const year = +dateNaissanceFieldValue.substr(6, 4);
+      const month = (+dateNaissanceFieldValue.substr(3, 2) ) - 1;
+      const day = +dateNaissanceFieldValue.substr(0, 2);
+      const dateNaissance = new Date(year, month, day);
+      const today=new Date(); 
+      if(dateNaissance>= today) 
+      {
+        this.dateNaissanceValid=false;
+        this.toastMessageService.addError('Date de naissance', 'La date de naissance ne peut pas être dans le futur !');
+        return;
+      }
+
+      const nbDays = AppUtils.diffInDaysBetweenDates(dateNaissance, today);
+      if(nbDays<0) return null;
+      if (nbDays < 365 * 3 ) 
+      {
+        this.dateNaissanceValid=false;
+        this.toastMessageService.addError('Date de naissance', 'La date de naissance doit représenter un âge de minimum 3 ans !');
+        return;
+      }
+    }
+
     this.authService.updateUser(this.userForm.value, this.assignedFonctions, this.assignedRoles)
       .subscribe(
         user => {
           // Ok utilisateur modifié
           this.toastMessageService.addSuccess('Modification utilisateur', 'Un utilisateur a été modifié: '+user.nom+' '+user.prenom+', '+user.username, 5000);
           this.userEmitter.emit(user);
+          /// this.onClearForm(); pas ici !!!
+
         }
         ,
         err => {
@@ -235,6 +310,15 @@ export class UserEditComponent implements OnInit, OnChanges {
   onClearForm()
   {
     this.userForm.reset();
+    this.userForm.patchValue({
+      dateNaissance: null
+    });
+    
+    //this.datePicker.s
+    //this.datePicker.selectDate(null);
+    this.userForm.controls.dateNaissance.setValue('');
+    this.assignedFonctions.length=0;
+    this.assignedRoles.length=0;
   }
 
   ngOnChanges(changes: SimpleChanges)
@@ -249,7 +333,7 @@ export class UserEditComponent implements OnInit, OnChanges {
         prenom: this.user.prenom,
         username: this.user.username,
         email: this.user.email,
-        dateNaissance: this.datePipe.transform(this.user.dateNaissance, 'dd/MM/yyyy'),
+        dateNaissance: (this.user.dateNaissance)?this.datePipe.transform(this.user.dateNaissance, 'dd/MM/yyyy'):'',
 
         tel: this.user.numTel,
         telPrive: this.user.numTelPrive,

@@ -7,9 +7,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StagesComponent implements OnInit {
 
+  showModal: boolean;
+  panelOpenState = false;
+
+  stages: any=null;
+  
   constructor() { }
 
   ngOnInit(): void {
   }
+
+ 
+  show(event)
+  {
+    this.showModal = true; // Show-Hide Modal Check
+    return false;
+  }
+  //Bootstrap Modal Close event
+  hide(event)
+  {
+    this.showModal = false;
+    return false; 
+  }
+
 
 }
