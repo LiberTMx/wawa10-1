@@ -11,6 +11,7 @@ import { InterclubsLdfParticipantModel } from '../model/interclubs-ldf-participa
 import { InterclubsLdfByCategoryModel } from '../model/interclubs-ldf-by-category.model';
 import { InterclubsSemaineVersionModel } from '../model/interclubs-semaine-version.model';
 import { InterclubsLDF } from '../model/interclubs-ldf.model';
+import { InterclubsSelectionModel } from '../model/interclubs-selection.model';
 
 @Injectable({
   providedIn: 'root'
@@ -116,9 +117,15 @@ export class SelectionService {
     return this.httpClient.get<Array<InterclubsSemaineVersionModel>>(apiUrl);
   }
 
-  storeSelection(selection: InterclubsLDF, match: InterclubsMatchModel, position: number): Observable<InterclubsLDF>
+  storeSelection(selection: InterclubsLDF, match: InterclubsMatchModel, position: number): Observable<InterclubsSelectionModel>
   {
-    return Observable.of(selection);
+    
+    const apiUrl=`${environment.apiUrl}/interclubs/createSelection`;
+    const postData = new FormData();
+    postData.append('selection' , JSON.stringify(selection));
+    postData.append('match' , JSON.stringify(match));
+    postData.append('position' , String(position));
+    return this.httpClient.post<InterclubsSelectionModel>(apiUrl, postData);
   }
 
   storeReserve(selection: InterclubsLDF, match: InterclubsMatchModel, position: number): Observable<InterclubsLDF>

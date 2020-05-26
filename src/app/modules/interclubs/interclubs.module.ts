@@ -12,6 +12,7 @@ import { StoreModule } from '@ngrx/store';
 import { interclubsReducer } from './state/reducers/interclubs.reducer';
 import { SelectionService } from './selections/services/selection.service';
 import { HommesComponent } from './selections/selection/hommes/hommes.component';
+import { AppCommonModule } from '../common/app-common.module';
 
 
 
@@ -19,6 +20,7 @@ import { HommesComponent } from './selections/selection/hommes/hommes.component'
   declarations: [FeuilleDeMatchComponent, SelectionComponent, HommesComponent],
   imports: [
     CommonModule,
+    AppCommonModule,
     InterclubsRoutingModule,
     MaterialModule,
     PrimengModule,
