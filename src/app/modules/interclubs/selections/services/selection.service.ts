@@ -12,6 +12,7 @@ import { InterclubsLdfByCategoryModel } from '../model/interclubs-ldf-by-categor
 import { InterclubsSemaineVersionModel } from '../model/interclubs-semaine-version.model';
 import { InterclubsLDF } from '../model/interclubs-ldf.model';
 import { InterclubsSelectionModel } from '../model/interclubs-selection.model';
+import { MessageModel } from 'src/app/common/model/message.model';
 
 @Injectable({
   providedIn: 'root'
@@ -117,19 +118,40 @@ export class SelectionService {
     return this.httpClient.get<Array<InterclubsSemaineVersionModel>>(apiUrl);
   }
 
-  storeSelection(selection: InterclubsLDF, match: InterclubsMatchModel, position: number): Observable<InterclubsSelectionModel>
+  storeSelection(selection: InterclubsLDF, match: InterclubsMatchModel, position: number, version: InterclubsSemaineVersionModel): Observable<InterclubsSelectionModel>
   {
     
     const apiUrl=`${environment.apiUrl}/interclubs/createSelection`;
-    const postData = new FormData();
+/*     const postData = new FormData();
     postData.append('selection' , JSON.stringify(selection));
     postData.append('match' , JSON.stringify(match));
-    postData.append('position' , String(position));
-    return this.httpClient.post<InterclubsSelectionModel>(apiUrl, postData);
+    postData.append('position' , String(position)); */
+    return this.httpClient.post<InterclubsSelectionModel>(apiUrl, {
+      selection: JSON.stringify(selection),
+      match: JSON.stringify(match),
+      position:  String(position),
+      version: JSON.stringify(version)
+    });
   }
 
   storeReserve(selection: InterclubsLDF, match: InterclubsMatchModel, position: number): Observable<InterclubsLDF>
   {
     return Observable.of(selection);
+  }
+
+  getSelection(match: InterclubsMatchModel, version: InterclubsSemaineVersionModel): Observable <Array<InterclubsSelectionModel>>
+  {
+    const apiUrl=`${environment.apiUrl}/interclubs/selectionForMatch/?matchId=${match.MatchId}&versionId=${version.id}`;
+    return this.httpClient.get<Array<InterclubsSelectionModel>>(apiUrl);
+  }
+
+  deleteSelection(match: InterclubsMatchModel, index: number, version: InterclubsSemaineVersionModel): Observable<MessageModel>
+  {
+    const apiUrl=`${environment.apiUrl}/interclubs/deleteSelection`;
+    return this.httpClient.post<MessageModel>(apiUrl, {
+      match: JSON.stringify(match),
+      position:  String(index),
+      version: JSON.stringify(version)
+    });
   }
 }
