@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../auth/services/auth.service';
+import { AuthenticatedUserModel } from '../../../auth/model/authenticated-user.model';
 
 @Component({
   selector: 'app-stages',
@@ -11,13 +14,23 @@ export class StagesComponent implements OnInit {
   panelOpenState = false;
 
   stages: any=null;
-  
-  constructor() { }
+  connectedUser: AuthenticatedUserModel;
 
-  ngOnInit(): void {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) { }
+
+  ngOnInit(): void 
+  {
+    this.connectedUser=this.authService.getCurrentUser();
   }
 
- 
+  isUserStageAdmin(): boolean
+  {
+    return this.authService.isUserClubAdmin() || this.authService.isUserStageAdmin();
+  }
+
   show(event)
   {
     this.showModal = true; // Show-Hide Modal Check
@@ -28,6 +41,12 @@ export class StagesComponent implements OnInit {
   {
     this.showModal = false;
     return false; 
+  }
+
+
+  onShowContactForm()
+  {
+    this.router.navigate(['contact', 'form']);
   }
 
 

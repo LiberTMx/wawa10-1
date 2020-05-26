@@ -25,13 +25,13 @@ export class InactivityTrackerEffects {
         !((action.type === AuthActionTypes.LogoutAction) )),
         switchMap(
             (action: Action) => {
-                console.log('Extending timer');
+                //console.log('Extending timer');
                 const envTimeout = Number(`${environment.APPLICATION_INACTIVITY_TIME_OUT}`);
                 const timeout = envTimeout ? envTimeout : this.APPLICATION_INACTIVITY_TIME_OUT;
                 return Observable.timer(timeout);
             }
         ), map(() => {
-            console.log('Logging out since the max inactivity time is exceeded');
+            //console.log('Logging out since the max inactivity time is exceeded');
             this.authService.logout();
             this.router.navigate(['/']);
             return new LogoutAction();

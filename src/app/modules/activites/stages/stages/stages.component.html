@@ -108,55 +108,84 @@
       
       <p-tabView>
         <p-tabPanel header="Présentation">
-          Content 1
+          <div class="div-stage">
+            <div *ngIf="stages; else pas_de_stage">
+              <app-stage-presentation *ngFor="let stage of stages" [stage]="stage"></app-stage-presentation>
+            </div>
+            <ng-template #pas_de_stage>
+              <div class="pas_de_stage">
+                Désolé, pour l'instant il n'y a aucun stage organisé ! <br>
+                Vous pouvez toutefois vous adresser à notre secrétariat via ce lien: 
+                <span style="color: cornflowerblue;"><a (click)="onShowContactForm()"> Secrétariat</a></span> 
+              </div>
+            </ng-template>
+          </div>
         </p-tabPanel>
         <p-tabPanel header="Inscription à un stage">
-          <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Personal data
-                </mat-panel-title>
-                <mat-panel-description>
-                  Type your name and age
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-          
-              <mat-form-field>
-                <mat-label>First name</mat-label>
-                <input matInput>
-              </mat-form-field>
-          
-              <mat-form-field>
-                <mat-label>Age</mat-label>
-                <input matInput type="number" min="1">
-              </mat-form-field>
-            </mat-expansion-panel>
-            <mat-expansion-panel (opened)="panelOpenState = true"
-                                (closed)="panelOpenState = false">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Self aware panel
-                </mat-panel-title>
-                <mat-panel-description>
-                  Currently I am {{panelOpenState ? 'open' : 'closed'}}
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-              <p>I'm visible because I am open</p>
-            </mat-expansion-panel>
-          </mat-accordion>
+          <div class="div-stage">
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Personal data
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    Type your name and age
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+            
+                <mat-form-field>
+                  <mat-label>First name</mat-label>
+                  <input matInput>
+                </mat-form-field>
+            
+                <mat-form-field>
+                  <mat-label>Age</mat-label>
+                  <input matInput type="number" min="1">
+                </mat-form-field>
+              </mat-expansion-panel>
+              <mat-expansion-panel (opened)="panelOpenState = true"
+                                  (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Self aware panel
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <p>I'm visible because I am open</p>
+              </mat-expansion-panel>
+            </mat-accordion>
+            
+          </div>
         </p-tabPanel>
         <p-tabPanel header="Mes inscriptions">
-            Content 3
+          <div class="div-stage">
+            
+          </div>
         </p-tabPanel>
         <p-tabPanel header="Nos sparrings">
-          Content 3
-      </p-tabPanel>
-        <p-tabPanel header="Comment s'inscrire...">
-          Content 3
+          <div class="div-stage">
+            
+          </div>
         </p-tabPanel>
-        <p-tabPanel header="Archives">
-          Content 3
+        <p-tabPanel header="Comment s'inscrire...">
+          <div class="div-stage">
+            
+          </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Ajouter un stage" *ngIf="isUserStageAdmin()">
+          <div>
+            <app-stage-create></app-stage-create>
+          </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Archives" *ngIf="isUserStageAdmin()">
+          <div class="div-stage">
+            
+          </div>
         </p-tabPanel>
       </p-tabView>
     </mdb-card-body>

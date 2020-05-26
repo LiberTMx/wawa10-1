@@ -1,0 +1,29 @@
+<div class="row">
+    <div>
+        <span class="badge badge-info badge_style" title="Importer les Matches"
+                (click)="onDecreaseImageWidth()"
+                (mousedown)="mousedown('dw')" (mouseup)="mouseup()" (mouseleave)="mouseup()"> - </span>      
+        <span class="badge badge-info badge_style" title="Importer les Matches"
+                (click)="onIncreaseImageWidth()"
+                (mousedown)="mousedown('iw')" (mouseup)="mouseup()" (mouseleave)="mouseup()"> + </span> 
+    </div>
+    
+    <div>
+        <span class="badge badge-info badge_style" title="Importer les Matches"
+                (click)="onDecreaseImageHeight()"
+                (mousedown)="mousedown('dh')" (mouseup)="mouseup()" (mouseleave)="mouseup()"> - </span>      
+        <span class="badge badge-info badge_style" title="Importer les Matches"
+                (click)="onIncreaseImageHeight()"
+                (mousedown)="mousedown('ih')" (mouseup)="mouseup()" (mouseleave)="mouseup()"> + </span> 
+    </div>
+</div>
+
+<img class="img-fluid"  [src]="dialogData.image" [width]="dialogData.width" [height]="dialogData.height" alt="Sample image">
+
+<div>
+    <small>Taille:  largeur: {{ dialogData.width}}, hauteur: {{ dialogData.height}}</small>
+</div>
+<div>
+    <button type="button" class="btn btn-sm btn-success" (click)="onSave()">Ok</button>
+    <button type="button" class="btn btn-sm btn-success" (click)="onCancel()">Cancel</button>
+</div>

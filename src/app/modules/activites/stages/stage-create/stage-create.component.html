@@ -1,0 +1,389 @@
+
+<div class="templates">
+
+    <div *ngIf="template===0" style="border: 2px;">
+        <div fxLayout="row">
+            <div flex="50%">
+                <div fxLayout="column">
+                    <!-- Featured image -->
+                    <div class="view overlay rounded z-depth-1-half mb-lg-0 mb-4 waves-light feature-image2" [ngStyle]="image_0_style"
+                         mdbWavesEffect>
+                        <img class="img-fluid" [ngStyle]="image_0_style" [src]="imageUrl" alt="Sample image">
+                        <a>
+                        <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div flex="50%">
+                <div fxLayout="column">
+                    <div class="md-form form-sm">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <input type="text" id="title" [(ngModel)]="stageTitre"
+                               class="form-control" mdbInput width="300px">
+                        <label for="title">Titre du stage</label>
+                    </div>
+                    <div class="md-form form-sm">
+                        <i class="fa fa-pencil prefix grey-text"></i>
+                        <textarea type="text" id="presentation" [(ngModel)]="stagePresentation"
+                                class="md-textarea" style="height: 70px"
+                                mdbInput></textarea>
+                        <label for="presentation">Présentation du stage</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="template===1" style="border: 2px;">
+        <div fxLayout="row">
+            
+            <div flex="50%">
+                <div fxLayout="column">
+                    <div class="md-form form-sm">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <input type="text" id="title" [(ngModel)]="stageTitre"
+                               class="form-control" mdbInput width="300px">
+                        <label for="title">Titre du stage</label>
+                    </div>
+                    <div class="md-form form-sm">
+                        <i class="fa fa-pencil prefix grey-text"></i>
+                        <textarea type="text" id="presentation" [(ngModel)]="stagePresentation"
+                                class="md-textarea" style="height: 70px"
+                                mdbInput></textarea>
+                        <label for="presentation">Présentation du stage</label>
+                    </div>
+                </div>
+            </div>
+
+            <div flex="50%">
+                <div fxLayout="column">
+                    <!-- Featured image -->
+                    <div class="view overlay rounded z-depth-1-half mb-lg-0 mb-4 waves-light feature-image2" [ngStyle]="image_0_style"
+                         mdbWavesEffect>
+                        <img class="img-fluid" [ngStyle]="image_0_style" [src]="imageUrl" alt="Sample image">
+                        <a>
+                        <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div *ngIf="template===2" style="border: 2px;">
+        <div fxLayout="column">
+            <div flex="50%">
+                <div fxLayout="column">
+                    <!-- Featured image -->
+                    <div class="view overlay rounded z-depth-1-half mb-lg-0 mb-4 waves-light feature-image2" [ngStyle]="image_2_style"
+                         mdbWavesEffect>
+                        <img class="img-fluid" [ngStyle]="image_0_style" [src]="imageUrl" alt="Sample image">
+                        <a>
+                        <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div flex="50%">
+                <div fxLayout="row">
+                    <div class="md-form form-sm">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <input type="text" id="title" [(ngModel)]="stageTitre"
+                               class="form-control" mdbInput width="300px">
+                        <label for="title">Titre du stage</label>
+                    </div>
+                    <div class="md-form form-sm">
+                        <i class="fa fa-pencil prefix grey-text"></i>
+                        <textarea type="text" id="presentation" [(ngModel)]="stagePresentation"
+                                class="md-textarea" style="height: 70px"
+                                mdbInput></textarea>
+                        <label for="presentation">Présentation du stage</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form [formGroup]="stageForm">
+
+    <div class="form-check form-check-inline radio-green">
+        <input type="radio" class="form-check-input" id="materialInline1" value="0" (click)="onTemplateClick(0)"
+               formControlName="template"
+               mdbInput>
+        <label class="form-check-label" for="materialInline1">1</label>
+    </div>
+    
+    <div class="form-check form-check-inline radio-blue">
+        <input type="radio" class="form-check-input" id="materialInline2" value="1" (click)="onTemplateClick(1)"
+               formControlName="template"
+               mdbInput>
+        <label class="form-check-label" for="materialInline2">2</label>
+    </div>
+    
+    <div class="form-check form-check-inline radio-yellow">
+        <input type="radio" class="form-check-input" id="materialInline3" value="2" (click)="onTemplateClick(2)"
+               formControlName="template"
+               mdbInput>
+        <label class="form-check-label" for="materialInline3">3</label>
+    </div>
+
+
+
+    <hr>
+
+    <div>
+        <button class="btn btn-sm" (click)="onDeleteImage()">Supprimer l'image</button>
+        <input type="file" name="image" accept="image/*" formControlName="image" (change)="showPreview($event)"  />
+    </div>
+    <div>
+        <p>Ajuster la taille de l'image</p>
+        <div fxLayout="row" fxFlexAlign="baseline">
+
+            <div class="md-form form-sm" *ngIf="template!==3">
+                <input type="text" id="largeur" formControlName="image0Width" class="form-control" 
+                       mdbInput width="100px" (change)="onChangeImage0Width()">
+                <label for="largeur">Largeur</label>
+            </div>
+            <div class="md-form form-sm" *ngIf="template===3">
+                <input type="text" id="largeur" formControlName="image2Width" class="form-control" 
+                       mdbInput width="100px" (change)="onChangeImage2Width()">
+                <label for="largeur">Largeur</label>
+            </div>
+            <div>
+                <span class="badge badge-info badge_style" title="Importer les Matches"
+                        (mousedown)="mousedown('dw')" (mouseup)="mouseup()" (mouseleave)="mouseup()"
+                        (click)="onDecreaseImageWidth()"> - </span>      
+                <span class="badge badge-info badge_style" title="Importer les Matches"
+                        (mousedown)="mousedown('iw')" (mouseup)="mouseup()" (mouseleave)="mouseup()"
+                        (click)="onIncreaseImageWidth()"> + </span> 
+            </div>
+
+
+            <div class="md-form form-sm" *ngIf="template!==3">
+                <input type="text" id="hauteur" formControlName="image0Height" class="form-control" 
+                       mdbInput width="100px" (change)="onChangeImage0Height()">
+                <label for="hauteur">Hauteur</label>
+            </div>
+            <div class="md-form form-sm" *ngIf="template===3">
+                <input type="text" id="hauteur" formControlName="image2Height" class="form-control" 
+                       mdbInput width="100px" (change)="onChangeImage2Height()">
+                <label for="hauteur">Hauteur</label>
+            </div>
+            <div>
+                <span class="badge badge-info badge_style" title="Importer les Matches"
+                        (mousedown)="mousedown('dh')" (mouseup)="mouseup()" (mouseleave)="mouseup()"
+                        (click)="onDecreaseImageHeight()"> - </span>      
+                <span class="badge badge-info badge_style" title="Importer les Matches"
+                        (mousedown)="mousedown('ih')" (mouseup)="mouseup()" (mouseleave)="mouseup()"
+                        (click)="onIncreaseImageHeight()"> + </span> 
+            </div>
+        </div>
+        
+
+    </div>
+
+    <div>
+        <p>Image zoomable</p>
+        <div class="md-form form-sm form-field">
+            <mdb-checkbox formControlName="zoom">Zoom</mdb-checkbox>
+        </div>
+        <div *ngIf="isZoomEnabled()">
+            <div>
+                <p>Ajuster la taille du zoom de l'image</p>
+                <div fxLayout="row" fxFlexAlign="baseline">
+
+                    <div class="md-form form-sm">
+                        <input type="text" id="largeurZoom" formControlName="imageZoomWidth" 
+                               class="form-control" 
+                               mdbInput width="100px" (change)="onChangeImageZoomWidth()">
+                        <label for="largeurZoom">Largeur</label>
+                    </div>
+                    <div class="md-form form-sm">
+                        <input type="text" id="hauteurZoom" formControlName="imageZoomHeight" 
+                               class="form-control" 
+                               mdbInput width="100px" (change)="onChangeImageZoomHeight()">
+                        <label for="hauteurZoom">Hauteur</label>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-sm" (click)="onTestZoom()">Test zoom</button>
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+
+    <!-- PERIODE DU STAGE -->
+    <div *ngIf="periodes" class="row">
+        <p>Période</p>
+        <div class="md-form form-sm">
+            <select id="periode" formControlName="periodeId" (change)="onPeriodeChanged()">
+                <option *ngFor="let p of getPeriodesForStages()" 
+                    [value]="p.id" 
+                    [label]="p.nom"></option>
+            </select>
+        </div>
+        <div *ngIf="selectedPeriode">
+            <p>Début de la période:{{ selectedPeriode.dateDebut | date: 'dd/MM/yyyy' }}</p>
+            <p>Fin de la période:{{ selectedPeriode.dateFin | date: 'dd/MM/yyyy' }}</p>
+            <br>
+        </div>
+        <div class="md-form form-sm form-field">
+            <mdb-date-picker #dateDebut name="dateDebut" [options]="myDatePickerOptions" 
+                
+                [label]="'Date de début.'"
+                [placeholder]="'Selected date'" 
+                [locale]="lang"
+                formControlName="dateDebut" ></mdb-date-picker>
+                <!-- <div id="dates-error" *ngIf=" ! dateNaissanceValid " style="color: red;"><small>La date de naissance est rejetée</small></div>
+    -->
+        </div>
+
+        <div class="md-form form-sm form-field">
+            <mdb-date-picker #dateFin name="dateFin" [options]="myDatePickerOptions" 
+                
+                [label]="'Date de fin.'"
+                [placeholder]="'Selected date'" 
+                [locale]="lang"
+                formControlName="dateFin" ></mdb-date-picker>
+                <!-- <div id="dates-error" *ngIf=" ! dateNaissanceValid " style="color: red;"><small>La date de naissance est rejetée</small></div>
+    -->
+        </div>
+
+    </div>
+
+        
+    <!-- HORAIRE DE BASE DU STAGE -->
+    <div class="row">
+
+        <p>Horaire de la matinée</p>
+        <div class="md-form form-sm">
+            <input type="text" id="heureDebutMatin" formControlName="heureDebutMatin" 
+                   class="form-control" 
+                   mdbInput width="100px" >
+            <label for="heureDebutMatin">Début matinée</label>
+        </div>
+        <div class="md-form form-sm">
+            <input type="text" id="heureFinMatin" formControlName="heureFinMatin" 
+                   class="form-control" 
+                   mdbInput width="100px" >
+            <label for="heureFinMatin">Fin matinée</label>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <p>Horaire de l'après-midi</p>
+        <div class="md-form form-sm">
+            <input type="text" id="heureDebutApresMidi" formControlName="heureDebutApresMidi" 
+                   class="form-control" 
+                   mdbInput width="100px" >
+            <label for="heureDebutApresMidi">Début après-midi</label>
+        </div>
+        <div class="md-form form-sm">
+            <input type="text" id="heureFinApresMidi" formControlName="heureFinApresMidi" 
+                   class="form-control" 
+                   mdbInput width="100px" >
+            <label for="heureFinApresMidi">Fin après-midi</label>
+        </div>
+    </div>
+
+    <!-- TARIF -->
+    <div>
+        <div class="md-form form-sm form-field">
+            <mdb-checkbox formControlName="byJourneeAllowed">inscription par journée autorisée</mdb-checkbox>
+        </div>
+<!--         <div class="md-form form-sm form-field">
+            <mdb-checkbox formControlName="byDemiJourneeAllowed">inscription par demi-journée autorisée</mdb-checkbox>
+        </div> -->
+<!--         <div class="md-form form-sm form-field">
+            <mdb-checkbox formControlName="hasTarifUnique">Tarif unique</mdb-checkbox>
+        </div>
+        <div *ngIf="isTarifUnique()">
+            <div class="md-form form-sm">
+                <input type="text" id="tarifUnique" formControlName="tarifUnique" 
+                       class="form-control" 
+                       mdbInput width="100px" >
+                <label for="tarifUnique">Tarif unique</label>
+            </div>
+        </div> -->
+        <div *ngIf=" ! isTarifUnique()">
+            <div class="md-form form-sm">
+                <input type="text" id="tarifMembre" formControlName="tarifMembre" 
+                       class="form-control" 
+                       mdbInput width="100px" >
+                <label for="tarifMembre">Tarif membre</label>
+            </div>
+            <div class="md-form form-sm">
+                <input type="text" id="tarifNonMembre" formControlName="tarifNonMembre" 
+                       class="form-control" 
+                       mdbInput width="100px" >
+                <label for="tarifNonMembre">Tarif non-membre</label>
+            </div>
+            <div class="md-form form-sm">
+                <input type="text" id="tarifSupplementNonMembre" formControlName="tarifSupplementNonMembre" 
+                       class="form-control" 
+                       mdbInput width="100px" >
+                <label for="tarifSupplementNonMembre">Supplément non-membre</label>
+            </div>
+            <div class="md-form form-sm">
+                <i class="fa fa-pencil prefix grey-text"></i>
+                <textarea type="text" id="tarifJutificationSupplementNonMembre" formControlName="tarifJutificationSupplementNonMembre" 
+                        class="md-textarea" style="height: 70px"
+                        mdbInput></textarea>
+                <label for="tarifJutificationSupplementNonMembre">Justification Supplément non-membre</label>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="md-form form-sm">
+        <i class="fa fa-pencil prefix grey-text"></i>
+        <textarea type="text" id="encadrement" formControlName="encadrement" 
+                class="md-textarea" style="height: 70px"
+                mdbInput></textarea>
+        <label for="encadrement">Encadrement</label>
+    </div>
+    <div class="md-form form-sm">
+        <i class="fa fa-pencil prefix grey-text"></i>
+        <textarea type="text" id="sparring" formControlName="sparring" 
+                class="md-textarea" style="height: 70px"
+                mdbInput></textarea>
+        <label for="sparring">Sparring</label>
+    </div>
+
+    <!-- limite d'inscriptions -->
+    <div class="md-form form-sm form-field">
+        <mdb-checkbox formControlName="hasInscriptionLimit">Nombre d'inscriptions limité?</mdb-checkbox>
+    </div>
+
+    <div class="md-form form-sm">
+        <input type="text" id="inscriptionLimitCount" formControlName="inscriptionLimitCount" 
+               class="form-control" 
+               mdbInput width="100px" >
+        <label for="inscriptionLimitCount">Nombre maximum d'inscriptions</label>
+    </div>
+
+<!--     <div>
+        - tarif unique <br>
+        - tarif pour les membres <br>
+        - tarif pour les non membres <br>
+        - supplement non-membre <br>
+        - jutification supplement non-membres <br>
+        - date debut <br>
+        - date fin <br>
+        - horaire matin <br>
+        - horaire après-midi <br>
+        - inscription par journée autorisée <br>
+        - inscription par demi-journée autorisée <br>
+        - encadrement <br>
+        - sparrings <br>
+    </div> -->
+
+</form>
