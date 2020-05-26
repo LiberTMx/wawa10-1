@@ -114,7 +114,10 @@
                                     <th style="width: 20%" scope="col">Classement</th>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><button class="button button" (click)="onSelectionJoueur(1)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>J1</button></th>
+                                    <th scope="row">
+                                        <button class="button button" (click)="onSelectionJoueur(1)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>J1</button>
+                                        <button class="button button" (click)="onDeleteSelectionJoueur(1)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect><i class="fas fa-trash"></i></button>
+                                    </th>              
                                     <td>
                                         <input type="text" mdbInput formControlName="j1_indice" readonly>
                                     </td>
@@ -126,7 +129,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><button class="button button" (click)="onSelectionJoueur(2)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>J2</button></th>
+                                    <th scope="row">
+                                        <button class="button button" (click)="onSelectionJoueur(2)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>J2</button>
+                                        <button class="button button" (click)="onDeleteSelectionJoueur(2)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect><i class="fas fa-trash"></i></button>
+                                    </th>
                                     <td>
                                         <input type="text" mdbInput formControlName="j2_indice" readonly>
                                     </td>
@@ -138,7 +144,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><button class="button button" (click)="onSelectionJoueur(3)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>J3</button></th>
+                                    <th scope="row">
+                                        <button class="button button" (click)="onSelectionJoueur(3)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>J3</button>
+                                        <button class="button button" (click)="onDeleteSelectionJoueur(3)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect><i class="fas fa-trash"></i></button>
+                                    </th>
                                     <td>
                                         <input type="text" mdbInput formControlName="j3_indice" readonly>
                                     </td>
@@ -150,7 +159,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><button class="button button" (click)="onSelectionJoueur(4)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>J4</button></th>
+                                    <th scope="row">
+                                        <button class="button button" (click)="onSelectionJoueur(4)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>J4</button>
+                                        <button class="button button" (click)="onDeleteSelectionJoueur(4)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect><i class="fas fa-trash"></i></button>
+                                    </th>
                                     <td>
                                         <input type="text" mdbInput formControlName="j4_indice" readonly>
                                     </td>
@@ -162,7 +174,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><button class="button button" (click)="onSelectionReserve(1)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>R1</button></th>
+                                    <th scope="row">
+                                        <button class="button button" (click)="onSelectionJoueur(5)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>R1</button>
+                                        <button class="button button" (click)="onDeleteSelectionJoueur(5)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect><i class="fas fa-trash"></i></button>
+                                    </th>
                                     <td>
                                         <input type="text" mdbInput formControlName="r1_indice" readonly>
                                     </td>
@@ -174,7 +189,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><button class="button button" (click)="onSelectionReserve(2)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>R2</button></th>
+                                    <th scope="row">
+                                        <button class="button button" (click)="onSelectionJoueur(6)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>R2</button>
+                                        <button class="button button" (click)="onDeleteSelectionJoueur(6)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect><i class="fas fa-trash"></i></button>
+                                    </th>
                                     <td>
                                         <input type="text" mdbInput formControlName="r2_indice" readonly>
                                     </td>
@@ -186,7 +204,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><button class="button button" (click)="onSelectionReserve(3)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>R3</button></th>
+                                    <th scope="row">
+                                        <button class="button button" (click)="onSelectionJoueur(7)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>R3</button>
+                                        <button class="button button" (click)="onDeleteSelectionJoueur(7)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect><i class="fas fa-trash"></i></button>
+                                    </th>
                                     <td>
                                         <input type="text" mdbInput formControlName="r3_indice" readonly>
                                     </td>
@@ -199,7 +220,10 @@
                                 </tr>
                                 
                                 <tr>
-                                    <th scope="row"><button class="button button" (click)="onSelectionReserve(4)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>R4</button></th>
+                                    <th scope="row">
+                                        <button class="button button" (click)="onSelectionJoueur(8)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect>R4</button>
+                                        <button class="button button" (click)="onDeleteSelectionJoueur(8)" mdbBtn type="button" color="danger" rounded="true" mdbWavesEffect><i class="fas fa-trash"></i></button>
+                                    </th>
                                     <td>
                                         <input type="text" mdbInput formControlName="r4_indice" readonly>
                                     </td>

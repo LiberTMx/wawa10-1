@@ -129,7 +129,7 @@ export class SelectionComponent implements OnInit {
 
   buildListeDesForcesByCategory(category: InterclubsCategoryModel): Array<InterclubsLDF>
   {
-    console.log('Building ldf for catg:', category);
+    //console.log('Building ldf for catg:', category);
 
     const ldf=new Array<InterclubsLDF>();
 
