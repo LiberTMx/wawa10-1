@@ -84,7 +84,7 @@
                         (click)="onEditUser(user)"> <mdb-icon fas icon="edit" class="indigo-text pr-1"></mdb-icon> 
                       </span> 
                       &nbsp;
-                      <span class="badge badge_style" *ngIf="isUserClubAdmin"
+                      <span class="badge badge_style" *ngIf="isUserClubAdmin && !isCurrentUser(user)"
                         title="Supprimer" 
                         (click)="onDeleteUser(user)"> <mdb-icon fas icon="user-minus" class="red-text pr-1"></mdb-icon> 
                       </span> 

@@ -51,6 +51,7 @@ export class UserListeComponent implements OnInit {
       .subscribe(
         users => {
             this.users=users;
+            this.onSortByNom();
             console.log('users', users);
           }
       );
@@ -83,11 +84,11 @@ export class UserListeComponent implements OnInit {
   onSortByNom()
   {
     this.users.sort( (u1,u2) => {
-      if(u1.nom < u2.nom) return -1;
-      if(u1.nom > u2.nom) return +1;
+      if(u1.nom.toUpperCase() < u2.nom.toUpperCase()) return -1;
+      if(u1.nom.toUpperCase() > u2.nom.toUpperCase()) return +1;
       //return 0;
-      if(u1.prenom < u2.prenom) return -1;
-      if(u1.prenom > u2.prenom) return +1;
+      if(u1.prenom.toUpperCase() < u2.prenom.toUpperCase()) return -1;
+      if(u1.prenom.toUpperCase() > u2.prenom.toUpperCase()) return +1;
       return 0;
     }  );
     
@@ -96,8 +97,8 @@ export class UserListeComponent implements OnInit {
   onSortByPrenom()
   {
     this.users.sort( (u1,u2) => {
-      if(u1.prenom < u2.prenom) return -1;
-      if(u1.prenom > u2.prenom) return +1;
+      if(u1.prenom.toUpperCase() < u2.prenom.toUpperCase()) return -1;
+      if(u1.prenom.toUpperCase() > u2.prenom.toUpperCase()) return +1;
       return 0;
     }  );
   }
@@ -207,12 +208,21 @@ export class UserListeComponent implements OnInit {
 
   replaceUserInList(user: AuthUserModel)
   {
-    this.users = this.users.filter( u => u.id === user.id ? user : u );
+    //this.users = [...this.users.filter( u => u.id === user.id ? user : u )];
+    /*
+    let newUsers= [...this.users];
+    newUsers=newUsers.filter( u => u.id === user.id ? user : u );
+    Object.assign(this.users,newUsers);$$
+    */
+    this.users=this.users.filter( u => u.id !== user.id );
+    this.users.push(user);
+    this.onSortByNom();
   }
 
   onUserModified(user: AuthUserModel)
   {
     this.replaceUserInList(user);
+    this.onShowListe();
   }
 
   hasEditAccess(user: AuthUserModel): boolean
@@ -279,5 +289,10 @@ export class UserListeComponent implements OnInit {
               'Un utilisateur a été réactivé: '+user.nom+' '+user.prenom+', '+user.username, 5000);
         }
       );
+  }
+
+  isCurrentUser(user: AuthUserModel): boolean
+  {
+    return user.id === this.currentUser.id;
   }
 }

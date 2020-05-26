@@ -55,7 +55,7 @@
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/veterans">Vétérans</a></li> -->
 
           <li *ngFor="let cat of interclubCategories">
-            <a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/{{cat.id}}">{{ cat.name }}</a>
+            <a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/{{cat.id}}">{{ cat.synonyme }}</a>
           </li>
 
           <div class="divider dropdown-divider"></div>

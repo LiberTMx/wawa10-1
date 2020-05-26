@@ -19,9 +19,10 @@ import { NewsComponent } from './news/news/news.component';
 import { NewsDetailsComponent } from './news/news-details/news-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InterclubsModule } from '../interclubs/interclubs.module';
+import { ImageZoomDialogComponent } from './utils/image-zoom-dialog/image-zoom-dialog.component';
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, MenuComponent, HomeComponent, PdfViewerComponent,
-    NewsListeComponent, NewsCreateComponent, NewsComponent, NewsDetailsComponent],
+    NewsListeComponent, NewsCreateComponent, NewsComponent, NewsDetailsComponent, ImageZoomDialogComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -44,7 +45,8 @@ import { InterclubsModule } from '../interclubs/interclubs.module';
   ],
   providers: [
     EnvService,
-  ]
+  ],
+  entryComponents: [ImageZoomDialogComponent],
 })
 export class AppCommonModule {
 }

@@ -8,6 +8,7 @@ export class InterclubsCategory
     firstSeason: number;
     lastSeason: number;
     order: number;
+    synonyme: string;
 }
 
 export class InterclubsCategoryModel implements InterclubsCategory
@@ -20,4 +21,5 @@ export class InterclubsCategoryModel implements InterclubsCategory
     firstSeason: number;
     lastSeason: number;
     order: number;
+    synonyme: string;
 }

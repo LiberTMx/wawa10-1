@@ -39,7 +39,7 @@ export const mdbdatepicker_locales={
         sunHighlight: true,
         minYear: 1900,
         closeAfterSelect: true,
-        showClearDateBtn: false
+        showClearDateBtn: true
       }
       ,
       nl: {

@@ -44,6 +44,8 @@ export class HommesComponent implements OnInit {
   storedSelectionsMap: Map<number, InterclubsSelectionModel> = new Map<number, InterclubsSelectionModel>();
   selectionsReserveMap: Map<number, InterclubsLDF> = new Map<number, InterclubsLDF>();
 
+  selectedSemaineVersion: InterclubsSemaineVersionModel;
+
   constructor(
     private selectionService: SelectionService,
     private formBuilder: FormBuilder,
@@ -281,5 +283,10 @@ export class HommesComponent implements OnInit {
         }
         break;
       }
+  }
+
+  onChangeSemaineVersion(event)
+  {
+
   }
 }
