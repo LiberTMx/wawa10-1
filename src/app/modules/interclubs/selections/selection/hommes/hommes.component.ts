@@ -8,6 +8,7 @@ import { SelectionService } from '../../services/selection.service';
 import { InterclubsSemaineVersionModel } from '../../model/interclubs-semaine-version.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { InterclubsSelectionModel } from '../../model/interclubs-selection.model';
+import { ToastMessageService } from 'src/app/common/services/toast-message.service';
 
 @Component({
   selector: 'app-interclubs-selections-hommes',
@@ -46,6 +47,7 @@ export class HommesComponent implements OnInit {
   constructor(
     private selectionService: SelectionService,
     private formBuilder: FormBuilder,
+    private toastMessageService: ToastMessageService,
     ) 
   { 
   }
@@ -133,6 +135,7 @@ export class HommesComponent implements OnInit {
     this.selectionsMap.set(index, this.selectedJoueur);
 
     this.selectionService.storeSelection(this.selectedJoueur, this.selectedMatch, index)
+    
       .subscribe(
         res => {
             console.log('selection stored');
@@ -141,8 +144,16 @@ export class HommesComponent implements OnInit {
           }
         ,
         err => {
-                // message d'erreur a l'util Toast service
-                console.error(err);}
+          console.error('unable to create the selection', err);
+          if(err.error)
+          {
+            this.toastMessageService.addError('Selection', 'Une erreur s\'est produite:'+err.error.message, 11000);
+          }
+          else
+          {
+            this.toastMessageService.addError('Selection', 'Une erreur s\'est produite:'+err.message, 11000);
+          }
+        }
 
       
      );
