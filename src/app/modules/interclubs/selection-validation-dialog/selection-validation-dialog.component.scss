@@ -1,0 +1,21 @@
+.validation-table {
+    //width: 716px; /* 140px * 5 column + 16px scrollbar width */
+    border-spacing: 0;
+    display: block;
+    height: calc(100vh - 350px);
+    overflow: auto;
+    font-size: 12px;
+
+    td th{
+        font-size: 11px;
+    }
+    tr.active td {
+        font-size: 13px;
+        background-color:#123456 !important;
+        color: white;
+    }
+}
+
+.result-container {
+    max-height: 400px;
+}

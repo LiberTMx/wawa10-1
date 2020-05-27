@@ -11,6 +11,9 @@ import { InterclubsSelectionModel } from '../../model/interclubs-selection.model
 import { ToastMessageService } from 'src/app/common/services/toast-message.service';
 import { InterclubsLdfParticipantModel } from '../../model/interclubs-ldf-participant.model';
 import { InterclubsLdfByCategoryModel } from '../../model/interclubs-ldf-by-category.model';
+import { InterclubsCategoryModel } from '../../model/interclubs-category.model';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { SelectionValidationDialogComponent } from '../../../selection-validation-dialog/selection-validation-dialog.component';
 
 @Component({
   selector: 'app-interclubs-selections-hommes',
@@ -31,6 +34,9 @@ export class HommesComponent implements OnInit {
   @Input()
   matches: Array<InterclubsMatchModel>;
   
+  @Input()
+  interclubCategory: InterclubsCategoryModel;
+
   selectedSemaine: InterclubsSemaineModel=null;
   selectedTeam: InterclubsTeamModel=null;
   selectedMatch: InterclubsMatchModel = null;
@@ -53,6 +59,7 @@ export class HommesComponent implements OnInit {
   constructor(
     private selectionService: SelectionService,
     private formBuilder: FormBuilder,
+    private matDialog: MatDialog,
     private toastMessageService: ToastMessageService,
     ) 
   { 
@@ -176,7 +183,9 @@ export class HommesComponent implements OnInit {
 
   onSelectionJoueur(index: number)
   {
-    if(this.selectedSemaineVersion===null || this.selectedSemaineVersion===undefined || this.selectedSemaineVersion.semaine_version_statut!=="working") 
+    if(this.selectedSemaineVersion===null 
+        || this.selectedSemaineVersion===undefined 
+        || this.selectedSemaineVersion.semaine_version_statut!=='working') 
     {
       this.toastMessageService.addError('Selection', 'Vous devez sélectionner une version working ',11000);
       return;
@@ -186,7 +195,10 @@ export class HommesComponent implements OnInit {
       this.toastMessageService.addError('Selection', 'Vous devez sélectionner un match',11000);
       return;
     }
-    if(this.selectedJoueur===null || this.selectedJoueur===undefined) return;
+    if(this.selectedJoueur===null || this.selectedJoueur===undefined) {
+      this.toastMessageService.addError('Selection', 'Vous devez sélectionner un joueur',11000);
+      return;
+    }
 
     this.selectionsMap.set(index, this.selectedJoueur);
 
@@ -393,5 +405,56 @@ export class HommesComponent implements OnInit {
           this.selectionsMap.set(index, null);
         }
       );
+  }
+
+  onSemaineVersionValidate()
+  {
+    // Il faut avoir une semaine active et en mode working !
+    if(this.selectedSemaineVersion===null 
+      || this.selectedSemaineVersion===undefined 
+      || this.selectedSemaineVersion.semaine_version_statut!=='working') 
+    {
+      this.toastMessageService.addError('Validation des sélections', 'Vous devez sélectionner une version working ',11000);
+      return;
+    }
+
+    // this.router.navigate(['interclubs', 'selections', 'validate', this.interclubCategory.id, this.selectedSemaine.id, this.selectedSemaineVersion.id]);
+
+    const matches = this.matches.filter( m => m.WeekName === this.selectedSemaine.weekName );
+
+    const infos: {
+          interclubCategory: InterclubsCategoryModel, 
+          selectedSemaine: InterclubsSemaineModel, 
+          selectedSemaineVersion: InterclubsSemaineVersionModel,
+          teams: Array<InterclubsTeamModel>, 
+          matches: Array<InterclubsMatchModel>}
+      = { 
+        interclubCategory: this.interclubCategory, 
+        selectedSemaine: this.selectedSemaine, 
+        selectedSemaineVersion: this.selectedSemaineVersion,
+        teams: this.teams,
+        matches,
+    };
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '800px';
+
+    dialogConfig.data = infos;
+
+    const dialogRef = this.matDialog.open(SelectionValidationDialogComponent, dialogConfig);
+
+    /*
+    dialogRef.afterClosed().subscribe((groupe: EntrainementClasseGroupeModel) => {
+      console.log('The dialog was closed');
+      //this.animal = result;
+      console.log('dialog result', groupe);
+      if(groupe!==null)
+      {
+        this.addGroupeToList(groupe);
+      }
+    });
+    */
   }
 }

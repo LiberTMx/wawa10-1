@@ -1,0 +1,49 @@
+<h3>Validation des sélections pour l'interclubs: {{ infos.interclubCategory.synonyme }}</h3>>
+
+<div *ngIf="loading">
+    {{ loadingInfos }}
+</div>
+
+<div *ngIf="! loading" class="result-container">
+    <p>Nombre d'équipes: {{ infos.teams.length }}</p>
+    <p>Nombre de sélections attendues: {{attendedSelectionCount}}</p>
+    <p>Nombre de sélections réqlisées: {{ selectionCount }}</p>
+
+    <div *ngIf="validating">
+        <p>Validation en cours...</p>
+    </div>
+
+    <div>
+        <table mdbTable small="true" hover="true">
+            <thead>
+                <tr>
+                    <th>Team</th>
+                    <th>Size</th>
+                    <th>C.22.11</th>
+                    <th>C.22.13</th>
+                    <th>Min J</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr mdbTableCol  *ngFor="let item of validationResults; let ix = index" >
+                        <td scope="row">{{ item.team.Team}}</td>
+                        <td>{{ item.tSize }}</td>
+                        <td>{{ item.rule1 }}</td>
+                        <td>{{ item.rule2 }}</td>
+                        <td>{{ item.rule3 }}</td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+
+    <div>
+        <p>Sélections multiples ?</p>
+    </div>
+
+    <div>
+        <button type="button" class="btn btn-sm btn-warning" (click)="onCloseDialog()">Fermer la fenêtre</button>
+    </div>
+</div>
+
+
+

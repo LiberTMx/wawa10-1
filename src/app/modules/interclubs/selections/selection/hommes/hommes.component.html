@@ -57,8 +57,11 @@
                                             </mat-option>
                                             </mat-select>
                                         </mat-form-field>
-                                        <a (click)="onSemaineNextVersion()" mdbBtn floating="true" size="sm" gradient="blue" mdbWavesEffect>
+                                        <a (click)="onSemaineNextVersion()" mdbBtn floating="true" size="sm" gradient="blue" title="Ajouter une nouvelle version" mdbWavesEffect>
                                             <mdb-icon fas icon="plus"></mdb-icon>
+                                          </a>
+                                          <a (click)="onSemaineVersionValidate()" mdbBtn floating="true" size="sm" gradient="blue" title="Valider les sélections" mdbWavesEffect>
+                                            <i class="fas fa-check"></i>
                                           </a>
                                     </div>
                     

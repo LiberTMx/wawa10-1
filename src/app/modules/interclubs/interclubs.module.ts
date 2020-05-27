@@ -13,12 +13,13 @@ import { interclubsReducer } from './state/reducers/interclubs.reducer';
 import { SelectionService } from './selections/services/selection.service';
 import { HommesComponent } from './selections/selection/hommes/hommes.component';
 import { AppCommonModule } from '../common/app-common.module';
-import { SelectionValidationComponent } from './selection-validation/selection-validation.component';
+import { SelectionInformationComponent } from './selection-information/selection-information.component';
+import { SelectionValidationDialogComponent } from './selection-validation-dialog/selection-validation-dialog.component';
 
 
 
 @NgModule({
-  declarations: [FeuilleDeMatchComponent, SelectionComponent, HommesComponent, SelectionValidationComponent],
+  declarations: [FeuilleDeMatchComponent, SelectionComponent, HommesComponent, SelectionInformationComponent, SelectionValidationDialogComponent],
   imports: [
     CommonModule,
     AppCommonModule,
@@ -39,6 +40,7 @@ import { SelectionValidationComponent } from './selection-validation/selection-v
   ],
   providers: [
     SelectionService,
-  ]
+  ],
+  entryComponents: [SelectionValidationDialogComponent]
 })
 export class InterclubsModule { }
