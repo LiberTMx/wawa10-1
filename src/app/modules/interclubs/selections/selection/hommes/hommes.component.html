@@ -57,12 +57,21 @@
                                             </mat-option>
                                             </mat-select>
                                         </mat-form-field>
-                                        <a (click)="onSemaineNextVersion()" mdbBtn floating="true" size="sm" gradient="blue" title="Ajouter une nouvelle version" mdbWavesEffect>
+                                 <!--        <a (click)="onSemaineNextVersion()" mdbBtn floating="true" size="sm" gradient="blue" title="Ajouter une nouvelle version" mdbWavesEffect>
                                             <mdb-icon fas icon="plus"></mdb-icon>
                                           </a>
-                                          <a (click)="onSemaineNextVersion()" mdbBtn floating="true" size="sm" gradient="blue" title="Valider les sélections" mdbWavesEffect>
+                                          <a (click)="onValidateNextVersion()" mdbBtn floating="true" size="sm" gradient="blue" title="Valider les sélections" mdbWavesEffect>
                                             <i class="fas fa-check"></i>
                                           </a>
+                                          <a (click)="onSemainePublishVersion()" mdbBtn floating="true" size="sm" gradient="blue" title="Publier les sélections" mdbWavesEffect>
+                                            <i class="fas fa-check"></i>
+                                          </a> -->
+
+                          
+
+                                          <span class="badge badge-info badge_style" title="Ajouter une nouvelle version" (click)="onSemaineNextVersion()"><mdb-icon fas icon="plus"></mdb-icon> Ajouter une nouvelle version</span> 
+                                          <span class="badge badge-info badge_style" title="Ajouter une nouvelle version" (click)="onValidateNextVersion()"><i class="fas fa-check"></i> Ajouter une nouvelle version</span> 
+                                          <span class="badge badge-info badge_style" title="Ajouter une nouvelle version" (click)="onSemainePublishVersion()"><i class="fas fa-check"></i> Ajouter une nouvelle version</span> 
                                     </div>
                     
                                     <div>
