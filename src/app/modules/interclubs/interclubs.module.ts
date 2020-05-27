@@ -13,11 +13,12 @@ import { interclubsReducer } from './state/reducers/interclubs.reducer';
 import { SelectionService } from './selections/services/selection.service';
 import { HommesComponent } from './selections/selection/hommes/hommes.component';
 import { AppCommonModule } from '../common/app-common.module';
+import { SelectionValidationComponent } from './selection-validation/selection-validation.component';
 
 
 
 @NgModule({
-  declarations: [FeuilleDeMatchComponent, SelectionComponent, HommesComponent],
+  declarations: [FeuilleDeMatchComponent, SelectionComponent, HommesComponent, SelectionValidationComponent],
   imports: [
     CommonModule,
     AppCommonModule,
