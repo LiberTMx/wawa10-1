@@ -186,7 +186,10 @@ export class HommesComponent implements OnInit {
       this.toastMessageService.addError('Selection', 'Vous devez sélectionner un match',11000);
       return;
     }
-    if(this.selectedJoueur===null || this.selectedJoueur===undefined) return;
+    if(this.selectedJoueur===null || this.selectedJoueur===undefined) {
+      this.toastMessageService.addError('Selection', 'Vous devez sélectionner un joueur',11000);
+      return;
+    }
 
     this.selectionsMap.set(index, this.selectedJoueur);
 
