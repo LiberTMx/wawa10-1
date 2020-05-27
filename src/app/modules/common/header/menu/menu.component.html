@@ -57,7 +57,8 @@
           <li *ngFor="let cat of interclubCategories">
             <a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/{{cat.id}}">{{ cat.synonyme }}</a>
           </li>
-
+          <div class="divider dropdown-divider"></div>
+          <li><a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/selectioninfo">Consulter les sélections</a></li>
           <div class="divider dropdown-divider"></div>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="tournoi/new">Listes des forces</a></li>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="criterium/new">Challenge</a></li>
