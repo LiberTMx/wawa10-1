@@ -118,6 +118,12 @@ export class SelectionService {
     return this.httpClient.get<Array<InterclubsSemaineVersionModel>>(apiUrl);
   }
 
+  getPublishedInterclubsSemaines(): Observable <Array<InterclubsSemaineVersionModel>>
+  {
+    const apiUrl=`${environment.apiUrl}/interclubs/publishedInterclubsSemaines`;
+    return this.httpClient.get<Array<InterclubsSemaineVersionModel>>(apiUrl);
+  }
+
   storeSelection(selection: InterclubsLDF, match: InterclubsMatchModel, position: number, version: InterclubsSemaineVersionModel): Observable<InterclubsSelectionModel>
   {
     
@@ -151,6 +157,14 @@ export class SelectionService {
     return this.httpClient.post<MessageModel>(apiUrl, {
       match: JSON.stringify(match),
       position:  String(index),
+      version: JSON.stringify(version)
+    });
+  }
+
+  publishSemaineVersion(version: InterclubsSemaineVersionModel): Observable<InterclubsSemaineVersionModel>
+  {
+    const apiUrl=`${environment.apiUrl}/interclubs/publishSemaineVersion`;
+    return this.httpClient.post<InterclubsSemaineVersionModel>(apiUrl, {
       version: JSON.stringify(version)
     });
   }

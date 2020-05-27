@@ -1,1 +1,76 @@
-<p>selection-information works!</p>
+
+    <div class="row">
+                
+                      <div class="col-sm-4">
+                            <mdb-card class="small">
+                                <mdb-card-header>Sélections interclubs</mdb-card-header>
+                                <mdb-card-body>
+
+                                    <div>
+                                        <mat-form-field>
+                                            <mat-label>Categorie</mat-label>
+                                            <mat-select matNativeControl [(ngModel)]="selectedCategory" name="category" 
+                                                (selectionChange)="onChangeCategory($event)">
+                                            <mat-option value="" selected></mat-option>
+                                            <mat-option *ngFor="let i of interclubs" [value]="i">
+                                                Categorie {{i.synonyme}}
+                                            </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div>
+                                        <mat-form-field>
+                                            <mat-label>Semaine</mat-label>
+                                            <mat-select matNativeControl [(ngModel)]="selectedSemaine" name="semaine" 
+                                                (selectionChange)="onChangeSemaine($event)">
+                                            <mat-option value="" selected></mat-option>
+                                            <mat-option *ngFor="let w of semainesByInterclubsCategory" [value]="w">
+                                                Semaine {{w.weekName}} du {{w.startOfWeek | date:'dd/MM/yyyy'}} au {{w.endOfWeek | date:'dd/MM/yyyy' }}.
+                                            </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </mdb-card-body>
+                            </mdb-card>
+                        </div>
+    
+                        <div class="col-sm-8">
+                            <mdb-card class="small">
+                                <mdb-card-header>Votre sélection</mdb-card-header>
+                                <mdb-card-body>
+                                    <table mdbTable small="true" hover="true">
+                                       <tr>
+                                        <td><b>Date</b>:</td>
+                                        <td><span *ngIf="selectedMatch">{{ selectedMatch?.matchDate | date:'dd/MM/yyyy'}}  <b>Heure</b>: {{ selectedMatch?.Time}}</span> </td>
+                                       </tr>
+                                       <tr>
+                                        <td><b>Match</b>:</td>
+                                        <td><span *ngIf="selectedMatch">{{ selectedMatch?.HomeTeam}} contre {{ selectedMatch?.AwayTeam}}</span></td>
+                                       </tr>
+                                       <tr>
+                                        <td><b>Adresse</b>:</td>
+                                        <td><span *ngIf="selectedMatch">{{ selectedMatch?.venueName}},{{ selectedMatch?.venueStreet}}, <b>{{ selectedMatch?.venueTown}}</b></span></td>
+                                       </tr>
+                                       <tr>
+                                        <td>
+                                            <button class="button button" (click)="RefuseSelection()" mdbBtn type="button" color="danger" rounded="true" title="Refuser votre sélection" mdbWavesEffect><i class="fas fa-ban"></i></button>
+                                            <button class="button button" (click)="AcceptSelection()" mdbBtn type="button" color="success" rounded="true" title="Valider votre sélection" mdbWavesEffect><i class="fas fa-check"></i></button>
+                                            </td>
+                                       </tr>
+                                    </table> 
+                    
+                                </mdb-card-body>
+                            </mdb-card>
+                        </div>
+                        
+    </div>
+
+
+  
+
+
+
+ 
+  
+  
