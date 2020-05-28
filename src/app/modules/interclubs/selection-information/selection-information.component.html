@@ -67,7 +67,23 @@
     </div>
 
 
-  
+  <div *ngIf="teamSelectionData && teamCount===loadedTeamCount">
+      <div *ngFor="let teamData of teamSelectionData">
+          <!-- <app-selection-information-by-team [teamData]="teamData" [selections]="teamData.selections"></app-selection-information-by-team> -->
+
+          <div *ngIf="teamData.selectionsLoaded">
+              <span> Team: {{ teamData.team.Team }} </span>
+              <br>
+              <span>Match: {{ teamData.match | json }}</span>
+              <br>
+              <span>Selections: {{ Selections | json }}</span>
+              <br>
+              <hr>
+          </div>
+          
+
+      </div>
+  </div>
 
 
 
