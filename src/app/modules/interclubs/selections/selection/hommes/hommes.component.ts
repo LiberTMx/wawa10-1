@@ -462,7 +462,9 @@ export class HommesComponent implements OnInit {
 
   onSemainePublishVersion()
   {
-    if(this.selectedSemaineVersion===null || this.selectedSemaineVersion===undefined || this.selectedSemaineVersion.semaine_version_statut!=="working") 
+    if(this.selectedSemaineVersion===null 
+        || this.selectedSemaineVersion===undefined 
+        || this.selectedSemaineVersion.semaine_version_statut!=='working') 
     {
       this.toastMessageService.addError('Selection', 'Vous ne pouvez publier qu\'une version working ',11000);
       return;

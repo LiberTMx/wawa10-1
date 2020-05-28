@@ -75,6 +75,9 @@ export class SelectionValidationDialogComponent implements OnInit {
 
   loadSelectionByTeam(teamSize: number)
   {
+    // Pour verifier si un joueur est placé plusieurs fois dans 1 ou 2 équipes
+    const playerToTeamMap: Map<InterclubsSelectionModel, Array<InterclubsTeamModel> > = new Map<InterclubsSelectionModel, Array<InterclubsTeamModel>>();
+
     const teams = this.infos.teams;
     if(teams!==null && teams!==undefined && teams.length>0)
     {
@@ -95,6 +98,7 @@ export class SelectionValidationDialogComponent implements OnInit {
                 {
                   this.storedSelectionsMap.set(team, validSelections);
                   this.selectionCount += validSelections.length;
+                  this.mapPlayerToTeam(team, playerToTeamMap, validSelections);
                 }
               }
               else
@@ -109,6 +113,27 @@ export class SelectionValidationDialogComponent implements OnInit {
               if(c===teams.length) this.loading = false;
             }
           );
+      }
+    }
+  }
+
+  private mapPlayerToTeam(
+      team: InterclubsTeamModel,
+      playerToTeamMap: Map<InterclubsSelectionModel, Array<InterclubsTeamModel> >, 
+      validSelections: Array<InterclubsSelectionModel>)
+  {
+    for(const sel of validSelections)
+    {
+      let arr = playerToTeamMap.get(sel);
+      if(arr===null || arr === undefined)
+      {
+        arr = new Array<InterclubsTeamModel>();
+        arr.push(team);
+        playerToTeamMap.set(sel, arr);
+      }
+      else
+      {
+        arr.push(team);
       }
     }
   }

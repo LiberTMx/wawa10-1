@@ -29,7 +29,7 @@
             <div>
                 <div class="col-sm-12">
                     <div class="row">
-                        <div class="col-sm-5">
+                        <div class="col-sm-6">
                             <mdb-card class="small">
                                 <mdb-card-header>Choix des critères de sélections</mdb-card-header>
                                 <mdb-card-body>
@@ -73,9 +73,11 @@
 
                           
 
-                                          <span class="badge badge-info badge_style" title="Ajouter une nouvelle version" (click)="onSemaineNextVersion()"><mdb-icon fas icon="plus"></mdb-icon> Ajouter une nouvelle version</span> 
-                                          <span class="badge badge-info badge_style" title="Ajouter une nouvelle version" (click)="onValidateNextVersion()"><i class="fas fa-check"></i> Ajouter une nouvelle version</span> 
-                                          <span class="badge badge-info badge_style" title="Ajouter une nouvelle version" (click)="onSemainePublishVersion()"><i class="fas fa-check"></i> Ajouter une nouvelle version</span> 
+                                          <span class="badge badge-info badge_style" title="Ajouter une nouvelle version" (click)="onSemaineNextVersion()"><i class="fas fa-plus"></i>Ajouter</span> 
+                                          &nbsp;
+                                          <span class="badge badge-info badge_style" title="Valider la version de travail" (click)="onSemaineVersionValidate()"><i class="fas fa-check"></i>Valider</span> 
+                                          &nbsp;
+                                          <span class="badge badge-info badge_style" title="Publier la version de travail" (click)="onSemainePublishVersion()"><i class="fas fa-upload"></i>Publier</span> 
                                     </div>
                     
                                     <div>
@@ -93,7 +95,7 @@
                                 </mdb-card-body>
                             </mdb-card>
                         </div>
-                        <div class="col-sm-7">
+                        <div class="col-sm-6">
                             <mdb-card class="small">
                                 <mdb-card-header>Info sur le match selectionné</mdb-card-header>
                                 <mdb-card-body>
