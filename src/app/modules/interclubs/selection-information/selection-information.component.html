@@ -53,10 +53,10 @@
                                         <td><span *ngIf="selectedMatch">{{ selectedMatch?.venueName}},{{ selectedMatch?.venueStreet}}, <b>{{ selectedMatch?.venueTown}}</b></span></td>
                                        </tr>
                                        <tr>
-                                        <td>
+                       <!--                  <td>
                                             <button class="button button" (click)="RefuseSelection()" mdbBtn type="button" color="danger" rounded="true" title="Refuser votre sélection" mdbWavesEffect><i class="fas fa-ban"></i></button>
                                             <button class="button button" (click)="AcceptSelection()" mdbBtn type="button" color="success" rounded="true" title="Valider votre sélection" mdbWavesEffect><i class="fas fa-check"></i></button>
-                                            </td>
+                                            </td> -->
                                        </tr>
                                     </table> 
                     
@@ -67,21 +67,11 @@
     </div>
 
 
-  <div *ngIf="teamSelectionData && teamCount===loadedTeamCount">
+  <div *ngIf="teamSelectionData">
       <div *ngFor="let teamData of teamSelectionData">
-          <!-- <app-selection-information-by-team [teamData]="teamData" [selections]="teamData.selections"></app-selection-information-by-team> -->
-
-          <div *ngIf="teamData.selectionsLoaded">
-              <span> Team: {{ teamData.team.Team }} </span>
-              <br>
-              <span>Match: {{ teamData.match | json }}</span>
-              <br>
-              <span>Selections: {{ Selections | json }}</span>
-              <br>
-              <hr>
-          </div>
-          
-
+        <div *ngIf="teamData.selectionsLoaded">
+          <app-selection-information-by-team [teamData]="teamData"></app-selection-information-by-team>
+        </div>
       </div>
   </div>
 

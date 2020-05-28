@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InterclubsCategoryModel } from '../selections/model/interclubs-category.model';
 import { InterclubsSemaineModel } from '../selections/model/interclubs-semaine.model';
-import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 import { SelectionService } from '../selections/services/selection.service';
 import { InterclubsTeamModel } from '../selections/model/interclubs-team.model';
 import { InterclubsMatchModel } from '../selections/model/interclubs-match.model';
@@ -47,8 +44,7 @@ export class SelectionInformationComponent implements OnInit {
   ldfByCategory: Array<InterclubsLdfByCategoryModel>;
   listeDesForces: Array<InterclubsLDF>;
 
-  teamCount: number;
-  loadedTeamCount: number;
+  selectedMatch: any=null;// pas  bien... à corriger
 
   constructor(
     private selectionService: SelectionService,
@@ -198,10 +194,7 @@ export class SelectionInformationComponent implements OnInit {
   collectTeamData()
   {
     const teamSelectionDataArray: Array<InterclubsTeamSelectionDataModel> = new Array<InterclubsTeamSelectionDataModel>();
-    // this.teamSelectionData=teamSelectionDataArray;
 
-    this.teamCount=this.teamsByInterclubsCategory.length;
-    this.loadedTeamCount=0;
     for(const team of this.teamsByInterclubsCategory)
     {
       const teamSelectionData: InterclubsTeamSelectionDataModel = new InterclubsTeamSelectionDataModel();
@@ -217,7 +210,7 @@ export class SelectionInformationComponent implements OnInit {
       teamSelectionData.match = match;
 
       // Selection
-      const selections = this.selectionService.getSelection(match, this.selectedPublishedSemaine)
+      this.selectionService.getSelection(match, this.selectedPublishedSemaine)
         .subscribe(
           selections => {
             if(selections!==null && selections !==undefined && selections.length>0)
@@ -229,28 +222,21 @@ export class SelectionInformationComponent implements OnInit {
                 teamSelections.push(part);
               }
               teamSelectionData.selections = teamSelections;
-              
-              teamSelectionDataArray.push(teamSelectionData);
-
-              // Object.assign(this.teamSelectionData, teamSelectionDataArray);
-              console.log('Selections for team '+team.Team, teamSelectionData);
+              //console.log('Selections for team '+team.Team, teamSelectionData);
             }
             teamSelectionData.selectionsLoaded=true;
-            this.loadedTeamCount++;
-
-            if(this.teamCount === this.loadedTeamCount)
-            {
-              this.teamSelectionData = teamSelectionDataArray;
-            }
-          },
+          }
+          ,
           err=>console.error('err', err)
   
         );
 
       // Informations
-      //teamSelectionDataArray.push(teamSelectionData);
+
+      // Ajout dans l'array de resultat
+      teamSelectionDataArray.push(teamSelectionData);
     }
 
-    //this.teamSelectionData = teamSelectionDataArray;
+    this.teamSelectionData = teamSelectionDataArray;
   }
 }

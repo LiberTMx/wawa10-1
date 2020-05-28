@@ -13,8 +13,7 @@ export class SelectionInformationByTeamComponent implements OnInit {
   @Input()
   teamData: InterclubsTeamSelectionDataModel;
 
-  @Input()
-  selections: Array<InterclubsLDF>;
+
   
   constructor() { }
 
