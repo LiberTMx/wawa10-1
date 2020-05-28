@@ -9,6 +9,11 @@ import { InterclubsTeamModel } from '../selections/model/interclubs-team.model';
 import { InterclubsMatchModel } from '../selections/model/interclubs-match.model';
 import { InterclubsSemaineVersionModel } from '../selections/model/interclubs-semaine-version.model';
 import { ToastMessageService } from 'src/app/common/services/toast-message.service';
+import { InterclubsTeamSelectionDataModel } from '../selections/model/interclubs-team-selection-data.model';
+import { InterclubsLDF } from '../selections/model/interclubs-ldf.model';
+import { InterclubsLdfParticipantModel } from '../selections/model/interclubs-ldf-participant.model';
+import { InterclubsLdfByCategoryModel } from '../selections/model/interclubs-ldf-by-category.model';
+
 
 
 @Component({
@@ -36,6 +41,15 @@ export class SelectionInformationComponent implements OnInit {
   matches: Array<InterclubsMatchModel>;
 
   
+  teamSelectionData: Array<InterclubsTeamSelectionDataModel> = null;
+
+  ldfParticipants: Array<InterclubsLdfParticipantModel>;
+  ldfByCategory: Array<InterclubsLdfByCategoryModel>;
+  listeDesForces: Array<InterclubsLDF>;
+
+  teamCount: number;
+  loadedTeamCount: number;
+
   constructor(
     private selectionService: SelectionService,
     private toastMessageService: ToastMessageService,
@@ -67,6 +81,22 @@ export class SelectionInformationComponent implements OnInit {
         }
     );
 
+    this.selectionService.getInterclubsLDFParticipants()
+      .subscribe(
+        participants => {
+          this.ldfParticipants = participants;
+        }
+    );
+
+    // Chargement de la composition des listes de forces
+    this.selectionService.getInterclubsLDFByCategory()
+      .subscribe(
+        compositions => {
+          this.ldfByCategory = compositions;
+          console.log('Toutes les données interclubs ont étées lues');
+        }
+    );
+
     // publishedSemaines
     
     this.selectionService.getPublishedInterclubsSemaines()
@@ -76,6 +106,37 @@ export class SelectionInformationComponent implements OnInit {
           console.log('published semaines', semaines);
         }
     );
+  }
+  
+  buildListeDesForcesByCategory(category: InterclubsCategoryModel): Array<InterclubsLDF>
+  {
+    //console.log('Building ldf for catg:', category);
+
+    const ldf=new Array<InterclubsLDF>();
+
+    const ldfCats = this.ldfByCategory.filter( c => c.playerCategory === category.playerCategory);
+    if(ldfCats!==null && ldfCats!==undefined)
+    {
+      for(const ldfCat of ldfCats)
+      {
+        const participant = this.ldfParticipants.find( p => p.id === ldfCat.participantId);
+        if(participant!==null && participant!==undefined)
+        {
+          ldf.push( new InterclubsLDF( participant, ldfCat) );
+        }
+      }
+    }
+
+    // Faut maintenant trier la ldf dans le bon ordre !
+    ldf.sort( (p1, p2) => {
+      if(p1.listeDeForce.position < p2.listeDeForce.position) return -1;
+      if(p1.listeDeForce.position > p2.listeDeForce.position) return +1;
+      return 0;
+    } );
+
+    // console.log('ldf', ldf);
+
+    return ldf;
   }
   
   getFilteredSemaineByCategory(category: InterclubsCategoryModel): Array<InterclubsSemaineModel>
@@ -94,6 +155,7 @@ export class SelectionInformationComponent implements OnInit {
   {
     this.semainesByInterclubsCategory = this.getFilteredSemaineByCategory(this.selectedCategory);
     this.teamsByInterclubsCategory = this.getFilterTeamsByCategory(this.selectedCategory);
+    this.listeDesForces=this.buildListeDesForcesByCategory(this.selectedCategory);
   }
  
   onChangeSemaine(event)
@@ -116,6 +178,8 @@ export class SelectionInformationComponent implements OnInit {
       this.toastMessageService.addError('Selection', 'Pas de selection publiées pour la semaine choisie: '+this.selectedSemaine.weekName ,11000);
       return;
     }
+
+    this.collectTeamData();
   }
 
   getFilterTeamsByCategory(category: InterclubsCategoryModel): Array<InterclubsTeamModel>
@@ -131,15 +195,62 @@ export class SelectionInformationComponent implements OnInit {
     return filterTeams;
   }
 
-  brol()
+  collectTeamData()
   {
-    for( const team of this.teamsByInterclubsCategory)
+    const teamSelectionDataArray: Array<InterclubsTeamSelectionDataModel> = new Array<InterclubsTeamSelectionDataModel>();
+    // this.teamSelectionData=teamSelectionDataArray;
+
+    this.teamCount=this.teamsByInterclubsCategory.length;
+    this.loadedTeamCount=0;
+    for(const team of this.teamsByInterclubsCategory)
     {
-      const match = this.matches.find( m => m.awayTeamId === team.TeamId || m.homeTeamId === team.TeamId);
-      // match: InterclubsMatchModel, version: InterclubsSemaineVersionModel
-      
+      const teamSelectionData: InterclubsTeamSelectionDataModel = new InterclubsTeamSelectionDataModel();
+      // Team
+      teamSelectionData.team = team;
+      // Match
+      const match = this.matches.find( m => 
+        m.WeekName === this.selectedSemaine.weekName
+        && ( m.homeTeamId === team.TeamId || m.awayTeamId === team.TeamId ) 
+      );
+
+      // const match = this.matches.find( m => m.awayTeamId === team.TeamId || m.homeTeamId === team.TeamId);
+      teamSelectionData.match = match;
+
+      // Selection
       const selections = this.selectionService.getSelection(match, this.selectedPublishedSemaine)
-        .subscribe();
+        .subscribe(
+          selections => {
+            if(selections!==null && selections !==undefined && selections.length>0)
+            {
+              const teamSelections: Array<InterclubsLDF> = new Array<InterclubsLDF>();
+              for(const sel of selections)
+              {
+                const part: InterclubsLDF = this.listeDesForces.find( p => p.participant.authUserId === sel.auth_user_id);
+                teamSelections.push(part);
+              }
+              teamSelectionData.selections = teamSelections;
+              
+              teamSelectionDataArray.push(teamSelectionData);
+
+              // Object.assign(this.teamSelectionData, teamSelectionDataArray);
+              console.log('Selections for team '+team.Team, teamSelectionData);
+            }
+            teamSelectionData.selectionsLoaded=true;
+            this.loadedTeamCount++;
+
+            if(this.teamCount === this.loadedTeamCount)
+            {
+              this.teamSelectionData = teamSelectionDataArray;
+            }
+          },
+          err=>console.error('err', err)
+  
+        );
+
+      // Informations
+      //teamSelectionDataArray.push(teamSelectionData);
     }
+
+    //this.teamSelectionData = teamSelectionDataArray;
   }
 }

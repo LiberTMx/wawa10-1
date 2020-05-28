@@ -14,11 +14,12 @@ import { SelectionService } from './selections/services/selection.service';
 import { HommesComponent } from './selections/selection/hommes/hommes.component';
 import { AppCommonModule } from '../common/app-common.module';
 import { SelectionInformationComponent } from './selection-information/selection-information.component';
+import { SelectionInformationByTeamComponent } from './selection-information-by-team/selection-information-by-team.component';
 
 
 
 @NgModule({
-  declarations: [FeuilleDeMatchComponent, SelectionComponent, HommesComponent, SelectionInformationComponent],
+  declarations: [FeuilleDeMatchComponent, SelectionComponent, HommesComponent, SelectionInformationComponent, SelectionInformationByTeamComponent],
   imports: [
     CommonModule,
     AppCommonModule,
