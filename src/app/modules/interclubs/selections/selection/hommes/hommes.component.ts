@@ -185,7 +185,7 @@ export class HommesComponent implements OnInit {
   {
     if(this.selectedSemaineVersion===null 
         || this.selectedSemaineVersion===undefined 
-        || this.selectedSemaineVersion.semaine_version_statut!=='working') 
+        || (this.selectedSemaineVersion.semaine_version_statut!=='working' && this.selectedSemaineVersion.semaine_version_statut!=='published') ) 
     {
       this.toastMessageService.addError('Selection', 'Vous devez sélectionner une version working ',11000);
       return;
