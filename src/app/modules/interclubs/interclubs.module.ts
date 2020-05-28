@@ -15,11 +15,12 @@ import { HommesComponent } from './selections/selection/hommes/hommes.component'
 import { AppCommonModule } from '../common/app-common.module';
 import { SelectionInformationComponent } from './selection-information/selection-information.component';
 import { SelectionValidationDialogComponent } from './selection-validation-dialog/selection-validation-dialog.component';
+import { SelectionInformationByTeamComponent } from './selection-information-by-team/selection-information-by-team.component';
 
 
 
 @NgModule({
-  declarations: [FeuilleDeMatchComponent, SelectionComponent, HommesComponent, SelectionInformationComponent, SelectionValidationDialogComponent],
+  declarations: [FeuilleDeMatchComponent, SelectionComponent, HommesComponent, SelectionInformationComponent, SelectionInformationByTeamComponent, SelectionValidationDialogComponent],
   imports: [
     CommonModule,
     AppCommonModule,
