@@ -18,11 +18,15 @@ import { SelectionValidationDialogComponent } from './selection-validation-dialo
 import { SelectionInformationByTeamComponent } from './selection-information-by-team/selection-information-by-team.component';
 import { ListeDeForceComponent } from './liste-de-force/liste-de-force.component';
 import { AuthModule } from '../auth/auth.module';
+import { DamesComponent } from './selections/selection/dames/dames.component';
 
 
 
 @NgModule({
-  declarations: [FeuilleDeMatchComponent, SelectionComponent, HommesComponent, SelectionInformationComponent, SelectionInformationByTeamComponent, SelectionValidationDialogComponent, ListeDeForceComponent],
+  declarations: [FeuilleDeMatchComponent, SelectionComponent, 
+    HommesComponent, DamesComponent,
+    SelectionInformationComponent, SelectionInformationByTeamComponent, SelectionValidationDialogComponent, 
+    ListeDeForceComponent],
   imports: [
     CommonModule,
     AppCommonModule,

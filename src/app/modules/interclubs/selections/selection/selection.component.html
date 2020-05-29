@@ -23,4 +23,15 @@
         </app-interclubs-selections-hommes>
     </div>
 
+    <div *ngIf="selectedInterclubCategoryId === 2 && ldfParticipants && ldfByCategory">
+        <app-interclubs-selections-dames 
+            [semaines]=" getFilteredSemaineByCategory( selectedInterclubCategory )  "
+            [listeDesForces]=" buildListeDesForcesByCategory( selectedInterclubCategory ) "
+            [teams]="getFilterTeamsByCategory( selectedInterclubCategory)"
+            [matches]="getFilteredMatchesByCategory( selectedInterclubCategory)"
+            [interclubCategory]="selectedInterclubCategory"
+            >
+        </app-interclubs-selections-dames>
+    </div>
+
 </div>
