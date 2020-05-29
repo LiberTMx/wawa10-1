@@ -1,0 +1,13 @@
+<p>liste-de-force works!</p>
+
+<button type="button" class="btn btn-sm" (click)="onVerifyParticipantToUserLink()">Verifier liaison participant (ldf) - Profil utilisateur</button>
+
+<div *ngIf="verifyErrors && verifyErrors.length>0">
+    <table>
+        <tr *ngFor="let err of verifyErrors">
+            <td>{{ err.nom }}</td>
+            <td>{{ err.prenom }}</td>
+            <td>{{ err.licence }}</td>
+        </tr>
+    </table>
+</div>

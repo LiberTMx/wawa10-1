@@ -16,7 +16,8 @@
                                     <td>{{ item.participant.prenom}}</td>
                                     <td>{{ item.listeDeForce.rankingIndex}}</td>
                                     <td>{{ item.listeDeForce.classement}}</td>
-
+                                    <td *ngIf="item.allowed">&nbsp;</td>
+                                    <td *ngIf="!item.allowed"><i class="fas fa-exclamation-triangle" title="Sélection interdite - Pas de fiche membre"></i></td>
                             </tr>
                         </table> 
 

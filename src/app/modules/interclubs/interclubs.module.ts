@@ -16,11 +16,13 @@ import { AppCommonModule } from '../common/app-common.module';
 import { SelectionInformationComponent } from './selection-information/selection-information.component';
 import { SelectionValidationDialogComponent } from './selection-validation-dialog/selection-validation-dialog.component';
 import { SelectionInformationByTeamComponent } from './selection-information-by-team/selection-information-by-team.component';
+import { ListeDeForceComponent } from './liste-de-force/liste-de-force.component';
+import { AuthModule } from '../auth/auth.module';
 
 
 
 @NgModule({
-  declarations: [FeuilleDeMatchComponent, SelectionComponent, HommesComponent, SelectionInformationComponent, SelectionInformationByTeamComponent, SelectionValidationDialogComponent],
+  declarations: [FeuilleDeMatchComponent, SelectionComponent, HommesComponent, SelectionInformationComponent, SelectionInformationByTeamComponent, SelectionValidationDialogComponent, ListeDeForceComponent],
   imports: [
     CommonModule,
     AppCommonModule,
@@ -34,6 +36,9 @@ import { SelectionInformationByTeamComponent } from './selection-information-by-
     FormsModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+
+    AuthModule,
+    
   ],
   exports: [
     InterclubsRoutingModule,

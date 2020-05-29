@@ -86,7 +86,7 @@ export class HommesComponent implements OnInit {
     participant.nom='';
     participant.prenom='';
     const ldf=new InterclubsLdfByCategoryModel();
-    this.emptyPlayer=new InterclubsLDF(participant, ldf);
+    this.emptyPlayer=new InterclubsLDF(participant, ldf, true);
 
   }
 
@@ -187,7 +187,7 @@ export class HommesComponent implements OnInit {
         || this.selectedSemaineVersion===undefined 
         || (this.selectedSemaineVersion.semaine_version_statut!=='working' && this.selectedSemaineVersion.semaine_version_statut!=='published') ) 
     {
-      this.toastMessageService.addError('Selection', 'Vous devez sélectionner une version working ',11000);
+      this.toastMessageService.addError('Selection', 'Vous devez sélectionner une version working oou published',11000);
       return;
     }
     if(this.selectedMatch===null || this.selectedMatch===undefined) 
@@ -197,6 +197,12 @@ export class HommesComponent implements OnInit {
     }
     if(this.selectedJoueur===null || this.selectedJoueur===undefined) {
       this.toastMessageService.addError('Selection', 'Vous devez sélectionner un joueur',11000);
+      return;
+    }
+
+    if( ! this.selectedJoueur.allowed)
+    {
+      this.toastMessageService.addError('Selection REJETEE', 'Veuillez d\'abord définir une fiche membre pour ce joueur!',11000);
       return;
     }
 
@@ -412,9 +418,9 @@ export class HommesComponent implements OnInit {
     // Il faut avoir une semaine active et en mode working !
     if(this.selectedSemaineVersion===null 
       || this.selectedSemaineVersion===undefined 
-      || this.selectedSemaineVersion.semaine_version_statut!=='working') 
+      || (this.selectedSemaineVersion.semaine_version_statut!=='working' && this.selectedSemaineVersion.semaine_version_statut!=='published')) 
     {
-      this.toastMessageService.addError('Validation des sélections', 'Vous devez sélectionner une version working ',11000);
+      this.toastMessageService.addError('Validation des sélections', 'Vous devez sélectionner une version working ou published',11000);
       return;
     }
 
@@ -427,13 +433,16 @@ export class HommesComponent implements OnInit {
           selectedSemaine: InterclubsSemaineModel, 
           selectedSemaineVersion: InterclubsSemaineVersionModel,
           teams: Array<InterclubsTeamModel>, 
-          matches: Array<InterclubsMatchModel>}
+          matches: Array<InterclubsMatchModel>,
+          listeDesForces: Array<InterclubsLDF>
+        }
       = { 
         interclubCategory: this.interclubCategory, 
         selectedSemaine: this.selectedSemaine, 
         selectedSemaineVersion: this.selectedSemaineVersion,
         teams: this.teams,
         matches,
+        listeDesForces: this.listeDesForces,
     };
 
     const dialogConfig = new MatDialogConfig();
@@ -464,7 +473,7 @@ export class HommesComponent implements OnInit {
   {
     if(this.selectedSemaineVersion===null 
         || this.selectedSemaineVersion===undefined 
-        || this.selectedSemaineVersion.semaine_version_statut!=='working') 
+        || this.selectedSemaineVersion.semaine_version_statut!=='working'  ) 
     {
       this.toastMessageService.addError('Selection', 'Vous ne pouvez publier qu\'une version working ',11000);
       return;

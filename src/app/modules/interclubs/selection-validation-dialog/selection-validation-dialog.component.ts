@@ -7,6 +7,7 @@ import { InterclubsTeamModel } from '../selections/model/interclubs-team.model';
 import { InterclubsMatchModel } from '../selections/model/interclubs-match.model';
 import { SelectionService } from '../selections/services/selection.service';
 import { InterclubsSelectionModel } from '../selections/model/interclubs-selection.model';
+import { InterclubsLDF } from '../selections/model/interclubs-ldf.model';
 
 @Component({
   selector: 'app-selection-validation-dialog',
@@ -20,7 +21,8 @@ export class SelectionValidationDialogComponent implements OnInit {
     selectedSemaine: InterclubsSemaineModel, 
     selectedSemaineVersion: InterclubsSemaineVersionModel,
     teams: Array<InterclubsTeamModel>, 
-    matches: Array<InterclubsMatchModel>
+    matches: Array<InterclubsMatchModel>,
+    listeDesForces: Array<InterclubsLDF>
   };
 
   loading = true;
@@ -29,13 +31,18 @@ export class SelectionValidationDialogComponent implements OnInit {
   storedSelectionsMap: Map<InterclubsTeamModel, Array<InterclubsSelectionModel> > 
                               = new Map<InterclubsTeamModel, Array<InterclubsSelectionModel> >();
 
+  
   // Diagnotics
   validating=true;
   selectionCount=0;
   attendedSelectionCount=0;
 
-  validationResults: Array<{team: InterclubsTeamModel, rule1: boolean, rule2: boolean, rule3: boolean, tSize: number}>
-    =new Array<{team: InterclubsTeamModel, rule1: boolean, rule2: boolean, rule3: boolean, tSize: number}>();
+  validationResults: Array<{team: InterclubsTeamModel, rule1: boolean, rule2: boolean, rule3: boolean, tSize: number, color: string}>
+    =new Array<{team: InterclubsTeamModel, rule1: boolean, rule2: boolean, rule3: boolean, tSize: number, color: string}>();
+
+  playerToTeamMap: Map<InterclubsSelectionModel, Array<InterclubsTeamModel> >;
+
+  multipleSelections: Array<{ldf: InterclubsLDF, teams: Array<InterclubsTeamModel>} >;
 
   constructor(
     private dialogRef: MatDialogRef<SelectionValidationDialogComponent>,
@@ -46,7 +53,8 @@ export class SelectionValidationDialogComponent implements OnInit {
       selectedSemaine: InterclubsSemaineModel, 
       selectedSemaineVersion: InterclubsSemaineVersionModel,
       teams: Array<InterclubsTeamModel>, 
-      matches: Array<InterclubsMatchModel>
+      matches: Array<InterclubsMatchModel>,
+      listeDesForces: Array<InterclubsLDF>
     },
 
     private selectionService: SelectionService,
@@ -64,7 +72,7 @@ export class SelectionValidationDialogComponent implements OnInit {
 
     this.loadSelectionByTeam(teamSize);
 
-    this.validateSelections(teamSize);
+    
   }
 
   evaluateAttendedSelectionCount(teamSize: number)
@@ -104,17 +112,26 @@ export class SelectionValidationDialogComponent implements OnInit {
               else
               {
                 console.log('NO Selections for team '+team.Team+' !!! ');
+                this.storedSelectionsMap.set(team, null);
               }
+              if(c===teams.length)
+              {
+                this.loading = false;
+                this.validateSelections(teamSize);
+              } 
             }
             ,
             err => console.error(err)
             ,
             () => {
-              if(c===teams.length) this.loading = false;
+              //if(c===teams.length) this.loading = false;
             }
           );
       }
     }
+
+    this.playerToTeamMap=playerToTeamMap;
+
   }
 
   private mapPlayerToTeam(
@@ -124,7 +141,19 @@ export class SelectionValidationDialogComponent implements OnInit {
   {
     for(const sel of validSelections)
     {
-      let arr = playerToTeamMap.get(sel);
+
+      let arr=null;
+      for (const entry of this.playerToTeamMap.entries()) 
+      {
+        console.log(entry[0], entry[1]);   
+        if(entry[0].auth_user_id === sel.auth_user_id)
+        {
+          arr=entry[1];
+        }
+      }
+
+      //let arr = playerToTeamMap.get(sel);
+
       if(arr===null || arr === undefined)
       {
         arr = new Array<InterclubsTeamModel>();
@@ -153,35 +182,109 @@ export class SelectionValidationDialogComponent implements OnInit {
 
   validateSelections(teamSize: number)
   {
+    
+    this.validationResults=new Array<
+      {team: InterclubsTeamModel, rule1: boolean, rule2: boolean, rule3: boolean, tSize: number, color: string}
+      >();
     ///const selectedPlayer: any;
 
     // {team: InterclubsTeamModel, rule1: boolean, rule2: boolean, rule3: boolean}
     let teamNumber = 0;
     
+    const selectionMultiple=null;
+
+    let previousTeam=null;
+    let previousSelections=null;
+    let rule4=true;
+
     for(const team of this.infos.teams)
     { 
-      let rule1=true;
-      let rule2=true; 
-      let rule3=true;
+      let rule1=true;//C.22.11 Un joueur ne peut être aligné à une place plus basse que celle indiquée par son indice de référence.
+      let rule2=true;//C.22.13 Le premier joueur d'une équipe ne peut avoir un indice de référence plus petit 
+                     //que celui du troisième joueur de l'équipe supérieure <br> 
+      let rule3=true;// Vérifier aussi que dans chaque équipe on a au min 3 joueurs (2 pour les dames)
 
+      // rule4: un joueur ne peut être sélectionné qu'une seule fois !
       teamNumber++;
       let tSize=0;
       const rankingIndexMin = (teamNumber - 1 ) * teamSize + 1;
       const rankingIndexMax = rankingIndexMin + teamSize - 1 ;
       const selections = this.storedSelectionsMap.get(team);
+      console.log('selection team '+team.Team, selections);
       if(selections===null || selections===undefined) 
       { 
-        rule3 = false;
+        rule3 = false;// regle 3 non respectée
       }
       else
       {
         tSize = selections.length;
-        rule3 = (tSize === teamSize);
+        rule3 = (tSize === teamSize || tSize === teamSize-1 );
+
+        // verif rule 1
+        console.log('verify rule 1 ', rankingIndexMin, rankingIndexMax);
+        for(const sel of selections)
+        {
+          if(sel.ranking_index<rankingIndexMin /*|| sel.ranking_index > rankingIndexMax*/) 
+          {
+            rule1=false;
+            console.log('rule 1 not respected', sel);
+          }
+        }
       }
 
+      // rule 2
+      if(previousTeam!==null && previousSelections!==null && previousSelections!==undefined && previousSelections.length>0
+        && selections!==null && selections!==undefined && selections.length>0 )
+      {
+        const currentTeamFirstPlayer=selections.find( s => s.position === 1);
+        const previousTeamThirdPlayer=previousSelections.find( s => s.position === 3);
+
+        if(currentTeamFirstPlayer!==null && currentTeamFirstPlayer!==undefined && previousTeamThirdPlayer!==null && previousTeamThirdPlayer!==undefined)
+        {
+          if(currentTeamFirstPlayer.ranking_index < previousTeamThirdPlayer.ranking_index) rule2=false;
+        }
+      }
+
+
+      const color=(rule1 && rule2 && rule3) ? 'color: green;' : 'color: red; font-weight: bold;';
       this.validationResults.push(
-        {team, rule1, rule2, rule3, tSize}
+        {team, rule1, rule2, rule3, tSize, color}
       );
+
+      previousTeam=team;
+      previousSelections=selections;
+    }
+
+    // rule 4: selections multiples
+    if( this.playerToTeamMap!==null && this.playerToTeamMap!==undefined)
+    {
+      const multipleSelections: Array<{ldf: InterclubsLDF, teams: Array<InterclubsTeamModel>} >
+                            = new Array<{ldf: InterclubsLDF, teams: Array<InterclubsTeamModel>} >();
+
+      // playerToTeamMap: Map<InterclubsSelectionModel, Array<InterclubsTeamModel> >;
+      //const keys=this.playerToTeamMap.keys;
+      for (const entry of this.playerToTeamMap.entries()) 
+      {
+        console.log(entry[0], entry[1]);
+        if(entry[1]!==null && entry[1]!==undefined && entry[1].length>1)
+        {
+          rule4=false;
+
+          const sel: InterclubsSelectionModel=entry[0];
+          const teams: Array<InterclubsTeamModel>=entry[1];
+          const ldf: InterclubsLDF = this.infos.listeDesForces.find( p => p.participant.authUserId === sel.auth_user_id);
+
+          multipleSelections.push(
+            {ldf, teams}
+          );
+        }
+      }
+
+      if(!rule4)
+      {
+        this.multipleSelections = multipleSelections;
+      }
+
     }
     this.validating=false;
   }

@@ -5,7 +5,8 @@ export class InterclubsLDF
 {
     constructor(
         public participant: InterclubsLdfParticipantModel,
-        public listeDeForce: InterclubsLdfByCategoryModel
+        public listeDeForce: InterclubsLdfByCategoryModel,
+        public allowed: boolean,
     ) {}
    
 }
