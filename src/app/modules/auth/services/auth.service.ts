@@ -326,4 +326,10 @@ export class AuthService {
       const apiUrl=`${environment.apiUrl}/auth/comite`;
       return this.httpClient.get<Array<AuthUserModel>>( apiUrl );
     }
+
+    findUserByLicence(licence: string): Observable<AuthUserModel>
+    {
+      const apiUrl=`${environment.apiUrl}/auth/userByLicence/${licence}`;
+      return this.httpClient.get<AuthUserModel>( apiUrl );
+    }
 }

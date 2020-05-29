@@ -168,4 +168,12 @@ export class SelectionService {
       version: JSON.stringify(version)
     });
   }
+
+  updateLdfParticipant(participant: InterclubsLdfParticipantModel): Observable<InterclubsLdfParticipantModel> 
+  {
+    const apiUrl=`${environment.apiUrl}/interclubs/updateLdfParticipant`;
+    return this.httpClient.post<InterclubsLdfParticipantModel>(apiUrl, {
+      participant: JSON.stringify(participant)
+    });
+  }
 }

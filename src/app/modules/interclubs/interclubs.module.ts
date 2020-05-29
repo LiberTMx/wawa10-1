@@ -14,12 +14,22 @@ import { SelectionService } from './selections/services/selection.service';
 import { HommesComponent } from './selections/selection/hommes/hommes.component';
 import { AppCommonModule } from '../common/app-common.module';
 import { SelectionInformationComponent } from './selection-information/selection-information.component';
+import { SelectionValidationDialogComponent } from './selection-validation-dialog/selection-validation-dialog.component';
 import { SelectionInformationByTeamComponent } from './selection-information-by-team/selection-information-by-team.component';
+import { ListeDeForceComponent } from './liste-de-force/liste-de-force.component';
+import { AuthModule } from '../auth/auth.module';
+import { DamesComponent } from './selections/selection/dames/dames.component';
+import { VeteransComponent } from './selections/selection/veterans/veterans.component';
+import { AineesComponent } from './selections/selection/ainees/ainees.component';
+import { JeunesComponent } from './selections/selection/jeunes/jeunes.component';
 
 
 
 @NgModule({
-  declarations: [FeuilleDeMatchComponent, SelectionComponent, HommesComponent, SelectionInformationComponent, SelectionInformationByTeamComponent],
+  declarations: [FeuilleDeMatchComponent, SelectionComponent, 
+    HommesComponent, DamesComponent,
+    SelectionInformationComponent, SelectionInformationByTeamComponent, SelectionValidationDialogComponent, 
+    ListeDeForceComponent, VeteransComponent, AineesComponent, JeunesComponent],
   imports: [
     CommonModule,
     AppCommonModule,
@@ -33,6 +43,9 @@ import { SelectionInformationByTeamComponent } from './selection-information-by-
     FormsModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+
+    AuthModule,
+    
   ],
   exports: [
     InterclubsRoutingModule,
@@ -40,6 +53,7 @@ import { SelectionInformationByTeamComponent } from './selection-information-by-
   ],
   providers: [
     SelectionService,
-  ]
+  ],
+  entryComponents: [SelectionValidationDialogComponent]
 })
 export class InterclubsModule { }

@@ -1,0 +1,90 @@
+<h3>Validation des sélections pour l'interclubs: {{ infos.interclubCategory.synonyme }}</h3>
+
+<div *ngIf="loading">
+    {{ loadingInfos }}
+</div>
+
+<div *ngIf="! loading" class="result-container">
+    <p>
+    <small>
+        Nombre d'équipes: {{ infos.teams.length }} <br>
+        Nombre de sélections attendues: {{attendedSelectionCount}} <br>
+        Nombre de sélections réqlisées: {{ selectionCount }} <br>
+    </small>
+    </p>
+
+    <div *ngIf="validating">
+        <p>Validation en cours...</p>
+    </div>
+
+    <div>
+        <table mdbTable small="true" hover="true">
+            <thead>
+                <tr>
+                    <th>Team</th>
+                    <th>Size</th>
+                    <th>C.22.11</th>
+                    <th>C.22.13</th>
+                    <th>Min J</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr mdbTableCol  *ngFor="let item of validationResults; let ix = index" >
+                        <td scope="row"><span [style]="item.color">{{ item.team.Team}}</span></td>
+                        <td>{{ item.tSize }}</td>
+                        <td>{{ item.rule1 }}</td>
+                        <td>{{ item.rule2 }}</td>
+                        <td>{{ item.rule3 }}</td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+
+    <div *ngIf="multipleSelections">
+        <br>
+        <h5>Sélections multiples !!!</h5>
+        <table>
+            <tr *ngFor="let se of multipleSelections">
+                <td>{{ se.ldf.participant.prenom }} &nbsp; {{ se.ldf.participant.nom }}</td>
+                <td>est sélectionné plusieurs fois:</td>
+                <td>
+                    <span *ngFor="let tt of se.teams">{{ tt.Team }}, </span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <button type="button" class="btn btn-sm btn-warning" (click)="onCloseDialog()">Fermer la fenêtre</button>
+    </div>
+
+    <br>
+    <hr>
+    <div>
+        <h4>Les règles de validation</h4>
+        Règle 1: <br>
+            C.22.11 Un joueur ne peut être aligné à une place plus basse que celle indiquée par son indice de référence. <br>
+            <br>
+            Exemples: <br>
+            Indice de réf. 3: ce joueur ne peut être aligné qu'en équipe A jusqu'à la place 3. <br>
+            Indice de réf. 7: ce joueur peut être aligné dans les équipes A et B jusqu'à la place 7 (messieurs). <br>
+            Indice de réf. 10: ce joueur peut être aligné dans les équipes A, B et C jusqu'à la	place 10 (messieurs). <br>
+        <br>
+        Règle 2: <br>
+            C.22.13 Le premier joueur d'une équipe ne peut avoir un indice de référence plus petit que <br>
+            celui du troisième joueur de l'équipe supérieure <br>
+        <br>
+        Règle 3: <br>
+            Vérifier aussi que dans chaque équipe on a au min 3 joueurs (2 pour les dames). <br>
+        <br>
+        Règle 4: <br>
+            Vérifier que chaque joueur n'est sélectionné qu'une seule fois. <br>
+            Si plusieurs fois avec  1<=pos<=4, alors erreur. <br>
+            Si une fois 5<=pos<=8 (réserve), alors warning. <br>
+        <br>
+    </div>
+
+</div>
+
+
+

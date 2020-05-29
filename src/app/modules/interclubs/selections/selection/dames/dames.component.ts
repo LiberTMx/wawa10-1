@@ -1,26 +1,26 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { InterclubsSemaineModel } from '../../model/interclubs-semaine.model';
-import { MatSelectChange } from '@angular/material/select';
 import { InterclubsLDF } from '../../model/interclubs-ldf.model';
 import { InterclubsTeamModel } from '../../model/interclubs-team.model';
 import { InterclubsMatchModel } from '../../model/interclubs-match.model';
-import { SelectionService } from '../../services/selection.service';
+import { InterclubsCategoryModel } from '../../model/interclubs-category.model';
 import { InterclubsSemaineVersionModel } from '../../model/interclubs-semaine-version.model';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { InterclubsSelectionModel } from '../../model/interclubs-selection.model';
-import { ToastMessageService } from 'src/app/common/services/toast-message.service';
+import { SelectionService } from '../../services/selection.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ToastMessageService } from '../../../../../common/services/toast-message.service';
 import { InterclubsLdfParticipantModel } from '../../model/interclubs-ldf-participant.model';
 import { InterclubsLdfByCategoryModel } from '../../model/interclubs-ldf-by-category.model';
-import { InterclubsCategoryModel } from '../../model/interclubs-category.model';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatSelectChange } from '@angular/material/select';
+import { InterclubsSelectionModel } from '../../model/interclubs-selection.model';
 import { SelectionValidationDialogComponent } from '../../../selection-validation-dialog/selection-validation-dialog.component';
 
 @Component({
-  selector: 'app-interclubs-selections-hommes',
-  templateUrl: './hommes.component.html',
-  styleUrls: ['./hommes.component.scss']
+  selector: 'app-interclubs-selections-dames',
+  templateUrl: './dames.component.html',
+  styleUrls: ['./dames.component.scss']
 })
-export class HommesComponent implements OnInit {
+export class DamesComponent implements OnInit {
 
   @Input()
   semaines: Array<InterclubsSemaineModel>;
@@ -36,7 +36,7 @@ export class HommesComponent implements OnInit {
   
   @Input()
   interclubCategory: InterclubsCategoryModel;
-
+  
   selectedSemaine: InterclubsSemaineModel=null;
   selectedTeam: InterclubsTeamModel=null;
   selectedMatch: InterclubsMatchModel = null;
@@ -61,9 +61,7 @@ export class HommesComponent implements OnInit {
     private formBuilder: FormBuilder,
     private matDialog: MatDialog,
     private toastMessageService: ToastMessageService,
-    ) 
-  { 
-  }
+  ) { }
 
   ngOnInit(): void 
   {
@@ -493,5 +491,6 @@ export class HommesComponent implements OnInit {
   onValidateNextVersion()
   {
   }
+
 
 }

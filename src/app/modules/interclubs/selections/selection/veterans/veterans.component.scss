@@ -1,0 +1,46 @@
+
+::ng-deep .mat-select{
+    // min-width: 350px !important;
+    width: 200px;
+    //background-color: rgb(132, 178, 247);
+    font-size: 12px;   
+}
+
+.small{
+    height: 220px;
+}
+.selection-table{
+    height: 100px;
+}
+
+.button {
+    padding: 7px;
+    border-radius: 5px;
+
+}
+/* .table tr.active td {
+    background-color:#123456 !important;
+    color: white;
+ } */
+
+.ldf-table {
+    //width: 716px; /* 140px * 5 column + 16px scrollbar width */
+    border-spacing: 0;
+    display: block;
+    height: calc(100vh - 250px);
+    overflow: auto;
+    font-size: 12px;
+
+    td{
+        font-size: 11px;
+    }
+    tr.active td {
+        font-size: 13px;
+        background-color:#123456 !important;
+        color: white;
+    }
+}
+
+.badge_style {
+    cursor: pointer;
+}

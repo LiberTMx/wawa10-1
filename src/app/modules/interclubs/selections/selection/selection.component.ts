@@ -139,9 +139,10 @@ export class SelectionComponent implements OnInit {
       for(const ldfCat of ldfCats)
       {
         const participant = this.ldfParticipants.find( p => p.id === ldfCat.participantId);
-        if(participant!==null && participant!==undefined)
+        if(participant!==null && participant!==undefined )
         {
-          ldf.push( new InterclubsLDF( participant, ldfCat) );
+          const allowed=participant.authUserId!==null && participant.authUserId!==undefined && participant.authUserId>0;
+          ldf.push( new InterclubsLDF( participant, ldfCat, allowed) );
         }
       }
     }
