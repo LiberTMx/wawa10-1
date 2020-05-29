@@ -19,6 +19,9 @@ import { SelectionInformationByTeamComponent } from './selection-information-by-
 import { ListeDeForceComponent } from './liste-de-force/liste-de-force.component';
 import { AuthModule } from '../auth/auth.module';
 import { DamesComponent } from './selections/selection/dames/dames.component';
+import { VeteransComponent } from './selections/selection/veterans/veterans.component';
+import { AineesComponent } from './selections/selection/ainees/ainees.component';
+import { JeunesComponent } from './selections/selection/jeunes/jeunes.component';
 
 
 
@@ -26,7 +29,7 @@ import { DamesComponent } from './selections/selection/dames/dames.component';
   declarations: [FeuilleDeMatchComponent, SelectionComponent, 
     HommesComponent, DamesComponent,
     SelectionInformationComponent, SelectionInformationByTeamComponent, SelectionValidationDialogComponent, 
-    ListeDeForceComponent],
+    ListeDeForceComponent, VeteransComponent, AineesComponent, JeunesComponent],
   imports: [
     CommonModule,
     AppCommonModule,
