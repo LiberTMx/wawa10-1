@@ -29,6 +29,21 @@ export class EntrainementsService {
     return this.httpClient.post<EntrainementClasseModel>(apiUrl,  postData);
   }
 
+  updateClasse(classeFormValue: any): Observable<EntrainementClasseModel> 
+  {
+    const apiUrl=`${environment.apiUrl}/entrainement/updateClasse`;
+    const postData = new FormData();
+    postData.append('id', classeFormValue.id);
+    postData.append('titre' , classeFormValue.titre );
+    postData.append('presentation' , classeFormValue.presentation );
+    postData.append('status' , classeFormValue.status );
+    postData.append('externalLink' , classeFormValue.externalLink );
+    postData.append('showOrder' , classeFormValue.showOrder );
+    postData.append('avatar' , classeFormValue.avatar );
+    postData.append('image' , classeFormValue.image );
+    return this.httpClient.post<EntrainementClasseModel>(apiUrl,  postData);
+  }
+
   getEntrainementClasses(readAll: boolean): Observable< Array<EntrainementClasseModel> >
   {
     const url=`${environment.apiUrl}`;  

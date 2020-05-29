@@ -1,15 +1,36 @@
 .feature-image {
-    max-width: 300px;
+    max-width: 350px;
     max-height: 180px;
 
     .classe-image {
         max-width: 300px;
         max-height: 180px;
-        width: 250px;
+        width: 300px;
         height:180px;
     }
 }
 
 .classe-preview {
-    max-width: 300px !important;
+    max-width: 350px !important;
+    //height: 250px !important;
+}
+
+.entrainement-classe {
+    height: 250px;
+}
+
+.entrainement-classe-presentation {
+    height: 100px !important;
+    //min-height: 100px !important;
+    
+}
+
+.entrainement-classe-footer {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 10px;
+}
+
+.badge_style {
+    cursor: pointer;
 }

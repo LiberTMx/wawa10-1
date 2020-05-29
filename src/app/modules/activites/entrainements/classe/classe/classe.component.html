@@ -1,4 +1,5 @@
 <div *ngIf="classe" class="classe-preview">
+  <div class="entrainement-classe2">
     <mdb-card>
         <div class="view rgba-white-slight waves-light feature-image" mdbWavesEffect>
           <!-- Card img -->
@@ -19,21 +20,34 @@
           </a>
         </div>
         <!--Card content-->
-        <mdb-card-body>
+        <mdb-card-body class="entrainement-classe">
           <!--Title-->
           <mdb-card-title>
             <h4>{{ classe.titre }}</h4>
           </mdb-card-title>
     
-          <!--Text-->
-          <mdb-card-text> {{ classe.presentation }} </mdb-card-text>
-    
-          <!-- <a href="#" mdbBtn color="primary" mdbWavesEffect (click)="onShowClasseDetails()">Button</a> -->
-          <button type="button" class="btn btn-sm btn-success" (click)="onShowClasseGroupes()">Détails...</button>
-          <span *ngIf="classe.externalLink">
-            <br>
-            <a [href]="classe.externalLink" target="_blank" color="secondary" mdbWavesEffect>Infos externes</a>
-          </span>
+          <p-scrollPanel [style]="{width: '100%', height: '100px'}">
+            {{ classe.presentation }}
+          </p-scrollPanel>
+
+          <div class="entrainement-classe-footer">
+            <button type="button" class="btn btn-sm btn-success" (click)="onShowClasseGroupes()">Détails...</button>
+            &nbsp;
+
+            <span *ngIf="classe.externalLink">
+              <a [href]="classe.externalLink" target="_blank" color="secondary" mdbWavesEffect>Infos...</a>
+            </span>
+            &nbsp;
+
+            <span class="badge badge-info badge_style" title="Modifier la classe" *ngIf="isUserClubAdmin()"
+              (click)="onEditEntrainementClasse()">
+              <i class="fas fa-edit"></i>
+            </span>
+            &nbsp;
+
+          </div>
+
         </mdb-card-body>
-      </mdb-card>
+    </mdb-card>
+  </div>
 </div>

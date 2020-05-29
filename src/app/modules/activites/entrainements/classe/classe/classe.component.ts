@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { EntrainementClasseModel } from '../../model/entrainement-classe.model';
 import { EntrainementsService } from '../../services/entrainements.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-entrainement-classe',
@@ -20,6 +21,7 @@ export class ClasseComponent implements OnInit {
   isImageLoading = true;
 
   constructor(
+    private authService: AuthService,
     private entrainementsService: EntrainementsService,
     private router: Router,
   ) { }
@@ -65,5 +67,15 @@ export class ClasseComponent implements OnInit {
   onShowClasseGroupes()
   {
     this.router.navigate(['activites', 'entrainements', 'classe-groupes', this.classe.id]);
+  }
+
+  isUserClubAdmin(): boolean
+  {
+    return this.authService.isUserClubAdmin();
+  }
+
+  onEditEntrainementClasse()
+  {
+    this.router.navigate(['activites', 'entrainements', 'classe-edit', this.classe.id]);
   }
 }
