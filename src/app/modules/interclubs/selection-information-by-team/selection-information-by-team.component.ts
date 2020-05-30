@@ -19,6 +19,112 @@ export class SelectionInformationByTeamComponent implements OnInit {
 
   ngOnInit(): void 
   {
+    console.log('selection information team data', this.teamData);
   }
 
+  getParticipantIndex(index: number) : number
+  {
+    if (this.teamData!== null && this.teamData!==undefined)
+    {
+      const selections= this.teamData.selections;
+      if(selections!==null && selections !== undefined)
+      {
+        const selection = selections[index];
+        if(selection !== null && selection !== undefined)
+        {
+          const listeDeForce = selection.ldf.listeDeForce;
+          return listeDeForce.rankingIndex ;
+        }
+      }
+    }
+    return null;
+  }
+
+  getParticipantName(index: number) : string
+  {
+    if (this.teamData!== null && this.teamData!==undefined)
+    {
+      const selections= this.teamData.selections;
+      if(selections!==null && selections !== undefined)
+      {
+        const selection = selections[index];
+        if(selection !== null && selection !== undefined)
+        {
+          const participant = selection.ldf.participant;
+          return participant.prenom + ' ' + participant.nom;
+        }
+      }
+    }
+    return '';
+  }
+  
+  getParticipantClassement(index: number) : string
+  {
+    if (this.teamData!== null && this.teamData!==undefined)
+    {
+      const selections= this.teamData.selections;
+      if(selections!==null && selections !== undefined)
+      {
+        const selection = selections[index];
+        if(selection !== null && selection !== undefined)
+        {
+          const listeDeForce = selection.ldf.listeDeForce;
+          return listeDeForce.classement; 
+        }
+      }
+    }
+    return '';
+  }
+
+  getParticipantMobile(index: number) : string
+  {
+    if (this.teamData!== null && this.teamData!==undefined)
+    {
+      const selections= this.teamData.selections;
+      if(selections!==null && selections !== undefined)
+      {
+        const selection = selections[index];
+        if(selection !== null && selection !== undefined)
+        {
+          const user = selection.user;
+          return user.numMobile; 
+        }
+      }
+    }
+    return '';
+  }
+
+  getParticipantStatut(index: number) : string
+  {
+    if (this.teamData!== null && this.teamData!==undefined)
+    {
+      const selections= this.teamData.selections;
+      if(selections!==null && selections !== undefined)
+      {
+        const selection = selections[index];
+        if(selection !== null && selection !== undefined)
+        {
+          return selection.sel.joueur_confirmation;
+        }
+      }
+    }
+    return '';
+  }
+
+  getParticipantCommentaire(index: number) : string
+  {
+    if (this.teamData!== null && this.teamData!==undefined)
+    {
+      const selections= this.teamData.selections;
+      if(selections!==null && selections !== undefined)
+      {
+        const selection = selections[index];
+        if(selection !== null && selection !== undefined)
+        {
+          return selection.sel.joueur_commentaire;
+        }
+      }
+    }
+    return '';
+  }
 }

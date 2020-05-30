@@ -1,10 +1,13 @@
-
+<h4 style="text-align: center;">Selection des Hommes</h4>
 
     <div class="row">
         <div class="col-sm-4">
             <mdb-card >
-                <mdb-card-header>Liste des joueurs sélectionnables</mdb-card-header>
+               
                 <mdb-card-body>
+                    <mdb-card-title>
+                        <h5>Liste des joueurs sélectionnables</h5>
+                      </mdb-card-title>
     
                  <div *ngIf="listeDesForces">
 
@@ -32,8 +35,11 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <mdb-card class="small">
-                                <mdb-card-header>Choix des critères de sélections</mdb-card-header>
+                                
                                 <mdb-card-body>
+                                    <mdb-card-title>
+                                        <h5>Choix des critères de sélections</h5>
+                                      </mdb-card-title>
                                     <div>
                                         <mat-form-field>
                                             <mat-label>Semaine</mat-label>
@@ -98,8 +104,11 @@
                         </div>
                         <div class="col-sm-6">
                             <mdb-card class="small">
-                                <mdb-card-header>Info sur le match selectionné</mdb-card-header>
+                                
                                 <mdb-card-body>
+                                    <mdb-card-title>
+                                        <h5>Info sur le match selectionné</h5>
+                                      </mdb-card-title>
                                     <table mdbTable small="true" hover="true">
                                        <tr>
                                         <td><b>Date</b>:</td>
@@ -122,8 +131,11 @@
                 <div class="col-sm-12">
                     <br>
                     <mdb-card>
-                        <mdb-card-header>Sélection de l'équipe</mdb-card-header>
+                        
                         <mdb-card-body>
+                            <mdb-card-title>
+                                <h5>Sélection de l'équipe</h5>
+                              </mdb-card-title>
                             <form [formGroup]="selectionForm">
                             <table mdbTable small="true" hover="true" style="height: calc(2vh - 100px);">
                                 <tr>

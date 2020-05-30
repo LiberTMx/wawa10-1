@@ -10,6 +10,11 @@ import { InterclubsTeamSelectionDataModel } from '../selections/model/interclubs
 import { InterclubsLDF } from '../selections/model/interclubs-ldf.model';
 import { InterclubsLdfParticipantModel } from '../selections/model/interclubs-ldf-participant.model';
 import { InterclubsLdfByCategoryModel } from '../selections/model/interclubs-ldf-by-category.model';
+import { InterclubsEnrichedSelectionModel } from '../selections/model/interclubs-enriched-selection.model';
+import { AuthUserModel } from '../../auth/model/auth-user.model';
+import { InterclubsSelectionModel } from '../selections/model/interclubs-selection.model';
+import { AuthenticatedUserModel } from '../../auth/model/authenticated-user.model';
+import { AuthService } from '../../auth/services/auth.service';
 
 
 
@@ -46,13 +51,20 @@ export class SelectionInformationComponent implements OnInit {
 
   selectedMatch: any=null;// pas  bien... à corriger
 
+  currentUserSelection: {sel: InterclubsSelectionModel, ldf: InterclubsLDF, user: AuthUserModel}=null;
+
+  connectedUser: AuthenticatedUserModel;
+  
   constructor(
+    private authService: AuthService,
     private selectionService: SelectionService,
     private toastMessageService: ToastMessageService,
   ) { }
 
   ngOnInit(): void 
   {
+    this.connectedUser=this.authService.getCurrentUser();
+    
     this.selectionService.getInterclubsCategories()
       .subscribe(
         res => this.interclubs = res
@@ -210,18 +222,24 @@ export class SelectionInformationComponent implements OnInit {
       teamSelectionData.match = match;
 
       // Selection
-      this.selectionService.getSelection(match, this.selectedPublishedSemaine)
+      this.selectionService.getEnrichedSelection(match, this.selectedPublishedSemaine)
         .subscribe(
-          selections => {
-            if(selections!==null && selections !==undefined && selections.length>0)
+          (enrichedSelections: Array<InterclubsEnrichedSelectionModel>) => {
+            if(enrichedSelections!==null && enrichedSelections !==undefined && enrichedSelections.length>0)
             {
-              const teamSelections: Array<InterclubsLDF> = new Array<InterclubsLDF>();
-              for(const sel of selections)
+              const teamEnrichedSelections: Array<{sel: InterclubsSelectionModel, ldf: InterclubsLDF, user: AuthUserModel}> 
+                                              = new Array<{sel: InterclubsSelectionModel, ldf: InterclubsLDF, user: AuthUserModel}>();
+              for(const se of enrichedSelections)
               {
-                const part: InterclubsLDF = this.listeDesForces.find( p => p.participant.authUserId === sel.auth_user_id);
-                teamSelections.push(part);
+                const part: InterclubsLDF = this.listeDesForces.find( p => p.participant.authUserId === se.selection.auth_user_id);
+                teamEnrichedSelections.push({sel: se.selection, ldf: part, user: se.user});
+
+                if(this.connectedUser !==null && this.connectedUser !== undefined && se.user.id === this.connectedUser.id)
+                {
+                  this.currentUserSelection = {sel: se.selection, ldf: part, user: se.user};
+                }
               }
-              teamSelectionData.selections = teamSelections;
+              teamSelectionData.selections = teamEnrichedSelections;
               //console.log('Selections for team '+team.Team, teamSelectionData);
             }
             teamSelectionData.selectionsLoaded=true;
