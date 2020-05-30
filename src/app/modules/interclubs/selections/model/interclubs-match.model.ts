@@ -1,3 +1,5 @@
+import { InterclubsDivisionModel } from './interclubs-division.model';
+
 export class InterclubsMatchModel
 {
     id: number;
@@ -27,4 +29,6 @@ export class InterclubsMatchModel
     IsLocked: boolean;
     homeTeamId: string;
     awayTeamId: string;
+
+    division: InterclubsDivisionModel;
 }

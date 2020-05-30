@@ -13,6 +13,7 @@ import { InterclubsSemaineVersionModel } from '../model/interclubs-semaine-versi
 import { InterclubsLDF } from '../model/interclubs-ldf.model';
 import { InterclubsSelectionModel } from '../model/interclubs-selection.model';
 import { MessageModel } from 'src/app/common/model/message.model';
+import { InterclubsEnrichedSelectionModel } from '../model/interclubs-enriched-selection.model';
 
 @Injectable({
   providedIn: 'root'
@@ -149,6 +150,12 @@ export class SelectionService {
   {
     const apiUrl=`${environment.apiUrl}/interclubs/selectionForMatch/?matchId=${match.MatchId}&versionId=${version.id}`;
     return this.httpClient.get<Array<InterclubsSelectionModel>>(apiUrl);
+  }
+
+  getEnrichedSelection(match: InterclubsMatchModel, version: InterclubsSemaineVersionModel): Observable <Array<InterclubsEnrichedSelectionModel>>
+  {
+    const apiUrl=`${environment.apiUrl}/interclubs/enrichedSelectionForMatch/?matchId=${match.MatchId}&versionId=${version.id}`;
+    return this.httpClient.get<Array<InterclubsEnrichedSelectionModel>>(apiUrl);
   }
 
   deleteSelection(match: InterclubsMatchModel, index: number, version: InterclubsSemaineVersionModel): Observable<MessageModel>

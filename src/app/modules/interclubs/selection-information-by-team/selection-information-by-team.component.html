@@ -1,8 +1,230 @@
+<div class="col-sm-8">
+   <br> <br> <mdb-card>
+        
+        <mdb-card-body>
+            <h5> Sélections équipe {{ teamData.team.Team }} </h5>
+            <u>Rencontre:</u> {{ teamData.match.HomeTeam}} ({{ teamData.match.HomeClub}}) contre {{ teamData.match.AwayTeam}} ({{ teamData.match.AwayClub}})  <br>
+            <u>Adresse:</u> {{ teamData.match.venueName}}, {{ teamData.match.venueStreet}}, {{ teamData.match.venueTown}}
+            <u>Date:</u> {{ teamData.match.matchDate | date:'dd/MM/yyyy'}} <u>à</u> {{ teamData.match.Time}}
+            <u>Numéro de match:</u> {{ teamData.match.MatchId}} <u>Divison:</u> {{ teamData.match.division?.DivisionName }} <br> 
+           
+            
 
-<span> Team: {{ teamData.team.Team }} </span>
-<br>
-<span>Match: {{ teamData.match | json }}</span>
-<br>
-<span>Selections: {{ teamData.selections | json }}</span>
-<br>
-<hr>
+             <br><br>
+            
+
+            <table mdbTable small="true" hover="true" class="ldf-table">
+                <tr>
+                    <th style="width: 5%" scope="col">N°</th>
+                    <th style="width: 5%" scope="col">Indice</th>
+                    <th style="width: 20%" scope="col">Joueur</th>
+                    <th style="width: 5%" scope="col">Classement</th>
+                    <th style="width: 10%" scope="col">GSM</th>
+                    <th style="width: 5%" scope="col">Statut</th>
+                    <th style="width: 10%" scope="col">Commentaire</th>
+                    
+                </tr>
+                 <tr>
+                     <th scope="row">
+                          1
+                    </th>            
+                    <td>
+                        {{getParticipantIndex(0)}}
+                    </td>   
+                    <td>
+                        {{getParticipantName(0)}} 
+                    </td>    
+                    <td>
+                        {{getParticipantClassement(0)}} 
+                    </td>          
+                    <td>
+                        {{getParticipantMobile(0)}} 
+                        
+                    </td>
+                    <td>
+                        {{getParticipantStatut(0)}} 
+                    </td>
+                    <td>
+                        {{getParticipantCommentaire(0)}} 
+                    </td>
+                    
+                </tr> 
+                <tr>
+                    <th scope="row">
+                         2
+                   </th>            
+                   <td>
+                       {{getParticipantIndex(1)}}
+                   </td>   
+                   <td>
+                       {{getParticipantName(1)}} 
+                   </td>    
+                   <td>
+                       {{getParticipantClassement(1)}} 
+                   </td>          
+                   <td>
+                        {{getParticipantMobile(1)}}
+                   </td>
+                   <td>
+                       {{getParticipantStatut(1)}} 
+                   </td>
+                   <td>
+                       {{getParticipantCommentaire(1)}} 
+                   </td>
+                   
+               </tr> <tr>
+                <th scope="row">
+                     3
+               </th>            
+               <td>
+                   {{getParticipantIndex(2)}}
+               </td>   
+               <td>
+                   {{getParticipantName(2)}} 
+               </td>    
+               <td>
+                   {{getParticipantClassement(2)}} 
+               </td>          
+               <td>
+                    {{getParticipantMobile(2)}}
+               </td>
+               <td>
+                   {{getParticipantStatut(2)}} 
+               </td>
+               <td>
+                   {{getParticipantCommentaire(2)}} 
+               </td>
+               
+           </tr> <tr>
+            <th scope="row">
+                 4
+           </th>            
+           <td>
+               {{getParticipantIndex(3)}}
+           </td>   
+           <td>
+               {{getParticipantName(3)}} 
+           </td>    
+           <td>
+               {{getParticipantClassement(3)}} 
+           </td>          
+           <td>
+            {{getParticipantMobile(3)}}
+           </td>
+           <td>
+               {{getParticipantStatut(3)}} 
+           </td>
+           <td>
+               {{getParticipantCommentaire(3)}} 
+           </td>
+           
+       </tr> <tr>
+        <th scope="row">
+             R1
+       </th>            
+       <td>
+           {{getParticipantIndex(5)}}
+       </td>   
+       <td>
+           {{getParticipantName(4)}} 
+       </td>    
+       <td>
+           {{getParticipantClassement(4)}} 
+       </td>          
+       <td>
+            {{getParticipantMobile(4)}}
+       </td>
+       <td>
+           {{getParticipantStatut(4)}} 
+       </td>
+       <td>
+           {{getParticipantCommentaire(4)}} 
+       </td>
+       
+   </tr> <tr>
+    <th scope="row">
+         R2
+   </th>            
+   <td>
+       {{getParticipantIndex(5)}}
+   </td>   
+   <td>
+       {{getParticipantName(5)}} 
+   </td>    
+   <td>
+       {{getParticipantClassement(5)}} 
+   </td>          
+   <td>
+        {{getParticipantMobile(5)}}
+   </td>
+   <td>
+       {{getParticipantStatut(5)}} 
+   </td>
+   <td>
+       {{getParticipantCommentaire(5)}} 
+   </td>
+   
+</tr> <tr>
+    <th scope="row">
+         R3
+   </th>            
+   <td>
+       {{getParticipantIndex(6)}}
+   </td>   
+   <td>
+       {{getParticipantName(6)}} 
+   </td>    
+   <td>
+       {{getParticipantClassement(6)}} 
+   </td>          
+   <td>
+        {{getParticipantMobile(6)}}
+   </td>
+   <td>
+       {{getParticipantStatut(6)}} 
+   </td>
+   <td>
+       {{getParticipantStatut(6)}} 
+   </td>
+   
+</tr> <tr>
+    <th scope="row">
+         R4
+   </th>            
+   <td>
+       {{getParticipantIndex(7)}}
+   </td>   
+   <td>
+       {{getParticipantName(7)}} 
+   </td>    
+   <td>
+       {{getParticipantClassement(7)}} 
+   </td>          
+   <td>
+        {{getParticipantMobile(7)}}
+   </td>
+   <td>
+       {{getParticipantStatut(7)}} 
+   </td>
+   <td>
+       {{getParticipantStatut(7)}} 
+   </td>
+   
+</tr> 
+                
+                
+            </table> 
+            
+        </mdb-card-body>
+    </mdb-card>
+</div>
+<span></span>
+ 
+<!--<span> ALL: {{ teamData | json}}  </span>
+<br><br><br>
+<span>SELECTION: {{ teamData.selections | json }}</span>
+<br><br><br>
+<span>MATCH: {{ teamData.match | json }}</span>
+<br><br><br>
+<span>PARTICIPAN: {{ teamData.participant | json }}</span>
+<hr> -->
