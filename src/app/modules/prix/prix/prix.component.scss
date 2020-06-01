@@ -1,0 +1,33 @@
+// Pricing section
+.pricing-card {
+    text-align: center;
+
+    .price {
+      position: relative;
+    
+      .number {
+       
+        font-weight: 300;
+        &:before {
+          content: '€';
+          position: absolute;
+        
+        }
+        &:after {
+          content: '/an';
+          position: absolute;
+        
+        }
+      }
+      .version {
+       
+        position: absolute;
+        top: 0;
+        width: 100%;
+      
+      }
+    }
+   
+
+  }
+  

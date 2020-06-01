@@ -46,6 +46,7 @@
                                     <mdb-card-title>
                                         <h5>Votre sélection</h5>
                                       </mdb-card-title>
+                                      <p style="text-align: center;">Vous avez été sélectionné pour le match : <b>Limal Wavre C (BBW123) contre Alpa Schaerb. Woluwe D (BBW015)</b> </p>
                                       <table mdbTable small="true" hover="true" >
                                         <tr>
                                             <th style="width: 5%" scope="col">N°</th>
@@ -65,17 +66,17 @@
                                                 
                                             </td>   
                                             <td>
-                                                <span *ngIf="currentUserSelection">{{ currentUserSelection.sel.interclubs_match_id }}</span>
+                                                <span *ngIf="currentUserSelection">MAXIME LIBER</span>
                                             </td>    
                                             <td>
-                                                
+                                                <span *ngIf="currentUserSelection">B6</span>
                                             </td>          
-                                            
+                                                
                                             <td>
-                                                <span *ngIf="currentUserSelection">{{ currentUserSelection.sel.interclubs_match_id }}</span>
+                                                <span *ngIf="currentUserSelection">OK</span>
                                             </td>
                                             <td>
-                                                <span *ngIf="currentUserSelection">{{ currentUserSelection.sel.interclubs_match_id }}</span>
+                                                <span *ngIf="currentUserSelection">OK</span>
                                             </td>
                                             
                                         </tr> 
@@ -83,9 +84,9 @@
                                     </table>
                                     
                                    <!--  <span *ngIf="currentUserSelection">{{ currentUserSelection.sel.interclubs_match_id }}</span> -->
-                                    <span *ngIf="currentUserSelection">ALL: {{ currentUserSelection | json }}</span>
+                                    <!--<span *ngIf="currentUserSelection">ALL: {{ currentUserSelection | json }}</span>
                                     <br><br><br>
-                                    <span *ngIf="currentUserSelection">ALL: {{ currentUserSelection.ldf[0]}}</span>
+                                     <span *ngIf="currentUserSelection">ALL: {{ currentUserSelection.ldf[0]}}</span> -->
                                 </mdb-card-body>
                             </mdb-card>
                         </div>
