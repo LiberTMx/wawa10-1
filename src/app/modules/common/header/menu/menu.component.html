@@ -33,14 +33,16 @@
         aria-haspopup="true" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> Club</a>
         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="user/liste">Les membres</a></li>
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Devenir membre</a></li>
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="user/add" *ngIf="getAuthService().isUserClubAdmin()">Ajouter un membre</a></li>
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="user/entraineurs">Nos entraîneurs</a></li>
+         <!--  <li><a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Devenir membre</a></li> -->
+          <!-- <li><a class="dropdown-item" routerLinkActive="active" routerLink="user/entraineurs">Nos entraîneurs</a></li> -->         
           <div class="divider dropdown-divider"></div>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="local/local">Local</a></li>
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="club/comite">Comité et organisation</a></li>
+          <!-- <li><a class="dropdown-item" routerLinkActive="active" routerLink="club/comite">Comité et organisation</a></li> -->
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="status">Statuts</a></li>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="roi">Réglement Ordre Intérieur</a></li>
+          <div class="divider dropdown-divider"></div>
+          <li><a class="dropdown-item" routerLinkActive="active" routerLink="user/add" *ngIf="getAuthService().isUserClubAdmin()">Ajouter un membre</a></li>
+
         </div>
       </li>
 
@@ -60,11 +62,11 @@
           <div class="divider dropdown-divider"></div>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/selectioninfo">Consulter les sélections</a></li>
           <div class="divider dropdown-divider"></div>
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/ldf">Listes des forces</a></li>
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="criterium/new">Challenge</a></li>
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="coupe/new">Adresses des clubs</a></li>
-          <div class="divider dropdown-divider"></div>
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Tournoi</a></li>
+          <!-- <li><a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/ldf">Listes des forces</a></li> -->
+          <!-- <li><a class="dropdown-item" routerLinkActive="active" routerLink="criterium/new">Challenge</a></li> -->
+          <!-- <li><a class="dropdown-item" routerLinkActive="active" routerLink="coupe/new">Adresses des clubs</a></li> -->
+         <!--  <div class="divider dropdown-divider"></div>
+          <li><a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Tournoi</a></li> -->
         </div>
       </li>
 
@@ -72,17 +74,19 @@
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false"><i class="fa fa-calendar" aria-hidden="true"></i> Activités</a>
         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="activites/periodes">Périodes</a></li>
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="activites/calendrier">Calendrier</a></li>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="activites/entrainements">Entraînements</a></li>
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="activites/stages">Stages</a></li></div>
+          <!-- <li><a class="dropdown-item" routerLinkActive="active" routerLink="activites/periodes">Périodes</a></li>
+          <li><a class="dropdown-item" routerLinkActive="active" routerLink="activites/calendrier">Calendrier</a></li>
+          
+          <li><a class="dropdown-item" routerLinkActive="active" routerLink="activites/stages">Stages</a></li> -->
+        </div>
       </li>
 
-      <li><a class="nav-link" routerLinkActive="active" routerLink="prix/test"><i class="fa fa-eur" aria-hidden="true"></i> Devenir Membre<span class="sr-only">(current)</span></a></li>
+      <li><a class="nav-link" routerLinkActive="active" routerLink="prix/test"> <i class="fa fa-eur" aria-hidden="true"></i> Devenir Membre<span class="sr-only">(current)</span></a></li>
 
-      <li><a class="nav-link" routerLinkActive="active" routerLink="newsletter"><i class="fa fa-file-text" aria-hidden="true"></i> News Letter<span class="sr-only">(current)</span></a></li>
+      <!-- <li><a class="nav-link" routerLinkActive="active" routerLink="newsletter"><i class="fa fa-file-text" aria-hidden="true"></i> News Letter<span class="sr-only">(current)</span></a></li> -->
 
-      <li><a class="nav-link" routerLinkActive="active" routerLink="/"><i class="fa fa-file-text" aria-hidden="true"></i> Documents<span class="sr-only">(current)</span></a></li>
+      <!-- <li><a class="nav-link" routerLinkActive="active" routerLink="/"><i class="fa fa-file-text" aria-hidden="true"></i> Documents<span class="sr-only">(current)</span></a></li> -->
                     
       <li><a class="nav-link" routerLinkActive="active" routerLink="sponsors/liste"><i class="fa fa-handshake-o" aria-hidden="true"></i> Sponsors<span class="sr-only">(current)</span></a></li>
 
@@ -121,11 +125,11 @@
       </li>
       
       <li class="nav-item waves-light" mdbWavesEffect *ngIf=" ! user " routerLink="login">
-          <a class="nav-link"><i class="fa fa-sign-in"></i> Login</a>
+          <a class="nav-link"><i class="fa fa-sign-in"></i> Connexion</a>
       </li>
       
       <li class="nav-item waves-light" mdbWavesEffect *ngIf=" user " (click)="onLogout($event)">
-          <a class="nav-link">Logout <i class="fa fa-sign-out"></i></a>
+          <a class="nav-link">Déconnexion <i class="fa fa-sign-out"></i></a>
       </li>
           
   </ul>
