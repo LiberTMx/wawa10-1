@@ -16,6 +16,7 @@ import { PeriodesModule } from '../periodes/periodes.module';
 import { SeanceAddDialogComponent } from './groupe/seance-add-dialog/seance-add-dialog.component';
 import { AppCommonModule } from '../../common/app-common.module';
 import { SeanceComponent } from './groupe/seance/seance.component';
+import { PrimengModule } from '../../../modules.vendors/primeng/primeng.module';
 
 
 
@@ -28,6 +29,7 @@ import { SeanceComponent } from './groupe/seance/seance.component';
   imports: [
     CommonModule,
     // EntrainementsRoutingModule,
+    PrimengModule,
     MaterialModule,
     MdBootstrapProModule,
     FormsModule,

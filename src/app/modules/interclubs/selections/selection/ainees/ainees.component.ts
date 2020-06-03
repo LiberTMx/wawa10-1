@@ -186,7 +186,7 @@ export class AineesComponent implements OnInit
         || this.selectedSemaineVersion===undefined 
         || (this.selectedSemaineVersion.semaine_version_statut!=='working' && this.selectedSemaineVersion.semaine_version_statut!=='published') ) 
     {
-      this.toastMessageService.addError('Selection', 'Vous devez sélectionner une version working oou published',11000);
+      this.toastMessageService.addError('Selection', 'Vous devez sélectionner une version working ou published',11000);
       return;
     }
     if(this.selectedMatch===null || this.selectedMatch===undefined) 
