@@ -107,7 +107,7 @@
     </div>
 </div>
 
-<form [formGroup]="stageForm">
+<form [formGroup]="stageForm" (ngSubmit)="onCreateStage()">
 
     <div class="form-check form-check-inline radio-green">
         <input type="radio" class="form-check-input" id="materialInline1" value="0" (click)="onTemplateClick(0)"
@@ -221,7 +221,7 @@
     <div *ngIf="periodes" class="row">
         <p>Période</p>
         <div class="md-form form-sm">
-            <select id="periode" formControlName="periodeId" (change)="onPeriodeChanged()">
+            <select id="periode" formControlName="periodeId" (change)="onPeriodeChanged($event)">
                 <option *ngFor="let p of getPeriodesForStages()" 
                     [value]="p.id" 
                     [label]="p.nom"></option>
@@ -368,6 +368,26 @@
                class="form-control" 
                mdbInput width="100px" >
         <label for="inscriptionLimitCount">Nombre maximum d'inscriptions</label>
+    </div>
+
+    <!-- Annulation/modification inscription -->
+    <div class="md-form form-sm form-field">
+        <mdb-checkbox formControlName="isAnnulationAllowed">Annulation ou modification autorisée</mdb-checkbox>
+    </div>
+
+    <div class="md-form form-sm">
+        <mdb-date-picker #dateFin name="dateLimiteAnnulation" [options]="myDatePickerOptions" 
+                
+                [label]="'Date Limite Annulation/Modification'"
+                [placeholder]="'Selected date'" 
+                [locale]="lang"
+                formControlName="dateLimiteAnnulation" ></mdb-date-picker>
+    </div>
+
+    <div class="md-form form-sm">
+        <button mdbBtn  type="submit" class="btn btn-sm btn-success">Créer le stage</button>
+        &nbsp;
+        <button mdbBtn  type="button" class="btn btn-sm btn-outline-danger" (click)="onCancel()">Annuler</button>
     </div>
 
 <!--     <div>

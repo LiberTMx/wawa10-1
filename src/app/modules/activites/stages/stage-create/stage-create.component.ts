@@ -6,6 +6,9 @@ import { PeriodeModel } from '../../periodes/model/periode.model';
 import { PeriodesService } from '../../periodes/services/periodes.service';
 import { IMyOptions, LocaleService } from 'ng-uikit-pro-standard';
 import { mdbdatepicker_locales } from '../../../../common/interfaces/mdbdatepicker.locale';
+import { StagesService } from '../services/stages.service';
+import { Router } from '@angular/router';
+import { ToastMessageService } from '../../../../common/services/toast-message.service';
 
 @Component({
   selector: 'app-stage-create',
@@ -51,6 +54,9 @@ export class StageCreateComponent implements OnInit {
     private localeService: LocaleService,
     private matDialog: MatDialog,
     private periodesService: PeriodesService,
+    private router: Router,
+    private stagesService: StagesService,
+    private toastMessageService: ToastMessageService,
   ) { }
 
   ngOnInit(): void 
@@ -110,8 +116,10 @@ export class StageCreateComponent implements OnInit {
       sparring: [''],
 
       hasInscriptionLimit: [false],
-      inscriptionLimitCount: ['']
+      inscriptionLimitCount: [''],
 
+      isAnnulationAllowed: [''],
+      dateLimiteAnnulation: ['']
     });
   }
 
@@ -361,4 +369,33 @@ export class StageCreateComponent implements OnInit {
     console.log('periode changed:', this.selectedPeriode);
   }
 
+  onCancel()
+  {
+    this.router.navigate(['activites','stages']);
+  }
+
+  onCreateStage()
+  {
+    console.log('create stage:', this.stageForm.value);
+    const titre=this.stageForm.value.titre;
+    this.stagesService.createStage(this.stageForm.value)
+      .subscribe(res => {
+            console.log('create stage result:', res);
+            this.toastMessageService.addSuccess('Création stage', 'Le stage a été créée: '+titre, 5000);
+            this.router.navigate(['activites','stages']);
+          }
+        ,
+        err => {
+          console.error('unable to create the stage', err);
+          if(err.error)
+          {
+            this.toastMessageService.addError('Création stage', 'Une erreur s\'est produite:'+err.error.message, 11000);
+          }
+          else
+          {
+            this.toastMessageService.addError('Création stage', 'Une erreur s\'est produite:'+err.message, 10000);
+          }
+        }
+    );
+  }
 }
