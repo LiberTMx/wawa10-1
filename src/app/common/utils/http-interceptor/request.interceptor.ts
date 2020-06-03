@@ -38,7 +38,7 @@ export class RequestInterceptor implements HttpInterceptor {
 
     const tokens = this.authService.getTokens();
 
-    if (!this.authService.isAuthenticated()) {
+    if (!this.authService.isAuthenticated() && tokens !== null && tokens !== undefined) {
 
       if (tokens.refreshToken && !this.isRefreshing) {
         this.isRefreshing = true;
@@ -47,7 +47,13 @@ export class RequestInterceptor implements HttpInterceptor {
           .pipe(mergeMap((res: AuthenticatedUserModel) => {
             console.log('this.authService.storeData', res);
             // this.authService.storeData(res);
-            this.authService.postProcessLogin(res);
+            /*
+            const newUser: AuthenticatedUserModel=new AuthenticatedUserModel();
+            Object.assign(newUser, res);
+            this.authService.postProcessLogin(newUser);
+            */
+            //this.authService.updateUserTokens(res.tokens);
+
             this.isRefreshing = false;
             req = req.clone({
                 setHeaders: {
@@ -76,7 +82,8 @@ export class RequestInterceptor implements HttpInterceptor {
       */
     } 
     
-    else {
+    if(tokens !== null && tokens !== undefined) 
+    {
       req = req.clone({
         setHeaders: {
           Authorization: `${tokens.accessToken}`,
