@@ -38,7 +38,7 @@ export class AuthService {
     isAuthenticated(): boolean {
       const tokens = this.getTokens();
 
-      if (!tokens.accessToken) {
+      if (tokens!==null || tokens!==undefined || !tokens.accessToken) {
         return false;
       }
 
@@ -82,15 +82,24 @@ export class AuthService {
       return this.jwtHelperService.isTokenExpired(tokens.accessToken);
     }
 
-    getTokens(): any 
+    getTokens(): { accessToken: string, refreshToken: string } 
     {
+      /*
       const accessToken = localStorage.getItem('access_token');
       const refreshToken = localStorage.getItem('refresh_token');
       return { accessToken, refreshToken };
+      */
+
+      const currentUser = this.getCurrentUser();
+      if(currentUser!==null && currentUser!==undefined)
+      {
+        return { accessToken: currentUser.tokens.accessToken, refreshToken: currentUser.tokens.refreshToken };
+      }
     }
 
     getCurrentUser(): AuthenticatedUserModel 
     {
+      /*
       let user = this.getUserFromStore();
       if ((user===null || user===undefined) && localStorage.getItem('user') ) {
         console.warn('getting user from local storage');
@@ -107,6 +116,9 @@ export class AuthService {
       }
       
       return user;
+      */
+      
+      return this.getUserFromStore();
     }
 
     login(username: string, password: string): Observable<AuthenticatedUserModel> 
@@ -137,21 +149,26 @@ export class AuthService {
 
     postProcessLogin(pUser: AuthenticatedUserModel) {
       
-      let user: AuthenticatedUserModel=null;
+      //let user: AuthenticatedUserModel=null;
 
       if (pUser!==null && pUser!==undefined) 
       {
+        /*
+        console.log('authservice-postProcessLogin before dispatch ', pUser);
         user=new AuthenticatedUserModel();
         Object.assign(user, pUser);
-        this.store.dispatch( new LoginAction( {user}) );
+        */
+        this.store.dispatch( new LoginAction( {user: pUser}) );
+        console.log('authservice-postProcessLogin after dispatch', /*user*/ pUser);
       }
       else
       {
         this.store.dispatch( new LogoutAction());
       }
 
-      this.userEvents.next(user);
+      this.userEvents.next(/*user*/ pUser);
 
+      /*
       if (user !== null) {
         localStorage.setItem('access_token', user.tokens.accessToken);
         localStorage.setItem('refresh_token', user.tokens.refreshToken);
@@ -165,6 +182,7 @@ export class AuthService {
         //this.store.dispatch( new CalendarInitAction());
         //this.languageService.determineDefaultLanguage();
       }
+      */
      
     }
 
@@ -178,6 +196,14 @@ export class AuthService {
       return this.preLoginuser;
     }
 
+    updateUserTokens(tokens: TokensModel)
+    {
+      const user=this.getCurrentUser();
+      //user.tokens.accessToken=tokens.accessToken;
+      //user.tokens.refreshToken=tokens.refreshToken;
+      user.setTokens(tokens);
+      this.store.dispatch( new LoginAction( {user}) );
+    }
     refreshToken(refreshToken: string): Observable<any> {
       const url=`${environment.apiUrl}`;  
       const apiUrl = `${url}/auth/refresh-token/`;
@@ -207,6 +233,16 @@ export class AuthService {
     isUserSuperAdmin(): boolean
     {
       return this.isUserClubAdmin() && this.isUserStageAdmin() && this.isUserEntrainementAdmin();
+    }
+
+    isUserClubMembre(): boolean
+    {
+      // tslint:disable-next-line:variable-name
+      const _user=this.getUserFromStore();
+      if(_user===null || _user===undefined ) return false;
+      if(_user.roles===null || _user.roles===undefined) return false;
+      const role=_user.roles.find( r => r.authDomain.domain==='club' && r.role==='membre');
+      return role !==null && role !== undefined;
     }
 
     isUserClubAdmin(): boolean

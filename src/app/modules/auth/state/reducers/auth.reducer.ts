@@ -34,6 +34,7 @@ class ActionHandler {
 
   login(): AuthState {
     const a = this.action as any as LoginAction;
+    console.log('auth reducer - login', a.payload.user);
     const newState: AuthState = { ...this.state, user: a.payload.user,  loggedIn: true };
     return newState;
   }

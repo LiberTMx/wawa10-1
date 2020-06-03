@@ -46,7 +46,7 @@
         </div>
       </li>
 
-      <li class="nav-item dropdown" *ngIf=" ! loading">
+      <li class="nav-item dropdown" *ngIf=" ! loading && getAuthService().isUserClubMembre()">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false"><i class="fa fa-trophy" aria-hidden="true"></i> Competitions</a>
         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
@@ -57,9 +57,10 @@
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/veterans">Vétérans</a></li> -->
 
           <li *ngFor="let cat of interclubCategories">
-            <a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/{{cat.id}}">{{ cat.synonyme }}</a>
+            <a *ngIf="getAuthService().isUserClubAdmin()"
+                class="dropdown-item" routerLinkActive="active" routerLink="interclubs/{{cat.id}}">Sélections {{ cat.synonyme }}</a>
           </li>
-          <div class="divider dropdown-divider"></div>
+          <div class="divider dropdown-divider" *ngIf="getAuthService().isUserClubAdmin()"></div>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/selectioninfo">Consulter les sélections</a></li>
           <div class="divider dropdown-divider"></div>
           <!-- <li><a class="dropdown-item" routerLinkActive="active" routerLink="interclubs/ldf">Listes des forces</a></li> -->
