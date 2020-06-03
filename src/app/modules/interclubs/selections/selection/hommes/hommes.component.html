@@ -1,10 +1,13 @@
-
+<h4 style="text-align: center;">Selection des Hommes</h4>
 
     <div class="row">
         <div class="col-sm-4">
             <mdb-card >
-                <mdb-card-header>Liste des joueurs sélectionnables</mdb-card-header>
+               
                 <mdb-card-body>
+                    <mdb-card-title>
+                        <h5>Liste des joueurs sélectionnables</h5>
+                      </mdb-card-title>
     
                  <div *ngIf="listeDesForces">
 
@@ -32,8 +35,11 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <mdb-card class="small">
-                                <mdb-card-header>Choix des critères de sélections</mdb-card-header>
+                                
                                 <mdb-card-body>
+                                    <mdb-card-title>
+                                        <h5>Choix des critères de sélections</h5>
+                                      </mdb-card-title>
                                     <div>
                                         <mat-form-field>
                                             <mat-label>Semaine</mat-label>
@@ -58,22 +64,7 @@
                                             </mat-option>
                                             </mat-select>
                                         </mat-form-field>
-                                 <!--        <a (click)="onSemaineNextVersion()" mdbBtn floating="true" size="sm" gradient="blue" title="Ajouter une nouvelle version" mdbWavesEffect>
-                                            <mdb-icon fas icon="plus"></mdb-icon>
-                                          </a>
-
-                                          <a (click)="onSemaineVersionValidate()" mdbBtn floating="true" size="sm" gradient="blue" title="Valider les sélections" mdbWavesEffect>
-
-                                          <a (click)="onValidateNextVersion()" mdbBtn floating="true" size="sm" gradient="blue" title="Valider les sélections" mdbWavesEffect>
-
-                                            <i class="fas fa-check"></i>
-                                          </a>
-                                          <a (click)="onSemainePublishVersion()" mdbBtn floating="true" size="sm" gradient="blue" title="Publier les sélections" mdbWavesEffect>
-                                            <i class="fas fa-check"></i>
-                                          </a> -->
-
-                          
-
+<br>
                                           <span class="badge badge-info badge_style" title="Ajouter une nouvelle version" (click)="onSemaineNextVersion()"><i class="fas fa-plus"></i>Ajouter</span> 
                                           &nbsp;
                                           <span class="badge badge-info badge_style" title="Valider la version de travail" (click)="onSemaineVersionValidate()"><i class="fas fa-check"></i>Valider</span> 
@@ -98,8 +89,11 @@
                         </div>
                         <div class="col-sm-6">
                             <mdb-card class="small">
-                                <mdb-card-header>Info sur le match selectionné</mdb-card-header>
+                                
                                 <mdb-card-body>
+                                    <mdb-card-title>
+                                        <h5>Info sur le match selectionné</h5>
+                                      </mdb-card-title>
                                     <table mdbTable small="true" hover="true">
                                        <tr>
                                         <td><b>Date</b>:</td>
@@ -122,8 +116,11 @@
                 <div class="col-sm-12">
                     <br>
                     <mdb-card>
-                        <mdb-card-header>Sélection de l'équipe</mdb-card-header>
+                        
                         <mdb-card-body>
+                            <mdb-card-title>
+                                <h5>Sélection de l'équipe</h5>
+                              </mdb-card-title>
                             <form [formGroup]="selectionForm">
                             <table mdbTable small="true" hover="true" style="height: calc(2vh - 100px);">
                                 <tr>

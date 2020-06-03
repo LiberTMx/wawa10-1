@@ -3,8 +3,12 @@
                 
                       <div class="col-sm-4">
                             <mdb-card class="small">
-                                <mdb-card-header>Sélections interclubs</mdb-card-header>
+                                
                                 <mdb-card-body>
+                                    <mdb-card-title>
+                                        <h5>Sélections interclubs</h5>
+                                      </mdb-card-title>
+                                    
 
                                     <div>
                                         <mat-form-field>
@@ -37,29 +41,52 @@
     
                         <div class="col-sm-8">
                             <mdb-card class="small">
-                                <mdb-card-header>Votre sélection</mdb-card-header>
+                                
                                 <mdb-card-body>
-                                    <table mdbTable small="true" hover="true">
-                                       <tr>
-                                        <td><b>Date</b>:</td>
-                                        <td><span *ngIf="selectedMatch">{{ selectedMatch?.matchDate | date:'dd/MM/yyyy'}}  <b>Heure</b>: {{ selectedMatch?.Time}}</span> </td>
-                                       </tr>
-                                       <tr>
-                                        <td><b>Match</b>:</td>
-                                        <td><span *ngIf="selectedMatch">{{ selectedMatch?.HomeTeam}} contre {{ selectedMatch?.AwayTeam}}</span></td>
-                                       </tr>
-                                       <tr>
-                                        <td><b>Adresse</b>:</td>
-                                        <td><span *ngIf="selectedMatch">{{ selectedMatch?.venueName}},{{ selectedMatch?.venueStreet}}, <b>{{ selectedMatch?.venueTown}}</b></span></td>
-                                       </tr>
-                                       <tr>
-                       <!--                  <td>
-                                            <button class="button button" (click)="RefuseSelection()" mdbBtn type="button" color="danger" rounded="true" title="Refuser votre sélection" mdbWavesEffect><i class="fas fa-ban"></i></button>
-                                            <button class="button button" (click)="AcceptSelection()" mdbBtn type="button" color="success" rounded="true" title="Valider votre sélection" mdbWavesEffect><i class="fas fa-check"></i></button>
-                                            </td> -->
-                                       </tr>
-                                    </table> 
-                    
+                                    <mdb-card-title>
+                                        <h5>Votre sélection</h5>
+                                      </mdb-card-title>
+                                      <p style="text-align: center;">Vous avez été sélectionné pour le match : <b>Limal Wavre C (BBW123) contre Alpa Schaerb. Woluwe D (BBW015)</b> </p>
+                                      <table mdbTable small="true" hover="true" >
+                                        <tr>
+                                            <th style="width: 5%" scope="col">N°</th>
+                                            <th style="width: 5%" scope="col">Indice</th>
+                                            <th style="width: 20%" scope="col">Joueur</th>
+                                            <th style="width: 5%" scope="col">Classement</th>
+                                            <th style="width: 5%" scope="col">Statut</th>
+                                            <th style="width: 10%" scope="col">Commentaire</th>
+                                            
+                                        </tr>
+                                         <tr>
+                                             <th scope="row">
+                                                <span *ngIf="currentUserSelection">{{ currentUserSelection.sel.position }}</span>
+                                            </th>            
+                                            <td>
+                                                <span *ngIf="currentUserSelection">{{ currentUserSelection.sel.ranking_index }}</span>
+                                                
+                                            </td>   
+                                            <td>
+                                                <span *ngIf="currentUserSelection">MAXIME LIBER</span>
+                                            </td>    
+                                            <td>
+                                                <span *ngIf="currentUserSelection">B6</span>
+                                            </td>          
+                                                
+                                            <td>
+                                                <span *ngIf="currentUserSelection">OK</span>
+                                            </td>
+                                            <td>
+                                                <span *ngIf="currentUserSelection">OK</span>
+                                            </td>
+                                            
+                                        </tr> 
+  
+                                    </table>
+                                    
+                                   <!--  <span *ngIf="currentUserSelection">{{ currentUserSelection.sel.interclubs_match_id }}</span> -->
+                                    <!--<span *ngIf="currentUserSelection">ALL: {{ currentUserSelection | json }}</span>
+                                    <br><br><br>
+                                     <span *ngIf="currentUserSelection">ALL: {{ currentUserSelection.ldf[0]}}</span> -->
                                 </mdb-card-body>
                             </mdb-card>
                         </div>
