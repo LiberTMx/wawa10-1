@@ -46,7 +46,7 @@
                                     <mdb-card-title>
                                         <h5>Votre sélection</h5>
                                       </mdb-card-title>
-                                      <p style="text-align: center;">Vous avez été sélectionné pour le match : <b>Limal Wavre C (BBW123) contre Alpa Schaerb. Woluwe D (BBW015)</b> </p>
+                                      <p *ngIf="currentUserSelectionMatch" style="text-align: center;">Vous avez été sélectionné pour le match : <b>  {{ currentUserSelectionMatch.HomeTeam }}  &nbsp; ({{ currentUserSelectionMatch.HomeClub }}) </b> contre <b>   {{ currentUserSelectionMatch.AwayTeam }} &nbsp; ({{ currentUserSelectionMatch.AwayClub }})</b> </p>
                                       <table mdbTable small="true" hover="true" >
                                         <tr>
                                             <th style="width: 5%" scope="col">N°</th>
@@ -66,10 +66,10 @@
                                                 
                                             </td>   
                                             <td>
-                                                <span *ngIf="currentUserSelection">MAXIME LIBER</span>
+                                                <span *ngIf="currentUserSelection">{{ currentUserSelection.user.prenom + ' '+ currentUserSelection.user.nom }}</span>
                                             </td>    
                                             <td>
-                                                <span *ngIf="currentUserSelection">B6</span>
+                                                <span *ngIf="currentUserSelection">{{ currentUserSelection.ldf.listeDeForce.classement }}</span>
                                             </td>          
                                                 
                                             <td>
