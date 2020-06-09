@@ -5,7 +5,7 @@ import { AuthenticatedUserModel } from '../../../auth/model/authenticated-user.m
 import { Subscription } from 'rxjs';
 import { NavbarComponent } from 'ng-uikit-pro-standard';
 import { SelectionService } from '../../../interclubs/selections/services/selection.service';
-import { InterclubsCategoryModel } from 'src/app/modules/interclubs/selections/model/interclubs-category.model';
+import { InterclubsCategoryModel } from '../../../interclubs/selections/model/interclubs-category.model';
 
 @Component({
   selector: 'app-menu',

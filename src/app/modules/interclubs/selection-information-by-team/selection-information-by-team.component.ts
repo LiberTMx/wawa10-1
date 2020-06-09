@@ -1,7 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ViewportScroller } from '@angular/common';
 import { flyInOut } from 'ng-uikit-pro-standard';
 import { InterclubsTeamSelectionDataModel } from '../selections/model/interclubs-team-selection-data.model';
 import { InterclubsLDF } from '../selections/model/interclubs-ldf.model';
+
+import { PdfMakeWrapper, PageReference, Txt, Table } from 'pdfmake-wrapper';
 
 @Component({
   selector: 'app-selection-information-by-team',
@@ -15,14 +18,16 @@ export class SelectionInformationByTeamComponent implements OnInit {
 
 
   
-  constructor() { }
+  constructor(
+    private viewportScroller: ViewportScroller
+  ) { }
 
   ngOnInit(): void 
   {
     console.log('selection information team data', this.teamData);
   }
 
-  getParticipantIndex(index: number) : number
+  getParticipantIndex(index: number): number
   {
     if (this.teamData!== null && this.teamData!==undefined)
     {
@@ -40,7 +45,7 @@ export class SelectionInformationByTeamComponent implements OnInit {
     return null;
   }
 
-  getParticipantName(index: number) : string
+  getParticipantName(index: number): string
   {
     if (this.teamData!== null && this.teamData!==undefined)
     {
@@ -58,7 +63,7 @@ export class SelectionInformationByTeamComponent implements OnInit {
     return '';
   }
   
-  getParticipantClassement(index: number) : string
+  getParticipantClassement(index: number): string
   {
     if (this.teamData!== null && this.teamData!==undefined)
     {
@@ -76,7 +81,7 @@ export class SelectionInformationByTeamComponent implements OnInit {
     return '';
   }
 
-  getParticipantMobile(index: number) : string
+  getParticipantMobile(index: number): string
   {
     if (this.teamData!== null && this.teamData!==undefined)
     {
@@ -94,7 +99,7 @@ export class SelectionInformationByTeamComponent implements OnInit {
     return '';
   }
 
-  getParticipantStatut(index: number) : string
+  getParticipantStatut(index: number): string
   {
     if (this.teamData!== null && this.teamData!==undefined)
     {
@@ -111,7 +116,7 @@ export class SelectionInformationByTeamComponent implements OnInit {
     return '';
   }
 
-  getParticipantCommentaire(index: number) : string
+  getParticipantCommentaire(index: number): string
   {
     if (this.teamData!== null && this.teamData!==undefined)
     {
@@ -126,5 +131,18 @@ export class SelectionInformationByTeamComponent implements OnInit {
       }
     }
     return '';
+  }
+
+  public onAnchorClick(elementId: string): void 
+  { 
+    this.viewportScroller.scrollToAnchor(elementId);
+  }
+
+  onExportTeamAsPdf()
+  {
+    const pdf: PdfMakeWrapper = new PdfMakeWrapper();
+    pdf.pageMargins( 20 /*[ 40, 60, 40, 60 ]*/ );
+    pdf.create().download();
+
   }
 }

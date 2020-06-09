@@ -1,5 +1,5 @@
-import { AuthUserModel } from 'src/app/modules/auth/model/auth-user.model';
 import { InterclubsSelectionModel } from './interclubs-selection.model';
+import { AuthUserModel } from '../../../auth/model/auth-user.model';
 
 export class InterclubsEnrichedSelectionModel
 {

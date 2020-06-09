@@ -14,10 +14,10 @@
 
     <div *ngIf="selectedInterclubCategoryId === 1 && ldfParticipants && ldfByCategory">
         <app-interclubs-selections-hommes 
-            [semaines]=" filteredSemaineByCategory  "
-            [listeDesForces]=" filteredListeDesForcesByCategory "
-            [teams]="filteredTeamsByCategory"
-            [matches]="filteredMatchesByCategory"
+            [semaines]=" getFilteredSemaineByCategory( selectedInterclubCategory )  "
+            [listeDesForces]=" buildListeDesForcesByCategory( selectedInterclubCategory ) "
+            [teams]="getFilterTeamsByCategory( selectedInterclubCategory)"
+            [matches]="getFilteredMatchesByCategory( selectedInterclubCategory)"
             [interclubCategory]="selectedInterclubCategory"
             >
         </app-interclubs-selections-hommes>
@@ -25,10 +25,10 @@
 
     <div *ngIf="selectedInterclubCategoryId === 2 && ldfParticipants && ldfByCategory">
         <app-interclubs-selections-dames 
-            [semaines]=" filteredSemaineByCategory "
-            [listeDesForces]=" filteredListeDesForcesByCategory "
-            [teams]="filteredTeamsByCategory"
-            [matches]="filteredMatchesByCategory"
+            [semaines]=" getFilteredSemaineByCategory( selectedInterclubCategory )  "
+            [listeDesForces]=" buildListeDesForcesByCategory( selectedInterclubCategory ) "
+            [teams]="getFilterTeamsByCategory( selectedInterclubCategory)"
+            [matches]="getFilteredMatchesByCategory( selectedInterclubCategory)"
             [interclubCategory]="selectedInterclubCategory"
             >
         </app-interclubs-selections-dames>
@@ -36,10 +36,10 @@
 
     <div *ngIf="selectedInterclubCategoryId === 3 && ldfParticipants && ldfByCategory">
         <app-interclubs-selections-veterans 
-            [semaines]=" filteredSemaineByCategory  "
-            [listeDesForces]=" filteredListeDesForcesByCategory "
-            [teams]="filteredTeamsByCategory"
-            [matches]="filteredMatchesByCategory"
+            [semaines]=" getFilteredSemaineByCategory( selectedInterclubCategory )  "
+            [listeDesForces]=" buildListeDesForcesByCategory( selectedInterclubCategory ) "
+            [teams]="getFilterTeamsByCategory( selectedInterclubCategory)"
+            [matches]="getFilteredMatchesByCategory( selectedInterclubCategory)"
             [interclubCategory]="selectedInterclubCategory"
             >
         </app-interclubs-selections-veterans>
@@ -47,10 +47,10 @@
 
     <div *ngIf="selectedInterclubCategoryId === 4 && ldfParticipants && ldfByCategory">
         <app-interclubs-selections-ainees 
-            [semaines]=" filteredSemaineByCategory  "
-            [listeDesForces]=" filteredListeDesForcesByCategory "
-            [teams]="filteredTeamsByCategory"
-            [matches]="filteredMatchesByCategory"
+            [semaines]=" getFilteredSemaineByCategory( selectedInterclubCategory )  "
+            [listeDesForces]=" buildListeDesForcesByCategory( selectedInterclubCategory ) "
+            [teams]="getFilterTeamsByCategory( selectedInterclubCategory)"
+            [matches]="getFilteredMatchesByCategory( selectedInterclubCategory)"
             [interclubCategory]="selectedInterclubCategory"
             >
         </app-interclubs-selections-ainees>

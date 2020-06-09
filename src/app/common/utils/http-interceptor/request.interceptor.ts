@@ -11,10 +11,9 @@ import { Observable, throwError } from 'rxjs';
 import { mergeMap, catchError } from 'rxjs/operators';
 import { AuthService } from '../../../modules/auth/services/auth.service';
 import { AuthenticatedUserModel } from '../../../modules/auth/model/authenticated-user.model';
-import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
-import { LogoutAction } from 'src/app/modules/auth/state/actions/auth-logout.action';
-// import { EnvConfigService, ConfigKeys } from 'src/app/modules.shared/services/config/EnvConfig.service';
+import { LogoutAction } from '../../../modules/auth/state/actions/auth-logout.action';
+import { AppState } from '../../../state/app.state';
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
@@ -45,7 +44,7 @@ export class RequestInterceptor implements HttpInterceptor {
         return this.authService
           .refreshToken(tokens.refreshToken)
           .pipe(mergeMap((res: AuthenticatedUserModel) => {
-            console.log('this.authService.storeData', res);
+            //console.log('this.authService.storeData', res);
             // this.authService.storeData(res);
             /*
             const newUser: AuthenticatedUserModel=new AuthenticatedUserModel();

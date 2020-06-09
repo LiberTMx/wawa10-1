@@ -5,7 +5,6 @@ import { SelectionService } from '../selections/services/selection.service';
 import { InterclubsTeamModel } from '../selections/model/interclubs-team.model';
 import { InterclubsMatchModel } from '../selections/model/interclubs-match.model';
 import { InterclubsSemaineVersionModel } from '../selections/model/interclubs-semaine-version.model';
-import { ToastMessageService } from 'src/app/common/services/toast-message.service';
 import { InterclubsTeamSelectionDataModel } from '../selections/model/interclubs-team-selection-data.model';
 import { InterclubsLDF } from '../selections/model/interclubs-ldf.model';
 import { InterclubsLdfParticipantModel } from '../selections/model/interclubs-ldf-participant.model';
@@ -15,6 +14,7 @@ import { AuthUserModel } from '../../auth/model/auth-user.model';
 import { InterclubsSelectionModel } from '../selections/model/interclubs-selection.model';
 import { AuthenticatedUserModel } from '../../auth/model/authenticated-user.model';
 import { AuthService } from '../../auth/services/auth.service';
+import { ToastMessageService } from '../../../common/services/toast-message.service';
 
 
 

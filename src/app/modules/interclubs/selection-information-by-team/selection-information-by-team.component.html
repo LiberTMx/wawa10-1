@@ -215,6 +215,15 @@
                 
             </table> 
             
+            <br>
+            <a (click)="onAnchorClick('top-of-page')">Haut de page</a>&nbsp;
+
+            <div *ngIf="teamData">
+                <a (click)="onExportTeamAsPdf()" title="Exporter au format pdf">
+                    <img [src]="'assets/img/pdf.png'" width="30px" height="32px">
+                </a>
+            </div>
+                
         </mdb-card-body>
     </mdb-card>
 </div>
