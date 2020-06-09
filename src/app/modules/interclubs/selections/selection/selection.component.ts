@@ -33,6 +33,12 @@ export class SelectionComponent implements OnInit {
   ldfParticipants: Array<InterclubsLdfParticipantModel>;
   ldfByCategory: Array<InterclubsLdfByCategoryModel>;
 
+  // Performance issue solved
+  filteredSemaineByCategory: Array<InterclubsSemaineModel>;
+  filteredListeDesForcesByCategory: Array<InterclubsLDF>;
+  filteredTeamsByCategory: Array<InterclubsTeamModel>;
+  filteredMatchesByCategory: Array<InterclubsMatchModel>;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private selectionService: SelectionService,
@@ -85,11 +91,17 @@ export class SelectionComponent implements OnInit {
                                       compositions => {
                                         this.ldfByCategory = compositions;
                                         console.log('Toutes les données interclubs ont étées lues');
+                                        this.filteredSemaineByCategory=this.getFilteredSemaineByCategory( this.selectedInterclubCategory );
+                                        this.filteredListeDesForcesByCategory=this.buildListeDesForcesByCategory( this.selectedInterclubCategory );
+                                        this.filteredTeamsByCategory=this.getFilterTeamsByCategory( this.selectedInterclubCategory);
+                                        this.filteredMatchesByCategory = this.getFilteredMatchesByCategory( this.selectedInterclubCategory);
+                                        this.loading=false;
                                       }
                                       ,
-                                      err => console.error('error loading matches', err)
-                                      ,
-                                      () => this.loading=false
+                                      err => {
+                                        console.error('error loading matches', err); 
+                                        this.loading=false;
+                                      }
                                     );
                                 }
                               );
