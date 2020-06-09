@@ -52,6 +52,7 @@ export class SelectionInformationComponent implements OnInit {
   selectedMatch: any=null;// pas  bien... à corriger
 
   currentUserSelection: {sel: InterclubsSelectionModel, ldf: InterclubsLDF, user: AuthUserModel}=null;
+  currentUserSelectionMatch: InterclubsMatchModel = null;
 
   connectedUser: AuthenticatedUserModel;
   
@@ -237,6 +238,7 @@ export class SelectionInformationComponent implements OnInit {
                 if(this.connectedUser !==null && this.connectedUser !== undefined && se.user.id === this.connectedUser.id)
                 {
                   this.currentUserSelection = {sel: se.selection, ldf: part, user: se.user};
+                  this.currentUserSelectionMatch = match;
                 }
               }
               teamSelectionData.selections = teamEnrichedSelections;
