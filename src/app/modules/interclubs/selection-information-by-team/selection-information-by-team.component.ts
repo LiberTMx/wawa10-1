@@ -5,6 +5,9 @@ import { InterclubsTeamSelectionDataModel } from '../selections/model/interclubs
 import { InterclubsLDF } from '../selections/model/interclubs-ldf.model';
 
 import { PdfMakeWrapper, PageReference, Txt, Table } from 'pdfmake-wrapper';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { TeamSelectionPdfGenerator } from '../utils/pdf/team-selection-pdf-generator';
+import { InterclubsCategoryModel } from '../selections/model/interclubs-category.model';
 
 @Component({
   selector: 'app-selection-information-by-team',
@@ -16,6 +19,8 @@ export class SelectionInformationByTeamComponent implements OnInit {
   @Input()
   teamData: InterclubsTeamSelectionDataModel;
 
+  @Input()
+  interclubsCategory: InterclubsCategoryModel;
 
   
   constructor(
@@ -140,9 +145,26 @@ export class SelectionInformationByTeamComponent implements OnInit {
 
   onExportTeamAsPdf()
   {
-    const pdf: PdfMakeWrapper = new PdfMakeWrapper();
+    PdfMakeWrapper.setFonts(pdfFonts);
+    let pdf: PdfMakeWrapper = new PdfMakeWrapper();
+    pdf.info({
+      title: 'A document',
+      author: 'pdfmake-wrapper',
+      subject: 'subject of document',
+    });
+    pdf.pageSize('A4');
     pdf.pageMargins( 20 /*[ 40, 60, 40, 60 ]*/ );
-    pdf.create().download();
+    const footerText= new Txt('Rencontre interclub '+this.interclubsCategory.synonyme
+        +' - Semaine '+this.teamData.match.WeekName
+        +' - Equipe: ' +this.teamData.team.Team)
+      .alignment('center')
+      .italics()
+      .end 
+    ;
+    pdf.footer(footerText);
 
+    const pdfGenerator = new TeamSelectionPdfGenerator(pdf);
+    pdf=pdfGenerator.appendTeamDataToPdf(this.interclubsCategory, this.teamData);
+    pdf.create().download();
   }
 }

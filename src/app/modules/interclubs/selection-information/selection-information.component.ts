@@ -15,8 +15,11 @@ import { InterclubsSelectionModel } from '../selections/model/interclubs-selecti
 import { AuthenticatedUserModel } from '../../auth/model/authenticated-user.model';
 import { AuthService } from '../../auth/services/auth.service';
 import { ToastMessageService } from '../../../common/services/toast-message.service';
+import { ViewportScroller } from '@angular/common';
 
-
+import { PdfMakeWrapper, PageReference, Txt, Table } from 'pdfmake-wrapper';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { TeamSelectionPdfGenerator } from '../utils/pdf/team-selection-pdf-generator';
 
 @Component({
   selector: 'app-selection-information',
@@ -60,7 +63,29 @@ export class SelectionInformationComponent implements OnInit {
     private authService: AuthService,
     private selectionService: SelectionService,
     private toastMessageService: ToastMessageService,
+    private viewportScroller: ViewportScroller,
   ) { }
+
+  getTeamDataAnchor(teamData: InterclubsTeamSelectionDataModel): string
+  {
+    return 'team-'+teamData.match.id;
+  }
+
+  onAnchorClick(elementId: string): void 
+  { 
+    this.viewportScroller.scrollToAnchor(elementId);
+  }
+
+  onValidateSelection(selection: {sel: InterclubsSelectionModel, ldf: InterclubsLDF, user: AuthUserModel})
+  {
+    // TODO
+  }
+
+  onShowTeam(match: InterclubsMatchModel)
+  {
+    const teamDataAnchor = 'team-'+match.id;
+    this.onAnchorClick(teamDataAnchor);
+  }
 
   ngOnInit(): void 
   {
@@ -258,5 +283,37 @@ export class SelectionInformationComponent implements OnInit {
     }
 
     this.teamSelectionData = teamSelectionDataArray;
+  }
+
+  onExportAllTeamsAsPdf()
+  {
+    PdfMakeWrapper.setFonts(pdfFonts);
+    let pdf: PdfMakeWrapper = new PdfMakeWrapper();
+    pdf.info({
+      title: 'A document',
+      author: 'pdfmake-wrapper',
+      subject: 'subject of document',
+    });
+    pdf.pageSize('A4');
+    pdf.pageMargins( 20 /*[ 40, 60, 40, 60 ]*/ );
+    const footerText= new Txt('Rencontres interclubs '+this.selectedCategory.synonyme
+        +' - Semaine '+this.selectedSemaine.weekName)
+      .alignment('center')
+      .italics()
+      .end 
+    ;
+    pdf.footer(footerText);
+
+    const pdfGenerator = new TeamSelectionPdfGenerator(pdf);
+    for(const teamData of this.teamSelectionData)
+    {
+      pdf=pdfGenerator.appendTeamDataToPdf(this.selectedCategory, teamData);
+      pdf.add(
+        new Txt('')
+        .pageBreak('before')
+        .end
+      );
+    }
+    pdf.create().download();
   }
 }

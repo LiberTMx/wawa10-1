@@ -36,6 +36,11 @@
                                             </mat-select>
                                         </mat-form-field>
                                     </div>
+                                    <div *ngIf="teamSelectionData">
+                                        <a (click)="onExportAllTeamsAsPdf()" title="Exporter au format pdf">
+                                            <img [src]="'assets/img/pdf.png'" width="30px" height="32px">
+                                        </a>
+                                    </div>
                                 </mdb-card-body>
                             </mdb-card>
                         </div>
@@ -90,6 +95,10 @@
                                             <td>
                                                 <textarea name="commentaire" id="commentaire" name="commentaire" class="form-control" placeholder="Ecrivez votre commentaire ici" cols="15" rows="2"></textarea>
                                             </td>
+
+                                            <td>
+                                                <span class="badge badge-success badge_style" title="Valider ma sélection" (click)="onValidateSelection(currentUserSelection)"><i class="fas fa-check"></i>Valider</span> 
+                                            </td>
                                             
                                         </tr> 
 
@@ -97,9 +106,10 @@
                                        
                                     </table>
                                     <p *ngIf="currentUserSelectionMatch" style="text-align: center;">
-                                        <span class="badge badge-success badge_style" title="Valider la version de travail" (click)="onSelectionChoice()"><i class="fas fa-check"></i>Valider ma sélection</span> 
+                                        
                                         &nbsp;
-                                        <span class="badge badge-success badge_style" href="#maselect" title="Consulter mon équipe" (click)="onSelectionChoice()"><i class="fas fa-eye"></i>Consulter mon équipe</span>                                        
+                                        <!-- <span class="badge badge-success badge_style" href="#maselect" title="Consulter mon équipe" (click)="onSelectionChoice()"><i class="fas fa-eye"></i>Consulter mon équipe</span>                                         -->
+                                        <span class="badge badge-success badge_style" title="Consulter mon équipe" (click)="onShowTeam(currentUserSelectionMatch)"><i class="fas fa-eye"></i>Consulter mon équipe</span>                                        
                                         &nbsp;
                                         </p>
                                     
@@ -116,8 +126,9 @@
 
   <div *ngIf="teamSelectionData">
       <div *ngFor="let teamData of teamSelectionData">
+        <div [id]="getTeamDataAnchor(teamData)"></div>
         <div *ngIf="teamData.selectionsLoaded">
-          <app-selection-information-by-team [teamData]="teamData"></app-selection-information-by-team>
+          <app-selection-information-by-team [teamData]="teamData" [interclubsCategory]="selectedCategory"></app-selection-information-by-team>
         </div>
       </div>
   </div>
