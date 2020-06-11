@@ -8,18 +8,22 @@ import { MaterialModule } from '../../modules.vendors/google.angular.material/ma
 import { MdBootstrapProModule } from '../../modules.vendors/mdbootstrap/md-bootstrap-pro.module';
 import { PrimengModule } from '../../modules.vendors/primeng/primeng.module';
 import { ComiteOrganisationComponent } from './comite-organisation/comite-organisation.component';
-import { ComiteOrganisationUpdateComponent } from './comite-organisation-update/comite-organisation-update.component';
+import { AppCommonModule } from '../common/app-common.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
-  declarations: [ComiteComponent, ComiteOrganisationComponent, ComiteOrganisationUpdateComponent],
+  declarations: [ComiteComponent, ComiteOrganisationComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
     MaterialModule,
     PrimengModule,
     MdBootstrapProModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AppCommonModule,
     AuthModule, 
     ClubRoutingModule,
   ]

@@ -39,7 +39,8 @@ export class RequestInterceptor implements HttpInterceptor {
 
     if (!this.authService.isAuthenticated() && tokens !== null && tokens !== undefined) {
 
-      if (tokens.refreshToken && !this.isRefreshing) {
+      if (tokens.refreshToken && !this.isRefreshing) 
+      {
         this.isRefreshing = true;
         return this.authService
           .refreshToken(tokens.refreshToken)
@@ -63,10 +64,13 @@ export class RequestInterceptor implements HttpInterceptor {
             return next.handle(req);
           }),
             catchError(error => {
+              console.error('http interceptor error', error);
+              /*
               this.isRefreshing = false;
               this.authService.logout();
               this.store.dispatch(new LogoutAction());
               this.router.navigate(['/auth/login']);
+              */
               return throwError(error);
             }));
       } 
