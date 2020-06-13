@@ -7,7 +7,7 @@
             <u>Adresse:</u> {{ teamData.match.venueName}}, {{ teamData.match.venueStreet}}, {{ teamData.match.venueTown}}
             <u>Date:</u> {{ teamData.match.matchDate | date:'dd/MM/yyyy'}} <u>à</u> {{ teamData.match.Time}} <br>
             <u>Numéro de match:</u> {{ teamData.match.MatchId}} <u>Division:</u> {{ teamData.match.division?.DivisionName }} <br> 
-            <a href="#">Retour à ma sélection</a>
+            <!-- <a href="#">Retour à ma sélection</a> Mieux utiliser haut de page (plus bas) -->
             
 
              <br><br>
@@ -215,6 +215,15 @@
                 
             </table> 
             
+            <br>
+            <a (click)="onAnchorClick('top-of-page')">Haut de page</a>&nbsp;
+
+            <div *ngIf="teamData">
+                <a (click)="onExportTeamAsPdf()" title="Exporter au format pdf">
+                    <img [src]="'assets/img/pdf.png'" width="30px" height="32px">
+                </a>
+            </div>
+                
         </mdb-card-body>
     </mdb-card>
 </div>

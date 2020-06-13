@@ -9,6 +9,12 @@ body {
     font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
 */
 
+// .navbar-nav > li > .dropdown-menu > a { background-color: #FF0000; }
+
+a.dropdown-item:hover {
+  background-color: lightsalmon  ;
+}
+
 #navbarDropdownMenuLink {
   color: white; 
   font-weight: 400;

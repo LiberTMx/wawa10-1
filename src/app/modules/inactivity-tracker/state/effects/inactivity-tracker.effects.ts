@@ -31,7 +31,7 @@ export class InactivityTrackerEffects {
                 return Observable.timer(timeout);
             }
         ), map(() => {
-            //console.log('Logging out since the max inactivity time is exceeded');
+            console.log('Logging out since the max inactivity time is exceeded');
             this.authService.logout();
             this.router.navigate(['/']);
             return new LogoutAction();

@@ -1,0 +1,72 @@
+<mdb-card>
+    <mdb-card-body>
+
+        <mdb-card-title>
+            <h4>L'organisation du club</h4>
+          </mdb-card-title>
+
+        <div *ngIf=" isConnectedUserClubAdmin() ">
+            <span class="badge badge-info badge_style" title="Modifier l'organisation" *ngIf=" toggleState === 1 "
+            (click)="onToggleState()">
+            <i class="fas fa-edit"></i> Modifier l'oranisation
+          </span>
+          <span class="badge badge-success badge_style" title="Visualiser l'organisation" *ngIf=" toggleState === 2 "
+              (click)="onToggleState()">
+              <i class="fas fa-random"></i> Visualiser l'organisation
+            </span>
+        </div>
+
+        <div *ngIf=" toggleState === 1 ">
+            <div *ngIf="isDocumentLoading">
+                <p>Chargement du document...</p>
+            </div>
+            <div *ngIf=" ! isDocumentLoading">
+                <div *ngIf="documentUrl !== null">
+                    <br>
+                    <app-pdf-viewer [selectedDocument]="documentUrl"></app-pdf-viewer>
+                </div>
+                <div *ngIf=" documentUrl === null">
+                    <br>
+                    <h6>Désolé, pas d'organigramme disponible pour le moment...</h6>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf=" toggleState === 2 ">
+
+            <br>
+            <h3>Charger le fichier pdf - Organisation du club</h3>
+            
+            <form [formGroup]="organisationForm" (ngSubmit)="onUpdateOrganisation()">
+            
+                <div class="md-form row">
+                    <div class="col-lg-2 col-xl-2 justify-content-end">
+                        <label for="pdfFile">Sélectionner un pdf:</label>
+                        <br> <br>
+                        <input type="file" name="pdf" accept="application/pdf"  
+                                id="pdfFile" formControlName="pdf" (change)="preloadPdf($event)"/>
+                    </div>
+                    
+                </div>
+
+                <div>
+                    <button class="btn btn-sm" (click)="onRemovePdf()">Supprimer le pdf</button>
+                </div>
+
+                <!-- Post data -->
+                <div class="md-form row">
+                    <div class="col-lg-3 col-xl-4">
+                        <button mdbBtn  type="submit" class="btn btn-sm btn-success">Publier l'organisation</button>
+                    </div>
+                </div>
+            </form>
+            
+            <hr>
+            <div *ngIf="pdfUrl!==null">
+                <app-pdf-viewer [selectedDocument]="pdfUrl"></app-pdf-viewer>
+            </div>
+        </div>
+
+    </mdb-card-body>
+</mdb-card>
+

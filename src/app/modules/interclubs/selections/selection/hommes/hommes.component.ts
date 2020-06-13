@@ -8,12 +8,12 @@ import { SelectionService } from '../../services/selection.service';
 import { InterclubsSemaineVersionModel } from '../../model/interclubs-semaine-version.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { InterclubsSelectionModel } from '../../model/interclubs-selection.model';
-import { ToastMessageService } from 'src/app/common/services/toast-message.service';
 import { InterclubsLdfParticipantModel } from '../../model/interclubs-ldf-participant.model';
 import { InterclubsLdfByCategoryModel } from '../../model/interclubs-ldf-by-category.model';
 import { InterclubsCategoryModel } from '../../model/interclubs-category.model';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { SelectionValidationDialogComponent } from '../../../selection-validation-dialog/selection-validation-dialog.component';
+import { ToastMessageService } from '../../../../../common/services/toast-message.service';
 
 @Component({
   selector: 'app-interclubs-selections-hommes',
@@ -70,7 +70,7 @@ export class HommesComponent implements OnInit {
     this.buildEmptyPlayer();
     
     //console.log('Liste des forces - Hommes:', this.listeDesForces);
-    console.log('Liste des matches - Hommes:', this.matches);
+    //console.log('Liste des matches - Hommes:', this.matches);
     this.prepareSelectionForm();
   }
 

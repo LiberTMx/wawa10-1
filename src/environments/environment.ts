@@ -7,7 +7,7 @@ export const environment = {
   apiUrl: 'http://localhost:3000/api',
   apiUrl1: 'https://localhost/api',
   angular_version: '9.0.1',
-  app_version: ' 0.0.17 - 3/6/2020 21h00',
+  app_version: ' 0.0.20 - 11/6/2020 23h40',
   APPLICATION_INACTIVITY_TIME_OUT: 60 * 60 * 1000
 };
 

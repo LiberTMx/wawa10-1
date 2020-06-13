@@ -2,7 +2,7 @@ import { InterclubsTeamModel } from './interclubs-team.model';
 import { InterclubsMatchModel } from './interclubs-match.model';
 import { InterclubsSelectionModel } from './interclubs-selection.model';
 import { InterclubsLDF } from './interclubs-ldf.model';
-import { AuthUserModel } from 'src/app/modules/auth/model/auth-user.model';
+import { AuthUserModel } from '../../../auth/model/auth-user.model';
 
 export class InterclubsTeamSelectionDataModel
 {

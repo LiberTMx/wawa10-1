@@ -1,0 +1,59 @@
+
+<!-- 
+<app-interclubs-selections-hommes 
+    [semaines]=" getFilteredSemaineByInterclubCategory( selectedInterclubCategory )  "
+    *ngIf = "! loading && selectedInterclubCategoryId === 1">
+
+</app-interclubs-selections-hommes> -->
+
+<div *ngIf="loading">
+    Chargement des données en cours...
+</div>
+
+<div *ngIf="! loading">
+
+    <div *ngIf="selectedInterclubCategoryId === 1 && ldfParticipants && ldfByCategory">
+        <app-interclubs-selections-hommes 
+            [semaines]=" getFilteredSemaineByCategory( selectedInterclubCategory )  "
+            [listeDesForces]=" buildListeDesForcesByCategory( selectedInterclubCategory ) "
+            [teams]="getFilterTeamsByCategory( selectedInterclubCategory)"
+            [matches]="getFilteredMatchesByCategory( selectedInterclubCategory)"
+            [interclubCategory]="selectedInterclubCategory"
+            >
+        </app-interclubs-selections-hommes>
+    </div>
+
+    <div *ngIf="selectedInterclubCategoryId === 2 && ldfParticipants && ldfByCategory">
+        <app-interclubs-selections-dames 
+            [semaines]=" getFilteredSemaineByCategory( selectedInterclubCategory )  "
+            [listeDesForces]=" buildListeDesForcesByCategory( selectedInterclubCategory ) "
+            [teams]="getFilterTeamsByCategory( selectedInterclubCategory)"
+            [matches]="getFilteredMatchesByCategory( selectedInterclubCategory)"
+            [interclubCategory]="selectedInterclubCategory"
+            >
+        </app-interclubs-selections-dames>
+    </div>
+
+    <div *ngIf="selectedInterclubCategoryId === 3 && ldfParticipants && ldfByCategory">
+        <app-interclubs-selections-veterans 
+            [semaines]=" getFilteredSemaineByCategory( selectedInterclubCategory )  "
+            [listeDesForces]=" buildListeDesForcesByCategory( selectedInterclubCategory ) "
+            [teams]="getFilterTeamsByCategory( selectedInterclubCategory)"
+            [matches]="getFilteredMatchesByCategory( selectedInterclubCategory)"
+            [interclubCategory]="selectedInterclubCategory"
+            >
+        </app-interclubs-selections-veterans>
+    </div>
+
+    <div *ngIf="selectedInterclubCategoryId === 4 && ldfParticipants && ldfByCategory">
+        <app-interclubs-selections-ainees 
+            [semaines]=" getFilteredSemaineByCategory( selectedInterclubCategory )  "
+            [listeDesForces]=" buildListeDesForcesByCategory( selectedInterclubCategory ) "
+            [teams]="getFilterTeamsByCategory( selectedInterclubCategory)"
+            [matches]="getFilteredMatchesByCategory( selectedInterclubCategory)"
+            [interclubCategory]="selectedInterclubCategory"
+            >
+        </app-interclubs-selections-ainees>
+    </div>
+
+</div>

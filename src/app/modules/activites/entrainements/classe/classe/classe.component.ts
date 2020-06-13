@@ -3,6 +3,7 @@ import { EntrainementClasseModel } from '../../model/entrainement-classe.model';
 import { EntrainementsService } from '../../services/entrainements.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../auth/services/auth.service';
+import { ClasseStatusType } from '../../enums/classe-status.enum';
 
 @Component({
   selector: 'app-entrainement-classe',
@@ -77,5 +78,10 @@ export class ClasseComponent implements OnInit {
   onEditEntrainementClasse()
   {
     this.router.navigate(['activites', 'entrainements', 'classe-edit', this.classe.id]);
+  }
+
+  isClasseHidden(): boolean
+  {
+    return this.classe.status === ClasseStatusType.CACHEE || this.classe.status === ClasseStatusType.CACHEE.toUpperCase();
   }
 }

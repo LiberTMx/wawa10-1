@@ -6,6 +6,13 @@
       <mdb-card-text>Nos classes d'entraînements <br>
         <div *ngIf="isUserClubAdmin()">
           <button type="button" class="btn btn-sm btn-outline-primary" (click)="onCreateNewClass()">Créer une classe</button>
+
+          &nbsp;
+
+          <button *ngIf=" ! showHiddenClasses"
+            type="button" class="btn btn-sm btn-outline-info" (click)="onShowHiddenClasses(true)">Afficher les classes cachées</button>
+          <button *ngIf=" showHiddenClasses"
+            type="button" class="btn btn-sm btn-outline-info" (click)="onShowHiddenClasses(false)">Cacher les classes cachées</button>
         </div>
       
       </mdb-card-text>
@@ -16,12 +23,13 @@
 
       <hr>
       
-      <div class="card-deck" *ngIf="classes">
-        <!-- les classes dynamiques -->
-        <div *ngFor="let classe of classes">
+      <!-- les classes dynamiques -->
+      <div class="card-deck " *ngIf="classesToDisplay">
+        <div *ngFor="let classe of classesToDisplay" class="mt-4">
           <app-entrainement-classe [classe]="classe"></app-entrainement-classe>
         </div>
       </div>
+
     </mdb-card-body>
   </mdb-card>
 

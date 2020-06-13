@@ -36,6 +36,11 @@
                                             </mat-select>
                                         </mat-form-field>
                                     </div>
+                                    <div *ngIf="teamSelectionData">
+                                        <a (click)="onExportAllTeamsAsPdf()" title="Exporter au format pdf">
+                                            <img [src]="'assets/img/pdf.png'" width="30px" height="32px">
+                                        </a>
+                                    </div>
                                 </mdb-card-body>
                             </mdb-card>
                         </div>
@@ -123,7 +128,7 @@
       <div *ngFor="let teamData of teamSelectionData">
         <div [id]="getTeamDataAnchor(teamData)"></div>
         <div *ngIf="teamData.selectionsLoaded">
-          <app-selection-information-by-team [teamData]="teamData"></app-selection-information-by-team>
+          <app-selection-information-by-team [teamData]="teamData" [interclubsCategory]="selectedCategory"></app-selection-information-by-team>
         </div>
       </div>
   </div>

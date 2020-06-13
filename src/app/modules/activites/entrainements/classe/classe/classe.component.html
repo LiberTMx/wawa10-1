@@ -43,7 +43,10 @@
               (click)="onEditEntrainementClasse()">
               <i class="fas fa-edit"></i>
             </span>
-            &nbsp;
+
+            <span  title="Cette classe est cachée !" *ngIf="isClasseHidden()" classe="alert-hidden" >
+              &nbsp; &nbsp; <img [src]="'./assets/img/Alert.png'">
+            </span>
 
           </div>
 

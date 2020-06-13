@@ -1,5 +1,5 @@
 <!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark red">
+<nav class="navbar navbar-expand-lg navbar-dark red no-transition">
 
   <!-- Navbar brand -->
  
@@ -32,7 +32,9 @@
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" 
         aria-haspopup="true" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> Club</a>
         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="user/liste">Les membres</a></li>
+          <li><a class="dropdown-item" routerLink="user/liste">Les membres</a></li>
+          <li><a class="dropdown-item" routerLink="club/organisation">Organisation</a></li>
+          
          <!--  <li><a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Devenir membre</a></li> -->
           <!-- <li><a class="dropdown-item" routerLinkActive="active" routerLink="user/entraineurs">Nos entraîneurs</a></li> -->         
           <div class="divider dropdown-divider"></div>
@@ -75,7 +77,7 @@
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false"><i class="fa fa-calendar" aria-hidden="true"></i> Activités</a>
         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="activites/entrainements">Entraînements</a></li>
+          <li><a class="dropdown-item"  routerLink="activites/entrainements">Entraînements</a></li>
           <!-- <li><a class="dropdown-item" routerLinkActive="active" routerLink="activites/periodes">Périodes</a></li>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="activites/calendrier">Calendrier</a></li>
           
@@ -83,15 +85,19 @@
         </div>
       </li>
 
-      <li><a class="nav-link" routerLinkActive="active" routerLink="prix/test"> <i class="fa fa-eur" aria-hidden="true"></i> Devenir Membre<span class="sr-only">(current)</span></a></li>
+      <li class="nav-item"><a class="nav-link active" routerLink="prix/test"> <i class="fas fa-graduation-cap"></i> Devenir Membre<span class="sr-only">(current)</span></a></li>
 
       <!-- <li><a class="nav-link" routerLinkActive="active" routerLink="newsletter"><i class="fa fa-file-text" aria-hidden="true"></i> News Letter<span class="sr-only">(current)</span></a></li> -->
 
       <!-- <li><a class="nav-link" routerLinkActive="active" routerLink="/"><i class="fa fa-file-text" aria-hidden="true"></i> Documents<span class="sr-only">(current)</span></a></li> -->
                     
-      <li><a class="nav-link" routerLinkActive="active" routerLink="sponsors/liste"><i class="fa fa-handshake-o" aria-hidden="true"></i> Sponsors<span class="sr-only">(current)</span></a></li>
+      <li class="nav-item">
+        <a class="nav-link active" routerLink="sponsors/liste"><i class="fas fa-handshake" aria-hidden="true"></i> Sponsors<span class="sr-only">(current)</span></a>
+      </li>
 
-      <li><a class="nav-link" routerLinkActive="active" routerLink="contact/form"><i class="fa fa-address-book-o" aria-hidden="true"></i> Contact<span class="sr-only">(current)</span></a></li>
+      <li class="nav-item">
+        <a class="nav-link active"  routerLink="contact/form"><i class="fab fa-wpforms" aria-hidden="true"></i> Contact<span class="sr-only">(current)</span></a>
+      </li>
     
       <li class="nav-item dropdown" *ngIf="getAuthService().isUserClubAdmin()">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -121,16 +127,16 @@
 
     <ul class="navbar-nav nav-flex-icons">
                 
-      <li class="nav-item waves-light" mdbWavesEffect *ngIf=" user " (click)="onMyProfile($event)">
-        <a class="nav-link" title="{{user.getFullName()}}">&nbsp; <i class="fa fa-user prefix"></i> &nbsp;</a>
+      <li class="nav-item active" mdbWavesEffect *ngIf=" user " (click)="onMyProfile($event)">
+        <a class="nav-link" title="{{user.getFullName()}}">&nbsp; <i class="fas fa-user prefix"></i> &nbsp;</a>
       </li>
       
-      <li class="nav-item waves-light" mdbWavesEffect *ngIf=" ! user " routerLink="login">
-          <a class="nav-link"><i class="fa fa-sign-in"></i> Connexion</a>
+      <li class="nav-item active" mdbWavesEffect *ngIf=" ! user " routerLink="login">
+          <a class="nav-link"><i class="fas fa-sign-in-alt"></i> Connexion</a>
       </li>
       
-      <li class="nav-item waves-light" mdbWavesEffect *ngIf=" user " (click)="onLogout($event)">
-          <a class="nav-link">Déconnexion <i class="fa fa-sign-out"></i></a>
+      <li class="nav-item active" mdbWavesEffect *ngIf=" user " (click)="onLogout($event)">
+          <a class="nav-link">Déconnexion <i class="fas fa-sign-out-alt"></i></a>
       </li>
           
   </ul>

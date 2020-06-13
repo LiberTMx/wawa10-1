@@ -12,8 +12,8 @@ import { InterclubsLdfByCategoryModel } from '../model/interclubs-ldf-by-categor
 import { InterclubsSemaineVersionModel } from '../model/interclubs-semaine-version.model';
 import { InterclubsLDF } from '../model/interclubs-ldf.model';
 import { InterclubsSelectionModel } from '../model/interclubs-selection.model';
-import { MessageModel } from 'src/app/common/model/message.model';
 import { InterclubsEnrichedSelectionModel } from '../model/interclubs-enriched-selection.model';
+import { MessageModel } from '../../../../common/model/message.model';
 
 @Injectable({
   providedIn: 'root'
