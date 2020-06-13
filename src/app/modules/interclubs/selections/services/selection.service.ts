@@ -14,6 +14,7 @@ import { InterclubsLDF } from '../model/interclubs-ldf.model';
 import { InterclubsSelectionModel } from '../model/interclubs-selection.model';
 import { InterclubsEnrichedSelectionModel } from '../model/interclubs-enriched-selection.model';
 import { MessageModel } from '../../../../common/model/message.model';
+import { AuthUserModel } from '../../../auth/model/auth-user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -183,4 +184,17 @@ export class SelectionService {
       participant: JSON.stringify(participant)
     });
   }
+
+  validateSelection(selection: {sel: InterclubsSelectionModel, ldf: InterclubsLDF, user: AuthUserModel}, 
+                    formValue: any, 
+                    selectedPublishedSemaine: InterclubsSemaineVersionModel): Observable<any>
+  {
+    const apiUrl=`${environment.apiUrl}/interclubs/validateSelection`;
+    return this.httpClient.post<any>(apiUrl, {
+      selectionId: String(selection.sel.id),
+      statut: formValue.statut,
+      commentaire: formValue.commentaire
+    });
+  }
+
 }

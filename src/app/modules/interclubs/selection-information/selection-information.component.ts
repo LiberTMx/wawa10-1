@@ -20,6 +20,10 @@ import { ViewportScroller } from '@angular/common';
 import { PdfMakeWrapper, PageReference, Txt, Table } from 'pdfmake-wrapper';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { TeamSelectionPdfGenerator } from '../utils/pdf/team-selection-pdf-generator';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { SelectionValidationType } from '../enums/selection-validation-type.enum';
+import { KvpModel } from 'src/app/common/model/kvp.model';
+import { AppUtils } from 'src/app/common/utils/AppUtils';
 
 @Component({
   selector: 'app-selection-information',
@@ -45,7 +49,8 @@ export class SelectionInformationComponent implements OnInit {
 
   matches: Array<InterclubsMatchModel>;
 
-  
+  validationStatus: Array<KvpModel>=AppUtils.stringEnumToKeyValue(SelectionValidationType);
+
   teamSelectionData: Array<InterclubsTeamSelectionDataModel> = null;
 
   ldfParticipants: Array<InterclubsLdfParticipantModel>;
@@ -59,8 +64,11 @@ export class SelectionInformationComponent implements OnInit {
 
   connectedUser: AuthenticatedUserModel;
   
+  selectionValidationForm: FormGroup;
+
   constructor(
     private authService: AuthService,
+    private formBuilder: FormBuilder,
     private selectionService: SelectionService,
     private toastMessageService: ToastMessageService,
     private viewportScroller: ViewportScroller,
@@ -78,7 +86,18 @@ export class SelectionInformationComponent implements OnInit {
 
   onValidateSelection(selection: {sel: InterclubsSelectionModel, ldf: InterclubsLDF, user: AuthUserModel})
   {
-    // TODO
+    // selectedPublishedSemaine
+    const formValue = this.selectionValidationForm.value;
+    console.log('confirmation selection:', formValue);
+    this.selectionService.validateSelection(selection, formValue, this.selectedPublishedSemaine)
+      .subscribe(
+        res => {
+          //console.log('done');
+          this.toastMessageService.addSuccess('Selection', 'Statut et commentaire mis à jour');
+          this.collectTeamData();
+        }
+    );
+  
   }
 
   onShowTeam(match: InterclubsMatchModel)
@@ -140,8 +159,18 @@ export class SelectionInformationComponent implements OnInit {
           console.log('published semaines', semaines);
         }
     );
+
+    this.prepareForm();
   }
   
+  prepareForm()
+  {
+    this.selectionValidationForm = this.formBuilder.group({
+      statut: [this.currentUserSelection?.sel.joueur_confirmation],
+      commentaire: [this.currentUserSelection?.sel.joueur_commentaire]
+    });
+  }
+
   buildListeDesForcesByCategory(category: InterclubsCategoryModel): Array<InterclubsLDF>
   {
     //console.log('Building ldf for catg:', category);
@@ -262,8 +291,13 @@ export class SelectionInformationComponent implements OnInit {
 
                 if(this.connectedUser !==null && this.connectedUser !== undefined && se.user.id === this.connectedUser.id)
                 {
+
                   this.currentUserSelection = {sel: se.selection, ldf: part, user: se.user};
                   this.currentUserSelectionMatch = match;
+                  this.selectionValidationForm.patchValue({
+                    statut: this.currentUserSelection.sel.joueur_confirmation,
+                    commentaire: this.currentUserSelection.sel.joueur_commentaire
+                  });
                 }
               }
               teamSelectionData.selections = teamEnrichedSelections;
