@@ -52,6 +52,15 @@ export class SelectionComponent implements OnInit {
       this.selectedInterclubCategoryId= +params.get('id');  
       this.selectionService.setSelectedInterclubCategory(this.selectedInterclubCategoryId);
       this.selectedInterclubCategory = this.selectionService.findInterclubCategoryById(this.selectedInterclubCategoryId);
+
+      if( ! this.loading)
+      {
+        this.filteredSemaineByCategory=this.getFilteredSemaineByCategory( this.selectedInterclubCategory );
+        this.filteredListeDesForcesByCategory=this.buildListeDesForcesByCategory( this.selectedInterclubCategory );
+        this.filteredTeamsByCategory=this.getFilterTeamsByCategory( this.selectedInterclubCategory);
+        this.filteredMatchesByCategory = this.getFilteredMatchesByCategory( this.selectedInterclubCategory);
+      }
+
     }); 
 
     console.log('selected cat:', this.selectedInterclubCategoryId);
@@ -122,7 +131,13 @@ export class SelectionComponent implements OnInit {
   getFilteredSemaineByCategory(category: InterclubsCategoryModel): Array<InterclubsSemaineModel>
   {
     if(this.semaines===null || this.semaines===undefined) return null;
-    return this.semaines.filter( s => s.afftDivisionCategoryId === category.playerCategory );
+    const semaines = this.semaines.filter( s => s.afftDivisionCategoryId === category.playerCategory );
+    semaines.sort( (s1, s2) => {
+      if(s1.weekName < s2.weekName) return -1;
+      if(s1.weekName > s2.weekName) return +1;
+      return 0;
+    });
+    return semaines;
   }
 
   getFilterTeamsByCategory(category: InterclubsCategoryModel): Array<InterclubsTeamModel>
